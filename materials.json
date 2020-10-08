@@ -1,0 +1,55 @@
+{
+	"Missing": {
+		"Color": [255, 0, 204]
+	},
+	"Missing Rotation": {
+		"Color": [0, 251, 255]
+	},
+	"Metal": {
+		"Color": [115, 115, 115]
+	},
+	"Wood": {
+		"Color": [33, 100, 176]
+	},
+	"Alloy": {
+		"Color": [199, 199, 199]
+	},
+	"Stone": {
+		"Color": [155, 242, 231]
+	},
+	"Lead": {
+		"Color": [41, 41, 41]
+	},
+	"Heavy Armour": {
+		"Color": [118, 118, 132]
+	},
+	"Rubber": {
+		"Color": [44, 71, 34]
+	},
+	"Applique": {
+		"Color": [196, 164, 144]
+	},
+	"Reinforced Wood": {
+		"Color": [23, 80, 156]
+	},
+	"ERA": {
+		"Color": [66, 66, 66]
+	},
+	"Barrel": {
+		"Color": [90, 90, 90]
+	},
+	"Muzzle Brake": {
+		"Color": [90, 90, 90]
+	},
+	"Laser": {
+		"Color": [0, 147, 173]
+	},
+	"Glass": {
+		"Invisible": true,
+		"Color": [255, 255, 255]
+	},
+	"Railing": {
+		"Invisible": true,
+		"Color": [255, 255, 255]
+	}
+}
