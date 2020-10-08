@@ -78,42 +78,43 @@ for k in materials:
 
 #BlockIds: block ids [int]
 
-def process_blueprint(fname, silent=False):
-    """Load and init blueprint data"""
+def process_blueprint(fname, silent=False, standaloneMode=False):
+    """Load and init blueprint data. Returns blueprint, calculation times, image filename"""
+    if not silent: print("Processing blueprint \"", fname, "\"", sep="")
     ts1 = time.time()
     with open(fname, "r") as f:
         bp = json.load(f)
     ts1 = time.time() - ts1
-    if not silent: print("JSON parse completed in", ts1)
+    if not silent: print("JSON parse completed in", ts1, "s")
     #convert to numpy data
     ts2 = time.time()
     __convert_blueprint(bp)
     ts2 = time.time() - ts2
-    if not silent: print("Conversion completed in", ts2)
+    if not silent: print("Conversion completed in", ts2, "s")
     #fetch infos
     ts3 = time.time()
     bp_infos = __fetch_infos(bp)
     ts3 = time.time() - ts3
-    if not silent: print("Infos gathered in", ts3)
+    if not silent: print("Infos gathered in", ts3, "s")
     #create top, side, front view matrices
     ts4 = time.time()
     top_mats, side_mats, front_mats = __create_view_matrices(bp)
     ts4 = time.time() - ts4
-    if not silent: print("View matrices completed in", ts4)
+    if not silent: print("View matrices completed in", ts4, "s")
     #create images
     ts5 = time.time()
     main_img = __create_images(top_mats, side_mats, front_mats, bp_infos)
     ts5 = time.time() - ts5
-    if not silent: print("Image creation completed in", ts5)
-    #show images
-    #cv2.imshow("top", top_img)
-    #cv2.imshow("top height", np.array(top_mats[1],dtype=float)/np.max(top_mats[1]))
-    #cv2.imshow("side", side_img)
-    #cv2.imshow("side height", np.array(side_mats[1],dtype=float)/np.max(side_mats[1]))
-    #cv2.imshow("front", front_img)
-    #cv2.imshow("front height", np.array(front_mats[1],dtype=float)/np.max(front_mats[1]))
-    cv2.imshow("Blueprint", main_img)
-    return bp, [ts1, ts2, ts3, ts4, ts5], main_img
+    if not silent: print("Image creation completed in", ts5, "s")
+    #save image
+    main_img_fname = fname[:-10] + "_view.png"
+    if not cv2.imwrite(main_img_fname, main_img):
+        print("ERROR: image could not be saved", main_img_fname)
+    #return
+    if standaloneMode:
+        return bp, [ts1, ts2, ts3, ts4, ts5], main_img
+    else:
+        return main_img_fname
 
 
 def __convert_blueprint(bp):
@@ -424,15 +425,17 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos):
 
 
 
-if __name__ == "__main__":
-    testlen = 1
+def speed_test(fname):
+    """Just some speed testing"""
+    global main_img, blueprint, bp
+    testlen = 10
     t1 = np.zeros(testlen)
     t2 = np.zeros(testlen)
     t3 = np.zeros(testlen)
     t4 = np.zeros(testlen)
     t5 = np.zeros(testlen)
     for i in range(testlen):
-        bp, timing, main_img = process_blueprint("../example blueprints/Tyr.blueprint", True)
+        bp, timing, main_img = process_blueprint(fname, True, True)
         t1[i] = timing[0]
         t2[i] = timing[1]
         t3[i] = timing[2]
@@ -446,6 +449,17 @@ if __name__ == "__main__":
     print("t5:", np.sum(t5)/testlen, "dt:", np.sum(np.abs(t5-np.sum(t5)/testlen))/testlen)
     
     blueprint = bp["Blueprint"]
-    #print(blueprint["BLP"])
+    #show image
+    cv2.imshow("Blueprint", main_img)
 
+if __name__ == "__main__":
+    #file
+    fname = "../example blueprints/Tyr.blueprint"
 
+    if False: speed_test(fname)
+    else:
+        import sys, os
+        if len(sys.argv) > 1:
+            if os.path.exists(sys.argv[1]):
+                bp, timing, main_img = process_blueprint(sys.argv[1], True, True)
+        input("Press enter to exit...")

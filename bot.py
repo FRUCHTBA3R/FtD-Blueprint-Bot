@@ -1,6 +1,6 @@
 import os
 
-import bp_to_img
+import bp_to_imgV2
 
 import discord
 from discord.ext import commands
@@ -9,6 +9,11 @@ from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 BP_FOLDER = os.getenv("BLUEPRINT_FOLDER")
+
+#create bp_folder
+if not os.path.exists(BP_FOLDER):
+    os.mkdir(BP_FOLDER)
+    
 
 bot = commands.Bot(command_prefix = "!")
 
@@ -22,7 +27,6 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     if message.author == bot.user:
-        #print("Self response suppressed")
         return
 
     for attachm in message.attachments:
@@ -46,28 +50,21 @@ async def on_message(message):
             with open(filename, "wb") as f:
                 f.write(content)
             #process blueprint
-            bp_name, img_file_front, img_file_top, img_file_side = bp_to_img.print_blueprint(filename)
+            combined_img_file = bp_to_imgV2.process_blueprint(filename)
             #files
-            markspoiler=False
-            file_front = discord.File(img_file_front, filename="Front of " + bp_name + ".png",
-                                      spoiler=markspoiler)
-            file_top = discord.File(img_file_top, filename="Top of " + bp_name + ".png",
-                                      spoiler=markspoiler)
-            file_side = discord.File(img_file_side, filename="Side of " + bp_name + ".png",
-                                      spoiler=markspoiler)
+            file = discord.File(combined_img_file)
             #upload
-            await message.channel.send(files=[file_front, file_top, file_side])
+            await message.channel.send(file=file)
             #delete files
-            os.remove(img_file_front)
-            os.remove(img_file_top)
-            os.remove(img_file_side)
+            os.remove(combined_img_file)
             os.remove(filename)
             
     await bot.process_commands(message)
-    
+
+#command testing
 @bot.command(name="print", help="testing print")
 async def cmd_print(ctx):
-    await ctx.send("i shall print")
+    await ctx.send("print test")
 
 
 

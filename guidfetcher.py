@@ -4,6 +4,7 @@ import json
 #search every file for json tag ComponentId
 FORCE_COMPLETE_FILE_SEARCH = True
 
+#mods folder of From The Depths
 ftdmodsfolder = "O:/SteamLibrary/steamapps/common/From The Depths/From_The_Depths_Data/StreamingAssets/Mods"
 invalid_file_ends = ["buildguide", "mtl", "wav", "blueprint", "dll", "obj", "cs",
                      "prefab", "mat", "png_hcm.swatch", "jpeg", "cache", "jpg",
