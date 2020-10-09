@@ -78,7 +78,7 @@ for k in materials:
 
 #BlockIds: block ids [int]
 
-def process_blueprint(fname, silent=False, standaloneMode=False):
+async def process_blueprint(fname, silent=False, standaloneMode=False):
     """Load and init blueprint data. Returns blueprint, calculation times, image filename"""
     if not silent: print("Processing blueprint \"", fname, "\"", sep="")
     ts1 = time.time()
@@ -425,7 +425,7 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos):
 
 
 
-def speed_test(fname):
+async def speed_test(fname):
     """Just some speed testing"""
     global main_img, blueprint, bp
     testlen = 10
@@ -435,7 +435,7 @@ def speed_test(fname):
     t4 = np.zeros(testlen)
     t5 = np.zeros(testlen)
     for i in range(testlen):
-        bp, timing, main_img = process_blueprint(fname, True, True)
+        bp, timing, main_img = await process_blueprint(fname, True, True)
         t1[i] = timing[0]
         t2[i] = timing[1]
         t3[i] = timing[2]
@@ -456,10 +456,18 @@ if __name__ == "__main__":
     #file
     fname = "../example blueprints/Tyr.blueprint"
 
-    if False: speed_test(fname)
+    import asyncio
+    
+    if False: asyncio.run(speed_test(fname))
     else:
         import sys, os
         if len(sys.argv) > 1:
             if os.path.exists(sys.argv[1]):
-                bp, timing, main_img = process_blueprint(sys.argv[1], True, True)
+                fname = sys.argv[1]
+        async def async_main():
+            global bp, timing, main_img
+            bp, timing, main_img = await process_blueprint(fname, True, True)
+        asyncio.run(async_main())
+        cv2.imshow("Blueprint", main_img)
+        cv2.waitKey(1)
         input("Press enter to exit...")

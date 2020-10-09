@@ -26,11 +26,32 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
+    bpcount = await process_attachments(message)
+    await bot.process_commands(message)
+
+#command testing
+@bot.command(name="print", help="Print last blueprint uploaded to channel. Only checks last 30 messages.")
+async def cmd_print(ctx):
+    """Find and print last blueprint in channel"""
+    print("Searching and printing last blueprint")
+    async for message in ctx.history(limit=30, oldest_first=False):
+        bpcount = await process_attachments(message)
+        if bpcount != 0:
+            break
+                
+
+async def process_attachments(message):
+    """Checks, processes and sends attachments of message.
+    Returns processed blueprint count"""
+    #skip messages from self
     if message.author == bot.user:
         return
 
+    bpcount = 0
+    #iterate attachments
     for attachm in message.attachments:
         if attachm.filename.endswith(".blueprint"):
+            bpcount += 1
             try:
                 content = await attachm.read()
             except discord.HTTPException:
@@ -50,7 +71,7 @@ async def on_message(message):
             with open(filename, "wb") as f:
                 f.write(content)
             #process blueprint
-            combined_img_file = bp_to_imgV2.process_blueprint(filename)
+            combined_img_file = await bp_to_imgV2.process_blueprint(filename)
             #files
             file = discord.File(combined_img_file)
             #upload
@@ -58,14 +79,8 @@ async def on_message(message):
             #delete files
             os.remove(combined_img_file)
             os.remove(filename)
-            
-    await bot.process_commands(message)
 
-#command testing
-@bot.command(name="print", help="testing print")
-async def cmd_print(ctx):
-    await ctx.send("print test")
-
+    return bpcount
 
 
 bot.run(TOKEN)
