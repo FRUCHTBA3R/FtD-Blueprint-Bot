@@ -29,7 +29,7 @@ async def on_message(message):
     bpcount = await process_attachments(message)
     await bot.process_commands(message)
 
-#command testing
+
 @bot.command(name="print", help="Print last blueprint uploaded to channel. Only checks last 30 messages.")
 async def cmd_print(ctx):
     """Find and print last blueprint in channel"""
@@ -38,7 +38,25 @@ async def cmd_print(ctx):
         bpcount = await process_attachments(message)
         if bpcount != 0:
             break
-                
+
+
+@bot.command(name="emoji")
+async def cmd_emoji(ctx):
+    """Print an emoji"""
+    await ctx.send("Thumbs down \U0001f44e")
+
+
+@bot.event
+async def on_reaction_add(reaction, user):
+    """React to thumbs down reaction on image"""
+    print("Found reaction", reaction, "from user", user)
+    if reaction.message.author == bot.user:
+        if reaction.emoji == "\U0001f44e":
+            print("Thumbs down on bot mesasge")
+    else:
+        if reaction.emoji == "\U0001f44e":
+            print("Thumbs down")
+
 
 async def process_attachments(message):
     """Checks, processes and sends attachments of message.
