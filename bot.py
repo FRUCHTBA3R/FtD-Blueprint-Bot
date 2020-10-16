@@ -40,12 +40,6 @@ async def cmd_print(ctx):
             break
 
 
-@bot.command(name="emoji")
-async def cmd_emoji(ctx):
-    """Print an emoji"""
-    await ctx.send("Thumbs down \U0001f44e")
-
-
 @bot.event
 async def on_reaction_add(reaction, user):
     """React to thumbs down reaction on image"""
@@ -63,7 +57,7 @@ async def process_attachments(message):
     Returns processed blueprint count"""
     #skip messages from self
     if message.author == bot.user:
-        return
+        return 0
 
     bpcount = 0
     #iterate attachments

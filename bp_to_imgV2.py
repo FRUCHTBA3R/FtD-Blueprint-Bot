@@ -436,7 +436,8 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos):
         info_img = np.full((height,width,3), np.array([255, 118, 33]), dtype=np.uint8)
         
         #write info
-        fontThickness = max(1, int(pixel * 0.1))
+        fontThickness = max(1, int(pixel * 0.07))
+        print(pixel, fontThickness)
         px = pixel//2
         py = pixel-baseline+pixel//2
         for k in bp_infos:
@@ -500,6 +501,7 @@ if __name__ == "__main__":
             global bp, timing, main_img
             bp, timing, main_img = await process_blueprint(fname, False, True)
         asyncio.run(async_main())
+        cv2.namedWindow("Blueprint", cv2.WINDOW_AUTOSIZE)
         cv2.imshow("Blueprint", main_img)
         cv2.waitKey(1)
         input("Press enter to exit...")
