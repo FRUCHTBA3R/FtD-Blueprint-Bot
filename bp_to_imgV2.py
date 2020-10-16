@@ -436,11 +436,12 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos):
         info_img = np.full((height,width,3), np.array([255, 118, 33]), dtype=np.uint8)
         
         #write info
+        fontThickness = max(1, int(pixel * 0.1))
         px = pixel//2
         py = pixel-baseline+pixel//2
         for k in bp_infos:
             txt = f"{k}: {bp_infos[k]}"
-            cv2.putText(info_img, txt, (px,py), fontFace, fontScale, (255,255,255))
+            cv2.putText(info_img, txt, (px,py), fontFace, fontScale, (255,255,255), fontThickness)
             py += pixel+pixel
             
     #combine images
