@@ -2,6 +2,7 @@ import json, time
 import numpy as np
 import quaternion
 import cv2
+#from scipy.signal import convolve2d
 
 #block rotation directions
 rot_normal = np.array([[ 0, 0, 1],
@@ -298,11 +299,20 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos):
         roll_down = np.roll(height, -1, 0)
         roll_left = np.roll(height, 1, 1)
         roll_right = np.roll(height, -1, 1)
+        
         #difference
         dup = np.where(height - roll_up > 1, 1, 0)
         ddown = np.where(height - roll_down > 1, 1, 0)
         dleft = np.where(height - roll_left > 1, 1, 0)
         dright = np.where(height - roll_right > 1, 1, 0)
+
+        #not used as roll_... is required later
+        #cv2 filter2D
+        #sci_dup = convolve2d(height, np.array([[0],[1],[-1]]), mode="same", fillvalue=-1)
+        #sci_ddown = convolve2d(height, np.array([[-1],[1],[0]]), mode="same", fillvalue=-1)
+        #sci_dleft = convolve2d(height, np.array([[0,1,-1]]), mode="same", fillvalue=-1)
+        #sci_dright = convolve2d(height, np.array([[-1,1,0]]), mode="same", fillvalue=-1)
+        
         #"super" difference
         superup = np.where(roll_up < 0, 1, 0)
         superdown = np.where(roll_down < 0, 1, 0)
@@ -313,21 +323,25 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos):
         superdown = (superdown == 1) & boolsupersum1
         superleft = (superleft == 1) & boolsupersum1
         superright = (superright == 1) & boolsupersum1
+        
         #sum, circle, edges
         dsum = dup + ddown + dleft + dright
         booldcircle = dsum == 4
         dcircle = np.where(booldcircle, 1, 0)
+        
         #remove circles
         dup[booldcircle] = 0
         ddown[booldcircle] = 0
         dleft[booldcircle] = 0
         dright[booldcircle] = 0
+        
         #diag A is / ; diag B is \
         booldsum2 = dsum == 2
         boolddiagA = booldsum2 & (dup == dleft)
         boolddiagB = booldsum2 & (dup == dright)
         ddiagA = np.where(boolddiagA, 1, 0)
         ddiagB = np.where(boolddiagB, 1, 0)
+        
         #remove diags
         dup[boolddiagA] = 0
         ddown[boolddiagA] = 0
@@ -337,11 +351,13 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos):
         ddown[boolddiagB] = 0
         dleft[boolddiagB] = 0
         dright[boolddiagB] = 0
+        
         #re-add super
         dup[superup] = 1
         ddown[superdown] = 1
         dleft[superleft] = 1
         dright[superright] = 1
+        
         #kronecker upscale
         dupimg = np.kron(dup, linetop)
         ddownimg = np.kron(ddown, linedown)
@@ -381,7 +397,7 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos):
         info_img = np.full((front_img.shape[1],front_img.shape[1],3), np.array([255, 118, 33]),
                        dtype=np.uint8)
         fontScale = 12./cv2.getTextSize("I", fontFace, 1, 1)[0][1] #scale to 12 pixels
-        cv2.putText(info_img, "Info-Error", (5,info_img.shape[0]//2), fontFace,
+        cv2.putText(info_img, "Error", (5,info_img.shape[0]//2), fontFace,
                     fontScale, (255,255,255))
     else:
         #find max length text
@@ -392,18 +408,33 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos):
             if len(txt) > maxlen:
                 maxlen = len(txt)
                 maxtxt = txt
+        
+        pixel = 14 #minimum text height in pixel
+        
         #get size of text with scaling 1
-        (width, height), baseline = cv2.getTextSize(maxtxt, fontFace, 1, 1)
-        pixel = 14
-        fontScale = pixel/(height+baseline) #scale to "pixel" pixels
+        #(width, height), baseline = cv2.getTextSize(maxtxt, fontFace, 1, 1)
+        #fontScale = pixel/(height+baseline) #scale to "pixel" pixels
+        #above code will result in:
+        fontScale = 0.4375
+        
         #get size of text with scaling "fontScale"
         (width, height), baseline = cv2.getTextSize(maxtxt, fontFace, fontScale, 1)
+
+        #reverse scaling calculation for text upscaling
+        reverse_scale_height = (top_img.shape[0] / 2 / len(bp_infos)) / (height+baseline)
+        reverse_scale_width = top_img.shape[0] / width / (1 + pixel / width)
+        reverse_scale = min(reverse_scale_height, reverse_scale_width) * fontScale
+        if fontScale < reverse_scale:#larger scale is possible
+            pixel = int(np.floor(pixel * min(reverse_scale_height, reverse_scale_width)))
+            fontScale = reverse_scale
+        
         #calculate height and limit minimum width/height to top view img height
         height = len(bp_infos) * (height+baseline) * 2
         height = max(height, top_img.shape[0])
-        width = int(np.ceil(width + pixel)) #required width + padding for text
+        width = width+pixel#int(np.ceil(width + pixel)) #required width + padding for text
         width = max(width, top_img.shape[0])
         info_img = np.full((height,width,3), np.array([255, 118, 33]), dtype=np.uint8)
+        
         #write info
         px = pixel//2
         py = pixel-baseline+pixel//2
@@ -466,7 +497,7 @@ if __name__ == "__main__":
                 fname = sys.argv[1]
         async def async_main():
             global bp, timing, main_img
-            bp, timing, main_img = await process_blueprint(fname, True, True)
+            bp, timing, main_img = await process_blueprint(fname, False, True)
         asyncio.run(async_main())
         cv2.imshow("Blueprint", main_img)
         cv2.waitKey(1)
