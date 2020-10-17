@@ -444,15 +444,26 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos):
             txt = f"{k}: {bp_infos[k]}"
             cv2.putText(info_img, txt, (px,py), fontFace, fontScale, (255,255,255), fontThickness)
             py += pixel+pixel
-            
+
+    darkBlue = np.array([255, 100, 0])
+    
     #combine images
     bottombuffer = np.full((max(0,info_img.shape[0]-top_img.shape[0]),top_img.shape[1],3),
                            np.array([255, 118, 33]), dtype=np.uint8)
     rightbuffer = np.full((front_img.shape[0],max(0, info_img.shape[1]-front_img.shape[1]),3),
                            np.array([255, 118, 33]), dtype=np.uint8)
+    #border side to front
+    side_img[:,-2:] = darkBlue
+    front_img[:,:2] = darkBlue
     toprow = np.concatenate((side_img, front_img, rightbuffer), 1)
     bottomrow = np.concatenate((top_img, bottombuffer), 0)
+    #border top to info
+    bottomrow[:,-2:] = darkBlue
+    info_img[:,:2] = darkBlue
     bottomrow = np.concatenate((bottomrow, info_img), 1)
+    #border toprow to bottomrow
+    toprow[-2:,:] = darkBlue
+    bottomrow[:2,:] = darkBlue
     res = np.concatenate((toprow, bottomrow), 0)
     return res
 
@@ -487,7 +498,7 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     #file
-    fname = "../example blueprints/Tyr.blueprint"
+    fname = "../example blueprints/WhaleShark.blueprint"
 
     import asyncio
     
@@ -503,5 +514,4 @@ if __name__ == "__main__":
         asyncio.run(async_main())
         cv2.namedWindow("Blueprint", cv2.WINDOW_AUTOSIZE)
         cv2.imshow("Blueprint", main_img)
-        cv2.waitKey(1)
-        input("Press enter to exit...")
+        cv2.waitKey()
