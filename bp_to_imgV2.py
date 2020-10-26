@@ -165,6 +165,15 @@ def __convert_blueprint(bp):
         blockposition_array = np.array(blueprint["BLP"],dtype=float).T
         blockposition_array = np.dot(blueprint["LocalRotation"],blockposition_array).T
         blueprint["BLP"] = blockposition_array.round().astype(int) + blueprint["LocalPosition"]
+
+        #check min/max coords with blp
+        #mincords = np.min(blueprint["BLP"], 0)
+        #maxcords = np.max(blueprint["BLP"], 0)
+        #print(mincords, maxcords)
+        #print(blueprint["MinCords"], blueprint["MaxCords"])
+        #re-min/max
+        #blueprint["MinCords"] = np.minimum(mincords, blueprint["MinCords"])
+        #blueprint["MaxCords"] = np.maximum(mincords, blueprint["MaxCords"])
         
         #rotate rot_normal and rot_tangent via local rotation
         blueprint["RotNormal"] = np.dot(blueprint["LocalRotation"],rot_normal).T.round().astype(int)
@@ -191,15 +200,28 @@ def __convert_blueprint(bp):
 
 def __fetch_infos(bp):
     """Gathers important information of blueprint"""
+    infos = {}
+    infos["Name"] = bp.get("Name")
+    if infos["Name"] is None:
+        infos["Name"] = "Unknown"
+    infos["Blocks"] = bp.get("SavedTotalBlockCount")
+    if infos["Blocks"] is None:
+        infos["Blocks"] = "?"
     try:
-        infos = {"Name": bp["Name"],
-                 "Blocks": str(bp["SavedTotalBlockCount"]),
-                 "Cost": str(round(bp["SavedMaterialCost"])),
-                 "Size": "W:{0} H:{1} L:{2}".format(*bp["Blueprint"]["Size"]),
-                 "Author": bp["Blueprint"]["AuthorDetails"]["CreatorReadableName"]}
+        infos["Cost"] = str(round(bp.get("SavedMaterialCost")))
     except Exception as err:
         print("Error while gathering blueprint info:", err)
-        infos = None
+        infos["Cost"] = "?"
+    try:
+        infos["Size"] = "W:{0} H:{1} L:{2}".format(*bp.get("Blueprint").get("Size"))
+    except Exception as err:
+        print("Error while gathering blueprint info:", err)
+        infos["Size"] = "?"
+    try:
+        infos["Author"] = bp.get("Blueprint").get("AuthorDetails").get("CreatorReadableName")
+    except Exception as err:
+        print("Error while gathering blueprint info:", err)
+        infos["Author"] = "Unknown"
     return infos
 
 
@@ -207,6 +229,7 @@ def __create_view_matrices(bp):
     """Create top, side, front view matrices (color matrix and height matrix)"""
     def blueprint_iter(blueprint, mincords):
         """Iterate blueprint and sub blueprints"""
+        nonlocal actual_min_cords
         #subtract min coords
         blueprint["BLP"] -= mincords
         #block loop
@@ -242,6 +265,8 @@ def __create_view_matrices(bp):
                             else: n_color = b_color
                             front_color[b_pos[1], b_pos[0]] = n_color
                             front_height[b_pos[1], b_pos[0]] = b_pos[2]
+                        #min cords
+                        actual_min_cords = np.minimum(actual_min_cords, b_pos)
                         #step
                         b_pos += b_dir
                 else:
@@ -253,18 +278,32 @@ def __create_view_matrices(bp):
         #sub blueprints iteration
         for sub_bp in blueprint["SCs"]:
             blueprint_iter(sub_bp, mincords)
-        
+
+    #calculate min cords again, cause "MinCords" are not always true
+    actual_min_cords = np.array(bp["Blueprint"]["MaxCords"])
     #create matrices
     top_color = np.full((*bp["Blueprint"]["Size"][[0,2]], 3), np.array([255, 118, 33]), dtype=np.uint16)
-    top_height = np.full(bp["Blueprint"]["Size"][[0,2]], -1, dtype=int)
+    top_height = np.full(bp["Blueprint"]["Size"][[0,2]], -12345, dtype=int)
     side_color = np.full((*bp["Blueprint"]["Size"][[1,2]], 3), np.array([255, 118, 33]), dtype=np.uint16)
-    side_height = np.full(bp["Blueprint"]["Size"][[1,2]], -1, dtype=int)
+    side_height = np.full(bp["Blueprint"]["Size"][[1,2]], -12345, dtype=int)
     front_color = np.full((*bp["Blueprint"]["Size"][[1,0]], 3), np.array([255, 118, 33]), dtype=np.uint16)
-    front_height = np.full(bp["Blueprint"]["Size"][[1,0]], -1, dtype=int)
+    front_height = np.full(bp["Blueprint"]["Size"][[1,0]], -12345, dtype=int)
     #blueprint iteration
     itemdict = bp["ItemDictionary"]
     blueprint_iter(bp["Blueprint"], bp["Blueprint"]["MinCords"])
-    return ([top_color, top_height],[side_color,side_height],[front_color,front_height])
+    #re-center based on actual min coordinates
+    print("Actual min cords:", actual_min_cords)
+    if np.any(actual_min_cords < bp["Blueprint"]["MinCords"]):
+        top_color = np.roll(top_color, (-actual_min_cords[0], -actual_min_cords[2]), (0,1))
+        top_height = np.roll(top_height, (-actual_min_cords[0], -actual_min_cords[2]), (0,1))
+        side_color = np.roll(side_color, (-actual_min_cords[1], -actual_min_cords[2]), (0,1))
+        side_height = np.roll(side_height, (-actual_min_cords[1], -actual_min_cords[2]), (0,1))
+        front_color = np.roll(front_color, (-actual_min_cords[1], -actual_min_cords[0]), (0,1))
+        front_height = np.roll(front_height, (-actual_min_cords[1], -actual_min_cords[0]), (0,1))
+    
+    return ([top_color, top_height],#, actual_min_cords[1]],
+            [side_color, side_height],#, actual_min_cords[0]],
+            [front_color, front_height])#, actual_min_cords[2]])
 
 
 def __create_images(top_mat, side_mat, front_mat, bp_infos):
@@ -276,12 +315,14 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos):
         height = cv2.flip(mat[1], 0)
         #border
         img = cv2.copyMakeBorder(img, 1, 1, 1, 1, cv2.BORDER_CONSTANT,value=(255, 118, 33))
-        height = cv2.copyMakeBorder(height, 1, 1, 1, 1, cv2.BORDER_CONSTANT,value=-1)
+        height = cv2.copyMakeBorder(height, 1, 1, 1, 1, cv2.BORDER_CONSTANT,value=-12345)
         #height coloring
         hmax = np.max(height)
         hmap = height
-        hmap = np.where(hmap == -1, hmax, hmap)
-        hmin = np.min(hmap)
+        hmap = np.where(hmap == -12345, hmax, hmap)
+        hmin = np.min(hmap) #mat[2]
+        if hmin == hmax:
+            hmin -= 1
         dh = hmax - hmin
         dhN = dh + dh + dh + dh
         hmap = (hmap + (dhN - hmin))/(dh + dhN)
@@ -437,7 +478,6 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos):
         
         #write info
         fontThickness = max(1, int(pixel * 0.07))
-        print(pixel, fontThickness)
         px = pixel//2
         py = pixel-baseline+pixel//2
         for k in bp_infos:
@@ -498,7 +538,7 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     #file
-    fname = "../example blueprints/WhaleShark.blueprint"
+    fname = "../example blueprints/example.blueprint"
 
     import asyncio
     

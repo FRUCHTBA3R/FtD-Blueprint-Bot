@@ -82,7 +82,7 @@ invguiddict["missing rotation"] = {"Name": "Missing Rotation", "Length": 1, "Mat
 #save
 blocks_file = "blocks.json"
 with open(blocks_file, "w") as f:
-    f.write(json.dumps(invguiddict, indent="\t", sort_keys=True))
+    json.dump(invguiddict, f, indent="\t", sort_keys=True)
             
 #print
 print(len(guiddict), "->", len(invguiddict))

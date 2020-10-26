@@ -9,13 +9,33 @@ from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 BP_FOLDER = os.getenv("BLUEPRINT_FOLDER")
+#####AUTHOR = int(os.getenv("AUTHOR"))
+
 
 #create bp_folder
 if not os.path.exists(BP_FOLDER):
     os.mkdir(BP_FOLDER)
-    
 
-bot = commands.Bot(command_prefix = "!")
+#guild/channel config manager
+import guildconfig
+GCM = guildconfig.GuildconfigManager()
+
+bot = commands.Bot(command_prefix = "bp!")
+
+def print_cmd(ctx):
+    """Print command information"""
+    print(f"[CMD] <{ctx.command}> invoked by '{ctx.author}' in channel '{ctx.channel}'", "" if ctx.guild is None else f"of guild '{ctx.guild}'")
+
+
+async def cc_is_author(ctx):
+    """Check if command sender is author."""
+    return await bot.is_owner(ctx.author)
+
+
+def cc_is_manager(ctx):
+    """Check if command sender has channel managment permissions."""
+    return (ctx.guild == None) or (ctx.author.permissions_in(ctx.channel).manage_channels)
+
 
 @bot.event
 async def on_ready():
@@ -24,40 +44,93 @@ async def on_ready():
     for guild in bot.guilds:
         print(f"{guild.name} (id: {guild.id})")
 
+
 @bot.event
 async def on_message(message):
-    bpcount = await process_attachments(message)
+    """Handle all messages"""
+    #skip all bot messages
+    if message.author.bot:
+        return 0
+
+    #mode
+    mode = GCM.getMode(message.guild.id, message.channel.id)
+    if (mode == 1) or (((mode == 2) or (mode is None)) and bot.user.mentioned_in(message)):
+        bpcount = await process_attachments(message)
+
+    #command processing
     await bot.process_commands(message)
 
 
 @bot.command(name="print", help="Print last blueprint uploaded to channel. Only checks last 30 messages.")
 async def cmd_print(ctx):
     """Find and print last blueprint in channel"""
-    print("Searching and printing last blueprint")
+    print_cmd(ctx)
     async for message in ctx.history(limit=30, oldest_first=False):
         bpcount = await process_attachments(message)
         if bpcount != 0:
             break
 
 
+@bot.command(name="mode", help="Set mode for current channel.\nAllowed arguments:\noff   Turned off.\non  Turned on.\nmention  Only react if bot is mentioned.",
+             require_var_positional=False, usage="off | on | mention")
+@commands.check(cc_is_manager) 
+async def cmd_mode(ctx, mode):
+    """Select mode for channel"""
+    print_cmd(ctx)
+    if ctx.guild is None:
+        return
+
+    #check mode
+    if not GCM.setMode(ctx.guild.id, ctx.channel.id, mode):
+        raise commands.errors.BadArgument("Mode could not be set")
+    
+    await ctx.message.add_reaction("\U0001f197") #:ok:
+    
+
+
+@bot.command(name="test", help="For testing stuff. (Author only)")
+@commands.check(cc_is_author)
+async def cmd_test(ctx):
+    """Testing function"""
+    print_cmd(ctx)
+    await ctx.channel.send("bp!print")
+
+
+@bot.event
+async def on_command_error(ctx, error):
+    """Command error exception"""
+    print(f"[ERR] <cmd:{type(error)}> {error}")
+    #[print(k, v) for k,v in vars(error).items()]
+    if type(error) == commands.errors.CheckFailure:
+        #permission error
+        await ctx.message.add_reaction("\U0001f4a9") #:poop:
+    else:
+        await ctx.message.add_reaction("\u2753") #:question:
+
+
 @bot.event
 async def on_reaction_add(reaction, user):
     """React to thumbs down reaction on image"""
-    print("Found reaction", reaction, "from user", user)
+    #print("Found reaction", reaction, "from user", user)
     if reaction.message.author == bot.user:
-        if reaction.emoji == "\U0001f44e":
+        if reaction.emoji == "\U0001f44e": #:thumbsdown:
             print("Thumbs down on bot mesasge")
-    else:
-        if reaction.emoji == "\U0001f44e":
-            print("Thumbs down")
+    #else:
+    #    if reaction.emoji == "\U0001f44e": #:thumbsdown:
+    #        print("Thumbs down")
 
 
 async def process_attachments(message):
     """Checks, processes and sends attachments of message.
     Returns processed blueprint count"""
+
+    #already checked in on_message
     #skip messages from self
-    if message.author == bot.user:
-        return 0
+    #if message.author == bot.user:
+    #    return 0
+    #skip all bot messages
+    #if message.author.bot:
+    #    return 0
 
     bpcount = 0
     #iterate attachments
