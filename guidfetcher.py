@@ -51,8 +51,6 @@ if len(extrainvguiddict) > 0:
     invguiddict.update(extrainvguiddict)
     print("->", len(invguiddict))
 
-#manual fixes
-invguiddict["867cea4e-6ea4-4fe2-a4a1-b6230308f8f1"]["Length"] = 4
 
 #load config
 materials = None
@@ -77,8 +75,13 @@ for k in invguiddict:
             invguiddict[k]["Length"] = sizedict[size]
             break
 
+#manual fixes
+invguiddict["867cea4e-6ea4-4fe2-a4a1-b6230308f8f1"]["Length"] = 4
+
+#missing
 invguiddict["missing"] = {"Name": "Missing", "Length": 1, "Material": "Missing"}
 invguiddict["missing rotation"] = {"Name": "Missing Rotation", "Length": 1, "Material": "Missing Rotation"}
+
 #save
 blocks_file = "blocks.json"
 with open(blocks_file, "w") as f:

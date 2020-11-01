@@ -64,6 +64,7 @@ with open("materials.json", "r") as f:
 for k in materials:
     if "Invisible" not in materials[k]:
         materials[k]["Invisible"] = False
+    materials[k]["Color"] = np.array(materials[k]["Color"])
 
 
 #Blueprint:
@@ -232,55 +233,115 @@ def __create_view_matrices(bp):
         nonlocal actual_min_cords
         #subtract min coords
         blueprint["BLP"] -= mincords
-        #block loop
-        for i in range(blueprint["BlockCount"]):
-            b_guid = itemdict[blueprint["BlockIds"][i]]
-            try:
-                b_length = blocks[b_guid]["Length"]
-                b_pos = blueprint["BLP"][i]
-                b_dir = blueprint["RotNormal"][blueprint["BLR"][i]]
-                b_material = blocks[b_guid]["Material"]
-                b_color = materials[b_material]["Color"]
-                b_invisible = materials[b_material]["Invisible"]
-                if type(b_length) == int:
-                    for l in range(b_length):
-                        #top
-                        if b_pos[1] >= top_height[b_pos[0], b_pos[2]]:
-                            if b_invisible:
-                                n_color = top_color[b_pos[0], b_pos[2]] + b_color
-                            else: n_color = b_color
-                            top_color[b_pos[0], b_pos[2]] = n_color
-                            top_height[b_pos[0], b_pos[2]] = b_pos[1]
-                        #side
-                        if b_pos[0] >= side_height[b_pos[1], b_pos[2]]:
-                            if b_invisible:
-                                n_color = side_color[b_pos[1], b_pos[2]] + b_color
-                            else: n_color = b_color
-                            side_color[b_pos[1], b_pos[2]] = n_color
-                            side_height[b_pos[1], b_pos[2]] = b_pos[0]
-                        #front
-                        if b_pos[2] >= front_height[b_pos[1], b_pos[0]]:
-                            if b_invisible:
-                                n_color = front_color[b_pos[1], b_pos[0]] + b_color
-                            else: n_color = b_color
-                            front_color[b_pos[1], b_pos[0]] = n_color
-                            front_height[b_pos[1], b_pos[0]] = b_pos[2]
-                        #min cords
-                        actual_min_cords = np.minimum(actual_min_cords, b_pos)
-                        #step
-                        b_pos += b_dir
-                else:
-                    print("Length not implemented", b_length)
-            except Exception as e:
-                print(e)
-                #print("Missing GUID", b_guid)
+
+        if True:
+            #numpyfication
+            a_guid = np.vectorize(itemdict.get)(blueprint["BlockIds"])
+            missing_block = blocks.get("missing")
+            a_length = np.vectorize(lambda x: blocks.get(x, missing_block).get("Length"))(a_guid)
+            a_pos = blueprint["BLP"]
+            a_dir = blueprint["RotNormal"][blueprint["BLR"]]
+            a_material = np.vectorize(lambda x: blocks.get(x, missing_block).get("Material"))(a_guid)
+            a_color = np.vectorize(lambda x: materials.get(x)["Color"], signature="()->(n)")(a_material)
+            a_invisible = np.vectorize(lambda x: materials.get(x)["Invisible"])(a_material)
+
+            def fill_color_and_height(color_mat, height_mat, sel_arr, pos_sel_arr, axisX, axisZ, axisY):
+                """Fills color_mat and height_mat with selected blocks (sel_arr as index and pos_sel_arr as position).
+                axisY is the height axis."""
+                nonlocal a_color, a_invisible
+                #create slicing indices for axes
+                axisA = axisX
+                axisB = axisZ+1 if axisZ > axisX else None
+                axisS = axisZ - axisX
+                
+                #selection of higher height
+                height_sel_arr = height_mat[pos_sel_arr[:, axisX], pos_sel_arr[:, axisZ]] < pos_sel_arr[:, axisY]
+                #position of selection
+                height_pos_sel_arr = pos_sel_arr[height_sel_arr]
+                
+                #select only max height for each x,z coord
+                #sort index of heights
+                sorted_index = np.argsort(height_pos_sel_arr[:, axisY], axis=0)[::-1]
+                #sort pos
+                sorted_pos = height_pos_sel_arr[sorted_index]
+                #find index of unique (x,z) coords
+                unique_pos, unique_index = np.unique(sorted_pos[:, axisA:axisB:axisS], return_index=True, axis=0)
+                
+                #coloring
+                color_mat[unique_pos[:, 0], unique_pos[:, 1]] = a_color[sel_arr][height_sel_arr][sorted_index][unique_index]
+                #new height
+                height_mat[unique_pos[:, 0], unique_pos[:, 1]] = sorted_pos[:, axisY][unique_index]
+                
+            
+            #single length loop
+            for i in range(4, 0, -1):
+                a_sel, = np.nonzero(a_length == i)
+                a_pos_sel = a_pos[a_sel]
+                
+                fill_color_and_height(top_color, top_height, a_sel, a_pos_sel, 0, 2, 1)
+
+                fill_color_and_height(side_color, side_height, a_sel, a_pos_sel, 1, 2, 0)
+
+                fill_color_and_height(front_color, front_height, a_sel, a_pos_sel, 1, 0, 2)
+
+                #min cords
+                actual_min_cords = np.minimum(np.amin(a_pos, 0), actual_min_cords)
+                #step
+                a_length[a_sel] -= 1
+                a_pos[a_sel] += a_dir[a_sel]
+        
+            
+        else:
+            #block loop
+            for i in range(blueprint["BlockCount"]):
+                b_guid = itemdict[blueprint["BlockIds"][i]]
+                try:
+                    b_length = blocks[b_guid]["Length"]
+                    b_pos = blueprint["BLP"][i]
+                    b_dir = blueprint["RotNormal"][blueprint["BLR"][i]]
+                    b_material = blocks[b_guid]["Material"]
+                    b_color = materials[b_material]["Color"]
+                    b_invisible = materials[b_material]["Invisible"]
+                    if type(b_length) == int:
+                        #if b_length != 4: continue
+                        for l in range(b_length):
+                            #top
+                            if b_pos[1] >= top_height[b_pos[0], b_pos[2]]:
+                                if b_invisible:
+                                    n_color = top_color[b_pos[0], b_pos[2]] + b_color
+                                else: n_color = b_color
+                                top_color[b_pos[0], b_pos[2]] = n_color
+                                top_height[b_pos[0], b_pos[2]] = b_pos[1]
+                            #side
+                            if b_pos[0] >= side_height[b_pos[1], b_pos[2]]:
+                                if b_invisible:
+                                    n_color = side_color[b_pos[1], b_pos[2]] + b_color
+                                else: n_color = b_color
+                                side_color[b_pos[1], b_pos[2]] = n_color
+                                side_height[b_pos[1], b_pos[2]] = b_pos[0]
+                            #front
+                            if b_pos[2] >= front_height[b_pos[1], b_pos[0]]:
+                                if b_invisible:
+                                    n_color = front_color[b_pos[1], b_pos[0]] + b_color
+                                else: n_color = b_color
+                                front_color[b_pos[1], b_pos[0]] = n_color
+                                front_height[b_pos[1], b_pos[0]] = b_pos[2]
+                            #min cords
+                            actual_min_cords = np.minimum(actual_min_cords, b_pos)
+                            #step
+                            b_pos += b_dir
+                    else:
+                        print("Length not implemented", b_length)
+                except Exception as e:
+                    print(e)
+                    #print("Missing GUID", b_guid)
         
         #sub blueprints iteration
         for sub_bp in blueprint["SCs"]:
             blueprint_iter(sub_bp, mincords)
 
     #calculate min cords again, cause "MinCords" are not always true
-    actual_min_cords = np.array(bp["Blueprint"]["MaxCords"])
+    actual_min_cords = np.full((3), np.iinfo(np.int32).max, dtype=np.int32)
     #create matrices
     top_color = np.full((*bp["Blueprint"]["Size"][[0,2]], 3), np.array([255, 118, 33]), dtype=np.uint16)
     top_height = np.full(bp["Blueprint"]["Size"][[0,2]], -12345, dtype=int)
@@ -292,7 +353,7 @@ def __create_view_matrices(bp):
     itemdict = bp["ItemDictionary"]
     blueprint_iter(bp["Blueprint"], bp["Blueprint"]["MinCords"])
     #re-center based on actual min coordinates
-    print("Actual min cords:", actual_min_cords)
+    #print("Actual min cords:", actual_min_cords)
     if np.any(actual_min_cords < bp["Blueprint"]["MinCords"]):
         top_color = np.roll(top_color, (-actual_min_cords[0], -actual_min_cords[2]), (0,1))
         top_height = np.roll(top_height, (-actual_min_cords[0], -actual_min_cords[2]), (0,1))
@@ -300,19 +361,28 @@ def __create_view_matrices(bp):
         side_height = np.roll(side_height, (-actual_min_cords[1], -actual_min_cords[2]), (0,1))
         front_color = np.roll(front_color, (-actual_min_cords[1], -actual_min_cords[0]), (0,1))
         front_height = np.roll(front_height, (-actual_min_cords[1], -actual_min_cords[0]), (0,1))
+
+    #flip
+    cv2.flip(side_color, 0, side_color)
+    cv2.flip(side_height, 0, side_height)
+    cv2.flip(front_color, -1, front_color)
+    cv2.flip(front_height, -1, front_height)
+    #print(side_height)
     
     return ([top_color, top_height],#, actual_min_cords[1]],
             [side_color, side_height],#, actual_min_cords[0]],
             [front_color, front_height])#, actual_min_cords[2]])
 
 
-def __create_images(top_mat, side_mat, front_mat, bp_infos):
+def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True):
     """Create images from view matrices"""
     def create_image(mat, upscale_f):
         """Create single image"""
         #flip
-        img = cv2.flip(mat[0], 0)
-        height = cv2.flip(mat[1], 0)
+        #img = cv2.flip(mat[0], 0)
+        img = mat[0]
+        #height = cv2.flip(mat[1], 0)
+        height = mat[1]
         #border
         img = cv2.copyMakeBorder(img, 1, 1, 1, 1, cv2.BORDER_CONSTANT,value=(255, 118, 33))
         height = cv2.copyMakeBorder(height, 1, 1, 1, 1, cv2.BORDER_CONSTANT,value=-12345)
@@ -334,82 +404,83 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos):
         img = cv2.resize(img, (img.shape[1]*upscale_f,img.shape[0]*upscale_f),
                          interpolation=cv2.INTER_AREA)
 
-        #contours
-        #rolling
-        roll_up = np.roll(height, 1, 0) #rolled down for up difference calculation
-        roll_down = np.roll(height, -1, 0)
-        roll_left = np.roll(height, 1, 1)
-        roll_right = np.roll(height, -1, 1)
-        
-        #difference
-        dup = np.where(height - roll_up > 1, 1, 0)
-        ddown = np.where(height - roll_down > 1, 1, 0)
-        dleft = np.where(height - roll_left > 1, 1, 0)
-        dright = np.where(height - roll_right > 1, 1, 0)
+        if contours:
+            #contours
+            #rolling
+            roll_up = np.roll(height, 1, 0) #rolled down for up difference calculation
+            roll_down = np.roll(height, -1, 0)
+            roll_left = np.roll(height, 1, 1)
+            roll_right = np.roll(height, -1, 1)
+            
+            #difference
+            dup = np.where(height - roll_up > 1, 1, 0)
+            ddown = np.where(height - roll_down > 1, 1, 0)
+            dleft = np.where(height - roll_left > 1, 1, 0)
+            dright = np.where(height - roll_right > 1, 1, 0)
 
-        #not used as roll_... is required later
-        #cv2 filter2D
-        #sci_dup = convolve2d(height, np.array([[0],[1],[-1]]), mode="same", fillvalue=-1)
-        #sci_ddown = convolve2d(height, np.array([[-1],[1],[0]]), mode="same", fillvalue=-1)
-        #sci_dleft = convolve2d(height, np.array([[0,1,-1]]), mode="same", fillvalue=-1)
-        #sci_dright = convolve2d(height, np.array([[-1,1,0]]), mode="same", fillvalue=-1)
-        
-        #"super" difference
-        superup = np.where(roll_up < 0, 1, 0)
-        superdown = np.where(roll_down < 0, 1, 0)
-        superleft = np.where(roll_left < 0, 1, 0)
-        superright = np.where(roll_right < 0, 1, 0)
-        boolsupersum1 = (superup + superdown + superleft + superright) == 1
-        superup = (superup == 1) & boolsupersum1
-        superdown = (superdown == 1) & boolsupersum1
-        superleft = (superleft == 1) & boolsupersum1
-        superright = (superright == 1) & boolsupersum1
-        
-        #sum, circle, edges
-        dsum = dup + ddown + dleft + dright
-        booldcircle = dsum == 4
-        dcircle = np.where(booldcircle, 1, 0)
-        
-        #remove circles
-        dup[booldcircle] = 0
-        ddown[booldcircle] = 0
-        dleft[booldcircle] = 0
-        dright[booldcircle] = 0
-        
-        #diag A is / ; diag B is \
-        booldsum2 = dsum == 2
-        boolddiagA = booldsum2 & (dup == dleft)
-        boolddiagB = booldsum2 & (dup == dright)
-        ddiagA = np.where(boolddiagA, 1, 0)
-        ddiagB = np.where(boolddiagB, 1, 0)
-        
-        #remove diags
-        dup[boolddiagA] = 0
-        ddown[boolddiagA] = 0
-        dleft[boolddiagA] = 0
-        dright[boolddiagA] = 0
-        dup[boolddiagB] = 0
-        ddown[boolddiagB] = 0
-        dleft[boolddiagB] = 0
-        dright[boolddiagB] = 0
-        
-        #re-add super
-        dup[superup] = 1
-        ddown[superdown] = 1
-        dleft[superleft] = 1
-        dright[superright] = 1
-        
-        #kronecker upscale
-        dupimg = np.kron(dup, linetop)
-        ddownimg = np.kron(ddown, linedown)
-        dleftimg = np.kron(dleft, lineleft)
-        drightimg = np.kron(dright, lineright)
-        dcircleimg = np.kron(dcircle, linecircle)
-        ddiagAimg = np.kron(ddiagA, linediagA)
-        ddiagBimg = np.kron(ddiagB, linediagB)
-        dimg = dupimg + ddownimg + dleftimg + drightimg + dcircleimg + ddiagAimg + ddiagBimg
+            #not used as roll_... is required later
+            #cv2 filter2D
+            #sci_dup = convolve2d(height, np.array([[0],[1],[-1]]), mode="same", fillvalue=-1)
+            #sci_ddown = convolve2d(height, np.array([[-1],[1],[0]]), mode="same", fillvalue=-1)
+            #sci_dleft = convolve2d(height, np.array([[0,1,-1]]), mode="same", fillvalue=-1)
+            #sci_dright = convolve2d(height, np.array([[-1,1,0]]), mode="same", fillvalue=-1)
+            
+            #"super" difference
+            superup = np.where(roll_up < 0, 1, 0)
+            superdown = np.where(roll_down < 0, 1, 0)
+            superleft = np.where(roll_left < 0, 1, 0)
+            superright = np.where(roll_right < 0, 1, 0)
+            boolsupersum1 = (superup + superdown + superleft + superright) == 1
+            superup = (superup == 1) & boolsupersum1
+            superdown = (superdown == 1) & boolsupersum1
+            superleft = (superleft == 1) & boolsupersum1
+            superright = (superright == 1) & boolsupersum1
+            
+            #sum, circle, edges
+            dsum = dup + ddown + dleft + dright
+            booldcircle = dsum == 4
+            dcircle = np.where(booldcircle, 1, 0)
+            
+            #remove circles
+            dup[booldcircle] = 0
+            ddown[booldcircle] = 0
+            dleft[booldcircle] = 0
+            dright[booldcircle] = 0
+            
+            #diag A is / ; diag B is \
+            booldsum2 = dsum == 2
+            boolddiagA = booldsum2 & (dup == dleft)
+            boolddiagB = booldsum2 & (dup == dright)
+            ddiagA = np.where(boolddiagA, 1, 0)
+            ddiagB = np.where(boolddiagB, 1, 0)
+            
+            #remove diags
+            dup[boolddiagA] = 0
+            ddown[boolddiagA] = 0
+            dleft[boolddiagA] = 0
+            dright[boolddiagA] = 0
+            dup[boolddiagB] = 0
+            ddown[boolddiagB] = 0
+            dleft[boolddiagB] = 0
+            dright[boolddiagB] = 0
+            
+            #re-add super
+            dup[superup] = 1
+            ddown[superdown] = 1
+            dleft[superleft] = 1
+            dright[superright] = 1
+            
+            #kronecker upscale
+            dupimg = np.kron(dup, linetop)
+            ddownimg = np.kron(ddown, linedown)
+            dleftimg = np.kron(dleft, lineleft)
+            drightimg = np.kron(dright, lineright)
+            dcircleimg = np.kron(dcircle, linecircle)
+            ddiagAimg = np.kron(ddiagA, linediagA)
+            ddiagBimg = np.kron(ddiagB, linediagB)
+            dimg = dupimg + ddownimg + dleftimg + drightimg + dcircleimg + ddiagAimg + ddiagBimg
 
-        img[dimg > 0] = 255
+            img[dimg > 0] = 255
         return img
 
     upscale_f = 5
@@ -538,11 +609,11 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     #file
-    fname = "../example blueprints/example.blueprint"
+    fname = "../example blueprints/exampleTurretRotation.blueprint"
 
     import asyncio
     
-    if False: asyncio.run(speed_test(fname))
+    if True: asyncio.run(speed_test(fname))
     else:
         import sys, os
         if len(sys.argv) > 1:
