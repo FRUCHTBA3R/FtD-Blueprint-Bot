@@ -28,7 +28,7 @@ rot_normal = np.array([[ 0, 0, 1],
                        [ 1, 0, 0],
                        [-1, 0, 0],
                        [ 1, 0, 0],
-                       [-1, 0, 0]]).T
+                       [-1, 0, 0]])
 #not testet!!!
 rot_tangent = np.array([[ 0, 1, 0],
                         [ 0, 1, 0],
@@ -53,7 +53,13 @@ rot_tangent = np.array([[ 0, 1, 0],
                         [ 0,-1, 0],
                         [ 0,-1, 0],
                         [ 0, 0, 1],
-                        [ 0, 0,-1]]).T
+                        [ 0, 0,-1]])
+rot_bitangent = np.cross(rot_normal, rot_tangent)
+
+#transpose
+rot_normal = rot_normal.T
+rot_tangent = rot_tangent.T
+rot_bitangent = rot_bitangent.T
 
 #load blocks and materials configuration
 with open("blocks.json", "r") as f:
@@ -128,11 +134,17 @@ def __convert_blueprint(bp):
         blueprint["BLR"] = np.array(blueprint["BLR"])
         #convert local rotation to quaternion
         localrot_split = blueprint["LocalRotation"].split(",")
-        blueprint["LocalRotation"] = quaternion.as_rotation_matrix(np.quaternion(
+        localrot = quaternion.as_rotation_matrix(np.quaternion(
                                                    float(localrot_split[3]),
                                                    float(localrot_split[0]),
                                                    float(localrot_split[1]),
                                                    float(localrot_split[2])))
+        localrot_arg = np.argmax(np.abs(localrot), axis=1)
+        localrot_max = np.sign(localrot[[0, 1, 2], localrot_arg])
+        localrot[:,:] = 0
+        localrot[[0, 1, 2], localrot_arg] = localrot_max
+        blueprint["LocalRotation"] = localrot
+        
         #convert local position to np array
         blueprint["LocalPosition"] = np.array(blueprint["LocalPosition"].split(","),
                                               dtype=float).round().astype(int)
@@ -176,9 +188,10 @@ def __convert_blueprint(bp):
         #blueprint["MinCords"] = np.minimum(mincords, blueprint["MinCords"])
         #blueprint["MaxCords"] = np.maximum(mincords, blueprint["MaxCords"])
         
-        #rotate rot_normal and rot_tangent via local rotation
+        #rotate rot_normal, rot_tangent and rot_bitangent via local rotation
         blueprint["RotNormal"] = np.dot(blueprint["LocalRotation"],rot_normal).T.round().astype(int)
         blueprint["RotTangent"] = np.dot(blueprint["LocalRotation"],rot_tangent).T.round().astype(int)
+        blueprint["RotBitangent"] = np.dot(blueprint["LocalRotation"],rot_bitangent).T.round().astype(int)
         
         #sub blueprint iteration
         for sub_bp in blueprint["SCs"]:
@@ -238,9 +251,11 @@ def __create_view_matrices(bp):
             #numpyfication
             a_guid = np.vectorize(itemdict.get)(blueprint["BlockIds"])
             missing_block = blocks.get("missing")
-            a_length = np.vectorize(lambda x: blocks.get(x, missing_block).get("Length"))(a_guid)
+            a_length = np.vectorize(lambda x: blocks.get(x).get("Length"))(a_guid)
             a_pos = blueprint["BLP"]
             a_dir = blueprint["RotNormal"][blueprint["BLR"]]
+            a_dir_tan = blueprint["RotTangent"][blueprint["BLR"]]
+            a_dir_bitan = blueprint["RotBitangent"][blueprint["BLR"]]
             a_material = np.vectorize(lambda x: blocks.get(x, missing_block).get("Material"))(a_guid)
             a_color = np.vectorize(lambda x: materials.get(x)["Color"], signature="()->(n)")(a_material)
             a_invisible = np.vectorize(lambda x: materials.get(x)["Invisible"])(a_material)
@@ -275,22 +290,58 @@ def __create_view_matrices(bp):
             
             #single length loop
             for i in range(4, 0, -1):
+                #block selection
                 a_sel, = np.nonzero(a_length == i)
+                if len(a_sel) == 0: continue
                 a_pos_sel = a_pos[a_sel]
                 
+                #fill
                 fill_color_and_height(top_color, top_height, a_sel, a_pos_sel, 0, 2, 1)
-
                 fill_color_and_height(side_color, side_height, a_sel, a_pos_sel, 1, 2, 0)
-
                 fill_color_and_height(front_color, front_height, a_sel, a_pos_sel, 1, 0, 2)
 
                 #min cords
                 actual_min_cords = np.minimum(np.amin(a_pos, 0), actual_min_cords)
+                
                 #step
                 a_length[a_sel] -= 1
                 a_pos[a_sel] += a_dir[a_sel]
+                
+            #area loop
+            areasizes = {33: 3, 34: 5, 35: 7}
+            for i  in range(33, 36):
+                #block selection
+                a_sel, = np.nonzero(a_length == i)
+                if len(a_sel) == 0: continue
+
+                #range & limits
+                arearng = range(areasizes[i])
+                areamax = areasizes[i] - 1
+
+                #inital offset
+                a_pos[a_sel] -= (areamax >> 1) * (a_dir_bitan[a_sel] + a_dir_tan[a_sel])
+                
+                for j in arearng:
+                    for k in arearng:
+                        #select position here as loop changes a_pos
+                        a_pos_sel = a_pos[a_sel]
+                        #fill
+                        fill_color_and_height(top_color, top_height, a_sel, a_pos_sel, 0, 2, 1)
+                        fill_color_and_height(side_color, side_height, a_sel, a_pos_sel, 1, 2, 0)
+                        fill_color_and_height(front_color, front_height, a_sel, a_pos_sel, 1, 0, 2)
+                        #min cords
+                        actual_min_cords = np.minimum(np.amin(a_pos, 0), actual_min_cords)
+                        #step
+                        if k < areamax:
+                            if j % 2 == 0:
+                                a_pos[a_sel] += a_dir_bitan[a_sel]
+                            else:
+                                a_pos[a_sel] -= a_dir_bitan[a_sel]
+                    
+                    #tangential step
+                    a_pos[a_sel] += a_dir_tan[a_sel]
         
-            
+        
         else:
             #block loop
             for i in range(blueprint["BlockCount"]):
@@ -303,7 +354,6 @@ def __create_view_matrices(bp):
                     b_color = materials[b_material]["Color"]
                     b_invisible = materials[b_material]["Invisible"]
                     if type(b_length) == int:
-                        #if b_length != 4: continue
                         for l in range(b_length):
                             #top
                             if b_pos[1] >= top_height[b_pos[0], b_pos[2]]:
@@ -374,7 +424,7 @@ def __create_view_matrices(bp):
             [front_color, front_height])#, actual_min_cords[2]])
 
 
-def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True):
+def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upscale_f=5):
     """Create images from view matrices"""
     def create_image(mat, upscale_f):
         """Create single image"""
@@ -426,10 +476,11 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True):
             #sci_dright = convolve2d(height, np.array([[-1,1,0]]), mode="same", fillvalue=-1)
             
             #"super" difference
-            superup = np.where(roll_up < 0, 1, 0)
-            superdown = np.where(roll_down < 0, 1, 0)
-            superleft = np.where(roll_left < 0, 1, 0)
-            superright = np.where(roll_right < 0, 1, 0)
+            superable = height > -12345
+            superup = np.where((roll_up == -12345) & superable, 1, 0)
+            superdown = np.where((roll_down == -12345) & superable, 1, 0)
+            superleft = np.where((roll_left == -12345) & superable, 1, 0)
+            superright = np.where((roll_right == -12345) & superable, 1, 0)
             boolsupersum1 = (superup + superdown + superleft + superright) == 1
             superup = (superup == 1) & boolsupersum1
             superdown = (superdown == 1) & boolsupersum1
@@ -483,7 +534,7 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True):
             img[dimg > 0] = 255
         return img
 
-    upscale_f = 5
+    #upscale_f = 5
     #lines
     linetop = np.zeros((upscale_f,upscale_f))
     linetop[0] = 1
@@ -609,11 +660,11 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     #file
-    fname = "../example blueprints/exampleTurretRotation.blueprint"
+    fname = "../example blueprints/Argentum.blueprint"
 
     import asyncio
     
-    if True: asyncio.run(speed_test(fname))
+    if False: asyncio.run(speed_test(fname))
     else:
         import sys, os
         if len(sys.argv) > 1:
@@ -623,6 +674,12 @@ if __name__ == "__main__":
             global bp, timing, main_img
             bp, timing, main_img = await process_blueprint(fname, False, True)
         asyncio.run(async_main())
-        cv2.namedWindow("Blueprint", cv2.WINDOW_AUTOSIZE)
+        cv2.namedWindow("Blueprint", cv2.WINDOW_NORMAL)
+        sY, sX, _ = main_img.shape
+        sM = min(980 / sY, 1820 / sX)
+        if sM < 1.0:
+            cv2.resizeWindow("Blueprint", (int(sX * sM), int(sY * sM)))
+        else:
+            cv2.resizeWindow("Blueprint", (sX, sY))
         cv2.imshow("Blueprint", main_img)
         cv2.waitKey()

@@ -450,10 +450,7 @@
 		"Name": "1m Wide Wheel"
 	},
 	"05c9b256-38d2-4388-ad8c-b98118593f11": {
-		"Length": [
-			5,
-			5
-		],
+		"Length": 34,
 		"Material": "Wood",
 		"Name": "Wood duct (5x5)"
 	},
@@ -548,10 +545,7 @@
 		"Name": "Build guide spawner"
 	},
 	"06ca59e7-d3e6-40da-a9c0-9c6d60029d87": {
-		"Length": [
-			3,
-			3
-		],
+		"Length": 33,
 		"Material": "Missing",
 		"Name": "3x3x274QLaserExample"
 	},
@@ -871,10 +865,7 @@
 		"Name": "130mm Casemate"
 	},
 	"0ab1f2c9-180f-479c-9d82-717a341d4db8": {
-		"Length": [
-			5,
-			5
-		],
+		"Length": 34,
 		"Material": "Missing",
 		"Name": "5x5x12LargeCJEExample"
 	},
@@ -889,10 +880,7 @@
 		"Name": "gun40Twin Mk5 Gun"
 	},
 	"0ad57e10-a324-425f-89d5-832067a6b4f3": {
-		"Length": [
-			5,
-			5
-		],
+		"Length": 34,
 		"Material": "Missing",
 		"Name": "5x5x10EcoDraba3000"
 	},
@@ -2882,10 +2870,7 @@
 		"Name": "Heavy Armour 1m to 3m slope transition (mirrored)"
 	},
 	"23dc456a-cfc7-4373-a1a1-3eb73d1ab7b7": {
-		"Length": [
-			7,
-			7
-		],
+		"Length": 35,
 		"Material": "Alloy",
 		"Name": "Alloy duct (7x7)"
 	},
@@ -2955,18 +2940,12 @@
 		"Name": "alloy mat Paint"
 	},
 	"249595af-669e-4894-9505-62928fd9bfa6": {
-		"Length": [
-			5,
-			5
-		],
+		"Length": 34,
 		"Material": "Missing",
 		"Name": "5x5x9EcoDraba4000"
 	},
 	"24b4b0d5-8b0f-48bd-bef7-fdad00dede68": {
-		"Length": [
-			7,
-			7
-		],
+		"Length": 35,
 		"Material": "Wood",
 		"Name": "Wood duct (7x7)"
 	},
@@ -3256,10 +3235,7 @@
 		"Name": "Heavy Barrel Start"
 	},
 	"27c9fc2c-e0f4-472c-b089-b231992a5b77": {
-		"Length": [
-			5,
-			5
-		],
+		"Length": 34,
 		"Material": "Missing",
 		"Name": "5x5x8 6000 series"
 	},
@@ -4624,10 +4600,7 @@
 		"Name": "Railing L TA 3m M4"
 	},
 	"3ac87f70-edd3-4006-a53c-2fa73e10f101": {
-		"Length": [
-			5,
-			5
-		],
+		"Length": 34,
 		"Material": "Missing",
 		"Name": "Janus1axis5x5ciws.blueprint"
 	},
@@ -6327,11 +6300,8 @@
 		"Name": "Stop"
 	},
 	"52b78a75-115a-4962-96f1-35177b46ba93": {
-		"Length": [
-			7,
-			7
-		],
-		"Material": "Missing",
+		"Length": 35,
+		"Material": "Metal",
 		"Name": "Duct (7x7)"
 	},
 	"52bfd0a0-522b-45c3-92d8-57875ac7241d": {
@@ -6915,10 +6885,7 @@
 		"Name": "Sail Main Block"
 	},
 	"593cb2ec-b110-4f18-8b25-f0ba9bd28bcc": {
-		"Length": [
-			3,
-			3
-		],
+		"Length": 33,
 		"Material": "Missing",
 		"Name": "fuel storage tank 3x3 removal"
 	},
@@ -7048,10 +7015,7 @@
 		"Name": "Heavy Armour mat Bump"
 	},
 	"5b37e54b-096b-4e10-9730-4f8823c596ff": {
-		"Length": [
-			3,
-			3
-		],
+		"Length": 33,
 		"Material": "Alloy",
 		"Name": "Alloy duct (3x3)"
 	},
@@ -7236,11 +7200,8 @@
 		"Name": "(CARD) Aerial AI"
 	},
 	"5e236eef-c91e-45bc-afc4-bff4d133ac14": {
-		"Length": [
-			3,
-			3
-		],
-		"Material": "Missing",
+		"Length": 33,
+		"Material": "Metal",
 		"Name": "Duct (3x3)"
 	},
 	"5e2a61b2-6902-4d01-9990-7a1cc0b7f282": {
@@ -7264,11 +7225,8 @@
 		"Name": "Lead 3m offset right"
 	},
 	"5e574e3c-24af-409c-b165-f079ba9c1946": {
-		"Length": [
-			5,
-			5
-		],
-		"Material": "Missing",
+		"Length": 34,
+		"Material": "Metal",
 		"Name": "Duct 5x5"
 	},
 	"5e73653e-519c-4f13-9f69-1d80c19151d8": {
@@ -7407,10 +7365,7 @@
 		"Name": "Shaft Reduction Gear incoming shaft 1m"
 	},
 	"6071db06-cc2a-4692-8914-bf5c2df16928": {
-		"Length": [
-			3,
-			3
-		],
+		"Length": 33,
 		"Material": "Heavy Armour",
 		"Name": "Heavy armour duct (3x3)"
 	},
@@ -7665,10 +7620,7 @@
 		"Name": "Six Way Connector"
 	},
 	"641112d9-c6f1-43a9-a5f5-383e92223ed1": {
-		"Length": [
-			5,
-			5
-		],
+		"Length": 34,
 		"Material": "Missing",
 		"Name": "5x5x9 5000 alternative"
 	},
@@ -8058,10 +8010,7 @@
 		"Name": "Wood inverted triangle corner left 3m"
 	},
 	"692f710c-1710-4db5-9d8a-8c5acc4890ab": {
-		"Length": [
-			3,
-			3
-		],
+		"Length": 33,
 		"Material": "Wood",
 		"Name": "Wood duct (3x3)"
 	},
@@ -8131,10 +8080,7 @@
 		"Name": "Lead wedge (1m)"
 	},
 	"6a3306b7-1e69-4788-80c9-8a7d4dec07f0": {
-		"Length": [
-			5,
-			5
-		],
+		"Length": 34,
 		"Material": "Missing",
 		"Name": "5x5 Bromine"
 	},
@@ -9049,10 +8995,7 @@
 		"Name": "Mannequin hand left open"
 	},
 	"765df0b8-b698-40b1-8361-37882e72b07c": {
-		"Length": [
-			5,
-			5
-		],
+		"Length": 34,
 		"Material": "Alloy",
 		"Name": "Alloy duct (5x5)"
 	},
@@ -9207,10 +9150,7 @@
 		"Name": "Turret Block One Axis 3m"
 	},
 	"7804ea94-76fd-45b8-b6a8-80b0b7e4a180": {
-		"Length": [
-			7,
-			7
-		],
+		"Length": 35,
 		"Material": "Missing",
 		"Name": "7x7x9HarmonyDraba5000"
 	},
@@ -9580,10 +9520,7 @@
 		"Name": "Mimic: Tube"
 	},
 	"7d00b314-81af-4184-bce8-5b2b168907ee": {
-		"Length": [
-			3,
-			3
-		],
+		"Length": 33,
 		"Material": "Missing",
 		"Name": "3x3x21LAMSExample"
 	},
@@ -10326,11 +10263,6 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "pipe 3 way2 mirror"
-	},
-	"85aa18e6-bbae-404f-bb30-255d5650f8f7": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "Steam Engines"
 	},
 	"85cafbcb-2151-44ba-876a-8f82ca0d409a": {
 		"Length": 1,
@@ -12158,10 +12090,7 @@
 		"Name": "Missile Buoy Holder"
 	},
 	"9d6a7a27-b3d1-4579-8c6b-20c20d535d04": {
-		"Length": [
-			7,
-			7
-		],
+		"Length": 35,
 		"Material": "Heavy Armour",
 		"Name": "Heavy armour duct (7x7)"
 	},
@@ -12761,10 +12690,7 @@
 		"Name": "rubber normal"
 	},
 	"a5523981-ee50-4fe0-bba4-4d5782e89d60": {
-		"Length": [
-			3,
-			3
-		],
+		"Length": 33,
 		"Material": "Missing",
 		"Name": "3x3x9 5000 series"
 	},
@@ -13219,11 +13145,8 @@
 		"Name": "Lead triangle corner (left) (2m)"
 	},
 	"ab59ab39-179c-4fd8-bad3-2f3251f0a55a": {
-		"Length": [
-			7,
-			7
-		],
-		"Material": "Missing",
+		"Length": 35,
+		"Material": "Metal",
 		"Name": "Duct 7x7"
 	},
 	"ab699540-efc8-4592-bc97-204f6a874b3a": {
@@ -15072,10 +14995,7 @@
 		"Name": "Heavy Armour 1m to 3m slope transition right"
 	},
 	"c3328c3d-62db-498b-9984-d4c511250ee1": {
-		"Length": [
-			3,
-			3
-		],
+		"Length": 33,
 		"Material": "Missing",
 		"Name": "3x3x4-MunitionWarners"
 	},
@@ -15170,11 +15090,8 @@
 		"Name": "Metal down slope 3m"
 	},
 	"c489a675-78ad-461c-b772-b1dc1ae16beb": {
-		"Length": [
-			3,
-			3
-		],
-		"Material": "Missing",
+		"Length": 33,
+		"Material": "Metal",
 		"Name": "Duct 3x3"
 	},
 	"c4a2455b-cae5-4657-8db5-d5eef2e4aeb7": {
@@ -15803,10 +15720,7 @@
 		"Name": "Alloy 2m offset right"
 	},
 	"ccb3da4c-1aee-4f0e-9990-53072b8e0289": {
-		"Length": [
-			3,
-			3
-		],
+		"Length": 33,
 		"Material": "Missing",
 		"Name": "3x3x12SmallCJEExample"
 	},
@@ -17546,10 +17460,7 @@
 		"Name": "treadHeight"
 	},
 	"e238669c-ef02-4e6d-847e-3397f1a5b30d": {
-		"Length": [
-			5,
-			5
-		],
+		"Length": 34,
 		"Material": "Heavy Armour",
 		"Name": "Heavy armour duct (5x5)"
 	},
@@ -17979,11 +17890,8 @@
 		"Name": "Alloy 3m to 4m inverse transition left"
 	},
 	"e7fc9ece-d2f4-4671-a3e8-77196601cf4e": {
-		"Length": [
-			5,
-			5
-		],
-		"Material": "Missing",
+		"Length": 34,
+		"Material": "Metal",
 		"Name": "Duct (5x5)"
 	},
 	"e7ff5851-85c1-4707-9902-2051ae5b2975": {
@@ -19082,10 +18990,7 @@
 		"Name": "steam pipe tank 1m"
 	},
 	"f6a52815-5e74-4f27-ac13-7959134855f1": {
-		"Length": [
-			3,
-			3
-		],
+		"Length": 33,
 		"Material": "Missing",
 		"Name": "Heimdall1axis3x3ciws"
 	},

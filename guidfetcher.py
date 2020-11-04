@@ -10,7 +10,7 @@ invalid_file_ends = ["buildguide", "mtl", "wav", "blueprint", "dll", "obj", "cs"
                      "prefab", "mat", "png_hcm.swatch", "jpeg", "cache", "jpg",
                      "png", "animclip", "sln", "csprojAssemblyReference.cache", "csproj",
                      "csproj.FileListAbsolute.txt", "csproj.CopyComplete",
-                     "csproj.CoreCompileInputs.cache"]
+                     "csproj.CoreCompileInputs.cache", "helpage"]
 guiddict = {}
 extrainvguiddict = {}
 for root, dirs, files in os.walk(ftdmodsfolder):
@@ -57,7 +57,7 @@ materials = None
 materials_file = "materials.json"
 with open(materials_file, "r") as f:
     materials = json.loads(f.read())
-sizedict = {"1m": 1, "2m": 2, "3m": 3, "4m": 4, "1x1": 1, "3x3": (3,3), "5x5": (5,5), "7x7": (7,7)}
+sizedict = {"1m": 1, "2m": 2, "3m": 3, "4m": 4, "1x1": 1, "3x3": 33, "5x5": 34, "7x7": 35}
 
 #map
 for k in invguiddict:
@@ -77,6 +77,13 @@ for k in invguiddict:
 
 #manual fixes
 invguiddict["867cea4e-6ea4-4fe2-a4a1-b6230308f8f1"]["Length"] = 4
+invguiddict["5e574e3c-24af-409c-b165-f079ba9c1946"]["Material"] = "Metal"
+invguiddict["ab59ab39-179c-4fd8-bad3-2f3251f0a55a"]["Material"] = "Metal"
+invguiddict["c489a675-78ad-461c-b772-b1dc1ae16beb"]["Material"] = "Metal"
+invguiddict["5e236eef-c91e-45bc-afc4-bff4d133ac14"]["Material"] = "Metal"
+invguiddict["e7fc9ece-d2f4-4671-a3e8-77196601cf4e"]["Material"] = "Metal"
+invguiddict["52b78a75-115a-4962-96f1-35177b46ba93"]["Material"] = "Metal"
+
 
 #missing
 invguiddict["missing"] = {"Name": "Missing", "Length": 1, "Material": "Missing"}
