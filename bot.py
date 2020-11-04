@@ -11,7 +11,6 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 BP_FOLDER = os.getenv("BLUEPRINT_FOLDER")
 #####AUTHOR = int(os.getenv("AUTHOR"))
 
-
 #create bp_folder
 if not os.path.exists(BP_FOLDER):
     os.mkdir(BP_FOLDER)
@@ -43,6 +42,10 @@ async def on_ready():
     print(f"Connected to {len(bot.guilds)} guilds:")
     for guild in bot.guilds:
         print(f"{guild.name} (id: {guild.id})")
+
+    #set activity text
+    act = discord.Game("Create simplified images of blueprint files. Use pb!print to print last file. Use pb!help for commands. Private chat supported.")
+    await bot.change_presence(status=discord.Status.online, activity=act)
 
 
 @bot.event
