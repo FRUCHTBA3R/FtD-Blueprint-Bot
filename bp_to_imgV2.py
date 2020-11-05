@@ -413,10 +413,10 @@ def __create_view_matrices(bp):
         front_height = np.roll(front_height, (-actual_min_cords[1], -actual_min_cords[0]), (0,1))
 
     #flip
-    cv2.flip(side_color, 0, side_color)
-    cv2.flip(side_height, 0, side_height)
-    cv2.flip(front_color, -1, front_color)
-    cv2.flip(front_height, -1, front_height)
+    cv2.flip(side_color, 0, dst=side_color)
+    cv2.flip(side_height, 0, dst=side_height)
+    cv2.flip(front_color, -1, dst=front_color)
+    cv2.flip(front_height, -1, dst=front_height)
     #print(side_height)
     
     return ([top_color, top_height],#, actual_min_cords[1]],
