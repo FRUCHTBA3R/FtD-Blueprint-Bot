@@ -71,8 +71,12 @@ class GuildconfigManager():
         return self.config[key]
 
 
-    def setMode(self, guild_id, channel_id, mode):
+    def setMode(self, guild, channel, mode):
         """Set mode (int or str) for channel of guild. Return True if success"""
+        if guild is None or channel is None:
+            return False
+        guild_id = guild.id
+        channel_id = channel.id
         if guild_id is None or channel_id is None:
             return False
         guild_id = str(guild_id)

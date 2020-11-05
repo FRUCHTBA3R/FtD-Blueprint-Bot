@@ -56,7 +56,7 @@ async def on_message(message):
         return 0
 
     #mode
-    mode = GCM.getMode(message.guild.id, message.channel.id)
+    mode = GCM.getMode(message.guild, message.channel)
     if (mode == 1) or (((mode == 2) or (mode is None)) and bot.user.mentioned_in(message)):
         bpcount = await process_attachments(message)
 
@@ -84,7 +84,7 @@ async def cmd_mode(ctx, mode):
         return
 
     #check mode
-    if not GCM.setMode(ctx.guild.id, ctx.channel.id, mode):
+    if not GCM.setMode(ctx.guild, ctx.channel, mode):
         raise commands.errors.BadArgument("Mode could not be set")
     
     await ctx.message.add_reaction("\U0001f197") #:ok:
