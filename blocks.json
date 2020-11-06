@@ -200,7 +200,7 @@
 		"Name": "Huge Ion Thruster"
 	},
 	"02f0c77e-2d93-4ecf-baad-5918e1825a96": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "5m Generator"
 	},
@@ -300,7 +300,7 @@
 		"Name": "Shaft Reduction Gear outgoing shaft 3m"
 	},
 	"041d5b2b-fc8c-4218-8767-5b34971384f0": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Shaft Shift Axis GearBottom 5m"
 	},
@@ -384,13 +384,8 @@
 		"Material": "Missing",
 		"Name": "Autoloader [2m shells]"
 	},
-	"04e48ef2-1192-4ddc-ae8f-e9c86edcc445": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "HANoRivetPaint"
-	},
 	"04e5fdcc-a272-4226-879f-d92205da02b2": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "electric motor stator 5m"
 	},
@@ -785,7 +780,7 @@
 		"Name": "Rubber 4m Square backed corner left"
 	},
 	"09bec717-8b13-40ab-8468-0630cae1e964": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "5m Cased Crank"
 	},
@@ -1040,7 +1035,7 @@
 		"Name": "Extra mesh 0 of 2m tall AA Mantlet"
 	},
 	"0cb3fe9c-f669-444d-8aa6-537451ed4fdd": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "shaft piston 5m base mirror"
 	},
@@ -1065,7 +1060,7 @@
 		"Name": "Hercules2000"
 	},
 	"0cd79e3c-3f93-4b7e-adcd-316d94605e04": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Turret Block One Axis 5m"
 	},
@@ -1270,7 +1265,7 @@
 		"Name": "particle fire"
 	},
 	"0f172964-3bad-437d-b17c-0b52c8ddc43a": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "5m Axis-Shifting Gears L"
 	},
@@ -1444,13 +1439,18 @@
 		"Material": "Missing",
 		"Name": "1915mm heavy mortar"
 	},
+	"10ee639d-d23b-476f-a268-bca5046981cd": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "180K_4_prop"
+	},
 	"110f33e1-dc3b-42c0-8a84-2a54a50165c2": {
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Hydrofoil example"
 	},
 	"114dc652-ab33-44c8-9a5a-4167052fa4b4": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "5m Balloon Wheel"
 	},
@@ -1460,7 +1460,7 @@
 		"Name": "SharkTooth"
 	},
 	"119782b3-e07c-49c5-8a8c-a8af500fc6a5": {
-		"Length": 1,
+		"Length": 51,
 		"Material": "Missing",
 		"Name": "Range Finder 7m"
 	},
@@ -1785,7 +1785,7 @@
 		"Name": "Frequency doubler"
 	},
 	"15d4be68-edf9-44ed-bfda-5522cd9da33f": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Wheel 5m mirror (turning)"
 	},
@@ -1805,9 +1805,14 @@
 		"Name": "gearbox large"
 	},
 	"16052cd0-6fb9-4c1f-bfcb-2574d21434f0": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Range Finder 5m armour"
+	},
+	"160f0567-8959-43fd-bcac-dbf412fad7d0": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "616_turbine"
 	},
 	"16373043-5898-4379-b462-6f269e675f80": {
 		"Length": 1,
@@ -1910,7 +1915,7 @@
 		"Name": "AdvController mat Bump"
 	},
 	"181e733f-fcca-49d2-87ec-12a937a3566b": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Range Finder 5m armour"
 	},
@@ -2025,7 +2030,7 @@
 		"Name": "Truss 2m"
 	},
 	"19a3d1a2-574e-4619-91b0-050d3b1201a9": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Electric Motor 5m"
 	},
@@ -2163,11 +2168,6 @@
 		"Length": 1,
 		"Material": "Barrel",
 		"Name": "Heavy Barrel"
-	},
-	"1b771964-14f3-42d7-949d-858e7ff2b6e0": {
-		"Length": 1,
-		"Material": "Heavy Armour",
-		"Name": "Heavy Armour mat Occlusion"
 	},
 	"1b7c3940-df67-4166-9924-b34fa6dddec2": {
 		"Length": 1,
@@ -2325,7 +2325,7 @@
 		"Name": "Lead 1m offset right"
 	},
 	"1d5d7744-bb2c-4c92-9778-3e6e2ce6153c": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Boiler 5m Connector"
 	},
@@ -2353,11 +2353,6 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Rudder Triangle Small"
-	},
-	"1dcfd888-fe8a-494b-87e8-5a703c5705a6": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "2000pwr Steam electric hybrid"
 	},
 	"1dd66387-6293-4fa0-a1da-6f0e4cb80dfa": {
 		"Length": 4,
@@ -2615,7 +2610,7 @@
 		"Name": "Rudder Curve Large Small"
 	},
 	"21143ff8-b7f0-486b-b78b-99f72241bc5b": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Boiler 5m Control"
 	},
@@ -2845,7 +2840,7 @@
 		"Name": "Rubber 3m square backed corner right"
 	},
 	"23797716-3986-4ee7-8fed-f7884a10d810": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "5m Engine Shaft"
 	},
@@ -2950,7 +2945,7 @@
 		"Name": "Wood duct (7x7)"
 	},
 	"24ce9e8e-9ed9-4113-88ff-63e7cb84397d": {
-		"Length": 1,
+		"Length": 51,
 		"Material": "Missing",
 		"Name": "Range Finder 7m armour"
 	},
@@ -3264,11 +3259,6 @@
 		"Material": "Missing",
 		"Name": "pipe 6 way"
 	},
-	"280c5b31-2a0c-481a-99e6-4677cd40a2df": {
-		"Length": 3,
-		"Material": "Missing",
-		"Name": "Large 5m prop-60570Force4.3msBurn"
-	},
 	"281689d3-1cce-4740-95ff-76a1c4d1a6a1": {
 		"Length": 3,
 		"Material": "Heavy Armour",
@@ -3325,7 +3315,7 @@
 		"Name": "steam pipe valve"
 	},
 	"28e3bb10-95af-4c63-934b-880f03d52be0": {
-		"Length": 1,
+		"Length": 51,
 		"Material": "Missing",
 		"Name": "Range Finder 7m"
 	},
@@ -3590,7 +3580,7 @@
 		"Name": "Rudder Curve Small"
 	},
 	"2cb1c94c-3485-4501-a41c-364b242cc2d2": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "shaft piston 5m piston"
 	},
@@ -3924,11 +3914,6 @@
 		"Material": "Laser",
 		"Name": "Laser Q switch"
 	},
-	"31051db4-f364-4e00-b402-462aa2d66ef8": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "HANoRivetOcclusion"
-	},
 	"31055780-b250-4f02-b0c1-92296219e028": {
 		"Length": 3,
 		"Material": "Metal",
@@ -3958,6 +3943,11 @@
 		"Length": 4,
 		"Material": "Alloy",
 		"Name": "Alloy inverted triangle corner (left) (4m)"
+	},
+	"311b8f91-5dd2-4871-b8ce-c7be91f76454": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Steam Drill Extension small"
 	},
 	"3123cb13-73e9-4d32-89dd-5ce567ee1597": {
 		"Length": 3,
@@ -4149,11 +4139,6 @@
 		"Material": "Barrel",
 		"Name": "Railgun barrel magnet"
 	},
-	"339dafb9-4203-4a2b-b375-f04cfede733f": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "880pwr Steam electric hybrid"
-	},
 	"33b65ccc-58a0-487d-8b68-a997a71b0bfe": {
 		"Length": 1,
 		"Material": "Missing",
@@ -4280,7 +4265,7 @@
 		"Name": "Steam Shaft Drill Extension 3m"
 	},
 	"35f290a8-8988-41d8-a2dd-7f3e69f8a5d7": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "electric motor rotor 5m"
 	},
@@ -4464,11 +4449,6 @@
 		"Material": "Missing",
 		"Name": "torqueless spin block subconstruct removal"
 	},
-	"385bf60a-73f3-4d8c-9071-7d42d1cd3d88": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "Small 1m prop-6730Force0.8msBurn"
-	},
 	"386512bc-237b-4faa-a989-323c270dec4c": {
 		"Length": 1,
 		"Material": "Stone",
@@ -4493,6 +4473,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "shaft wheel 1m"
+	},
+	"39171d5b-ea2b-4d46-86f3-e9934594f545": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "2925_turbine"
 	},
 	"392a9ac5-331f-4dc7-af92-a25caa6f5456": {
 		"Length": 1,
@@ -4704,6 +4689,11 @@
 		"Material": "Missing",
 		"Name": "40mm Octuple AA Gun"
 	},
+	"3beda094-c9fd-483f-85b8-5bd5a4475464": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "1384_turbine"
+	},
 	"3bff8428-7481-4847-b00e-f0e49233b86d": {
 		"Length": 1,
 		"Material": "Missing",
@@ -4750,7 +4740,7 @@
 		"Name": "Laser Small Barrel"
 	},
 	"3d03785a-21b9-42c7-8acb-17cf43de9d58": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "5m Propeller 7m"
 	},
@@ -4770,7 +4760,7 @@
 		"Name": "Stone inverted triangle corner (left) (2m)"
 	},
 	"3d540639-ac08-4e71-a233-3b483f594c1b": {
-		"Length": 1,
+		"Length": 52,
 		"Material": "Missing",
 		"Name": "Range Finder 9m armour"
 	},
@@ -4820,7 +4810,7 @@
 		"Name": "Stone 1m to 4m inverse transition right"
 	},
 	"3e36824a-b988-40cb-aec4-5ba6a93c5fd1": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "5m_drive_wheel"
 	},
@@ -5080,7 +5070,7 @@
 		"Name": "AllTerrainOff"
 	},
 	"41f8d920-d038-4bd9-b84d-01603ac7a534": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "5m Huge Gearbox"
 	},
@@ -5180,7 +5170,7 @@
 		"Name": "Sail components"
 	},
 	"432bf55d-a6f8-43f8-a156-ac4403589a69": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Shaft Shift Axis Frame 5m"
 	},
@@ -5200,7 +5190,7 @@
 		"Name": "turbine middle 3m"
 	},
 	"435fd3cc-7a4e-45f4-b47d-47a5cdd9a4fc": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Balloon Wheel 5m turning"
 	},
@@ -5270,7 +5260,7 @@
 		"Name": "Metal inverted triangle corner (left) (1m)"
 	},
 	"4479a607-8cbf-45de-bd6b-1de26e70423b": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "5m Piston"
 	},
@@ -5734,13 +5724,18 @@
 		"Material": "Missing",
 		"Name": "Material Storage Tank Large (Head)"
 	},
+	"4aca9c27-1a04-429c-bd1c-8fcad9cceaae": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "36K_prop"
+	},
 	"4acae4a8-788d-4111-a282-71d70a922faf": {
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Resource"
 	},
 	"4ae3bc3c-c39e-4d6b-afab-d0e34d783bc5": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Wheel 5m"
 	},
@@ -5895,7 +5890,7 @@
 		"Name": "pause"
 	},
 	"4d1e042a-9377-46a1-ac30-8b3ca17364aa": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "crank 5m"
 	},
@@ -5945,7 +5940,7 @@
 		"Name": "Stacked Stairs"
 	},
 	"4dcc1e0b-58f5-4524-8f1c-3d1b30a6e4e6": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Shaft Shift Axis Gearmiddle 5m"
 	},
@@ -6055,7 +6050,7 @@
 		"Name": "SeaReporting"
 	},
 	"4f5d97d1-5ab6-475b-afa5-dc86ccfb12b1": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Extra mesh 0 of Wheel 5m"
 	},
@@ -6497,7 +6492,7 @@
 	"550bce6c-a105-470d-8600-bd178d9d4dc1": {
 		"Length": 1,
 		"Material": "Missing",
-		"Name": "Debug - Health & AC"
+		"Name": " Health & AC"
 	},
 	"552785c2-43cd-41e6-a13a-818388b93968": {
 		"Length": 1,
@@ -6510,7 +6505,7 @@
 		"Name": "Rubber down slope (1m)"
 	},
 	"55308054-1328-4e0c-8e4f-4544ce1eae32": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Shaft Shift Axis Gearbottom 5m"
 	},
@@ -6685,7 +6680,7 @@
 		"Name": "Wood 4m offset right"
 	},
 	"5715bbc9-3fc3-4b00-b869-962fb9ec7358": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Crank 5m base"
 	},
@@ -6750,7 +6745,7 @@
 		"Name": "Wood pole (3m)"
 	},
 	"57b2c11e-8eea-4e0e-a102-56021b8df30f": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "5m Reduction Gear"
 	},
@@ -7248,11 +7243,6 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Strategic Antenna"
-	},
-	"5eb4b953-63f3-4fd8-a6bc-470a2cd8e5ce": {
-		"Length": 3,
-		"Material": "Missing",
-		"Name": "Large 3m prop-26920Force2.8msBurn"
 	},
 	"5ebf9caa-ee7e-476d-b45d-33ca3f5ea93a": {
 		"Length": 2,
@@ -7785,7 +7775,7 @@
 		"Name": "Metal triangle corner (left) (3m)"
 	},
 	"6672d9e3-8192-48de-b5fa-e93aca3c8df1": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Shaft Reduction Gear incoming shaft 5m"
 	},
@@ -7833,6 +7823,11 @@
 		"Length": 1,
 		"Material": "Alloy",
 		"Name": "Alloy 1m to 2m inverse transition right"
+	},
+	"66db15cc-57be-4212-ac37-7a62837a7311": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "SteamValves"
 	},
 	"66e3efae-4d73-4f4e-adbd-85e2573580e4": {
 		"Length": 2,
@@ -7925,17 +7920,17 @@
 		"Name": "Glass 1m to 4m slope transition left"
 	},
 	"67feebd5-5836-4699-92ac-b78927fe88f6": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Shaft Propeller 5mB"
 	},
 	"6810d99c-6a8c-4ddb-8450-d6d6e49f0657": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "shaft piston 5m base"
 	},
 	"681f2880-fb37-467f-88c9-d086380e4df2": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Shaft Redcution Gear incoming shaft 5m"
 	},
@@ -8154,8 +8149,13 @@
 		"Material": "Stone",
 		"Name": "Stone 3m offset left"
 	},
-	"6b66730e-78db-46fa-8bf0-e84b0246e8e4": {
+	"6b31206e-4c01-46e2-814e-dcdf587fa415": {
 		"Length": 1,
+		"Material": "Missing",
+		"Name": "Steam Drill Head small"
+	},
+	"6b66730e-78db-46fa-8bf0-e84b0246e8e4": {
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "crank 5m base"
 	},
@@ -8340,7 +8340,7 @@
 		"Name": "shaft shaft 1m"
 	},
 	"6d73f0bb-a420-42f2-ad3d-332a82d10917": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Shaft Shift Axis Frame 5m L"
 	},
@@ -8385,7 +8385,7 @@
 		"Name": "Alloy 3m to 4m inverse transition right"
 	},
 	"6df3028a-2f2a-4295-aa79-deab34c677c8": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "shaft propshaft 5m"
 	},
@@ -8615,7 +8615,7 @@
 		"Name": "Small Custom Jet"
 	},
 	"7161f887-4de6-4b5e-9066-f39d6cad9f16": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "One Axis Turret (5m)"
 	},
@@ -8688,6 +8688,11 @@
 		"Length": 1,
 		"Material": "Glass",
 		"Name": "Glass inverted corner (right) (1m)"
+	},
+	"72cbc06f-d3b6-48fc-8d16-a32c2ad70d8b": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Steam Drill Extension medium"
 	},
 	"72e5674d-8056-4321-bad5-287c81d5d880": {
 		"Length": 4,
@@ -8868,11 +8873,6 @@
 		"Length": 1,
 		"Material": "Wood",
 		"Name": "Wood variant 11"
-	},
-	"74aceee8-78d6-4889-b8cf-f25a354e8c0d": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "HANoRivetHeight"
 	},
 	"74b72dcc-96a4-4098-8803-ad0165904cae": {
 		"Length": 1,
@@ -9210,7 +9210,7 @@
 		"Name": "Heavy armour down slope 1m"
 	},
 	"78d6177b-345c-43d6-8e34-b28bf0a82659": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Wheel 5m mirror"
 	},
@@ -9614,11 +9614,6 @@
 		"Material": "Wood",
 		"Name": "Wood inverted corner (right) (1m)"
 	},
-	"7dd44b8c-5c25-4bae-b024-5785cfc38f09": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "HANoRivetColor"
-	},
 	"7dd4933f-8a0d-478e-b0a2-1e2c2f1c6957": {
 		"Length": 3,
 		"Material": "Alloy",
@@ -9840,7 +9835,7 @@
 		"Name": "energyEmpty"
 	},
 	"8061f185-a88f-448a-9800-2853057c0e92": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Shaft Shift Axis Geartop 5m"
 	},
@@ -10015,7 +10010,7 @@
 		"Name": "pull"
 	},
 	"8266bc4e-7dc4-4c3a-bef9-9dddf4dab8d2": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "5m Wheel"
 	},
@@ -10105,7 +10100,7 @@
 		"Name": "Alloy 1m to 3m inverse transition right"
 	},
 	"83af2974-afaa-4adf-9036-de06586c5e70": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "shaft piston 5m arm"
 	},
@@ -10320,7 +10315,7 @@
 		"Name": "Dedicated heliblade extension"
 	},
 	"86296ab3-dab4-4551-a172-5294ede78dac": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Shaft Shaft Bearing casing 5m"
 	},
@@ -10465,7 +10460,7 @@
 		"Name": "Heavy armour inverted triangle corner (left) (4m)"
 	},
 	"8841b15a-7e54-4bec-bae4-f69313e45e91": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Shaft Reduction Gear outgoing shaft 5m"
 	},
@@ -11125,7 +11120,7 @@
 		"Name": "Metal 1m to 2m inverse transition right"
 	},
 	"91144385-f7b0-4b50-b671-738fad9aeee3": {
-		"Length": 1,
+		"Length": 52,
 		"Material": "Missing",
 		"Name": "Range Finder 9m"
 	},
@@ -11235,7 +11230,7 @@
 		"Name": "Wood triangle corner (right) (2m)"
 	},
 	"9220be15-31c6-4fe0-bd78-f4af75cd3531": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Extra mesh 0 of Turret Block One Axis 5m"
 	},
@@ -11300,7 +11295,7 @@
 		"Name": "Extra mesh 0 of Drill Extension"
 	},
 	"933a73ef-fb60-429f-9126-4f7d2a01605f": {
-		"Length": 1,
+		"Length": 52,
 		"Material": "Missing",
 		"Name": "Range Finder 9m"
 	},
@@ -11605,7 +11600,7 @@
 		"Name": "CRAM Cannons"
 	},
 	"96b233d6-dbda-4368-b948-9f4bf9d7a46c": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Shaft Reduction Gear casing 5m"
 	},
@@ -11615,7 +11610,7 @@
 		"Name": "Steam Shaft Drill Extension 1m"
 	},
 	"96d312d8-1a18-4823-836c-39383afff657": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Boiler 5m"
 	},
@@ -12033,11 +12028,6 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Steam Jet"
-	},
-	"9ce68e8f-47c9-4db1-ab4a-0ae76916c5f6": {
-		"Length": 1,
-		"Material": "Heavy Armour",
-		"Name": "heavy armour no rivets mat"
 	},
 	"9ced53fb-7540-4d7c-b245-6f90e8ff13a5": {
 		"Length": 1,
@@ -12600,7 +12590,7 @@
 		"Name": "mining"
 	},
 	"a3d90faa-db0a-4b8c-a4f4-921c6834d2a4": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "shaft piston 5m arm"
 	},
@@ -12840,7 +12830,7 @@
 		"Name": "Turret Block Two Axis"
 	},
 	"a72af619-591a-4351-9561-57e9d698277b": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Shaft Wheel 5m"
 	},
@@ -12975,7 +12965,7 @@
 		"Name": "Door Hatch Metal"
 	},
 	"a9064514-1090-4411-9ab4-16ef5d63817e": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Shaft Reduction Gear outgoing shaft 5m"
 	},
@@ -13074,6 +13064,11 @@
 		"Material": "Missing",
 		"Name": "AI"
 	},
+	"aa72587d-6b1f-4697-87e0-51a3cb137173": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "3600_800_prop"
+	},
 	"aa7bf257-9376-46f1-b9bf-48dcfbf52b4f": {
 		"Length": 1,
 		"Material": "Missing",
@@ -13115,7 +13110,7 @@
 		"Name": "Electric Engine"
 	},
 	"aac4a0a5-9ff4-489d-a119-ea1b6e56ea87": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "5m Axis-Shifting Gears R"
 	},
@@ -13133,11 +13128,6 @@
 		"Length": 1,
 		"Material": "Wood",
 		"Name": "Wood inverted triangle corner (left) (1m)"
-	},
-	"ab269ef7-929a-491f-bc08-bfbcfb908635": {
-		"Length": 1,
-		"Material": "Heavy Armour",
-		"Name": "Heavy Armour mat Height"
 	},
 	"ab2d7e9b-c4ee-41d1-84aa-998895dfc28b": {
 		"Length": 2,
@@ -13405,7 +13395,7 @@
 		"Name": "bullet"
 	},
 	"af05d310-d720-449a-893e-e76331ba49db": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "shaft piston 5m piston"
 	},
@@ -13789,6 +13779,11 @@
 		"Material": "Missing",
 		"Name": "Inverted corner right"
 	},
+	"b3a89e5e-0ab9-447e-8691-a06b4319b654": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Steam Drill Head medium"
+	},
 	"b3c69380-05df-471b-ba65-7d842e72cdb3": {
 		"Length": 1,
 		"Material": "Missing",
@@ -13805,7 +13800,7 @@
 		"Name": "Advanced Cannon heatsink"
 	},
 	"b3f1906b-12ae-47b9-850d-9f9bc11d1f8d": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Shaft Shift Axis GearTop 5m"
 	},
@@ -13965,7 +13960,7 @@
 		"Name": "Alloy 2m to 4m inverse transition left"
 	},
 	"b6184e42-1647-4bd2-8465-f8b88f76621f": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "5m Propeller Shaft"
 	},
@@ -14105,7 +14100,7 @@
 		"Name": "Nuclear Containment Platform"
 	},
 	"b7c60d19-d652-4fcc-af1a-85409c9c131f": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Turret Block One Axis (5m)"
 	},
@@ -14145,7 +14140,7 @@
 		"Name": "pipe vent"
 	},
 	"b8304b5f-9b20-48b0-b3df-a8187916ed98": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "5m Piston (mirror)"
 	},
@@ -14233,11 +14228,6 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "formation"
-	},
-	"b92585c5-bc8a-4703-82b8-29545124c839": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "Crank sounds"
 	},
 	"b92a4ce6-ea93-4c0c-97d7-494ea611caa9": {
 		"Length": 1,
@@ -14465,7 +14455,7 @@
 		"Name": "nothing"
 	},
 	"bca2b4e8-2216-448b-b254-927833620756": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Balloon Wheel 5m mirror"
 	},
@@ -14519,8 +14509,13 @@
 		"Material": "Missing",
 		"Name": "NearExplosionA"
 	},
-	"bd84a2af-5c90-46f2-bc6c-ee39a8c2424e": {
+	"bd6f7d5d-8348-4c82-ad28-16e4c261f581": {
 		"Length": 1,
+		"Material": "Missing",
+		"Name": "SteamTanks"
+	},
+	"bd84a2af-5c90-46f2-bc6c-ee39a8c2424e": {
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Extra mesh 0 of Wheel 5m mirror"
 	},
@@ -14825,7 +14820,7 @@
 		"Name": "Rubber 1m to 3m slope transition"
 	},
 	"c0eecb94-0410-4031-9015-2ec4b8fd4c80": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Steam Shaft Drill Head 5m"
 	},
@@ -15130,7 +15125,7 @@
 		"Name": "Glass down slope (4m)"
 	},
 	"c50611e2-ff08-473c-a33d-237e0b09cb85": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "EM0 of Turret Block One Axis 5m"
 	},
@@ -15259,11 +15254,6 @@
 		"Material": "Missing",
 		"Name": "gunWarp Gatling CRAM 1"
 	},
-	"c6885186-36e6-4562-828a-e5376d42872a": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "HANoRivetBump"
-	},
 	"c68d0ed7-66d1-42cd-974e-01aa0f36c847": {
 		"Length": 1,
 		"Material": "Missing",
@@ -15350,7 +15340,7 @@
 		"Name": "Stone beam (4m)"
 	},
 	"c7a5936e-9c61-4dcd-88ea-ac16da80b712": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "electric motor rotor 5m"
 	},
@@ -15423,11 +15413,6 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Mannequin foot right"
-	},
-	"c87463d4-209c-44b7-bd42-89d6d5babae5": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "Huge 7m prop-48270Force19.8msBurn"
 	},
 	"c89978fc-2b10-494d-8824-6717f24a8048": {
 		"Length": 1,
@@ -15505,7 +15490,7 @@
 		"Name": "Core_Images"
 	},
 	"c9c226ff-ebd3-4394-b6d5-d4796e0dd149": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Wheel 5m (turning)"
 	},
@@ -15525,7 +15510,7 @@
 		"Name": "Heavy Armour mat rt Smoothness"
 	},
 	"c9fbeca3-1100-436f-a69e-34c80ac45b05": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Range Finder 5m"
 	},
@@ -15660,7 +15645,7 @@
 		"Name": "Alloy inverted triangle corner (right) (2m)"
 	},
 	"cbe68b75-1568-494e-8caf-c9e5336faea7": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Steam Shaft Drill Extension 5m"
 	},
@@ -15745,7 +15730,7 @@
 		"Name": "Missiles"
 	},
 	"cd06f23c-9a61-448a-864e-529298e5bbd1": {
-		"Length": 1,
+		"Length": 51,
 		"Material": "Missing",
 		"Name": "Range Finder 7m armour"
 	},
@@ -15865,7 +15850,7 @@
 		"Name": "SeaOff"
 	},
 	"ceae02f9-2a21-40a0-b0d5-fdb0e4975826": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "5m Propeller 5m"
 	},
@@ -16235,7 +16220,7 @@
 		"Name": "anim-shaft piston split 2m piston localised.obj"
 	},
 	"d3b7286c-f44b-440b-b6d5-c4e1a91a0279": {
-		"Length": 1,
+		"Length": 52,
 		"Material": "Missing",
 		"Name": "Range Finder 9m armour"
 	},
@@ -16830,7 +16815,7 @@
 		"Name": "Metal inverted triangle corner left 3m"
 	},
 	"da173fac-8673-4ef7-aae5-d089e78ea6ce": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Balloon Wheel 5m"
 	},
@@ -16880,7 +16865,7 @@
 		"Name": "Metal up slope (2m)"
 	},
 	"daadd5b7-028e-4367-bfee-1c142d5c0514": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Extra mesh 0 of 5m Balloon wheel"
 	},
@@ -17085,7 +17070,7 @@
 		"Name": "Medium Gantry + Hatch"
 	},
 	"dddf2251-d1e6-4792-9270-c9250b610733": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Balloon Wheel 5m turning mirror"
 	},
@@ -17245,7 +17230,7 @@
 		"Name": "(CARD) Fortress AI"
 	},
 	"df77290b-88c0-4024-9836-ecc546a36b69": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Shaft Shaft Bearing 5m"
 	},
@@ -17889,6 +17874,11 @@
 		"Material": "Alloy",
 		"Name": "Alloy 3m to 4m inverse transition left"
 	},
+	"e7cbd742-3734-4c1d-b002-e20facdc9593": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "90K_prop"
+	},
 	"e7fc9ece-d2f4-4671-a3e8-77196601cf4e": {
 		"Length": 34,
 		"Material": "Metal",
@@ -17960,7 +17950,7 @@
 		"Name": "Metal 2m to 3m inverse transition right"
 	},
 	"e8b463d8-f0fd-48a9-9d97-e8b61882343c": {
-		"Length": 1,
+		"Length": 51,
 		"Material": "Missing",
 		"Name": "Shaft Huge Propeller 7m"
 	},
@@ -18035,7 +18025,7 @@
 		"Name": "Railgun barrel magnet"
 	},
 	"e94916f5-9688-46ad-b975-983b38b35174": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "shaft shaft 5m"
 	},
@@ -18060,7 +18050,7 @@
 		"Name": "Crank 3m base"
 	},
 	"e9d05684-1568-4753-887f-c3cb52f870ff": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Shaft Shift Axis GearMiddle 5m"
 	},
@@ -18154,11 +18144,6 @@
 		"Material": "Missing",
 		"Name": "Large Missile Hatch 4x4"
 	},
-	"eb447da1-7b8c-4d19-913e-dc5d299fe549": {
-		"Length": 1,
-		"Material": "Heavy Armour",
-		"Name": "Heavy Armour mat Metallic"
-	},
 	"eb609418-1810-4555-9e66-c64127bd690b": {
 		"Length": 1,
 		"Material": "Missing",
@@ -18170,7 +18155,7 @@
 		"Name": "Glass 1m offset left"
 	},
 	"eb8186f4-6c24-48e6-b918-0aaea3bde6c9": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "5m Engine Shaft Bearing"
 	},
@@ -18388,11 +18373,6 @@
 		"Length": 3,
 		"Material": "Heavy Armour",
 		"Name": "Heavy Armour 3m square backed corner right"
-	},
-	"ef2c4583-736d-403d-a893-31dd014f9748": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "4000pwr Steam electric hybrid"
 	},
 	"ef2e81c1-d06d-474f-b12c-14de1702db1b": {
 		"Length": 1,
@@ -18885,7 +18865,7 @@
 		"Name": "X-Junction Pipe"
 	},
 	"f55d8e9b-953c-42bd-bd7a-4e961db690ee": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Boiler 5m End"
 	},
@@ -19135,7 +19115,7 @@
 		"Name": "Origin block"
 	},
 	"f8594608-c8c2-4544-94cb-8c0c78fbb4b0": {
-		"Length": 1,
+		"Length": 50,
 		"Material": "Missing",
 		"Name": "Range Finder 5m"
 	},

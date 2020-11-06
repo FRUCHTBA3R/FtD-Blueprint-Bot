@@ -286,10 +286,27 @@ def __create_view_matrices(bp):
                 color_mat[unique_pos[:, 0], unique_pos[:, 1]] = a_color[sel_arr][height_sel_arr][sorted_index][unique_index]
                 #new height
                 height_mat[unique_pos[:, 0], unique_pos[:, 1]] = sorted_pos[:, axisY][unique_index]
-                
+
             
-            #single length loop
-            for i in range(4, 0, -1):
+            #centered beam init loop
+            centerbeamsizes = {50: 5, 51: 7, 52: 9}
+            for i in range(50, 53):
+                #block selection
+                a_sel, = np.nonzero(a_length == i)
+                if len(a_sel) == 0: continue
+
+                cbeam_len = centerbeamsizes[i]
+                
+                #inital offset
+                a_pos[a_sel] -= (cbeam_len >> 1) * (a_dir_bitan[a_sel])
+
+                #set length & rot
+                a_length[a_sel] = cbeam_len
+                a_dir[a_sel] = a_dir_bitan[a_sel]
+
+            
+            #single length loop (also fills centered beams)
+            for i in range(9, 0, -1):
                 #block selection
                 a_sel, = np.nonzero(a_length == i)
                 if len(a_sel) == 0: continue
@@ -306,7 +323,8 @@ def __create_view_matrices(bp):
                 #step
                 a_length[a_sel] -= 1
                 a_pos[a_sel] += a_dir[a_sel]
-                
+
+            
             #area loop
             areasizes = {33: 3, 34: 5, 35: 7}
             for i  in range(33, 36):
@@ -340,6 +358,13 @@ def __create_view_matrices(bp):
                     
                     #tangential step
                     a_pos[a_sel] += a_dir_tan[a_sel]
+
+                #set length to zero
+                a_length[a_sel] = 0
+            
+            #are all length values zero
+            if np.any(a_length != 0):
+                print("[WARN] Blocks with unknown / unimplemented length were found!")
         
         
         else:
@@ -660,7 +685,7 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     #file
-    fname = "../example blueprints/Argentum.blueprint"
+    fname = "../example blueprints/PreDread Forwards.blueprint"
 
     import asyncio
     
