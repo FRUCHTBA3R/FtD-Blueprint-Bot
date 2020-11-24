@@ -57,7 +57,7 @@ async def on_message(message):
 
     #mode
     mode = GCM.getMode(message.guild, message.channel)
-    if (mode == 1) or (((mode == 2) or (mode is None)) and bot.user.mentioned_in(message)):
+    if (mode == 1) or ( ((mode == 2) or (mode is None)) and bot.user.mentioned_in(message) ):
         bpcount = await process_attachments(message)
 
     #command processing

@@ -94,8 +94,12 @@ class GuildconfigManager():
         return True
     
 
-    def getMode(self, guild_id, channel_id):
+    def getMode(self, guild, channel):
         """Get mode (int) for channel of guild."""
+        if guild is None or channel is None:
+            return None
+        guild_id = guild.id
+        channel_id = channel.id
         if guild_id is None or channel_id is None:
             return None
         g = self.config.get(str(guild_id))
