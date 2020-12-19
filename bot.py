@@ -1,4 +1,5 @@
 import os
+import sys, traceback
 
 import bp_to_imgV2
 
@@ -18,6 +19,8 @@ if not os.path.exists(BP_FOLDER):
 #guild/channel config manager
 import guildconfig
 GCM = guildconfig.GuildconfigManager()
+
+lastError = None
 
 bot = commands.Bot(command_prefix = "bp!")
 
@@ -126,7 +129,7 @@ async def on_reaction_add(reaction, user):
 async def process_attachments(message):
     """Checks, processes and sends attachments of message.
     Returns processed blueprint count"""
-
+    global lastError
     #already checked in on_message
     #skip messages from self
     #if message.author == bot.user:
@@ -159,16 +162,58 @@ async def process_attachments(message):
             with open(filename, "wb") as f:
                 f.write(content)
             #process blueprint
-            combined_img_file = await bp_to_imgV2.process_blueprint(filename)
-            #files
-            file = discord.File(combined_img_file)
-            #upload
-            await message.channel.send(file=file)
-            #delete files
-            os.remove(combined_img_file)
+            try:
+                combined_img_file = await bp_to_imgV2.process_blueprint(filename)
+                #files
+                file = discord.File(combined_img_file)
+                #upload
+                await message.channel.send(file=file)
+                #delete image file
+                os.remove(combined_img_file)
+            except:
+                lastError = sys.exc_info()
+                await handle_blueprint_error(message, lastError)
+            
+            #delete blueprint file
             os.remove(filename)
 
     return bpcount
+
+
+async def handle_blueprint_error(message, error):
+    """Sends error notification to channel where message was received and error informations to bot owner."""
+    def traceback_string():
+        etype, value, tb = error
+        exceptionList = traceback.format_exception_only(etype, value)
+        tracebackList = traceback.extract_tb(tb)
+        s = "Traceback:\n"
+        for elem in tracebackList:
+            s += f"File `{elem.filename}`, line {elem.lineno}, in `{elem.name}`\n```{elem.line}```"
+        for elem in exceptionList:
+            s += elem
+        return s
+
+    global bot
+    #log to console
+    traceback.print_exception(*error)
+    #log to channel and bot owner chat
+    ownerId = bot.owner_id
+    if ownerId is None or ownerId == 0:
+        appinfo = await bot.application_info()
+        bot.owner_id = appinfo.owner.id
+        ownerId = bot.owner_id
+        if ownerId is None or ownerId == 0:
+            await message.channel.send("You found an error! Could not send details to bot owner.")
+            return
+    #fetch owner
+    try:
+        ownerUser = await bot.fetch_user(ownerId)
+    except (discord.NotFound, discord.HTTPException):
+        await message.channel.send("You found an error! Could not send details to bot owner.")
+        return
+    #send
+    await ownerUser.send(traceback_string())
+    await message.channel.send(f"You found an error! Details were send to {ownerUser.name}")
 
 
 bot.run(TOKEN)
