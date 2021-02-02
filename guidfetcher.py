@@ -58,7 +58,7 @@ materials_file = "materials.json"
 with open(materials_file, "r") as f:
     materials = json.loads(f.read())
 sizedict = {"1m": 1, "2m": 2, "3m": 3, "4m": 4, "1x1": 1, "3x3": 33, "5x5": 34, "7x7": 35, " 5m": 50, " 7m": 51, " 9m": 52,
-            "2mUpright": 62, "3mUpright": 63, "4mUpright": 64}
+            "2mUpright": 62, "3mUpright": 63, "4mUpright": 64, "3mCenteredUpright": 70}
 
 #map
 for k in invguiddict:
@@ -91,6 +91,16 @@ invguiddict["21646640-41cf-42a3-931a-3c40b9c79d83"]["Length"] = sizedict["3mUpri
 invguiddict["ac24cd04-449e-47b9-bf8c-bf58d9997264"]["Length"] = sizedict["3mUpright"] #truss 3m
 invguiddict["de17ff79-e670-4f08-ab59-df1ecac3905b"]["Length"] = sizedict["2mUpright"] #truss 2m
 invguiddict["19a1d5ad-99e3-4a18-8943-22a82f554231"]["Length"] = sizedict["2mUpright"] #truss 2m
+#mantlet fixes
+invguiddict["5396a3df-77ca-430a-96bf-bd81324c05ba"]["Length"] = sizedict["2mUpright"] #aa mantlet 2m
+invguiddict["627957c0-d34a-46b1-a5eb-c08a34748b77"]["Length"] = sizedict["2mUpright"] #aa mantlet 2m
+invguiddict["2f87caef-8e9d-468f-925e-b0bf98e071f3"]["Length"] = sizedict["2mUpright"] #aa mantlet 2m
+invguiddict["a4eb415c-7ba9-4e27-a118-2d450c48c236"]["Length"] = sizedict["3mCenteredUpright"] #elevation mantlet 3m
+invguiddict["19e0aacf-5bcc-45da-8c4f-a50984514bbf"]["Length"] = sizedict["3mCenteredUpright"] #elevation mantlet 3m
+invguiddict["c624a6cd-31dc-49d3-a1e9-5482d06acbc6"]["Length"] = sizedict["3mCenteredUpright"] #elevation mantlet 3m
+invguiddict["04e813ed-9011-49bc-b15a-36c5095e56b6"]["Length"] = sizedict["3x3"] #omni mantlet 3x3
+invguiddict["09d28633-cff1-4cc4-9e11-161f350dbf60"]["Length"] = sizedict["3x3"] #omni mantlet 3x3
+
 
 #missing
 invguiddict["missing"] = {"Name": "Missing", "Length": 1, "Material": "Missing"}

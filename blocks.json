@@ -400,7 +400,7 @@
 		"Name": "electric motor stator 5m"
 	},
 	"04e813ed-9011-49bc-b15a-36c5095e56b6": {
-		"Length": 3,
+		"Length": 33,
 		"Material": "Missing",
 		"Name": "3m x 3m Omni Mantlet"
 	},
@@ -805,7 +805,7 @@
 		"Name": "Metal beam (4m)"
 	},
 	"09d28633-cff1-4cc4-9e11-161f350dbf60": {
-		"Length": 3,
+		"Length": 33,
 		"Material": "Missing",
 		"Name": "3m x 3m Omni Mantlet"
 	},
@@ -2070,7 +2070,7 @@
 		"Name": "Railgun_fire"
 	},
 	"19e0aacf-5bcc-45da-8c4f-a50984514bbf": {
-		"Length": 3,
+		"Length": 70,
 		"Material": "Missing",
 		"Name": "Extra mesh 0 of 3m tall Elevation Mantlet"
 	},
@@ -3840,7 +3840,7 @@
 		"Name": "Reinforced Wood"
 	},
 	"2f87caef-8e9d-468f-925e-b0bf98e071f3": {
-		"Length": 2,
+		"Length": 62,
 		"Material": "Missing",
 		"Name": "2m tall AA Mantlet"
 	},
@@ -6470,7 +6470,7 @@
 		"Name": "Small Jet Combuster"
 	},
 	"5396a3df-77ca-430a-96bf-bd81324c05ba": {
-		"Length": 2,
+		"Length": 62,
 		"Material": "Missing",
 		"Name": "Extra mesh 0 of 2m tall AA Mantlet"
 	},
@@ -7585,7 +7585,7 @@
 		"Name": "gun152twin A Gun"
 	},
 	"627957c0-d34a-46b1-a5eb-c08a34748b77": {
-		"Length": 2,
+		"Length": 62,
 		"Material": "Missing",
 		"Name": "2m tall AA Mantlet"
 	},
@@ -12785,7 +12785,7 @@
 		"Name": "Alloy triangle corner (left) (1m)"
 	},
 	"a4eb415c-7ba9-4e27-a118-2d450c48c236": {
-		"Length": 3,
+		"Length": 70,
 		"Material": "Missing",
 		"Name": "3m tall Elevation Mantlet"
 	},
@@ -15395,7 +15395,7 @@
 		"Name": "Autocannon_fire"
 	},
 	"c624a6cd-31dc-49d3-a1e9-5482d06acbc6": {
-		"Length": 3,
+		"Length": 70,
 		"Material": "Missing",
 		"Name": "3m tall Elevation Mantlet"
 	},

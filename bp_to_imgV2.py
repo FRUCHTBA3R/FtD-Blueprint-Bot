@@ -271,6 +271,12 @@ def __create_view_matrices(bp):
                 axisS = axisZ - axisX
                 
                 #selection of higher height
+                #if height_mat.shape[0] <= np.max(pos_sel_arr[:, axisX]):
+                #    print("x Axis overflow:", height_mat.shape[0], "to", np.max(pos_sel_arr[:, axisX]))
+                #    return
+                #if height_mat.shape[1] <= np.max(pos_sel_arr[:, axisZ]):
+                #    print("y Axis overflow:", height_mat.shape[1], "to", np.max(pos_sel_arr[:, axisZ]))
+                #    return
                 height_sel_arr = height_mat[pos_sel_arr[:, axisX], pos_sel_arr[:, axisZ]] < pos_sel_arr[:, axisY]
                 #position of selection
                 height_pos_sel_arr = pos_sel_arr[height_sel_arr]
@@ -301,7 +307,7 @@ def __create_view_matrices(bp):
                 
             
             #centered beam init loop
-            centerbeamsizes = {50: 5, 51: 7, 52: 9}
+            centerbeamsizes = {50: 5, 51: 7, 52: 9, 70: 3}
             for i in range(50, 53):
                 #block selection
                 a_sel, = np.nonzero(a_length == i)
@@ -316,6 +322,22 @@ def __create_view_matrices(bp):
                 a_length[a_sel] = cbeam_len
                 a_dir[a_sel] = a_dir_bitan[a_sel]
 
+
+            #centered upright beam init loop
+            for i in range(70, 71):
+                #block selection
+                a_sel, = np.nonzero(a_length == i)
+                if len(a_sel) == 0: continue
+                
+                cbeam_len = centerbeamsizes[i]
+                print("test")
+                #inital offset
+                a_pos[a_sel] -= (cbeam_len >> 1) * (a_dir_tan[a_sel])
+
+                #set length & rot
+                a_length[a_sel] = cbeam_len
+                a_dir[a_sel] = a_dir_tan[a_sel]
+            
             
             #single length loop (also fills centered beams)
             for i in range(9, 0, -1):
@@ -697,7 +719,7 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     #file
-    fname = "../example blueprints/exampleTrussRotation.blueprint"
+    fname = "../example blueprints/Crossbones.blueprint"
 
     import asyncio
     
