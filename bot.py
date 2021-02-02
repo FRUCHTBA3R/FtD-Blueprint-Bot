@@ -141,7 +141,7 @@ async def process_attachments(message):
     bpcount = 0
     #iterate attachments
     for attachm in message.attachments:
-        if attachm.filename.endswith(".blueprint"):
+        if attachm.filename.endswith(".blueprint") or attachm.filename.endswith(".blueprint_ba"):
             bpcount += 1
             try:
                 content = await attachm.read()

@@ -51,5 +51,32 @@
 	"Railing": {
 		"Invisible": true,
 		"Color": [255, 255, 255]
+	},
+	"Wheel": {
+		"Color": [31, 15, 14]
+	},
+	"Wing": {
+		"Color": [212, 213, 163]
+	},
+	"Control Surface": {
+		"Color": [212, 213, 163]
+	},
+	"Helicopter": {
+		"Color": [212, 213, 163]
+	},
+	"Aileron": {
+		"Color": [212, 213, 163]
+	},
+	"Flight Surface": {
+		"Color": [212, 213, 163]
+	},
+	"Aero Rudder": {
+		"Color": [212, 213, 163]
+	},
+	"Aero Elevator": {
+		"Color": [212, 213, 163]
+	},
+	"Heliblade": {
+		"Color": [212, 213, 163]
 	}
 }

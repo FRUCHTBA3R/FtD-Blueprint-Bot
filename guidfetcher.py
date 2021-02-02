@@ -75,6 +75,9 @@ for k in invguiddict:
         if v.find(size) >= 0:
             invguiddict[k]["Length"] = sizedict[size]
             break
+    #wheels
+    #if v.find(" wheel ") >= 0:
+        
 
 #manual fixes
 invguiddict["867cea4e-6ea4-4fe2-a4a1-b6230308f8f1"]["Length"] = 4

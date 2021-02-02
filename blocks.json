@@ -311,7 +311,7 @@
 	},
 	"042595f4-ec02-4d55-affe-afe875642d95": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "3m Wing Corner Left"
 	},
 	"042cfada-38db-4af5-a1c8-13ddce0da29c": {
@@ -441,7 +441,7 @@
 	},
 	"05743d87-8d1a-43aa-8858-fe5e86d66681": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "Wing Inverted Corner Right"
 	},
 	"0586026e-8167-4594-a151-dd16df0434f0": {
@@ -451,7 +451,7 @@
 	},
 	"05a3646b-88cb-4946-b7da-c843efc958ff": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "1m Wide Wheel"
 	},
 	"05c9b256-38d2-4388-ad8c-b98118593f11": {
@@ -621,7 +621,7 @@
 	},
 	"079486cb-69d1-4913-aa5a-7956386bc1f0": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Ship's wheel"
 	},
 	"07dab8ca-4b2a-43bf-a9ce-8b4e2babe000": {
@@ -981,7 +981,7 @@
 	},
 	"0bcc02c7-e3fe-41ac-887f-f04f991dc516": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Aileron",
 		"Name": "Extra mesh 0 of Aileron"
 	},
 	"0bd593e6-99bf-4227-ac2a-494f4b8ea426": {
@@ -1001,7 +1001,7 @@
 	},
 	"0bef4d76-c52e-4ec5-a770-9120bd1887aa": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Helicopter",
 		"Name": "Helicopter Blade (Upside down!!)"
 	},
 	"0bfe90b0-fa52-4924-8802-55889e80f827": {
@@ -1346,7 +1346,7 @@
 	},
 	"0fd8c160-7f2e-4921-8eef-ff2bd8785c1a": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "Wing middle"
 	},
 	"0fdbcbb1-a403-40e9-bcda-b40cb8bf8e37": {
@@ -1481,7 +1481,7 @@
 	},
 	"114dc652-ab33-44c8-9a5a-4167052fa4b4": {
 		"Length": 50,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "5m Balloon Wheel"
 	},
 	"115fa1f0-d006-4332-a02a-0c0a521366f6": {
@@ -1721,7 +1721,7 @@
 	},
 	"14884b06-6834-469d-a996-629b6d155a8f": {
 		"Length": 4,
-		"Material": "Missing",
+		"Material": "Control Surface",
 		"Name": "Control surface 4m"
 	},
 	"1488e9ed-e89b-4902-883e-bc4a0613ed72": {
@@ -1821,7 +1821,7 @@
 	},
 	"15d4be68-edf9-44ed-bfda-5522cd9da33f": {
 		"Length": 50,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Wheel 5m mirror (turning)"
 	},
 	"15da2066-cc54-4eaa-81e9-64be87330205": {
@@ -1996,7 +1996,7 @@
 	},
 	"193e75f6-8632-4798-8d89-8fbe4d77e6fa": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "Wing Corner Left"
 	},
 	"195cef46-3089-4ab2-bc87-658a75f255f0": {
@@ -2206,7 +2206,7 @@
 	},
 	"1b98886a-174d-4b4d-aba2-5978dff6b009": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "shaft wheel 3m"
 	},
 	"1b9aa074-9b04-4b5c-b30e-35bdfa0e0835": {
@@ -2456,7 +2456,7 @@
 	},
 	"1e978876-5c69-45f1-9ba1-40b5ae560f9e": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Balloon wheel 1m mirror"
 	},
 	"1ea30b98-9a7a-40db-acb4-40686df28eec": {
@@ -2736,12 +2736,12 @@
 	},
 	"21f54fdb-b2ee-4e26-964f-e929b9730389": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Aileron",
 		"Name": "Extra mesh 0 of Aileron"
 	},
 	"22524171-87ab-4fc3-80fb-ac5690b624b3": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Wheel 3m mirror (turning)"
 	},
 	"225372c3-043a-4de3-9599-660b37db6522": {
@@ -2911,7 +2911,7 @@
 	},
 	"24032540-b488-4316-ada1-44952bd2bb0e": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Balloon Wheel Turning 1m mirror"
 	},
 	"2427f527-0f69-4bce-83d1-f955c1bc4862": {
@@ -2921,7 +2921,7 @@
 	},
 	"2428bcbb-bcf2-4ee3-8b00-f5b9cc8ff997": {
 		"Length": 2,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "2m wing"
 	},
 	"242be860-8b25-4bdc-91fd-c1fecba9a7f1": {
@@ -2946,7 +2946,7 @@
 	},
 	"24571c54-056b-43c9-8334-654e7f0c3789": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Extra mesh 0 of Wheel (power)"
 	},
 	"2467396f-4173-4abc-a10f-0838fd5b554e": {
@@ -3211,7 +3211,7 @@
 	},
 	"26f8008a-5b1b-4e4a-a507-c75122eac4f6": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Wheel mirror(power)"
 	},
 	"2718d6ad-07a2-4d98-bd7e-9cdb2b3f70db": {
@@ -3241,7 +3241,7 @@
 	},
 	"275b820d-dd55-49aa-9b09-48b58e8ab5da": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Aero Rudder",
 		"Name": "Aero Rudder (yaw only)"
 	},
 	"27692d7a-c05f-4ac4-ac98-f25e359faebc": {
@@ -3271,7 +3271,7 @@
 	},
 	"27e00238-15f6-475e-88b0-9c5228a22522": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Extra mesh 0 of Wheel mirror(turning)"
 	},
 	"27e60f25-016f-49ca-a7f2-8b1e194f1d78": {
@@ -3316,7 +3316,7 @@
 	},
 	"2841d866-93bb-43ab-857a-bb8f6b73d589": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Control Surface",
 		"Name": "Control surface pivot object"
 	},
 	"288e3778-900b-4bfd-a455-e94ed75c6ec2": {
@@ -3326,7 +3326,7 @@
 	},
 	"2891ef14-4d02-459a-b9a5-17469997c6d7": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "3m Wing Inverted Corner Left"
 	},
 	"28a7e02f-e9b4-48b3-a237-b1b6aed57064": {
@@ -3436,7 +3436,7 @@
 	},
 	"2a508eb8-cc74-43bb-9643-afd0c518d09f": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Helicopter",
 		"Name": "Helicopter Blade (Upside down!!)"
 	},
 	"2a6b1826-fdb3-463c-be3a-cf416575d488": {
@@ -3641,7 +3641,7 @@
 	},
 	"2d101cbc-b3aa-47e4-8a96-00a24638f6b0": {
 		"Length": 4,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "4m Wing Inverted Corner Left"
 	},
 	"2d11e2a0-bb68-412f-8b7d-0312b2a674a1": {
@@ -3771,7 +3771,7 @@
 	},
 	"2ec29b39-8a90-475b-b116-e62c83db3e97": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Wheel 3m"
 	},
 	"2eca89e0-5c2f-4b1c-a5bf-df5190e13ef4": {
@@ -4231,7 +4231,7 @@
 	},
 	"350cabaa-55f2-4c8e-bbf4-7d3771b56b8c": {
 		"Length": 4,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "4m Wing Inverted Corner Left"
 	},
 	"350d3eb2-a00c-40b0-b81e-e19bbb8e6b1e": {
@@ -4521,7 +4521,7 @@
 	},
 	"390dde0f-0388-4f8e-8286-438d31e5e6fc": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "shaft wheel 1m"
 	},
 	"39171d5b-ea2b-4d46-86f3-e9934594f545": {
@@ -4856,7 +4856,7 @@
 	},
 	"3e01fa52-676c-40cd-b62c-620c215b2c82": {
 		"Length": 2,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "2m Wing Corner Left"
 	},
 	"3e0a0bd7-7805-4e8f-836e-0cbcfee512af": {
@@ -5061,12 +5061,12 @@
 	},
 	"41053b64-a49a-4618-b153-bcc66bf77365": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "Wing Inverted Corner Left"
 	},
 	"410aa2c0-13ef-43ce-b638-6364541091a8": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Extra mesh 0 of 1m Wide wheel mirror"
 	},
 	"411cca8d-244b-446b-86e9-2bf219d557e8": {
@@ -5246,12 +5246,12 @@
 	},
 	"435fd3cc-7a4e-45f4-b47d-47a5cdd9a4fc": {
 		"Length": 50,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Balloon Wheel 5m turning"
 	},
 	"4363ead8-3cdd-4d95-b461-193dc928790d": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Wheel (turning)"
 	},
 	"43658611-66ee-4708-90f2-e57e12a392b0": {
@@ -5556,7 +5556,7 @@
 	},
 	"478efa9f-5743-4238-ad2e-750770d7da11": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "Wing"
 	},
 	"47bf8e7d-be27-4e3f-89ad-24aebc103e4e": {
@@ -5706,7 +5706,7 @@
 	},
 	"4996676f-deef-4bf3-9329-ef4f562c1902": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "Wing 1m"
 	},
 	"49aa71f0-e73d-4d4e-8b6f-940d6c3bc1b4": {
@@ -5801,7 +5801,7 @@
 	},
 	"4ae3bc3c-c39e-4d6b-afab-d0e34d783bc5": {
 		"Length": 50,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Wheel 5m"
 	},
 	"4afe98c2-e412-4154-acf8-4a3f27e3610e": {
@@ -5851,7 +5851,7 @@
 	},
 	"4b4bdd8a-e01c-4d77-8228-e19e241ad623": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Mock Wheel Mirror"
 	},
 	"4b54ee6e-73bd-49f7-bfe6-1d4c398725e0": {
@@ -6116,7 +6116,7 @@
 	},
 	"4f5d97d1-5ab6-475b-afa5-dc86ccfb12b1": {
 		"Length": 50,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Extra mesh 0 of Wheel 5m"
 	},
 	"4f69c678-2fc0-426f-bcb4-cd0006bbc7fb": {
@@ -6316,7 +6316,7 @@
 	},
 	"52458936-b413-4456-bf49-92564d0a15ad": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "Wing Inverted Corner Left"
 	},
 	"524cc556-c755-4df0-b396-7cb44d98fcb5": {
@@ -6386,7 +6386,7 @@
 	},
 	"52d7ed5c-98a3-46ee-8363-fe64198a16b9": {
 		"Length": 4,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "4m wing"
 	},
 	"52d93871-2d12-4c50-82ba-0eff6bf1fe8c": {
@@ -6686,7 +6686,7 @@
 	},
 	"564a75cd-8d7c-469b-a4b3-053d772b7d9d": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Heliblade",
 		"Name": "Dedicated heliblade spinner"
 	},
 	"564e67db-7518-44ab-9be2-89304e3c83d4": {
@@ -6886,7 +6886,7 @@
 	},
 	"583965a3-9366-43ba-909f-eb301960a378": {
 		"Length": 2,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "2m Wing Corner Left"
 	},
 	"583b24e6-4f8b-4e6e-bd72-804a6424c816": {
@@ -7201,7 +7201,7 @@
 	},
 	"5c9e5a53-f1cd-4490-b733-936c6d224c62": {
 		"Length": 2,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "2m Wing Inverted Corner Left"
 	},
 	"5cf2b4da-c1b8-4005-930b-73cc39ac9d28": {
@@ -7241,7 +7241,7 @@
 	},
 	"5d9ba4f6-11c3-4f4f-9914-fc75df7d85da": {
 		"Length": 2,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "2m Wing Corner Right"
 	},
 	"5daf113d-b3aa-424f-9163-9761633aa2b8": {
@@ -7301,7 +7301,7 @@
 	},
 	"5e4fd548-9873-48c3-b8b6-5261841b9258": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "1m wing"
 	},
 	"5e50a9c4-2a8b-40fd-a8ab-d62d9b22f37b": {
@@ -7401,7 +7401,7 @@
 	},
 	"5fe1df10-ccf8-47a9-8165-783835f365be": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Heliblade",
 		"Name": "Dedicated heliblade extension"
 	},
 	"5fe7cbea-2e1c-446c-b4b3-4546ef128b97": {
@@ -7421,7 +7421,7 @@
 	},
 	"601d9742-0016-46e9-ac5c-872817eb7a67": {
 		"Length": 2,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "2m Wing Inverted Corner Right"
 	},
 	"604cbbd5-8d8b-4e77-9ec0-e66f2f6c0c12": {
@@ -7886,7 +7886,7 @@
 	},
 	"667f4e1c-533d-4af2-9fb0-d0af518d9227": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "3m Wing Inverted Corner Right"
 	},
 	"6680b327-c594-4a96-86d6-d6161a101b79": {
@@ -8356,7 +8356,7 @@
 	},
 	"6cf7ba0b-eee5-48a8-a714-f8a6ce76d186": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Balloon Wheel Turning 1m"
 	},
 	"6cf8a940-889d-4caa-9ae4-53c918f4458b": {
@@ -8551,7 +8551,7 @@
 	},
 	"6eef43e9-732a-4ba0-a6a9-e41010024f6b": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "3m wing"
 	},
 	"6efc804c-258c-4ebe-b4c6-8e52fb2642cd": {
@@ -8566,7 +8566,7 @@
 	},
 	"6f0efd3e-c241-437c-b25f-92dc1e83332c": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Heliblade",
 		"Name": "Dedicated heliblade pole extender"
 	},
 	"6f23f24e-ac4b-44d4-bb02-ff7618f91e6d": {
@@ -8656,7 +8656,7 @@
 	},
 	"7047d22e-8f85-4cda-9f4f-6af3e8399b27": {
 		"Length": 2,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "Wing 2m"
 	},
 	"704d42c8-a058-4468-9880-93147b735df6": {
@@ -8811,7 +8811,7 @@
 	},
 	"7325f3c9-79b3-4f3b-ae94-e9223f3ae717": {
 		"Length": 4,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "4m Wing Inverted Corner Right"
 	},
 	"7334e419-a8e1-4027-af86-7893433b604e": {
@@ -8886,7 +8886,7 @@
 	},
 	"73d1c070-a1e2-4928-9446-ea7b217a8bfb": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "3m Wing Corner Right"
 	},
 	"73d5190b-3a68-4db6-979d-19425ea08b7f": {
@@ -9061,7 +9061,7 @@
 	},
 	"75a78e48-0848-45ee-9df2-e2b328c1933d": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Aero Elevator",
 		"Name": "Aero Elevator (pitch only)"
 	},
 	"75fb3a6f-61f7-4336-a978-7037821f9a5c": {
@@ -9176,7 +9176,7 @@
 	},
 	"772e7aa7-ff28-43a1-8771-f80230c56b95": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Helicopter",
 		"Name": "Helicopter blade"
 	},
 	"7758edc4-8f5b-4711-9fd2-96c952352516": {
@@ -9291,7 +9291,7 @@
 	},
 	"78afdbc6-f9d6-4aca-a8a9-2ce3b407af7a": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "Wing"
 	},
 	"78b81c0a-44df-4c24-b2a5-5d273737da60": {
@@ -9301,7 +9301,7 @@
 	},
 	"78d6177b-345c-43d6-8e34-b28bf0a82659": {
 		"Length": 50,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Wheel 5m mirror"
 	},
 	"78eeec4a-4f1b-4442-ab24-bbe740b76759": {
@@ -9616,7 +9616,7 @@
 	},
 	"7d016aa1-e2b3-4fb0-a51e-8e01df77c6c5": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "shaft wheel 3m"
 	},
 	"7d048bb4-637a-4744-962a-1d0406f1f962": {
@@ -9756,7 +9756,7 @@
 	},
 	"7e8d0314-5433-44ae-a0f6-88356f1ecb9b": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "Wing Inverted Corner Right"
 	},
 	"7e9a5541-27f7-432a-9a26-4e8320758b64": {
@@ -9781,7 +9781,7 @@
 	},
 	"7eafd0d0-d1d8-4851-a3df-54317e205af1": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "3m Balloon Wheel"
 	},
 	"7ebdfa78-1942-457e-8f30-f178525bb5f1": {
@@ -9816,7 +9816,7 @@
 	},
 	"7f42f8b6-a5cd-421c-ba8a-a3e1403faab1": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "wing strut"
 	},
 	"7f514cfb-dc29-49c3-a427-ccb5aefafd2d": {
@@ -9891,7 +9891,7 @@
 	},
 	"7fea28f0-eb30-4700-a592-c3eb1ffc7b0e": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Helicopter",
 		"Name": "Helicopter blade (unstabilised)"
 	},
 	"7ff9a34b-0dad-4281-9d91-e3768ecb8b11": {
@@ -10081,7 +10081,7 @@
 	},
 	"81db2a62-75ff-4d9a-aecb-10d3f8f4a47e": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Balloon Wheel 3m mirror"
 	},
 	"81dcf098-c201-4c48-bc5b-70616fea111c": {
@@ -10121,7 +10121,7 @@
 	},
 	"8266bc4e-7dc4-4c3a-bef9-9dddf4dab8d2": {
 		"Length": 50,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "5m Wheel"
 	},
 	"8277a5c7-344e-475d-b084-03ade5ded3b8": {
@@ -10431,7 +10431,7 @@
 	},
 	"862712ab-6534-45e2-ad89-1d8eb0fd26de": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Heliblade",
 		"Name": "Dedicated heliblade extension"
 	},
 	"86296ab3-dab4-4551-a172-5294ede78dac": {
@@ -10526,7 +10526,7 @@
 	},
 	"8768ed82-11cd-4823-a5c3-58ef4e1912a9": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Control Surface",
 		"Name": "Control surface 3m"
 	},
 	"87a98f30-0a71-400d-966c-2df45268c9ae": {
@@ -10686,7 +10686,7 @@
 	},
 	"89dec2f1-ab3b-4a7a-b603-b331ab754b86": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Wheel (power)"
 	},
 	"89e0134f-7fca-444d-9852-9cae7d99f03c": {
@@ -10726,7 +10726,7 @@
 	},
 	"8a0d13bd-a28c-451a-bd97-79da69091bbf": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Aileron",
 		"Name": "Aileron"
 	},
 	"8a428506-4727-4049-b71c-731acaffa1f0": {
@@ -10856,7 +10856,7 @@
 	},
 	"8bd727bf-88ab-4ef8-a2f7-f13a894b3540": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Extra mesh 0 of Wheel 3m"
 	},
 	"8be98c15-3b38-4500-94a1-3f0f088a45cb": {
@@ -11036,7 +11036,7 @@
 	},
 	"8eda7a85-5166-4cf2-a0b2-fa7935784639": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "Wing Corner Right"
 	},
 	"8ee6e0a8-3ac9-4020-adc8-2b7edd4bd38d": {
@@ -11161,7 +11161,7 @@
 	},
 	"904b6fc3-33b6-479e-80ca-f1a40fd319ab": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Extra mesh 0 of Wheel (power)"
 	},
 	"90541aa6-218e-455a-bac1-cef08737084d": {
@@ -11321,7 +11321,7 @@
 	},
 	"91e7a486-6b8b-4f76-bf74-096e3c41a7af": {
 		"Length": 4,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "4m Wing Corner Right"
 	},
 	"91edbb3a-87b5-4d3b-a0dc-bb6086e6d1cf": {
@@ -11331,7 +11331,7 @@
 	},
 	"91ef14fd-da81-4010-bfa6-0a9aafc7112b": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Balloon wheel 1m"
 	},
 	"91f61454-6e53-4df0-9ced-e4d86a98ab88": {
@@ -11441,7 +11441,7 @@
 	},
 	"936f57b0-0376-411e-a9c2-776681111efc": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Ship's wheel"
 	},
 	"93738a25-93c3-4f29-afc7-789718da247f": {
@@ -11666,7 +11666,7 @@
 	},
 	"95d82234-1e88-44d8-b75c-a4f826d88220": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Extra mesh 0 of Wheel (turning)"
 	},
 	"95e34566-9234-4559-b601-9a0b9b7c11e5": {
@@ -12086,7 +12086,7 @@
 	},
 	"9c0bbbc0-e9a0-4f9a-a95d-f4999178c80f": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Extra mesh 0 of Wheel mirror(turning)"
 	},
 	"9c0d97cf-0c99-4565-a931-b1c5bdf8fc1b": {
@@ -12151,7 +12151,7 @@
 	},
 	"9c92daaf-654d-4e4e-9976-c7348ee7898d": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Balloon Wheel Turning 3m"
 	},
 	"9c993292-009c-4f40-93b3-8dc54faba349": {
@@ -12226,7 +12226,7 @@
 	},
 	"9dc82707-f6ba-4f19-b698-c47dd141c8b6": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Wheel (turning)"
 	},
 	"9dc8c57f-862b-4292-b626-4a36e523d689": {
@@ -12706,7 +12706,7 @@
 	},
 	"a3746c99-5e0b-4e0f-ad1e-c0f834054d72": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "Wing strut"
 	},
 	"a37b3dc7-5793-4d6d-bfe8-6aebdb93e65e": {
@@ -12796,7 +12796,7 @@
 	},
 	"a4fdfea1-1254-4f7b-9346-124dddb595bd": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Wheel mirror(turning)"
 	},
 	"a5062a9e-ea22-490f-bc3a-00896d87a07a": {
@@ -12816,7 +12816,7 @@
 	},
 	"a52e3c2a-51ff-421c-a320-f1909cd3481b": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Helicopter",
 		"Name": "helicopter blade (unstabilised)"
 	},
 	"a52e9d65-3d0c-44f0-a475-d9c2be000e02": {
@@ -12851,7 +12851,7 @@
 	},
 	"a5bb808a-ef3d-4262-84a6-6d245e3735ea": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Wheel 3m mirror"
 	},
 	"a60e954e-6b51-4a57-9d1f-f9dcdf31ab4c": {
@@ -12971,7 +12971,7 @@
 	},
 	"a72af619-591a-4351-9561-57e9d698277b": {
 		"Length": 50,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Shaft Wheel 5m"
 	},
 	"a745d992-b62f-4014-a524-9e5953ccffd3": {
@@ -13121,7 +13121,7 @@
 	},
 	"a919098a-0e6c-44cd-98c7-c22230df0132": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "Wing middle"
 	},
 	"a922f790-b109-42db-86ff-13d5efbb0397": {
@@ -13181,12 +13181,12 @@
 	},
 	"aa09f129-19dd-4f9e-b1e6-b7739fe12d3f": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "Wing Corner Right"
 	},
 	"aa129823-57fd-44ae-8c6d-a6291441e326": {
 		"Length": 4,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "4m Wing Corner Left"
 	},
 	"aa18ebc3-d274-43e9-b6e2-ee872c3635a9": {
@@ -13241,7 +13241,7 @@
 	},
 	"aab941f2-8cc4-4d27-b472-204b5e58900b": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Extra mesh 0 of Ship's wheel"
 	},
 	"aaba7cf7-f668-4262-8407-fe67126535fb": {
@@ -13316,7 +13316,7 @@
 	},
 	"abb098a7-fb43-44c6-af69-f22839630118": {
 		"Length": 4,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "4m Wing Corner Left"
 	},
 	"abb25d54-adf5-4a9c-ba88-ac011bf02f5e": {
@@ -13336,7 +13336,7 @@
 	},
 	"abd1afe4-2fb2-4f91-94aa-39d56f94ca05": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "shaft wheel 1m"
 	},
 	"ac09f902-8921-4a58-aad5-c679706697f6": {
@@ -13381,7 +13381,7 @@
 	},
 	"accbfca6-ba3b-49df-83e3-96007b1dc571": {
 		"Length": 4,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "Wing 4m"
 	},
 	"accf2dc7-a475-416e-849a-d43fa43acdcb": {
@@ -13461,7 +13461,7 @@
 	},
 	"adb9f9a4-4cdf-4cb8-882b-e1cf5737f0f7": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Extra mesh 0 of Ship's wheel"
 	},
 	"addba8d3-e651-40ed-89eb-4528c791a43f": {
@@ -13651,7 +13651,7 @@
 	},
 	"b05c64b7-12d8-4e28-9c6e-fa1405c3e757": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Heliblade",
 		"Name": "Dedicated heliblade spinner"
 	},
 	"b0648ad8-d806-439f-861b-607ccdc0cb89": {
@@ -13981,7 +13981,7 @@
 	},
 	"b46c1759-a7c1-4dca-9c15-d0c3329dcaae": {
 		"Length": 2,
-		"Material": "Missing",
+		"Material": "Control Surface",
 		"Name": "Control surface 2m"
 	},
 	"b46ef3f4-423e-4420-b818-f9ff7fc73cba": {
@@ -14341,7 +14341,7 @@
 	},
 	"b888863b-e92c-4d58-a9dd-a580869f65c1": {
 		"Length": 4,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "4m Wing Corner Right"
 	},
 	"b899d054-b4b8-44c9-9f6d-002578dd75cd": {
@@ -14536,7 +14536,7 @@
 	},
 	"bb18935d-7b63-4af9-a87f-a067da5f5109": {
 		"Length": 2,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "2m Wing Inverted Corner Right"
 	},
 	"bb192177-bbc8-43a9-a022-28c891148f67": {
@@ -14626,7 +14626,7 @@
 	},
 	"bca2b4e8-2216-448b-b254-927833620756": {
 		"Length": 50,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Balloon Wheel 5m mirror"
 	},
 	"bcaf33a4-98c3-41d7-b416-438670e97d53": {
@@ -14686,7 +14686,7 @@
 	},
 	"bd84a2af-5c90-46f2-bc6c-ee39a8c2424e": {
 		"Length": 50,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Extra mesh 0 of Wheel 5m mirror"
 	},
 	"bd8688a8-a33f-4b39-8277-020bd80f08d6": {
@@ -14856,7 +14856,7 @@
 	},
 	"bfdd3b2b-c77b-41a3-a1d0-e9014f9e7794": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "3m Wing Inverted Corner Right"
 	},
 	"bfed1af7-09ac-441e-9352-2c9346dcde2d": {
@@ -14866,7 +14866,7 @@
 	},
 	"bff4fd3e-980f-4c0d-bf36-84e077a32c15": {
 		"Length": 2,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "2m Wing Corner Right"
 	},
 	"c0033db5-650a-4d86-af33-3a9fb72a471d": {
@@ -14926,7 +14926,7 @@
 	},
 	"c05c88aa-96df-461e-832f-7d5591a24972": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Wheel 3m (turning)"
 	},
 	"c08c87e4-99c3-494a-a728-a956fdfe2afe": {
@@ -15116,7 +15116,7 @@
 	},
 	"c29682e0-0205-490d-ac72-df2c7d2682ed": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Extra mesh 0 of Wheel mirror(power)"
 	},
 	"c298d7f7-55b2-4201-951a-16821d1ebcb5": {
@@ -15166,7 +15166,7 @@
 	},
 	"c358f03e-2bcc-4669-92fc-55a235dbfee6": {
 		"Length": 4,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "4m Wing Inverted Corner Right"
 	},
 	"c36bae1b-3aba-4341-a488-bb4ada6d594a": {
@@ -15181,7 +15181,7 @@
 	},
 	"c384fa33-67c3-4915-a878-4245f4cdcecc": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Wheel mirror(power)"
 	},
 	"c3b83b66-faf9-46d0-8b24-fd7d7adc08e1": {
@@ -15281,7 +15281,7 @@
 	},
 	"c4e23d98-fbde-449e-823f-872004cadc7a": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Aileron",
 		"Name": "Aileron"
 	},
 	"c4ef6072-822a-4fa5-b618-e7fc0508c499": {
@@ -15451,7 +15451,7 @@
 	},
 	"c72ea777-6a49-427d-aa1c-9516cbd5d88f": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "1m Wide Wheel Mirror"
 	},
 	"c737a6ba-827a-4683-a93d-26bf33d3fb10": {
@@ -15666,7 +15666,7 @@
 	},
 	"c9c226ff-ebd3-4394-b6d5-d4796e0dd149": {
 		"Length": 50,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Wheel 5m (turning)"
 	},
 	"c9d0d3dc-9715-4629-abde-7f178d52f2fd": {
@@ -15976,7 +15976,7 @@
 	},
 	"ce05e453-eca5-4833-b3c6-bf9373851922": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Control Surface",
 		"Name": "Control surface 1m"
 	},
 	"ce379a75-9373-4eca-b8f2-e314d25da3ef": {
@@ -16226,7 +16226,7 @@
 	},
 	"d15a334b-d951-4991-89f0-cdf2599a9699": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Helicopter",
 		"Name": "Helicopter blade"
 	},
 	"d15c468f-705d-4bae-acc7-ca5856640dc0": {
@@ -16551,7 +16551,7 @@
 	},
 	"d4e23d98-fbde-449e-823f-872004cadc7a": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Flight Surface",
 		"Name": "Universal flight surface"
 	},
 	"d5016f16-6431-4e8f-b0cc-5f0f400b151a": {
@@ -16751,7 +16751,7 @@
 	},
 	"d7174c23-3168-4a0f-8a10-cbc4eaa91f0d": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Extra mesh 0 of 1m Wide wheel"
 	},
 	"d72b5544-874f-4e52-8169-a0fefaff5fcc": {
@@ -17001,7 +17001,7 @@
 	},
 	"da173fac-8673-4ef7-aae5-d089e78ea6ce": {
 		"Length": 50,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Balloon Wheel 5m"
 	},
 	"da3898ba-d53d-4dfc-9628-93db57be0812": {
@@ -17051,7 +17051,7 @@
 	},
 	"daadd5b7-028e-4367-bfee-1c142d5c0514": {
 		"Length": 50,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Extra mesh 0 of 5m Balloon wheel"
 	},
 	"dad49ac1-9503-4a74-9148-61c33a0c6097": {
@@ -17176,7 +17176,7 @@
 	},
 	"dc78f848-a386-421d-aed0-4713daafeb3f": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Extra mesh 0 of 3m Balloon wheel"
 	},
 	"dc8f69fe-f97c-404f-996c-1b934afa17b5": {
@@ -17256,7 +17256,7 @@
 	},
 	"dddf2251-d1e6-4792-9270-c9250b610733": {
 		"Length": 50,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Balloon Wheel 5m turning mirror"
 	},
 	"dde01453-fb08-4818-a85e-d56cb3a3e060": {
@@ -17426,7 +17426,7 @@
 	},
 	"df7ab21c-f0ed-4d37-9348-67c652239a48": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "Wing 3m"
 	},
 	"df9737d0-b566-45c6-89c5-f78277edd3c9": {
@@ -17681,7 +17681,7 @@
 	},
 	"e2a0456e-3c4c-4e0c-be28-dc4eaa7e11d9": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Extra mesh 0 of Wheel 3m mirror"
 	},
 	"e2a90514-aa7b-4051-b6df-44408ae45b8d": {
@@ -17731,7 +17731,7 @@
 	},
 	"e34208e6-79d8-475f-ba14-e92c1599a8ca": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Wheel mirror(turning)"
 	},
 	"e3487db4-58d3-4cb2-83f0-3c3f2c16fdcf": {
@@ -17796,7 +17796,7 @@
 	},
 	"e3e2f798-8f5d-488a-874f-3fe7c48f7138": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "3m Wing Corner Right"
 	},
 	"e3f40e91-96fa-43e6-84a4-8e54a35210b5": {
@@ -17886,7 +17886,7 @@
 	},
 	"e5773f95-5fb1-4ca5-99ff-4d472c28e0bb": {
 		"Length": 2,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "2m Wing Inverted Corner Left"
 	},
 	"e581b7dc-da92-421d-9262-a5781c287728": {
@@ -17976,7 +17976,7 @@
 	},
 	"e69cbb14-5df0-4645-8f11-93ce51207ff8": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Balloon Wheel 3m"
 	},
 	"e6a79e11-78c2-47b2-b189-356a1b5df190": {
@@ -17996,7 +17996,7 @@
 	},
 	"e6cfc973-36ee-4dbb-8fcf-949a57b0e09c": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "3m Wing Corner Left"
 	},
 	"e6de0d58-78f5-4e23-be78-21e5d1c29113": {
@@ -18301,7 +18301,7 @@
 	},
 	"eaca91cf-4363-400e-9bb4-6d7f06ea5427": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Extra mesh 0 of Wheel (turning)"
 	},
 	"ead7704b-dba8-48b9-9756-7713fc03650b": {
@@ -18746,7 +18746,7 @@
 	},
 	"f18d051c-2aad-4287-823e-997499716da1": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Mock Wheel"
 	},
 	"f1902ab2-589a-47a9-99e0-dbba65d82a6b": {
@@ -18926,7 +18926,7 @@
 	},
 	"f3f7620a-f281-4a3a-a75e-0106ef9c4eb8": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Wheel (power)"
 	},
 	"f409ac76-dc7a-45bc-8a08-b8ec6038a753": {
@@ -19126,7 +19126,7 @@
 	},
 	"f601a728-1a00-4d9e-b23c-f78064cbf3a5": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Balloon Wheel Turning 3m mirror"
 	},
 	"f61f3f2f-01d6-44ee-93af-7a6b64419bd4": {
@@ -19411,7 +19411,7 @@
 	},
 	"f9e94a6c-f000-47bb-ae72-540a084d7582": {
 		"Length": 3,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "3m Wing Inverted Corner Left"
 	},
 	"f9f36cb3-cbfd-446a-9313-40f8e31e6e89": {
@@ -19526,7 +19526,7 @@
 	},
 	"fb2303a6-fa27-4d11-a0c7-54e2e372ab06": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wheel",
 		"Name": "Extra mesh 0 of Wheel mirror(power)"
 	},
 	"fb321d39-8bf1-40f1-ab31-a10bef897d36": {
@@ -19571,7 +19571,7 @@
 	},
 	"fc010d1b-1c19-40e3-92dd-0f18c816b066": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Wing",
 		"Name": "Wing Corner Left"
 	},
 	"fc3341c2-66c0-42a1-ad51-4cc572e8c7b5": {
@@ -19636,7 +19636,7 @@
 	},
 	"fcdfe732-a99e-4dad-a469-036a578a6ed0": {
 		"Length": 1,
-		"Material": "Missing",
+		"Material": "Heliblade",
 		"Name": "Dedicated heliblade pole extender"
 	},
 	"fce44a0b-df1b-45f2-bfa8-159bfc00d192": {

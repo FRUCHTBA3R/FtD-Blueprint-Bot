@@ -719,7 +719,7 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     #file
-    fname = "../example blueprints/Crossbones.blueprint"
+    fname = "../example blueprints/IFV.blueprint"
 
     import asyncio
     
