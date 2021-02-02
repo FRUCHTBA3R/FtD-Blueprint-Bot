@@ -4,6 +4,11 @@
 		"Material": "Missing",
 		"Name": "Torpedo Launcher"
 	},
+	"000d3e02-1d42-44e0-a9cc-576367ad77ee": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Huge GantryHatch"
+	},
 	"003376ea-bcad-4322-89d6-0aad4e7829ae": {
 		"Length": 1,
 		"Material": "Missing",
@@ -159,11 +164,6 @@
 		"Material": "Missing",
 		"Name": "Rudder Triangle Large Small"
 	},
-	"020a1fb8-c159-4905-beaa-cdc4aa33b1b8": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "Medium wooden cargo hull"
-	},
 	"020fae5d-c759-4456-87e6-7e423752a427": {
 		"Length": 1,
 		"Material": "Alloy",
@@ -254,6 +254,11 @@
 		"Material": "Missing",
 		"Name": "Foulkon 10x100mm CIWS"
 	},
+	"03b67df9-3955-4baf-ae85-81f3d48761bf": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Hydrofoil"
+	},
 	"03c74855-093e-4e31-b071-e7198d1e077b": {
 		"Length": 2,
 		"Material": "Glass",
@@ -338,6 +343,11 @@
 		"Length": 1,
 		"Material": "Lead",
 		"Name": "Lead 1m to 3m inverse transition right"
+	},
+	"0448ca96-fa37-4389-9ee3-3e7280ffadd3": {
+		"Length": 50,
+		"Material": "Missing",
+		"Name": "5m Piston parallel"
 	},
 	"046e9d70-5c74-463a-8e74-2720dbe15811": {
 		"Length": 1,
@@ -563,6 +573,11 @@
 		"Length": 3,
 		"Material": "Wood",
 		"Name": "Wood triangle corner right 3m"
+	},
+	"073bd4af-d8b2-43ba-b6db-da6bc4271f69": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "SimpleCarburetedEngine"
 	},
 	"073f192e-dae8-471b-ac08-577fd6819126": {
 		"Length": 1,
@@ -864,6 +879,11 @@
 		"Material": "Missing",
 		"Name": "5x5x12LargeCJEExample"
 	},
+	"0abc098f-9fb7-428a-a951-4f0ebc6eef76": {
+		"Length": 1,
+		"Material": "Metal",
+		"Name": "Metal dreadnought hull B"
+	},
 	"0ac7e12b-ae0d-43ca-8938-8bc53d2fa635": {
 		"Length": 1,
 		"Material": "Missing",
@@ -1034,6 +1054,11 @@
 		"Material": "Missing",
 		"Name": "Extra mesh 0 of 2m tall AA Mantlet"
 	},
+	"0ca6becd-605b-469d-8cd0-acd292068325": {
+		"Length": 1,
+		"Material": "Metal",
+		"Name": "Metal dreadnought hull A"
+	},
 	"0cb3fe9c-f669-444d-8aa6-537451ed4fdd": {
 		"Length": 50,
 		"Material": "Missing",
@@ -1083,6 +1108,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "splash4"
+	},
+	"0d33b008-4c49-4ef2-81fd-423e8eba4837": {
+		"Length": 50,
+		"Material": "Missing",
+		"Name": "turbine middle 5m"
 	},
 	"0d466e68-7a97-4e27-a73c-6bda4010f7e7": {
 		"Length": 1,
@@ -1154,11 +1184,6 @@
 		"Material": "Alloy",
 		"Name": "alloy mat Metallic"
 	},
-	"0e00616b-0886-41a5-88a7-5e56248055c4": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": " invMinigun"
-	},
 	"0e11729e-09d9-4a3c-83dd-1ee16ed4f2f8": {
 		"Length": 1,
 		"Material": "Missing",
@@ -1208,6 +1233,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "electric motor rotor 1m"
+	},
+	"0e7291c7-bb43-4e5d-8b60-6f3a920c6f67": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "SimpleLaserSetupWithTransceiver"
 	},
 	"0e76f4c6-19c7-459d-b366-dfa17c09343c": {
 		"Length": 1,
@@ -1394,6 +1424,11 @@
 		"Material": "Missing",
 		"Name": "Radar 360"
 	},
+	"10a9cb00-c85c-4586-a868-7fab03f9ac5e": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Console Screen"
+	},
 	"10c36664-41f1-4429-8a1e-0ff3dade19c2": {
 		"Length": 2,
 		"Material": "Alloy",
@@ -1443,11 +1478,6 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "180K_4_prop"
-	},
-	"110f33e1-dc3b-42c0-8a84-2a54a50165c2": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "Hydrofoil example"
 	},
 	"114dc652-ab33-44c8-9a5a-4167052fa4b4": {
 		"Length": 50,
@@ -1658,6 +1688,11 @@
 		"Length": 1,
 		"Material": "Barrel",
 		"Name": "Barrel"
+	},
+	"13fecfd2-1144-4a7a-a99f-59e40f3c7d21": {
+		"Length": 50,
+		"Material": "Missing",
+		"Name": "turbine middle 5m W"
 	},
 	"13ff411e-deb3-40df-8309-345c5e26dd72": {
 		"Length": 1,
@@ -1944,11 +1979,6 @@
 		"Material": "Missing",
 		"Name": "Wedge Back 1m"
 	},
-	"18c4e2d3-7167-46f5-a199-c2be7d1586c0": {
-		"Length": 1,
-		"Material": "Metal",
-		"Name": "Large metal hull"
-	},
 	"1912c75a-18c7-4211-920b-566100c51b23": {
 		"Length": 2,
 		"Material": "Missing",
@@ -2009,11 +2039,6 @@
 		"Material": "Missing",
 		"Name": "Mannequin hand right open"
 	},
-	"198e2824-e7d7-4b5b-ad7d-1ef8ed9c3f3d": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "Prop plane frame"
-	},
 	"19945f75-8353-45e1-938f-a548fa05e05e": {
 		"Length": 1,
 		"Material": "Missing",
@@ -2025,7 +2050,7 @@
 		"Name": "gunWarp Barrel Wood"
 	},
 	"19a1d5ad-99e3-4a18-8943-22a82f554231": {
-		"Length": 2,
+		"Length": 62,
 		"Material": "Missing",
 		"Name": "Truss 2m"
 	},
@@ -2355,7 +2380,7 @@
 		"Name": "Rudder Triangle Small"
 	},
 	"1dd66387-6293-4fa0-a1da-6f0e4cb80dfa": {
-		"Length": 4,
+		"Length": 64,
 		"Material": "Missing",
 		"Name": "Truss 4m"
 	},
@@ -2559,6 +2584,11 @@
 		"Material": "Missing",
 		"Name": "Boat Rudder"
 	},
+	"208d1ed3-3bcc-42da-a9b2-5f1ac657d6b5": {
+		"Length": 1,
+		"Material": "Metal",
+		"Name": "Metal and alloy split hull"
+	},
 	"2099a233-181e-4f50-9a0e-78a547969a8e": {
 		"Length": 1,
 		"Material": "Missing",
@@ -2635,7 +2665,7 @@
 		"Name": "Sonar Decoy"
 	},
 	"21646640-41cf-42a3-931a-3c40b9c79d83": {
-		"Length": 3,
+		"Length": 63,
 		"Material": "Missing",
 		"Name": "Truss 3m"
 	},
@@ -2934,11 +2964,6 @@
 		"Material": "Alloy",
 		"Name": "alloy mat Paint"
 	},
-	"249595af-669e-4894-9505-62928fd9bfa6": {
-		"Length": 34,
-		"Material": "Missing",
-		"Name": "5x5x9EcoDraba4000"
-	},
 	"24b4b0d5-8b0f-48bd-bef7-fdad00dede68": {
 		"Length": 35,
 		"Material": "Wood",
@@ -3154,6 +3179,11 @@
 		"Material": "Metal",
 		"Name": "Wedge Metal Front 4m"
 	},
+	"26c77404-3095-4eff-a94c-427233c5c82a": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Console_Screen"
+	},
 	"26c79091-aa95-4088-b36a-782a56918504": {
 		"Length": 1,
 		"Material": "Missing",
@@ -3229,10 +3259,10 @@
 		"Material": "Barrel",
 		"Name": "Heavy Barrel Start"
 	},
-	"27c9fc2c-e0f4-472c-b089-b231992a5b77": {
-		"Length": 34,
-		"Material": "Missing",
-		"Name": "5x5x8 6000 series"
+	"27c3ff2f-e9a1-4281-a79a-1a5daddd98cd": {
+		"Length": 1,
+		"Material": "Metal",
+		"Name": "Metal strut"
 	},
 	"27d6c7ed-8bc5-4ef9-8611-4ada7e7b7bc2": {
 		"Length": 1,
@@ -3528,6 +3558,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Torpedo Launcher"
+	},
+	"2bf080eb-13db-4e95-bd26-ca285118bb46": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Heavy tank"
 	},
 	"2c0e19ac-5d84-433f-a805-d14026c57d58": {
 		"Length": 3,
@@ -4259,6 +4294,11 @@
 		"Material": "Glass",
 		"Name": "Glass beam slope diagonal cut (4m)"
 	},
+	"35b85870-f71e-42fe-93f8-1f1e4dae7b75": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Medium tank"
+	},
 	"35cd6905-44d0-4bb3-be0f-20ee2ed670bf": {
 		"Length": 3,
 		"Material": "Missing",
@@ -4303,6 +4343,11 @@
 		"Length": 2,
 		"Material": "Wood",
 		"Name": "Wood inverted triangle corner (right) (2m)"
+	},
+	"3652c823-409c-47ac-8624-bd4d82f11e3f": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Medium Wooden hull"
 	},
 	"3667c4d4-1ac9-4e68-bca1-11cda59650d4": {
 		"Length": 1,
@@ -4433,6 +4478,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "ContainerCargo336A"
+	},
+	"3825e3d5-59f4-489f-b75c-ca72341f0c00": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Console_BaseColour"
 	},
 	"382a7650-2231-4867-96e4-8d97242a4741": {
 		"Length": 1,
@@ -4568,6 +4618,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Boat Propeller"
+	},
+	"3a77144e-04c6-49ea-8d60-3419b9f00f5b": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Jet plane"
 	},
 	"3a9cb8cd-0f81-47e2-8332-ab5cc9ea70ce": {
 		"Length": 1,
@@ -4779,6 +4834,11 @@
 		"Material": "Barrel",
 		"Name": "Heavy Barrel (4m)"
 	},
+	"3dafc031-0a23-430f-bbca-4c7b8cd523db": {
+		"Length": 50,
+		"Material": "Missing",
+		"Name": "5m Turbine Middle"
+	},
 	"3dd3d388-e087-46fb-ae78-47b4fb91d644": {
 		"Length": 1,
 		"Material": "Missing",
@@ -4923,11 +4983,6 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Shaft Shaft Bearing 1m"
-	},
-	"3f9a8d05-1622-4e4f-9276-6d79953db83d": {
-		"Length": 1,
-		"Material": "Metal",
-		"Name": "21x13x56 Metal tumblehome B"
 	},
 	"3fac543b-7d25-4ea7-8f5c-002025881ca1": {
 		"Length": 1,
@@ -5619,6 +5674,16 @@
 		"Material": "Missing",
 		"Name": "Tail Plane"
 	},
+	"4940eecc-727d-468e-aaae-c6e92c91e2ac": {
+		"Length": 50,
+		"Material": "Missing",
+		"Name": "turbine end 5m"
+	},
+	"4958d0fc-2bc1-4d52-9837-c9c037fec098": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Wooden tugboat"
+	},
 	"495a4c41-467f-4586-b385-276512f9c827": {
 		"Length": 1,
 		"Material": "Heavy Armour",
@@ -5879,11 +5944,6 @@
 		"Material": "Missing",
 		"Name": "Missile Pod Hatch"
 	},
-	"4d01dd93-b88a-4701-9e05-eca070276b57": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "Hovercraft frame"
-	},
 	"4d1d1052-a785-469b-ada9-406b43fcdfde": {
 		"Length": 1,
 		"Material": "Missing",
@@ -5988,6 +6048,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "FS_Atlas_Color"
+	},
+	"4e6e9eef-e2ce-443b-b15e-f378dd08eb7f": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Console_Screen"
 	},
 	"4ea34fed-9309-407b-b8ea-5c0c73864a21": {
 		"Length": 1,
@@ -6204,6 +6269,11 @@
 		"Material": "Missing",
 		"Name": "Drill Extension vertical splitter"
 	},
+	"51eb2296-fb92-4241-8f48-323dd4339814": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "SimpleLaserSetup"
+	},
 	"51ebef4e-d86a-4ba2-95b1-a27537a5727b": {
 		"Length": 1,
 		"Material": "Missing",
@@ -6248,6 +6318,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Wing Inverted Corner Left"
+	},
+	"524cc556-c755-4df0-b396-7cb44d98fcb5": {
+		"Length": 50,
+		"Material": "Missing",
+		"Name": "5m Turbine Window"
 	},
 	"5250e057-6763-4c9a-b40f-20ffc5491080": {
 		"Length": 1,
@@ -6313,6 +6388,11 @@
 		"Length": 4,
 		"Material": "Missing",
 		"Name": "4m wing"
+	},
+	"52d93871-2d12-4c50-82ba-0eff6bf1fe8c": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Console"
 	},
 	"52d9fa74-95f8-4e5c-a40b-da476ed0d193": {
 		"Length": 1,
@@ -6473,11 +6553,6 @@
 		"Length": 4,
 		"Material": "Alloy",
 		"Name": "Alloy 4m offset left"
-	},
-	"54e60c41-405b-44e7-9259-95b7bf919355": {
-		"Length": 1,
-		"Material": "Metal",
-		"Name": "Medium metal and alloy hull"
 	},
 	"54ec391a-e033-4bae-8ab8-9d08a9a3804a": {
 		"Length": 1,
@@ -6659,10 +6734,25 @@
 		"Material": "Missing",
 		"Name": "Particle input port"
 	},
+	"56933e36-426e-458f-90da-3c3f36305385": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Console smoothnes"
+	},
+	"5697891b-f3d6-4587-9a86-bd4faa29171e": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Huge Hatch"
+	},
 	"56b29112-55f3-4e0a-9279-f6437adb2847": {
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Fuel Refinery"
+	},
+	"56b8c974-6eb9-4ef4-888d-aeaba3bcf7a2": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Huge Rail Gantry (invisible)"
 	},
 	"56c27d46-39b3-4ac1-b4f7-71c118d8dde9": {
 		"Length": 1,
@@ -7469,6 +7559,11 @@
 		"Material": "Laser",
 		"Name": "Laser Emitter"
 	},
+	"6224bab0-2eda-40bb-ae3d-001e75174cf1": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "missile transmitter"
+	},
 	"6244c400-f5c9-434b-a873-31aaca16ce5a": {
 		"Length": 1,
 		"Material": "Missing",
@@ -7608,11 +7703,6 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Six Way Connector"
-	},
-	"641112d9-c6f1-43a9-a5f5-383e92223ed1": {
-		"Length": 34,
-		"Material": "Missing",
-		"Name": "5x5x9 5000 alternative"
 	},
 	"642bf680-5258-46e5-890d-fa863b44c94b": {
 		"Length": 1,
@@ -8074,11 +8164,6 @@
 		"Material": "Lead",
 		"Name": "Lead wedge (1m)"
 	},
-	"6a3306b7-1e69-4788-80c9-8a7d4dec07f0": {
-		"Length": 34,
-		"Material": "Missing",
-		"Name": "5x5 Bromine"
-	},
 	"6a388121-f43e-479d-99cf-06ab59d5dd58": {
 		"Length": 1,
 		"Material": "Missing",
@@ -8209,6 +8294,11 @@
 		"Material": "Missing",
 		"Name": "Ladder"
 	},
+	"6c2ed847-ef94-4ba0-9dc1-589cb1fb94e5": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Core_Struts"
+	},
 	"6c33beca-d1e6-40a7-993a-89b40e0ac131": {
 		"Length": 4,
 		"Material": "Glass",
@@ -8228,6 +8318,11 @@
 		"Length": 3,
 		"Material": "Wood",
 		"Name": "Wood inverted triangle corner (right) (3m)"
+	},
+	"6c710586-6b65-4025-bb5c-1e359f45a352": {
+		"Length": 50,
+		"Material": "Missing",
+		"Name": "5m Turbine Generator"
 	},
 	"6c887739-1aec-4ae7-a061-148ca435bef2": {
 		"Length": 1,
@@ -8404,11 +8499,6 @@
 		"Material": "Missing",
 		"Name": "gun20Single Mk1 Gatling"
 	},
-	"6e3cea7c-b786-4bcc-95f4-da238006513a": {
-		"Length": 1,
-		"Material": "Metal",
-		"Name": "Metal and alloy split hull"
-	},
 	"6e3e6b16-8b29-44bc-ac95-0e83d6986e5a": {
 		"Length": 2,
 		"Material": "Alloy",
@@ -8518,6 +8608,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Docking station"
+	},
+	"6fc05823-7905-4b5e-bde0-858010860e91": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Huge Launcher"
 	},
 	"6fe70dc6-c163-46a6-bef0-69761728b65f": {
 		"Length": 1,
@@ -8673,6 +8768,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "gun40Oct Pdr  Gun 7"
+	},
+	"72750bc6-3f4d-4650-88f4-e1a51d2db249": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Huge Rail Gantry"
 	},
 	"72830583-ccd6-4b6e-a83f-488fccdba63e": {
 		"Length": 1,
@@ -9049,11 +9149,6 @@
 		"Material": "Missing",
 		"Name": "Front & Back Connector"
 	},
-	"76e4907b-2e71-477b-ab30-0d7962d59fd5": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "Jet frame"
-	},
 	"76f892fe-3310-4778-a448-0e234075590d": {
 		"Length": 1,
 		"Material": "Missing",
@@ -9148,11 +9243,6 @@
 		"Length": 3,
 		"Material": "Missing",
 		"Name": "Turret Block One Axis 3m"
-	},
-	"7804ea94-76fd-45b8-b6a8-80b0b7e4a180": {
-		"Length": 35,
-		"Material": "Missing",
-		"Name": "7x7x9HarmonyDraba5000"
 	},
 	"780642a2-a1cf-4cc4-8b2b-eb6e1fcdb4ee": {
 		"Length": 4,
@@ -9709,6 +9799,11 @@
 		"Material": "Glass",
 		"Name": "Glass wedge back (3m)"
 	},
+	"7eef2a22-53a5-4cf7-8608-b4a7419b0efd": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "New Component"
+	},
 	"7f189a18-7c28-4a4c-a1ee-e4d4335e79d6": {
 		"Length": 1,
 		"Material": "Glass",
@@ -9718,6 +9813,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Shield ring generator"
+	},
+	"7f42f8b6-a5cd-421c-ba8a-a3e1403faab1": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "wing strut"
 	},
 	"7f514cfb-dc29-49c3-a427-ccb5aefafd2d": {
 		"Length": 1,
@@ -9774,6 +9874,11 @@
 		"Material": "Missing",
 		"Name": "Walker ankle"
 	},
+	"7fbe7409-5884-4387-8348-d279e312f86b": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Spaw o matic"
+	},
 	"7fcfdaf0-2d2a-43be-842a-423e736ccdd0": {
 		"Length": 1,
 		"Material": "Missing",
@@ -9793,6 +9898,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "godmodeActive"
+	},
+	"7ffdab9d-e0b1-4943-98b0-e5ab7f11d06d": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Core_APS"
 	},
 	"801bc70a-c764-4d9d-936a-e67400e0a3d9": {
 		"Length": 1,
@@ -10039,6 +10149,11 @@
 		"Material": "Missing",
 		"Name": "Core_Land"
 	},
+	"82a88f97-bb6c-491f-b3f9-04317b33f34c": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "LargerSimpleInjectorEngine"
+	},
 	"82b2446e-c12e-436a-8340-76d38372ead1": {
 		"Length": 1,
 		"Material": "Missing",
@@ -10093,6 +10208,11 @@
 		"Length": 2,
 		"Material": "Glass",
 		"Name": "Glass 2m offset right"
+	},
+	"8393a606-7ede-427b-b1fa-ac61c9dbea5a": {
+		"Length": 3,
+		"Material": "Missing",
+		"Name": "Sign Post 3m"
 	},
 	"83aaf521-2335-46fd-ab73-85bc9eab379d": {
 		"Length": 1,
@@ -10394,6 +10514,11 @@
 		"Material": "Missing",
 		"Name": "gun100Gatling DWG Gatling"
 	},
+	"874113a3-3f91-4615-a9fb-008a83566803": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Huge Gantry"
+	},
 	"8746f5b3-e2a6-4067-95bc-9da3900690f8": {
 		"Length": 1,
 		"Material": "Missing",
@@ -10583,6 +10708,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "wingMetallic"
+	},
+	"89f5b8d5-f4dc-4430-88bc-626c24747050": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Small Wooden hull"
 	},
 	"89fea01c-551a-4031-997e-1cb8f4a29a12": {
 		"Length": 1,
@@ -11174,11 +11304,6 @@
 		"Material": "Lead",
 		"Name": "Lead 1m to 4m slope transition"
 	},
-	"91c3ca46-83c6-4970-b1c8-722fb0d216ad": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "Submarine Trainer"
-	},
 	"91cca4a9-a40f-43eb-9ba5-34c738b03d1f": {
 		"Length": 1,
 		"Material": "Missing",
@@ -11739,6 +11864,11 @@
 		"Material": "Missing",
 		"Name": "Ejector Add On"
 	},
+	"988a4ba6-37bc-4d94-9b54-7213e11192f7": {
+		"Length": 1,
+		"Material": "Metal",
+		"Name": "Metal tumblehome hull A"
+	},
 	"988aab4d-f021-49dd-9c13-e4f0ac8e5115": {
 		"Length": 1,
 		"Material": "Missing",
@@ -11944,6 +12074,11 @@
 		"Material": "Metal",
 		"Name": "Metal 2m to 3m inverse transition left"
 	},
+	"9bff4b97-c652-4da7-99df-ab4a1bd5551e": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Huge Rail Launcher"
+	},
 	"9c09eee2-e4bd-42ea-aaec-43a6d1451db3": {
 		"Length": 1,
 		"Material": "Laser",
@@ -11969,10 +12104,10 @@
 		"Material": "Metal",
 		"Name": "Metal triangle corner (left) (1m)"
 	},
-	"9c26788c-74e4-41d3-9607-641dfc86b459": {
+	"9c191453-ca09-4a1f-9467-687dcf6bc950": {
 		"Length": 1,
-		"Material": "Metal",
-		"Name": "Huge metal hull part B"
+		"Material": "Missing",
+		"Name": "missile receiver"
 	},
 	"9c3d71c3-7c13-4e87-a1cd-b373e3c11d43": {
 		"Length": 1,
@@ -12029,11 +12164,6 @@
 		"Material": "Missing",
 		"Name": "Steam Jet"
 	},
-	"9ced53fb-7540-4d7c-b245-6f90e8ff13a5": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "Small wooden tug"
-	},
 	"9cf42e3c-1e19-4620-88a3-4e59dcd4959e": {
 		"Length": 1,
 		"Material": "Wood",
@@ -12088,6 +12218,11 @@
 		"Length": 3,
 		"Material": "Rubber",
 		"Name": "Rubber triangle corner (left) (3m)"
+	},
+	"9da4b2a1-a69a-472d-ad2f-a65a9a36e6ea": {
+		"Length": 50,
+		"Material": "Missing",
+		"Name": "5m Turbine Front"
 	},
 	"9dc82707-f6ba-4f19-b698-c47dd141c8b6": {
 		"Length": 1,
@@ -12179,6 +12314,11 @@
 		"Material": "Missing",
 		"Name": "Crystal Resource Storage Small"
 	},
+	"9eadc394-7084-4978-8b82-9cbf5ecedee5": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Huge launch pad"
+	},
 	"9ebc44a7-5c1c-484e-8b06-ae390a48db17": {
 		"Length": 1,
 		"Material": "Missing",
@@ -12203,6 +12343,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "bomb"
+	},
+	"9eedfe02-5a15-45c1-b785-56f5aea76145": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Huge Rail Gantry"
 	},
 	"9f2f774e-1cc1-41ef-8b1b-014b9f583b4a": {
 		"Length": 1,
@@ -12283,11 +12428,6 @@
 		"Length": 2,
 		"Material": "Wood",
 		"Name": "Wood offset slope (left) (2m)"
-	},
-	"9fd845c2-f168-45ad-82d3-749728d1f8b3": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "Hovercraft Trainer"
 	},
 	"9fdc179e-5e89-4b4a-8bca-3f1b895b3d41": {
 		"Length": 1,
@@ -12564,6 +12704,11 @@
 		"Material": "Missing",
 		"Name": "AmmoNormal"
 	},
+	"a3746c99-5e0b-4e0f-ad1e-c0f834054d72": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Wing strut"
+	},
 	"a37b3dc7-5793-4d6d-bfe8-6aebdb93e65e": {
 		"Length": 1,
 		"Material": "Missing",
@@ -12788,11 +12933,6 @@
 		"Length": 4,
 		"Material": "Alloy",
 		"Name": "Alloy triangle corner (left) (4m)"
-	},
-	"a6da9290-ded6-4619-94c6-2ead555d8c3c": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "Medium wooden hull"
 	},
 	"a6def349-1d6d-49f0-ba96-e3d1050d7f95": {
 		"Length": 1,
@@ -13189,6 +13329,11 @@
 		"Material": "Missing",
 		"Name": "Material Storage Tank Large (mirror)"
 	},
+	"abb4185c-d524-4a2f-b4a6-aa5322cce997": {
+		"Length": 50,
+		"Material": "Missing",
+		"Name": "shaft piston 5m 4port base"
+	},
 	"abd1afe4-2fb2-4f91-94aa-39d56f94ca05": {
 		"Length": 1,
 		"Material": "Missing",
@@ -13200,7 +13345,7 @@
 		"Name": "Metal inverted triangle corner (left) (4m)"
 	},
 	"ac24cd04-449e-47b9-bf8c-bf58d9997264": {
-		"Length": 3,
+		"Length": 63,
 		"Material": "Missing",
 		"Name": "Truss 3m"
 	},
@@ -13379,6 +13524,11 @@
 		"Material": "Missing",
 		"Name": "Heartstone"
 	},
+	"aecb98bb-76cd-4d05-8304-acc1392ab596": {
+		"Length": 1,
+		"Material": "Alloy",
+		"Name": "Alloy strut"
+	},
 	"aed83dc4-0698-4902-ac6b-d2c122495996": {
 		"Length": 1,
 		"Material": "Missing",
@@ -13503,11 +13653,6 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Dedicated heliblade spinner"
-	},
-	"b05c71cb-5ce9-4b7f-b1d4-ff55a2778325": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "Dreadnought Hull Back"
 	},
 	"b0648ad8-d806-439f-861b-607ccdc0cb89": {
 		"Length": 1,
@@ -13694,6 +13839,11 @@
 		"Material": "Missing",
 		"Name": "gun94Single 37 Shield"
 	},
+	"b286aa49-6029-4ec3-9b58-b987a3d0ae61": {
+		"Length": 3,
+		"Material": "Missing",
+		"Name": "Sign post 3m"
+	},
 	"b2957d34-c1a6-457d-ad7c-efc64d1ffa43": {
 		"Length": 3,
 		"Material": "Glass",
@@ -13713,6 +13863,11 @@
 		"Length": 3,
 		"Material": "Alloy",
 		"Name": "Alloy triangle corner (left) (3m)"
+	},
+	"b2e0451f-25c1-4e5f-93bd-6d1b0aa2127f": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Scout tank"
 	},
 	"b2e1dec3-59f2-4fab-b8ca-9a1ae71d499f": {
 		"Length": 1,
@@ -13779,6 +13934,11 @@
 		"Material": "Missing",
 		"Name": "Inverted corner right"
 	},
+	"b3a5aeaf-902e-448c-94f9-c447a10698f2": {
+		"Length": 1,
+		"Material": "Metal",
+		"Name": "Metal and alloy hull"
+	},
 	"b3a89e5e-0ab9-447e-8691-a06b4319b654": {
 		"Length": 1,
 		"Material": "Missing",
@@ -13803,11 +13963,6 @@
 		"Length": 50,
 		"Material": "Missing",
 		"Name": "Shaft Shift Axis GearTop 5m"
-	},
-	"b3fa2278-e23f-4f9b-a4c9-5839e65c1410": {
-		"Length": 1,
-		"Material": "Metal",
-		"Name": "21x13x64 Metal tumblehome A"
 	},
 	"b4025301-d345-4853-b672-f1aeea83302e": {
 		"Length": 1,
@@ -14074,6 +14229,11 @@
 		"Material": "Rubber",
 		"Name": "Rubber 4m offset left"
 	},
+	"b762d67b-3a12-4265-ba30-2b800a9811cc": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "cube strut"
+	},
 	"b7763c61-18ff-4c0c-be45-418fdd27917f": {
 		"Length": 1,
 		"Material": "Glass",
@@ -14103,11 +14263,6 @@
 		"Length": 50,
 		"Material": "Missing",
 		"Name": "Turret Block One Axis (5m)"
-	},
-	"b7d2b75b-8f03-429d-9a2f-b524b747a4f8": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "3x7x10EcoDraba2000"
 	},
 	"b7e0a690-c7fa-4039-8d70-7a6f8cf0dce3": {
 		"Length": 1,
@@ -14173,6 +14328,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Drill Extension horizontal splitter"
+	},
+	"b87cbd21-faba-40de-9fca-a1f1a9178a21": {
+		"Length": 50,
+		"Material": "Missing",
+		"Name": "5m Turbine End"
 	},
 	"b88679fb-0325-4c85-942f-ad9c6ed6545b": {
 		"Length": 2,
@@ -14308,6 +14468,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Paddle"
+	},
+	"ba4a4581-d315-494e-9936-a82acd3fce13": {
+		"Length": 1,
+		"Material": "Wood",
+		"Name": "Wood strut"
 	},
 	"ba57dc92-c8b6-4dbd-b0a7-9f94c4ddb75a": {
 		"Length": 1,
@@ -14454,6 +14619,11 @@
 		"Material": "Missing",
 		"Name": "nothing"
 	},
+	"bc3f4b55-39b3-4a99-9823-fe57ec15aa41": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Missile wireless receiver"
+	},
 	"bca2b4e8-2216-448b-b254-927833620756": {
 		"Length": 50,
 		"Material": "Missing",
@@ -14574,6 +14744,11 @@
 		"Material": "Missing",
 		"Name": "Gauge Increase Port"
 	},
+	"be7ebf9f-8713-4905-9068-e25d8bef8646": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Console normal"
+	},
 	"be96a47d-f8b8-4f9b-974e-c5e2c985e1bb": {
 		"Length": 1,
 		"Material": "Missing",
@@ -14588,11 +14763,6 @@
 		"Length": 1,
 		"Material": "Wood",
 		"Name": "wood 1m to 2m slope inverse transition left"
-	},
-	"beda6fec-f897-4aa2-9f46-f4a725cf1604": {
-		"Length": 1,
-		"Material": "Alloy",
-		"Name": "Medium alloy hull"
 	},
 	"bee817d7-703e-46ac-ae92-3408760d087b": {
 		"Length": 1,
@@ -14894,6 +15064,11 @@
 		"Material": "Missing",
 		"Name": "Fast Forward"
 	},
+	"c1abb27c-7a09-4122-bef8-648ea241e9dd": {
+		"Length": 1,
+		"Material": "Metal",
+		"Name": "Metal hull"
+	},
 	"c1bbde77-6555-46b8-8194-389f2d773140": {
 		"Length": 3,
 		"Material": "Railing",
@@ -14923,11 +15098,6 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "ACDeco Tips"
-	},
-	"c25cff8c-6a1f-4b71-9601-d07a9cba17cc": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "Hull prefabs"
 	},
 	"c260c24c-3cac-44ab-be7a-ef51c3bb94aa": {
 		"Length": 1,
@@ -14988,11 +15158,6 @@
 		"Length": 1,
 		"Material": "Heavy Armour",
 		"Name": "Heavy Armour 1m to 3m slope transition right"
-	},
-	"c3328c3d-62db-498b-9984-d4c511250ee1": {
-		"Length": 33,
-		"Material": "Missing",
-		"Name": "3x3x4-MunitionWarners"
 	},
 	"c34145c5-bc8c-48c3-bafb-ebda44f1e300": {
 		"Length": 3,
@@ -15184,6 +15349,11 @@
 		"Material": "Missing",
 		"Name": "Channel+"
 	},
+	"c596084a-3f7e-4938-85a9-49207323f11c": {
+		"Length": 1,
+		"Material": "Metal",
+		"Name": "Metal tumblehome hull B"
+	},
 	"c5aaf2f4-ccf1-4c34-9ebf-a16eb5451920": {
 		"Length": 2,
 		"Material": "Stone",
@@ -15373,6 +15543,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Small Jet Controller"
+	},
+	"c7f585f8-eb3e-4ff0-bd48-bcd66d8eeeb6": {
+		"Length": 1,
+		"Material": "Alloy",
+		"Name": "Alloy hull"
 	},
 	"c7f59e0e-cceb-4aa3-9a3a-1c577b1f24e2": {
 		"Length": 2,
@@ -15734,6 +15909,11 @@
 		"Material": "Missing",
 		"Name": "Range Finder 7m armour"
 	},
+	"cd4d366f-aabb-4f52-adbf-590bf624442c": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Wooden cargo hull"
+	},
 	"cd4d4ab6-0652-46dd-b887-71714317f470": {
 		"Length": 1,
 		"Material": "Missing",
@@ -15748,6 +15928,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Large Gantry Left"
+	},
+	"cd7cb034-adf3-4d71-be65-9bca35ff823f": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Huge Gantry"
 	},
 	"cd90265f-4593-446b-9153-623c2f339dc0": {
 		"Length": 1,
@@ -16339,11 +16524,6 @@
 		"Material": "Stone",
 		"Name": "Stone beam (3m)"
 	},
-	"d47d4303-13be-4f44-8bea-aeae65359b8e": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "Heavy tank frame"
-	},
 	"d4806e59-5ebe-40b1-b223-c8232691396d": {
 		"Length": 1,
 		"Material": "Missing",
@@ -16408,6 +16588,11 @@
 		"Length": 4,
 		"Material": "Glass",
 		"Name": "Glass inverted triangle corner (right) (4m) mirrored"
+	},
+	"d54e01d9-e26b-427a-9f3d-08fd5dcf5960": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Console metallic"
 	},
 	"d553361e-1a6d-4d57-a238-83e516e13dc8": {
 		"Length": 1,
@@ -16599,11 +16784,6 @@
 		"Material": "Rubber",
 		"Name": "Rubber 1m to 2m inverse transition left"
 	},
-	"d789b6c7-f322-4272-963b-825007246f86": {
-		"Length": 1,
-		"Material": "Metal",
-		"Name": "Huge metal hull part A"
-	},
 	"d78bbac3-a00e-4c77-ac0c-6da5a95e2d72": {
 		"Length": 2,
 		"Material": "Lead",
@@ -16713,6 +16893,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "40mm Quad AA Gun"
+	},
+	"d8d6c061-d96f-4129-8c6e-b9ce839e8eec": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Console body"
 	},
 	"d8e3a021-6261-41f8-a6cf-802e924f3e1e": {
 		"Length": 1,
@@ -17095,7 +17280,7 @@
 		"Name": "gun100Gatling DWG Shield"
 	},
 	"de17ff79-e670-4f08-ab59-df1ecac3905b": {
-		"Length": 2,
+		"Length": 62,
 		"Material": "Missing",
 		"Name": "Truss 2m"
 	},
@@ -17174,6 +17359,11 @@
 		"Material": "Rubber",
 		"Name": "rubber mat"
 	},
+	"deeb176f-9036-4d94-94e1-a488707d706d": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "SimpleBatteryElectric"
+	},
 	"def31246-d999-49f8-9daf-acacd802d3ec": {
 		"Length": 4,
 		"Material": "Stone",
@@ -17198,11 +17388,6 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "UI Tips"
-	},
-	"df536922-bea0-4063-a272-a2b7694d2239": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "Scout tank frame"
 	},
 	"df546ee5-c317-4b04-8ea4-63f59f16bfd1": {
 		"Length": 1,
@@ -17443,6 +17628,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "treadHeight"
+	},
+	"e22db077-0dce-40cb-aa0c-39d4b9aa1f51": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Propeller plane"
 	},
 	"e238669c-ef02-4e6d-847e-3397f1a5b30d": {
 		"Length": 34,
@@ -17744,11 +17934,6 @@
 		"Material": "Missing",
 		"Name": "Ammo 2m"
 	},
-	"e629218a-20e0-4bff-9e15-8db55225cc14": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "Medium tank frame"
-	},
 	"e62d5f04-5c7a-4524-b97d-d60504babb2f": {
 		"Length": 1,
 		"Material": "Stone",
@@ -17813,11 +17998,6 @@
 		"Length": 3,
 		"Material": "Missing",
 		"Name": "3m Wing Corner Left"
-	},
-	"e6d0bc19-183e-4d37-bfb6-adfd78b7850d": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "Dreadnought Hull Front"
 	},
 	"e6de0d58-78f5-4e23-be78-21e5d1c29113": {
 		"Length": 1,
@@ -18109,11 +18289,6 @@
 		"Material": "Laser",
 		"Name": "Multipurpose laser"
 	},
-	"eaaec1b2-5b18-4761-9f54-2179f6bf4cf4": {
-		"Length": 1,
-		"Material": "Missing",
-		"Name": "3x2x4LaserWarnerExample"
-	},
 	"eabd8ca6-30c5-4960-9ec0-221b065b7306": {
 		"Length": 1,
 		"Material": "Missing",
@@ -18274,6 +18449,11 @@
 		"Material": "Barrel",
 		"Name": "Heavy Barrel (3m)"
 	},
+	"eda0ebb6-6cbd-4fd7-87e7-ddc2e75c5bee": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Huge hatch"
+	},
 	"edb1b2eb-dac7-4c4f-8967-35f61c75fd93": {
 		"Length": 1,
 		"Material": "Missing",
@@ -18348,6 +18528,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Nuclear Rod Controller"
+	},
+	"ee6c05d7-0f9d-4dd1-9184-bf0ed8ba108d": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "LaserTurretWithTransceiver"
 	},
 	"ee80686d-2abc-478e-a552-d4978cd98984": {
 		"Length": 1,
@@ -18839,6 +19024,11 @@
 		"Material": "Metal",
 		"Name": "Metal 2m offset right"
 	},
+	"f4df33ca-5cc4-4bf1-b0de-030b7e3586a3": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Missile wireless transmitter"
+	},
 	"f4ec0bf4-1037-4b56-b1d1-c48f528f1767": {
 		"Length": 2,
 		"Material": "Metal",
@@ -18858,6 +19048,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "splash5"
+	},
+	"f529b158-971a-4623-b3c7-b55d9a4e0017": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Huge MovingHatch"
 	},
 	"f55963b2-c28d-4537-887c-e93a04220347": {
 		"Length": 1,
@@ -18959,6 +19154,11 @@
 		"Material": "Missing",
 		"Name": "Spares processor"
 	},
+	"f660de92-bb92-45d0-bf6d-491ef7e02481": {
+		"Length": 50,
+		"Material": "Missing",
+		"Name": "turbine front 5m"
+	},
 	"f675b19a-4a67-41de-bd60-651bac2cfe17": {
 		"Length": 1,
 		"Material": "Alloy",
@@ -18998,6 +19198,11 @@
 		"Length": 1,
 		"Material": "Missing",
 		"Name": "Sonar 90"
+	},
+	"f6eacecd-8a64-4f49-bb71-15bebebabb13": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "Console_Screen"
 	},
 	"f6f120ee-fbc3-49f8-a2a3-a49e8674b8c8": {
 		"Length": 2,
@@ -19189,6 +19394,11 @@
 		"Material": "Wood",
 		"Name": "Wood wedge back (1m)"
 	},
+	"f9994ba7-762d-4325-b35f-aa3a7574610f": {
+		"Length": 1,
+		"Material": "Missing",
+		"Name": "SimpleInjectorEngine"
+	},
 	"f9b1d3e4-c4c8-47eb-9547-b4bf3f3ba730": {
 		"Length": 1,
 		"Material": "Rubber",
@@ -19213,6 +19423,11 @@
 		"Length": 1,
 		"Material": "Laser",
 		"Name": "Laser Targeter"
+	},
+	"fa01127a-77cd-41f1-be5a-f9b36f956266": {
+		"Length": 50,
+		"Material": "Missing",
+		"Name": "turbine generator 5m"
 	},
 	"fa0b636f-6b44-48a5-8422-ee6343a34e39": {
 		"Length": 3,
@@ -19484,6 +19699,11 @@
 		"Material": "Missing",
 		"Name": "Ammo Input Feeder"
 	},
+	"fd48a04d-ddd7-4828-b6d0-b6d3347488ee": {
+		"Length": 1,
+		"Material": "Heavy Armour",
+		"Name": "Heavy armour strut"
+	},
 	"fd4946a4-1633-4627-9728-c1b5dd276ddb": {
 		"Length": 4,
 		"Material": "Missing",
@@ -19630,7 +19850,7 @@
 		"Name": "Wood inverted triangle corner (right) (4m) mirrored"
 	},
 	"fe88a923-b85b-4471-bce5-8ceb1d0ddb14": {
-		"Length": 4,
+		"Length": 64,
 		"Material": "Missing",
 		"Name": "Truss 4m"
 	},

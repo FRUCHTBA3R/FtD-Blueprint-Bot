@@ -241,11 +241,12 @@ def __fetch_infos(bp):
 
 def __create_view_matrices(bp):
     """Create top, side, front view matrices (color matrix and height matrix)"""
-    def blueprint_iter(blueprint, mincords):
+    def blueprint_iter(blueprint, mincords, blueprint_desc = "main"):
         """Iterate blueprint and sub blueprints"""
         nonlocal actual_min_cords
         #subtract min coords
         blueprint["BLP"] -= mincords
+        #print("ViewMat at", blueprint_desc)
 
         if True:
             #numpyfication
@@ -287,6 +288,17 @@ def __create_view_matrices(bp):
                 #new height
                 height_mat[unique_pos[:, 0], unique_pos[:, 1]] = sorted_pos[:, axisY][unique_index]
 
+
+            #upright beam init loop (truss beams)
+            for i in range(61, 65):
+                #block selection
+                a_sel, = np.nonzero(a_length == i)
+                if len(a_sel) == 0: continue
+                
+                #set length & rot
+                a_length[a_sel] -= 60
+                a_dir[a_sel] = a_dir_tan[a_sel]
+                
             
             #centered beam init loop
             centerbeamsizes = {50: 5, 51: 7, 52: 9}
@@ -412,8 +424,8 @@ def __create_view_matrices(bp):
                     #print("Missing GUID", b_guid)
         
         #sub blueprints iteration
-        for sub_bp in blueprint["SCs"]:
-            blueprint_iter(sub_bp, mincords)
+        for i,sub_bp in enumerate(blueprint["SCs"]):
+            blueprint_iter(sub_bp, mincords, blueprint_desc+":"+str(i))
 
     #calculate min cords again, cause "MinCords" are not always true
     actual_min_cords = np.full((3), np.iinfo(np.int32).max, dtype=np.int32)
@@ -685,7 +697,7 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     #file
-    fname = "../example blueprints/PreDread Forwards.blueprint"
+    fname = "../example blueprints/exampleTrussRotation.blueprint"
 
     import asyncio
     

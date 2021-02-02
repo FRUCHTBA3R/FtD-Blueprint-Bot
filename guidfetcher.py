@@ -57,7 +57,8 @@ materials = None
 materials_file = "materials.json"
 with open(materials_file, "r") as f:
     materials = json.loads(f.read())
-sizedict = {"1m": 1, "2m": 2, "3m": 3, "4m": 4, "1x1": 1, "3x3": 33, "5x5": 34, "7x7": 35, " 5m": 50, " 7m": 51, " 9m": 52}
+sizedict = {"1m": 1, "2m": 2, "3m": 3, "4m": 4, "1x1": 1, "3x3": 33, "5x5": 34, "7x7": 35, " 5m": 50, " 7m": 51, " 9m": 52,
+            "2mUpright": 62, "3mUpright": 63, "4mUpright": 64}
 
 #map
 for k in invguiddict:
@@ -83,7 +84,13 @@ invguiddict["c489a675-78ad-461c-b772-b1dc1ae16beb"]["Material"] = "Metal"
 invguiddict["5e236eef-c91e-45bc-afc4-bff4d133ac14"]["Material"] = "Metal"
 invguiddict["e7fc9ece-d2f4-4671-a3e8-77196601cf4e"]["Material"] = "Metal"
 invguiddict["52b78a75-115a-4962-96f1-35177b46ba93"]["Material"] = "Metal"
-
+#truss fixes
+invguiddict["fe88a923-b85b-4471-bce5-8ceb1d0ddb14"]["Length"] = sizedict["4mUpright"] #truss 4m
+invguiddict["1dd66387-6293-4fa0-a1da-6f0e4cb80dfa"]["Length"] = sizedict["4mUpright"] #truss 4m
+invguiddict["21646640-41cf-42a3-931a-3c40b9c79d83"]["Length"] = sizedict["3mUpright"] #truss 3m
+invguiddict["ac24cd04-449e-47b9-bf8c-bf58d9997264"]["Length"] = sizedict["3mUpright"] #truss 3m
+invguiddict["de17ff79-e670-4f08-ab59-df1ecac3905b"]["Length"] = sizedict["2mUpright"] #truss 2m
+invguiddict["19a1d5ad-99e3-4a18-8943-22a82f554231"]["Length"] = sizedict["2mUpright"] #truss 2m
 
 #missing
 invguiddict["missing"] = {"Name": "Missing", "Length": 1, "Material": "Missing"}
