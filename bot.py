@@ -108,10 +108,10 @@ async def on_command_error(ctx, error):
     print(f"[ERR] <cmd:{type(error)}> {error}")
     #[print(k, v) for k,v in vars(error).items()]
     if type(error) == commands.errors.CheckFailure:
-        #permission error
-        await ctx.message.add_reaction("\U0001f4a9") #:poop:
+        # permission error
+        await ctx.message.add_reaction("\U0001f4a9") # :poop:
     else:
-        await ctx.message.add_reaction("\u2753") #:question:
+        await ctx.message.add_reaction("\u2753") # :question:
 
 
 @bot.event
@@ -155,38 +155,38 @@ async def process_attachments(message):
                 print("The attachment was deleted:", attachm.filename)
                 continue
 
-            #trigger typing
+            # trigger typing
             await message.channel.trigger_typing()
             filename = BP_FOLDER + "/" + attachm.filename
-            #save file
+            # save file
             with open(filename, "wb") as f:
                 f.write(content)
-            #process blueprint
+            # process blueprint
             try:
                 combined_img_file = await bp_to_imgV2.process_blueprint(filename)
-                #files
+                # files
                 file = discord.File(combined_img_file)
-                #upload
+                # upload
                 await message.channel.send(file=file)
-                #delete image file
+                # delete image file
                 os.remove(combined_img_file)
             except:
                 lastError = sys.exc_info()
-                await handle_blueprint_error(message, lastError)
+                await handle_blueprint_error(message, lastError, attachm.filename)
             
-            #delete blueprint file
+            # delete blueprint file
             os.remove(filename)
 
     return bpcount
 
 
-async def handle_blueprint_error(message, error):
+async def handle_blueprint_error(message, error, bpfilename):
     """Sends error notification to channel where message was received and error informations to bot owner."""
     def traceback_string():
         etype, value, tb = error
         exceptionList = traceback.format_exception_only(etype, value)
         tracebackList = traceback.extract_tb(tb)
-        s = "Traceback:\n"
+        s = f"Traceback of `{bpfilename}`:\n"
         for elem in tracebackList:
             s += f"File `{elem.filename}`, line {elem.lineno}, in `{elem.name}`\n```{elem.line}```"
         for elem in exceptionList:
@@ -194,9 +194,9 @@ async def handle_blueprint_error(message, error):
         return s
 
     global bot
-    #log to console
+    # log to console
     traceback.print_exception(*error)
-    #log to channel and bot owner chat
+    # log to channel and bot owner chat
     ownerId = bot.owner_id
     if ownerId is None or ownerId == 0:
         appinfo = await bot.application_info()
@@ -205,13 +205,13 @@ async def handle_blueprint_error(message, error):
         if ownerId is None or ownerId == 0:
             await message.channel.send("You found an error! Could not send details to bot owner.")
             return
-    #fetch owner
+    # fetch owner
     try:
         ownerUser = await bot.fetch_user(ownerId)
     except (discord.NotFound, discord.HTTPException):
         await message.channel.send("You found an error! Could not send details to bot owner.")
         return
-    #send
+    # send
     await ownerUser.send(traceback_string())
     await message.channel.send(f"You found an error! Details were send to {ownerUser.name}")
 

@@ -5,3 +5,6 @@
 __pycache__
 TODO.txt
 bot_avatar.xcf
+/venv/
+/.idea/
+slash_command_request.py

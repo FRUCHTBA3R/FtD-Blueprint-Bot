@@ -45,7 +45,7 @@ rot_tangent = np.array([
                         [ 0, 0,-1], #10
                         [-1, 0, 0], #11
                         [ 0,-1, 0], #12 this from [1,0,0] with 16
-                        [ 0, -1, 0], #13 this from [0,0,-1] with 22 this from [0,0,1] with 20
+                        [ 0,-1, 0], #13 this from [0,0,-1] with 22 this from [0,0,1] with 20
                         [ 0,-1, 0], #14 this from [-1,0,0] with 17
                         [ 0,-1, 0], #15 this from [0,0,1] with 21
                         [ 1, 0, 0], #16 this from [0,-1,0] with 12
@@ -786,7 +786,6 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
     return res
 
 
-
 async def speed_test(fname):
     """Just some speed testing"""
     global main_img, blueprint, bp
@@ -816,7 +815,7 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     #file
-    fname = "../example blueprints/exampleWheelRotation.blueprint"
+    fname = "../example blueprints/IFV.blueprint"
 
     import asyncio
     
@@ -826,6 +825,7 @@ if __name__ == "__main__":
         if len(sys.argv) > 1:
             if os.path.exists(sys.argv[1]):
                 fname = sys.argv[1]
+
         async def async_main():
             global bp, timing, main_img
             bp, timing, main_img = await process_blueprint(fname, False, True)
