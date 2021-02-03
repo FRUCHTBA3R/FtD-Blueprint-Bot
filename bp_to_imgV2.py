@@ -5,55 +5,57 @@ import cv2
 #from scipy.signal import convolve2d
 
 #block rotation directions
-rot_normal = np.array([[ 0, 0, 1],
-                       [ 1, 0, 0],
-                       [ 0, 0,-1],
-                       [-1, 0, 0],
-                       [ 0,-1, 0],
-                       [ 0,-1, 0],
-                       [ 0,-1, 0],
-                       [ 0,-1, 0],
-                       [ 0, 1, 0],
-                       [ 0, 1, 0],
-                       [ 0, 1, 0],
-                       [ 0, 1, 0],
-                       [ 0, 0, 1],
-                       [ 1, 0, 0],
-                       [ 0, 0,-1],
-                       [-1, 0, 0],
-                       [ 0, 0, 1],
-                       [ 0, 0,-1],
-                       [ 0, 0, 1],
-                       [ 0, 0,-1],
-                       [ 1, 0, 0],
-                       [-1, 0, 0],
-                       [ 1, 0, 0],
-                       [-1, 0, 0]])
+rot_normal = np.array([
+                       [ 0, 0, 1], #0
+                       [ 1, 0, 0], #1
+                       [ 0, 0,-1], #2
+                       [-1, 0, 0], #3
+                       [ 0,-1, 0], #4
+                       [ 0,-1, 0], #5
+                       [ 0,-1, 0], #6
+                       [ 0,-1, 0], #7
+                       [ 0, 1, 0], #8
+                       [ 0, 1, 0], #9
+                       [ 0, 1, 0], #10
+                       [ 0, 1, 0], #11
+                       [ 0, 0, 1], #12
+                       [ 1, 0, 0], #13
+                       [ 0, 0,-1], #14
+                       [-1, 0, 0], #15
+                       [ 0, 0, 1], #16
+                       [ 0, 0,-1], #17
+                       [ 0, 0, 1], #18
+                       [ 0, 0,-1], #19
+                       [ 1, 0, 0], #20
+                       [-1, 0, 0], #21
+                       [ 1, 0, 0], #22
+                       [-1, 0, 0]]) #23
 #not testet!!!
-rot_tangent = np.array([[ 0, 1, 0],
-                        [ 0, 1, 0],
-                        [ 0, 1, 0],
-                        [ 0, 1, 0],
-                        [ 0, 0, 1],
-                        [ 1, 0, 0],
-                        [ 0, 0,-1],
-                        [-1, 0, 0],
-                        [ 0, 0, 1],
-                        [ 1, 0, 0],
-                        [ 0, 0,-1],
-                        [-1, 0, 0],
-                        [ 1, 0, 0],
-                        [ 0, 0,-1],
-                        [-1, 0, 0],
-                        [ 0, 0, 1],
-                        [ 0,-1, 0],
-                        [ 0,-1, 0],
-                        [-1, 0, 0],
-                        [-1, 0, 0],
-                        [ 0,-1, 0],
-                        [ 0,-1, 0],
-                        [ 0, 0, 1],
-                        [ 0, 0,-1]])
+rot_tangent = np.array([
+                        [ 0, 1, 0], #0
+                        [ 0, 1, 0], #1
+                        [ 0, 1, 0], #2
+                        [ 0, 1, 0], #3
+                        [ 0, 0, 1], #4
+                        [ 1, 0, 0], #5
+                        [ 0, 0,-1], #6
+                        [-1, 0, 0], #7
+                        [ 0, 0, 1], #8
+                        [ 1, 0, 0], #9
+                        [ 0, 0,-1], #10
+                        [-1, 0, 0], #11
+                        [ 0,-1, 0], #12 this from [1,0,0] with 16
+                        [ 0, -1, 0], #13 this from [0,0,-1] with 22 this from [0,0,1] with 20
+                        [ 0,-1, 0], #14 this from [-1,0,0] with 17
+                        [ 0,-1, 0], #15 this from [0,0,1] with 21
+                        [ 1, 0, 0], #16 this from [0,-1,0] with 12
+                        [ 1, 0, 0], #17 this from [0,-1,0] with 14
+                        [-1, 0, 0], #18
+                        [-1, 0, 0], #19
+                        [ 0, 0, 1], #20 this from [0,-1,0] with 13
+                        [ 0, 0, 1], #21 this from [0,-1,0] with 15
+                        [ 0, 0,-1], #22 this from [0,0,1] with 13
+                        [ 0, 0,-1]]) #23
 rot_bitangent = np.cross(rot_normal, rot_tangent)
 
 #transpose
@@ -304,7 +306,21 @@ def __create_view_matrices(bp):
                 #set length & rot
                 a_length[a_sel] -= 60
                 a_dir[a_sel] = a_dir_tan[a_sel]
+
+
+            #sideways beam init loop
+            for i in [80, 81]:
+                #block selection
+                a_sel, = np.nonzero(a_length == i)
+                if len(a_sel) == 0: continue
                 
+                #set length & rot
+                a_length[a_sel] = 2
+                if i & 0b1: #odd is mirrored
+                    a_dir[a_sel] = -a_dir_bitan[a_sel]
+                else:
+                    a_dir[a_sel] = a_dir_bitan[a_sel]
+            
             
             #centered beam init loop
             centerbeamsizes = {50: 5, 51: 7, 52: 9, 70: 3}
@@ -324,7 +340,7 @@ def __create_view_matrices(bp):
 
 
             #centered upright beam init loop
-            for i in range(70, 71):
+            for i in [70]:
                 #block selection
                 a_sel, = np.nonzero(a_length == i)
                 if len(a_sel) == 0: continue
@@ -357,6 +373,22 @@ def __create_view_matrices(bp):
                 #step
                 a_length[a_sel] -= 1
                 a_pos[a_sel] += a_dir[a_sel]
+
+
+            #sideways area init loop
+            for i in range(82, 86):
+                #block selection
+                a_sel, = np.nonzero(a_length == i)
+                if len(a_sel) == 0: continue
+
+                #reorient tangent
+                if i & 0b1: #odd
+                    a_dir_bitan[a_sel] = -a_dir[a_sel]
+                else:
+                    a_dir_bitan[a_sel] = a_dir[a_sel]
+
+                #set length
+                a_length[a_sel] = (i >> 1) - 8 #map to 33 and 34
 
             
             #area loop
@@ -395,6 +427,71 @@ def __create_view_matrices(bp):
 
                 #set length to zero
                 a_length[a_sel] = 0
+
+
+            #sideways volume init loop
+            for i in range(86, 90):
+                #block selection
+                a_sel, = np.nonzero(a_length == i)
+                if len(a_sel) == 0: continue
+
+                #reorient tangent
+                if i & 0b1: #odd
+                    mem_dir = -a_dir_bitan[a_sel]
+                    a_dir_bitan[a_sel] = -a_dir[a_sel]
+                else:
+                    mem_dir = a_dir_bitan[a_sel]
+                    a_dir_bitan[a_sel] = a_dir[a_sel]
+                a_dir[a_sel] = mem_dir
+
+                #set length
+                a_length[a_sel] = (i >> 1) - 3 #map to 40 and 41
+
+
+            #volume loop
+            volumesize = {40: 3, 41: 5}
+            volumedepth = {40: 2, 41: 3}
+            for i in range(40, 42):
+                #block selection
+                a_sel, = np.nonzero(a_length == i)
+                if len(a_sel) == 0: continue
+
+                #range & limits
+                arearng = range(volumesize[i])
+                areamax = volumesize[i] - 1
+
+                #inital offset
+                a_pos[a_sel] -= (areamax >> 1) * (a_dir_bitan[a_sel] + a_dir_tan[a_sel])
+                a_dir_times_vol = volumedepth[i] * a_dir[a_sel]
+                
+                for j in arearng:
+                    for k in arearng:
+                        for l in range(volumedepth[i]):
+                            #select position here as loop changes a_pos
+                            a_pos_sel = a_pos[a_sel]
+                            #fill
+                            fill_color_and_height(top_color, top_height, a_sel, a_pos_sel, 0, 2, 1)
+                            fill_color_and_height(side_color, side_height, a_sel, a_pos_sel, 1, 2, 0)
+                            fill_color_and_height(front_color, front_height, a_sel, a_pos_sel, 1, 0, 2)
+                            #min cords
+                            actual_min_cords = np.minimum(np.amin(a_pos, 0), actual_min_cords)
+                            #step
+                            a_pos[a_sel] += a_dir[a_sel]
+                            
+                        a_pos[a_sel] -= a_dir_times_vol
+                        #bitangential step
+                        if k < areamax:
+                            if j % 2 == 0:
+                                a_pos[a_sel] += a_dir_bitan[a_sel]
+                            else:
+                                a_pos[a_sel] -= a_dir_bitan[a_sel]
+                    
+                    #tangential step
+                    a_pos[a_sel] += a_dir_tan[a_sel]
+
+                #set length to zero
+                a_length[a_sel] = 0
+            
             
             #are all length values zero
             if np.any(a_length != 0):
@@ -719,7 +816,7 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     #file
-    fname = "../example blueprints/IFV.blueprint"
+    fname = "../example blueprints/exampleWheelRotation.blueprint"
 
     import asyncio
     

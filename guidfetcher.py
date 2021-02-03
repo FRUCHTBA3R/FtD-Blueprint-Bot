@@ -57,8 +57,12 @@ materials = None
 materials_file = "materials.json"
 with open(materials_file, "r") as f:
     materials = json.loads(f.read())
-sizedict = {"1m": 1, "2m": 2, "3m": 3, "4m": 4, "1x1": 1, "3x3": 33, "5x5": 34, "7x7": 35, " 5m": 50, " 7m": 51, " 9m": 52,
-            "2mUpright": 62, "3mUpright": 63, "4mUpright": 64, "3mCenteredUpright": 70}
+sizedict = {"1m": 1, "2m": 2, "3m": 3, "4m": 4, 
+            "1x1": 1, "3x3": 33, "5x5": 34, "7x7": 35,
+            " 5m": 50, " 7m": 51, " 9m": 52,
+            "2mUpright": 62, "3mUpright": 63, "4mUpright": 64, "3mCenteredUpright": 70,
+            "2mSideway": 80, "1m3x3Sideway": 82, "1m5x5Sideway": 84, "2m3x3Sideway": 86, "3m5x5Sideway": 88 #mirrored pieces have index + 1
+            }
 
 #map
 for k in invguiddict:
@@ -76,7 +80,24 @@ for k in invguiddict:
             invguiddict[k]["Length"] = sizedict[size]
             break
     #wheels
-    #if v.find(" wheel ") >= 0:
+    if v.find(" wheel ") >= 0:
+        mirrored = 0
+        if v.find(" mirror ") >= 0:
+            mirrored = 1
+        if invguiddict[k]["Length"] == 1:
+            if v.find(" balloon ") >= 0:
+                invguiddict[k]["Length"] = sizedict["2mSideway"] + mirrored
+            #else just use length 1 which is already set
+        elif invguiddict[k]["Length"] == 3:
+            if v.find(" balloon ") >= 0:
+                invguiddict[k]["Length"] = sizedict["2m3x3Sideway"] + mirrored
+            else:
+                invguiddict[k]["Length"] = sizedict["1m3x3Sideway"] + mirrored
+        elif invguiddict[k]["Length"] == 50: #5m gets mapped to 50
+            if v.find(" balloon ") >= 0:
+                invguiddict[k]["Length"] = sizedict["3m5x5Sideway"] + mirrored
+            else:
+                invguiddict[k]["Length"] = sizedict["1m5x5Sideway"] + mirrored
         
 
 #manual fixes

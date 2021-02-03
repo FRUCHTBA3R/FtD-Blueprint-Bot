@@ -1480,7 +1480,7 @@
 		"Name": "180K_4_prop"
 	},
 	"114dc652-ab33-44c8-9a5a-4167052fa4b4": {
-		"Length": 50,
+		"Length": 88,
 		"Material": "Wheel",
 		"Name": "5m Balloon Wheel"
 	},
@@ -1820,7 +1820,7 @@
 		"Name": "Frequency doubler"
 	},
 	"15d4be68-edf9-44ed-bfda-5522cd9da33f": {
-		"Length": 50,
+		"Length": 85,
 		"Material": "Wheel",
 		"Name": "Wheel 5m mirror (turning)"
 	},
@@ -2205,7 +2205,7 @@
 		"Name": "advcannon mat Metallic"
 	},
 	"1b98886a-174d-4b4d-aba2-5978dff6b009": {
-		"Length": 3,
+		"Length": 82,
 		"Material": "Wheel",
 		"Name": "shaft wheel 3m"
 	},
@@ -2455,7 +2455,7 @@
 		"Name": "pistol fire"
 	},
 	"1e978876-5c69-45f1-9ba1-40b5ae560f9e": {
-		"Length": 1,
+		"Length": 81,
 		"Material": "Wheel",
 		"Name": "Balloon wheel 1m mirror"
 	},
@@ -2740,7 +2740,7 @@
 		"Name": "Extra mesh 0 of Aileron"
 	},
 	"22524171-87ab-4fc3-80fb-ac5690b624b3": {
-		"Length": 3,
+		"Length": 83,
 		"Material": "Wheel",
 		"Name": "Wheel 3m mirror (turning)"
 	},
@@ -2910,7 +2910,7 @@
 		"Name": "Coal Pile Large"
 	},
 	"24032540-b488-4316-ada1-44952bd2bb0e": {
-		"Length": 1,
+		"Length": 81,
 		"Material": "Wheel",
 		"Name": "Balloon Wheel Turning 1m mirror"
 	},
@@ -3770,7 +3770,7 @@
 		"Name": "Stone 2m to 3m inverse transition right"
 	},
 	"2ec29b39-8a90-475b-b116-e62c83db3e97": {
-		"Length": 3,
+		"Length": 82,
 		"Material": "Wheel",
 		"Name": "Wheel 3m"
 	},
@@ -5245,7 +5245,7 @@
 		"Name": "turbine middle 3m"
 	},
 	"435fd3cc-7a4e-45f4-b47d-47a5cdd9a4fc": {
-		"Length": 50,
+		"Length": 88,
 		"Material": "Wheel",
 		"Name": "Balloon Wheel 5m turning"
 	},
@@ -5800,7 +5800,7 @@
 		"Name": "Resource"
 	},
 	"4ae3bc3c-c39e-4d6b-afab-d0e34d783bc5": {
-		"Length": 50,
+		"Length": 84,
 		"Material": "Wheel",
 		"Name": "Wheel 5m"
 	},
@@ -6115,7 +6115,7 @@
 		"Name": "SeaReporting"
 	},
 	"4f5d97d1-5ab6-475b-afa5-dc86ccfb12b1": {
-		"Length": 50,
+		"Length": 84,
 		"Material": "Wheel",
 		"Name": "Extra mesh 0 of Wheel 5m"
 	},
@@ -8355,7 +8355,7 @@
 		"Name": "Stone beam (2m)"
 	},
 	"6cf7ba0b-eee5-48a8-a714-f8a6ce76d186": {
-		"Length": 1,
+		"Length": 80,
 		"Material": "Wheel",
 		"Name": "Balloon Wheel Turning 1m"
 	},
@@ -9300,7 +9300,7 @@
 		"Name": "Heavy armour down slope 1m"
 	},
 	"78d6177b-345c-43d6-8e34-b28bf0a82659": {
-		"Length": 50,
+		"Length": 85,
 		"Material": "Wheel",
 		"Name": "Wheel 5m mirror"
 	},
@@ -9615,7 +9615,7 @@
 		"Name": "3x3x21LAMSExample"
 	},
 	"7d016aa1-e2b3-4fb0-a51e-8e01df77c6c5": {
-		"Length": 3,
+		"Length": 82,
 		"Material": "Wheel",
 		"Name": "shaft wheel 3m"
 	},
@@ -9780,7 +9780,7 @@
 		"Name": "explosion6"
 	},
 	"7eafd0d0-d1d8-4851-a3df-54317e205af1": {
-		"Length": 3,
+		"Length": 86,
 		"Material": "Wheel",
 		"Name": "3m Balloon Wheel"
 	},
@@ -10080,7 +10080,7 @@
 		"Name": "Crystal growth tray"
 	},
 	"81db2a62-75ff-4d9a-aecb-10d3f8f4a47e": {
-		"Length": 3,
+		"Length": 87,
 		"Material": "Wheel",
 		"Name": "Balloon Wheel 3m mirror"
 	},
@@ -10120,7 +10120,7 @@
 		"Name": "pull"
 	},
 	"8266bc4e-7dc4-4c3a-bef9-9dddf4dab8d2": {
-		"Length": 50,
+		"Length": 84,
 		"Material": "Wheel",
 		"Name": "5m Wheel"
 	},
@@ -10855,7 +10855,7 @@
 		"Name": "Truss 1m"
 	},
 	"8bd727bf-88ab-4ef8-a2f7-f13a894b3540": {
-		"Length": 3,
+		"Length": 82,
 		"Material": "Wheel",
 		"Name": "Extra mesh 0 of Wheel 3m"
 	},
@@ -11330,7 +11330,7 @@
 		"Name": "Armoured Barrel end 2m"
 	},
 	"91ef14fd-da81-4010-bfa6-0a9aafc7112b": {
-		"Length": 1,
+		"Length": 80,
 		"Material": "Wheel",
 		"Name": "Balloon wheel 1m"
 	},
@@ -12150,7 +12150,7 @@
 		"Name": "(CARD) Target Prioritisation"
 	},
 	"9c92daaf-654d-4e4e-9976-c7348ee7898d": {
-		"Length": 3,
+		"Length": 86,
 		"Material": "Wheel",
 		"Name": "Balloon Wheel Turning 3m"
 	},
@@ -12850,7 +12850,7 @@
 		"Name": "Flash Suppression Barrel"
 	},
 	"a5bb808a-ef3d-4262-84a6-6d245e3735ea": {
-		"Length": 3,
+		"Length": 83,
 		"Material": "Wheel",
 		"Name": "Wheel 3m mirror"
 	},
@@ -12970,7 +12970,7 @@
 		"Name": "Turret Block Two Axis"
 	},
 	"a72af619-591a-4351-9561-57e9d698277b": {
-		"Length": 50,
+		"Length": 84,
 		"Material": "Wheel",
 		"Name": "Shaft Wheel 5m"
 	},
@@ -14625,7 +14625,7 @@
 		"Name": "Missile wireless receiver"
 	},
 	"bca2b4e8-2216-448b-b254-927833620756": {
-		"Length": 50,
+		"Length": 89,
 		"Material": "Wheel",
 		"Name": "Balloon Wheel 5m mirror"
 	},
@@ -14685,7 +14685,7 @@
 		"Name": "SteamTanks"
 	},
 	"bd84a2af-5c90-46f2-bc6c-ee39a8c2424e": {
-		"Length": 50,
+		"Length": 85,
 		"Material": "Wheel",
 		"Name": "Extra mesh 0 of Wheel 5m mirror"
 	},
@@ -14925,7 +14925,7 @@
 		"Name": "Bombing run airplane AI"
 	},
 	"c05c88aa-96df-461e-832f-7d5591a24972": {
-		"Length": 3,
+		"Length": 82,
 		"Material": "Wheel",
 		"Name": "Wheel 3m (turning)"
 	},
@@ -15665,7 +15665,7 @@
 		"Name": "Core_Images"
 	},
 	"c9c226ff-ebd3-4394-b6d5-d4796e0dd149": {
-		"Length": 50,
+		"Length": 84,
 		"Material": "Wheel",
 		"Name": "Wheel 5m (turning)"
 	},
@@ -17000,7 +17000,7 @@
 		"Name": "Metal inverted triangle corner left 3m"
 	},
 	"da173fac-8673-4ef7-aae5-d089e78ea6ce": {
-		"Length": 50,
+		"Length": 88,
 		"Material": "Wheel",
 		"Name": "Balloon Wheel 5m"
 	},
@@ -17050,7 +17050,7 @@
 		"Name": "Metal up slope (2m)"
 	},
 	"daadd5b7-028e-4367-bfee-1c142d5c0514": {
-		"Length": 50,
+		"Length": 88,
 		"Material": "Wheel",
 		"Name": "Extra mesh 0 of 5m Balloon wheel"
 	},
@@ -17175,7 +17175,7 @@
 		"Name": "Laser warner"
 	},
 	"dc78f848-a386-421d-aed0-4713daafeb3f": {
-		"Length": 3,
+		"Length": 86,
 		"Material": "Wheel",
 		"Name": "Extra mesh 0 of 3m Balloon wheel"
 	},
@@ -17255,7 +17255,7 @@
 		"Name": "Medium Gantry + Hatch"
 	},
 	"dddf2251-d1e6-4792-9270-c9250b610733": {
-		"Length": 50,
+		"Length": 89,
 		"Material": "Wheel",
 		"Name": "Balloon Wheel 5m turning mirror"
 	},
@@ -17680,7 +17680,7 @@
 		"Name": "gunWarp Shield APS"
 	},
 	"e2a0456e-3c4c-4e0c-be28-dc4eaa7e11d9": {
-		"Length": 3,
+		"Length": 83,
 		"Material": "Wheel",
 		"Name": "Extra mesh 0 of Wheel 3m mirror"
 	},
@@ -17975,7 +17975,7 @@
 		"Name": "gun40Twin Mk5 Barrel A"
 	},
 	"e69cbb14-5df0-4645-8f11-93ce51207ff8": {
-		"Length": 3,
+		"Length": 86,
 		"Material": "Wheel",
 		"Name": "Balloon Wheel 3m"
 	},
@@ -19125,7 +19125,7 @@
 		"Name": "Fuel Engines"
 	},
 	"f601a728-1a00-4d9e-b23c-f78064cbf3a5": {
-		"Length": 3,
+		"Length": 87,
 		"Material": "Wheel",
 		"Name": "Balloon Wheel Turning 3m mirror"
 	},
