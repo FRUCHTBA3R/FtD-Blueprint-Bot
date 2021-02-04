@@ -4,7 +4,7 @@ import quaternion
 import cv2
 #from scipy.signal import convolve2d
 
-#block rotation directions
+# block rotation directions
 rot_normal = np.array([
                        [ 0, 0, 1], #0
                        [ 1, 0, 0], #1
@@ -275,12 +275,14 @@ def __create_view_matrices(bp):
                 axisS = axisZ - axisX
                 
                 # selection of higher height
-                #if height_mat.shape[0] <= np.max(pos_sel_arr[:, axisX]):
-                #    print("x Axis overflow:", height_mat.shape[0], "to", np.max(pos_sel_arr[:, axisX]))
-                #    return
-                #if height_mat.shape[1] <= np.max(pos_sel_arr[:, axisZ]):
-                #    print("y Axis overflow:", height_mat.shape[1], "to", np.max(pos_sel_arr[:, axisZ]))
-                #    return
+                if height_mat.shape[0] <= np.max(pos_sel_arr[:, axisX]):
+                    errortext = f"x Axis overflow: {height_mat.shape[0]} to {np.max(pos_sel_arr[:, axisX])}\n" \
+                                f"Block guid: {a_guid[sel_arr[np.argmax(pos_sel_arr[:, axisX])]]}"
+                    raise IndexError(errortext)
+                if height_mat.shape[1] <= np.max(pos_sel_arr[:, axisZ]):
+                    errortext = f"x Axis overflow: {height_mat.shape[1]} to {np.max(pos_sel_arr[:, axisZ])}\n" \
+                                f"Block guid: {a_guid[sel_arr[np.argmax(pos_sel_arr[:, axisZ])]]}"
+                    raise IndexError(errortext)
                 height_sel_arr = height_mat[pos_sel_arr[:, axisX], pos_sel_arr[:, axisZ]] < pos_sel_arr[:, axisY]
                 # position of selection
                 height_pos_sel_arr = pos_sel_arr[height_sel_arr]
@@ -346,7 +348,6 @@ def __create_view_matrices(bp):
                 if len(a_sel) == 0: continue
                 
                 cbeam_len = centerbeamsizes[i]
-                print("test")
                 # initial offset
                 a_pos[a_sel] -= (cbeam_len >> 1) * (a_dir_tan[a_sel])
 
@@ -411,7 +412,7 @@ def __create_view_matrices(bp):
                 arearng = range(areasizes[i])
                 areamax = areasizes[i] - 1
 
-                # inital offset
+                # initial offset
                 a_pos[a_sel] -= (areamax >> 1) * (a_dir_bitan[a_sel] + a_dir_tan[a_sel])
                 
                 for j in arearng:
@@ -469,59 +470,58 @@ def __create_view_matrices(bp):
                 # set length
                 a_length[a_sel] = 42
 
-
             # volume loop
-            volumesize = {40: 3, 41: 5, 42: 3}
-            volumedepth = {40: 2, 41: 3, 42: 3}
-            for i in range(40, 42):
-                #block selection
+            volumesize = {40: 3, 41: 5, 42: 3, 43: 2}
+            volumedepth = {40: 2, 41: 3, 42: 3, 43: 2}
+            for i in range(40, 44):
+                # block selection
                 a_sel, = np.nonzero(a_length == i)
                 if len(a_sel) == 0: continue
 
-                #range & limits
+                # range & limits
                 arearng = range(volumesize[i])
                 areamax = volumesize[i] - 1
 
-                #inital offset
-                a_pos[a_sel] -= (areamax >> 1) * (a_dir_bitan[a_sel] + a_dir_tan[a_sel])
+                # note: - a_dir_bitan due to 2x2x2 orientation
+                # inital offset
+                a_pos[a_sel] -= (areamax >> 1) * (-a_dir_bitan[a_sel] + a_dir_tan[a_sel])
                 a_dir_times_vol = volumedepth[i] * a_dir[a_sel]
                 
                 for j in arearng:
                     for k in arearng:
                         for l in range(volumedepth[i]):
-                            #select position here as loop changes a_pos
+                            # select position here as loop changes a_pos
                             a_pos_sel = a_pos[a_sel]
-                            #fill
+                            # fill
                             fill_color_and_height(top_color, top_height, a_sel, a_pos_sel, 0, 2, 1)
                             fill_color_and_height(side_color, side_height, a_sel, a_pos_sel, 1, 2, 0)
                             fill_color_and_height(front_color, front_height, a_sel, a_pos_sel, 1, 0, 2)
-                            #min cords
+                            # min cords
                             actual_min_cords = np.minimum(np.amin(a_pos, 0), actual_min_cords)
-                            #step
+                            # step
                             a_pos[a_sel] += a_dir[a_sel]
                             
                         a_pos[a_sel] -= a_dir_times_vol
-                        #bitangential step
+                        # bitangential step
                         if k < areamax:
                             if j % 2 == 0:
-                                a_pos[a_sel] += a_dir_bitan[a_sel]
-                            else:
                                 a_pos[a_sel] -= a_dir_bitan[a_sel]
+                            else:
+                                a_pos[a_sel] += a_dir_bitan[a_sel]
                     
-                    #tangential step
+                    # tangential step
                     a_pos[a_sel] += a_dir_tan[a_sel]
 
-                #set length to zero
+                # set length to zero
                 a_length[a_sel] = 0
-            
-            
-            #are all length values zero
+
+            # are all length values zero
             if np.any(a_length != 0):
                 print("[WARN] Blocks with unknown / unimplemented length were found!")
         
         
         else:
-            #block loop
+            # block loop
             for i in range(blueprint["BlockCount"]):
                 b_guid = itemdict[blueprint["BlockIds"][i]]
                 try:
@@ -606,15 +606,15 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
     """Create images from view matrices"""
     def create_image(mat, upscale_f):
         """Create single image"""
-        #flip
+        # flip
         #img = cv2.flip(mat[0], 0)
         img = mat[0]
         #height = cv2.flip(mat[1], 0)
         height = mat[1]
-        #border
+        # border
         img = cv2.copyMakeBorder(img, 1, 1, 1, 1, cv2.BORDER_CONSTANT,value=(255, 118, 33))
         height = cv2.copyMakeBorder(height, 1, 1, 1, 1, cv2.BORDER_CONSTANT,value=-12345)
-        #height coloring
+        # height coloring
         hmax = np.max(height)
         hmap = height
         hmap = np.where(hmap == -12345, hmax, hmap)
@@ -625,35 +625,35 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
         dhN = dh + dh + dh + dh
         hmap = (hmap + (dhN - hmin))/(dh + dhN)
         img = np.multiply(img, hmap[:,:,np.newaxis])
-        #clip and convert to uint8
+        # clip and convert to uint8
         img = np.clip(img, 0, 255).astype(np.uint8)
-        #height = height.astype
-        #resize
+        # height = height.astype
+        # resize
         img = cv2.resize(img, (img.shape[1]*upscale_f,img.shape[0]*upscale_f),
                          interpolation=cv2.INTER_AREA)
 
         if contours:
-            #contours
-            #rolling
-            roll_up = np.roll(height, 1, 0) #rolled down for up difference calculation
+            # contours
+            # rolling
+            roll_up = np.roll(height, 1, 0)  # rolled down for up difference calculation
             roll_down = np.roll(height, -1, 0)
             roll_left = np.roll(height, 1, 1)
             roll_right = np.roll(height, -1, 1)
             
-            #difference
+            # difference
             dup = np.where(height - roll_up > 1, 1, 0)
             ddown = np.where(height - roll_down > 1, 1, 0)
             dleft = np.where(height - roll_left > 1, 1, 0)
             dright = np.where(height - roll_right > 1, 1, 0)
 
-            #not used as roll_... is required later
+            # not used as roll_... is required later
             #cv2 filter2D
             #sci_dup = convolve2d(height, np.array([[0],[1],[-1]]), mode="same", fillvalue=-1)
             #sci_ddown = convolve2d(height, np.array([[-1],[1],[0]]), mode="same", fillvalue=-1)
             #sci_dleft = convolve2d(height, np.array([[0,1,-1]]), mode="same", fillvalue=-1)
             #sci_dright = convolve2d(height, np.array([[-1,1,0]]), mode="same", fillvalue=-1)
             
-            #"super" difference
+            # "super" difference
             superable = height > -12345
             superup = np.where((roll_up == -12345) & superable, 1, 0)
             superdown = np.where((roll_down == -12345) & superable, 1, 0)
@@ -665,25 +665,25 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
             superleft = (superleft == 1) & boolsupersum1
             superright = (superright == 1) & boolsupersum1
             
-            #sum, circle, edges
+            # sum, circle, edges
             dsum = dup + ddown + dleft + dright
             booldcircle = dsum == 4
             dcircle = np.where(booldcircle, 1, 0)
             
-            #remove circles
+            # remove circles
             dup[booldcircle] = 0
             ddown[booldcircle] = 0
             dleft[booldcircle] = 0
             dright[booldcircle] = 0
             
-            #diag A is / ; diag B is \
+            # diag A is / ; diag B is \
             booldsum2 = dsum == 2
             boolddiagA = booldsum2 & (dup == dleft)
             boolddiagB = booldsum2 & (dup == dright)
             ddiagA = np.where(boolddiagA, 1, 0)
             ddiagB = np.where(boolddiagB, 1, 0)
             
-            #remove diags
+            # remove diags
             dup[boolddiagA] = 0
             ddown[boolddiagA] = 0
             dleft[boolddiagA] = 0
@@ -693,13 +693,13 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
             dleft[boolddiagB] = 0
             dright[boolddiagB] = 0
             
-            #re-add super
+            # re-add super
             dup[superup] = 1
             ddown[superdown] = 1
             dleft[superleft] = 1
             dright[superright] = 1
             
-            #kronecker upscale
+            # kronecker upscale
             dupimg = np.kron(dup, linetop)
             ddownimg = np.kron(ddown, linedown)
             dleftimg = np.kron(dleft, lineleft)
@@ -712,8 +712,8 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
             img[dimg > 0] = 255
         return img
 
-    #upscale_f = 5
-    #lines
+    # upscale_f = 5
+    # lines
     linetop = np.zeros((upscale_f,upscale_f))
     linetop[0] = 1
     linedown = np.zeros((upscale_f,upscale_f))
@@ -726,14 +726,14 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
     cv2.circle(linecircle, (upscale_f//2,upscale_f//2), upscale_f//2, 1)
     linediagB = np.identity(upscale_f)
     linediagA = np.flip(linediagB, 1)
-    #create images
+    # create images
     top_img = create_image(top_mat,upscale_f)
     side_img = create_image(side_mat,upscale_f)
     front_img = create_image(front_mat,upscale_f)
 
-    #info img
+    # info img
     fontFace = cv2.FONT_HERSHEY_SIMPLEX
-    #find max size text
+    # find max size text
     if bp_infos is None:
         info_img = np.full((front_img.shape[1],front_img.shape[1],3), np.array([255, 118, 33]),
                        dtype=np.uint8)
@@ -741,7 +741,7 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
         cv2.putText(info_img, "Error", (5,info_img.shape[0]//2), fontFace,
                     fontScale, (255,255,255))
     else:
-        #find max length text
+        # find max length text
         maxlen = 0
         maxtxt = None
         for k in bp_infos:
@@ -750,33 +750,33 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
                 maxlen = len(txt)
                 maxtxt = txt
         
-        pixel = 14 #minimum text height in pixel
+        pixel = 14  # minimum text height in pixel
         
-        #get size of text with scaling 1
-        #(width, height), baseline = cv2.getTextSize(maxtxt, fontFace, 1, 1)
-        #fontScale = pixel/(height+baseline) #scale to "pixel" pixels
-        #above code will result in:
+        # get size of text with scaling 1
+        # (width, height), baseline = cv2.getTextSize(maxtxt, fontFace, 1, 1)
+        # fontScale = pixel/(height+baseline) #scale to "pixel" pixels
+        # above code will result in:
         fontScale = 0.4375
         
-        #get size of text with scaling "fontScale"
+        # get size of text with scaling "fontScale"
         (width, height), baseline = cv2.getTextSize(maxtxt, fontFace, fontScale, 1)
 
-        #reverse scaling calculation for text upscaling
+        # reverse scaling calculation for text upscaling
         reverse_scale_height = (top_img.shape[0] / 2 / len(bp_infos)) / (height+baseline)
         reverse_scale_width = top_img.shape[0] / width / (1 + pixel / width)
         reverse_scale = min(reverse_scale_height, reverse_scale_width) * fontScale
-        if fontScale < reverse_scale:#larger scale is possible
+        if fontScale < reverse_scale:  # larger scale is possible
             pixel = int(np.floor(pixel * min(reverse_scale_height, reverse_scale_width)))
             fontScale = reverse_scale
         
-        #calculate height and limit minimum width/height to top view img height
+        # calculate height and limit minimum width/height to top view img height
         height = len(bp_infos) * (height+baseline) * 2
         height = max(height, top_img.shape[0])
-        width = width+pixel#int(np.ceil(width + pixel)) #required width + padding for text
+        width = width+pixel  # int(np.ceil(width + pixel)) #required width + padding for text
         width = max(width, top_img.shape[0])
         info_img = np.full((height,width,3), np.array([255, 118, 33]), dtype=np.uint8)
         
-        #write info
+        # write info
         fontThickness = max(1, int(pixel * 0.07))
         px = pixel//2
         py = pixel-baseline+pixel//2
@@ -837,7 +837,7 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     # file
-    fname = "../example blueprints/Carrier.blueprint"
+    fname = "../example blueprints/Crossbones.blueprint"
 
     import asyncio
     

@@ -790,7 +790,7 @@
 		"Name": "gun60Single Gr Barrel"
 	},
 	"099e452e-baae-40a9-bc40-a2124bb2224f": {
-		"Length": 4,
+		"Length": 2,
 		"Material": "Rubber",
 		"Name": "Rubber 4m Square backed corner left"
 	},
@@ -1095,7 +1095,7 @@
 		"Name": "Metal left slope (1m)"
 	},
 	"0cfeebea-d3ae-469e-bba7-df36eb616529": {
-		"Length": 1,
+		"Length": 2,
 		"Material": "Wood",
 		"Name": "wood 1m to 3m slope transition right"
 	},
@@ -1680,7 +1680,7 @@
 		"Name": "Glass square corner (left) (4m)"
 	},
 	"13e24625-7a1e-48a4-958c-850c3af85389": {
-		"Length": 1,
+		"Length": 4,
 		"Material": "Missing",
 		"Name": "Battery Storage Beam"
 	},
@@ -2285,7 +2285,7 @@
 		"Name": "Glass 1m to 4m inverse transition left"
 	},
 	"1cbba583-ef54-4de9-9364-4e7371bf4ac3": {
-		"Length": 1,
+		"Length": 6,
 		"Material": "Missing",
 		"Name": "Solid Ammo Clip [6m shells]"
 	},
@@ -2390,7 +2390,7 @@
 		"Name": "Core_ACDeco"
 	},
 	"1dd8c1cf-ce0b-469d-9924-455dae4958f5": {
-		"Length": 1,
+		"Length": 6,
 		"Material": "Missing",
 		"Name": "Autoloader [6m shells]"
 	},
@@ -3460,7 +3460,7 @@
 		"Name": "Bulkhead Glass"
 	},
 	"2a8501f7-2463-441c-901a-57d1a6573fe6": {
-		"Length": 1,
+		"Length": 8,
 		"Material": "Missing",
 		"Name": "Ammo Clip [8m shells]"
 	},
@@ -4515,7 +4515,7 @@
 		"Name": "Stone smoothness"
 	},
 	"38e9a85a-ac7d-4cb0-bd43-a5ae2099640c": {
-		"Length": 1,
+		"Length": 4,
 		"Material": "Missing",
 		"Name": "Battery Storage Beam"
 	},
@@ -4590,7 +4590,7 @@
 		"Name": "Paint sprayer"
 	},
 	"39fccb33-d334-479b-9b69-5571bd2cba38": {
-		"Length": 1,
+		"Length": 2,
 		"Material": "Lead",
 		"Name": "Lead 1m to 3m slope transition right"
 	},
@@ -4985,7 +4985,7 @@
 		"Name": "Shaft Shaft Bearing 1m"
 	},
 	"3fac543b-7d25-4ea7-8f5c-002025881ca1": {
-		"Length": 1,
+		"Length": 2,
 		"Material": "Glass",
 		"Name": "Glass 1m to 3m slope transition right"
 	},
@@ -5465,7 +5465,7 @@
 		"Name": "Crystal Resource Storage Large"
 	},
 	"462f80ed-2611-4cf8-a204-c7a66ea241da": {
-		"Length": 1,
+		"Length": 6,
 		"Material": "Missing",
 		"Name": "Ammo Clip [6m shells]"
 	},
@@ -5622,7 +5622,7 @@
 	"48678652-cad7-40ae-918f-af432b37fdf9": {
 		"Length": 1,
 		"Material": "Missing",
-		"Name": "Particle Tube"
+		"Name": "Particle tube 1m"
 	},
 	"486800cf-72f3-470d-9b3c-db6066fbca00": {
 		"Length": 1,
@@ -6020,7 +6020,7 @@
 		"Name": "Ammo 2x2m"
 	},
 	"4de09dc2-b68b-4fd3-a7fb-9031d9a064f2": {
-		"Length": 4,
+		"Length": 2,
 		"Material": "Lead",
 		"Name": "Lead 4m Square backed corner left"
 	},
@@ -6680,7 +6680,7 @@
 		"Name": "Railing R TA 3m M1"
 	},
 	"56450137-c20f-4793-972c-fb3fe56ae8d5": {
-		"Length": 1,
+		"Length": 43,
 		"Material": "Missing",
 		"Name": "Battery Storage Medium (mirror)"
 	},
@@ -6755,7 +6755,7 @@
 		"Name": "Huge Rail Gantry (invisible)"
 	},
 	"56c27d46-39b3-4ac1-b4f7-71c118d8dde9": {
-		"Length": 1,
+		"Length": 90,
 		"Material": "Missing",
 		"Name": "Battery Storage Large"
 	},
@@ -9910,7 +9910,7 @@
 		"Name": "Large Hatch Flip"
 	},
 	"80277222-e122-44c4-8e8f-83ba7fb370ce": {
-		"Length": 4,
+		"Length": 2,
 		"Material": "Alloy",
 		"Name": "Alloy 4m Square backed corner left"
 	},
@@ -10130,7 +10130,7 @@
 		"Name": "AI"
 	},
 	"82850c4b-ccfd-40dd-95fb-182b39d724d7": {
-		"Length": 1,
+		"Length": 90,
 		"Material": "Missing",
 		"Name": "Battery Storage Large"
 	},
@@ -10180,7 +10180,7 @@
 		"Name": "firebox side"
 	},
 	"832b5533-fa5d-45ec-ba4f-2dca1e8f0bba": {
-		"Length": 1,
+		"Length": 8,
 		"Material": "Missing",
 		"Name": "Autoloader [8m shells]"
 	},
@@ -10595,7 +10595,7 @@
 		"Name": "pipe 4 way2 mirror"
 	},
 	"886a646f-c407-45c4-bba8-f32808f862c2": {
-		"Length": 1,
+		"Length": 6,
 		"Material": "Missing",
 		"Name": "Autoloader [6m shells]"
 	},
@@ -10825,7 +10825,7 @@
 		"Name": "Rubber 1m to 3m inverse transition left"
 	},
 	"8b6eafd7-080c-44e6-85e8-99b1704e8391": {
-		"Length": 1,
+		"Length": 6,
 		"Material": "Missing",
 		"Name": "Ammo Clip [6m shells]"
 	},
@@ -11452,7 +11452,7 @@
 	"9385face-922e-4158-9632-7ab9fcb00166": {
 		"Length": 1,
 		"Material": "Laser",
-		"Name": "Laser Munition Defence"
+		"Name": "Laser Anti-Munition Defence"
 	},
 	"938d7bff-3e37-4f5f-a464-965d24353bd0": {
 		"Length": 1,
@@ -11655,7 +11655,7 @@
 		"Name": "SUPPLY_USER"
 	},
 	"95cabc9c-5c2a-4428-859d-99c044721532": {
-		"Length": 1,
+		"Length": 6,
 		"Material": "Missing",
 		"Name": "Solid Ammo Clip [6m shells]"
 	},
@@ -11760,7 +11760,7 @@
 		"Name": "Huge propeller"
 	},
 	"973c1ee1-2dc4-4cd7-be7c-32a37cb405de": {
-		"Length": 1,
+		"Length": 8,
 		"Material": "Missing",
 		"Name": "Solid Ammo Clip [8m shells]"
 	},
@@ -12325,7 +12325,7 @@
 		"Name": "Interface screen"
 	},
 	"9ebf197b-4961-45e0-b7b4-cfe93e7e8367": {
-		"Length": 1,
+		"Length": 2,
 		"Material": "Wood",
 		"Name": "Wood 1m to 3m slope transition right"
 	},
@@ -13370,7 +13370,7 @@
 		"Name": "Gauge cooler 4way"
 	},
 	"acb4bf6e-b10e-4a6f-b9dc-b22be888c096": {
-		"Length": 1,
+		"Length": 8,
 		"Material": "Missing",
 		"Name": "Hydraulic recoil absorber (8m)"
 	},
@@ -14140,7 +14140,7 @@
 		"Name": "Metal Material Storage Small"
 	},
 	"b6451534-5052-41d1-898d-7f2036ec68d6": {
-		"Length": 1,
+		"Length": 8,
 		"Material": "Missing",
 		"Name": "Autoloader [8m shells]"
 	},
@@ -15155,7 +15155,7 @@
 		"Name": "Turret Block One Axis (3m)"
 	},
 	"c3264d31-08c3-40f8-adfb-859b51e3b02f": {
-		"Length": 1,
+		"Length": 2,
 		"Material": "Heavy Armour",
 		"Name": "Heavy Armour 1m to 3m slope transition right"
 	},
@@ -15310,7 +15310,7 @@
 		"Name": "Plasma tranciever"
 	},
 	"c531f93d-7309-43d7-ae46-a16ba73efaba": {
-		"Length": 4,
+		"Length": 2,
 		"Material": "Metal",
 		"Name": "Metal 4m Square backed corner left"
 	},
@@ -16005,7 +16005,7 @@
 		"Name": "Stone normal"
 	},
 	"ce5dcc45-d764-476f-bb17-240e3c1d22bb": {
-		"Length": 1,
+		"Length": 8,
 		"Material": "Missing",
 		"Name": "Solid Ammo Clip [8m shells]"
 	},
@@ -16565,7 +16565,7 @@
 		"Name": "Glass 3m to 4m inverse transition right"
 	},
 	"d514c1bb-c3f6-4690-a1eb-7aa7b639584a": {
-		"Length": 1,
+		"Length": 8,
 		"Material": "Missing",
 		"Name": "Ammo Clip [8m shells]"
 	},
@@ -16710,7 +16710,7 @@
 		"Name": "gun100Gatling DWG Gun"
 	},
 	"d68e1c33-54c1-4e51-8abf-2b786a258dbd": {
-		"Length": 1,
+		"Length": 6,
 		"Material": "Missing",
 		"Name": "1axis Twin 1406mm elephant"
 	},
@@ -16725,7 +16725,7 @@
 		"Name": "Stone square corner (left) (1m)"
 	},
 	"d6b944ee-04fc-411c-9d22-935d5f4b2440": {
-		"Length": 1,
+		"Length": 2,
 		"Material": "Metal",
 		"Name": "Metal 1m to 3m slope transition right"
 	},
@@ -17490,7 +17490,7 @@
 		"Name": "AirTarget"
 	},
 	"e0a33722-5b20-4f51-9c34-7a05fecc20ba": {
-		"Length": 4,
+		"Length": 2,
 		"Material": "Stone",
 		"Name": "Stone 4m Square backed corner left"
 	},
@@ -17510,7 +17510,7 @@
 		"Name": "Fire control computer"
 	},
 	"e0f5e9a7-a384-48f9-9ec5-fe6aac81c440": {
-		"Length": 1,
+		"Length": 6,
 		"Material": "Missing",
 		"Name": "Hydraulic recoil absorber (6m)"
 	},
@@ -17560,7 +17560,7 @@
 		"Name": "Electric Engines"
 	},
 	"e183a579-7839-4226-83c1-99ddeb5540cc": {
-		"Length": 1,
+		"Length": 2,
 		"Material": "Stone",
 		"Name": "Stone 1m to 3m slope transition right"
 	},
@@ -17980,7 +17980,7 @@
 		"Name": "Balloon Wheel 3m"
 	},
 	"e6a79e11-78c2-47b2-b189-356a1b5df190": {
-		"Length": 1,
+		"Length": 43,
 		"Material": "Missing",
 		"Name": "Battery Storage Medium (mirror)"
 	},
@@ -18515,7 +18515,7 @@
 		"Name": "Azimuth Drive for IR Camera"
 	},
 	"ee47622e-4eb6-4fd0-81f7-97b33adde8d2": {
-		"Length": 1,
+		"Length": 43,
 		"Material": "Missing",
 		"Name": "Battery Storage Medium"
 	},
@@ -18550,7 +18550,7 @@
 		"Name": "AI Path Viewer"
 	},
 	"eee38852-9106-4946-a5ce-7fae2dfa4a12": {
-		"Length": 4,
+		"Length": 2,
 		"Material": "Heavy Armour",
 		"Name": "Heavy Armour 4m Square backed corner left"
 	},
@@ -19005,7 +19005,7 @@
 		"Name": "3m_drive_wheel"
 	},
 	"f4a993f3-e9ec-4405-bf36-7ae5d90e6b95": {
-		"Length": 1,
+		"Length": 2,
 		"Material": "Rubber",
 		"Name": "Rubber 1m to 3m slope transition right"
 	},
@@ -19280,7 +19280,7 @@
 		"Name": "Lead 1m to 4m inverse transition left"
 	},
 	"f7c75b5b-b95d-4bdb-a77d-12da69e7ee07": {
-		"Length": 1,
+		"Length": 43,
 		"Material": "Missing",
 		"Name": "Battery Storage Medium"
 	},
@@ -19480,7 +19480,7 @@
 		"Name": "Hydraulic recoil absorber [2m]"
 	},
 	"faafca6a-e060-4a5f-97c4-80e89173e004": {
-		"Length": 1,
+		"Length": 2,
 		"Material": "Alloy",
 		"Name": "Alloy 1m to 3m slope transition right"
 	},

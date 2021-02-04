@@ -57,20 +57,21 @@ materials = None
 materials_file = "materials.json"
 with open(materials_file, "r") as f:
     materials = json.loads(f.read())
-sizedict = {"1m": 1, "2m": 2, "3m": 3, "4m": 4, 
+sizedict = {"1m": 1, "2m": 2, "3m": 3, "4m": 4, "6m": 6, "8m": 8,
             "1x1": 1, "3x3": 33, "5x5": 34, "7x7": 35,
+            "2m3x3": 40, "3m5x5": 41, "3m3x3": 42, "2m2x2": 43,
             " 5m": 50, " 7m": 51, " 9m": 52,
             "2mUpright": 62, "3mUpright": 63, "4mUpright": 64, "3mCenteredUpright": 70,
             "2mSideways": 80, "1m3x3Sideways": 82, "1m5x5Sideways": 84, "2m3x3Sideways": 86, "3m5x5Sideways": 88,  # mirrored pieces have index + 1
-            "3x3Upright": 90, "5x5Upright": 91, "3m3x3Upright": 92
+            "3x3Upright": 90, "5x5Upright": 91, "3m3x3Upright": 92,
             }
 
 #map
 for k in invguiddict:
     v = invguiddict[k]["Name"].lower().replace("(", "").replace(")", "")
     v = f" {v} "
-    invguiddict[k]["Material"] = "Missing" # default material
-    invguiddict[k]["Length"] = 1 # default length
+    invguiddict[k]["Material"] = "Missing"  # default material
+    invguiddict[k]["Length"] = 1  # default length
     for m in materials:
         ml = f" {m.lower()} "
         if v.find(ml) >= 0:
@@ -100,13 +101,15 @@ for k in invguiddict:
                 invguiddict[k]["Length"] = sizedict["3m5x5Sideways"] + mirrored
             else:
                 invguiddict[k]["Length"] = sizedict["1m5x5Sideways"] + mirrored
+        continue
 
     # turrets
     if v.find(" turret ") >= 0:
         if invguiddict[k]["Length"] == 3:
             invguiddict[k]["Length"] = sizedict["3x3Upright"]
-        elif invguiddict[k]["Length"] == 50: # 5m gets mapped to 50
+        elif invguiddict[k]["Length"] == 50:  # 5m gets mapped to 50
             invguiddict[k]["Length"] = sizedict["5x5Upright"]
+        continue
 
     # rtgs
     if v.find(" rtg ") >= 0:
@@ -116,6 +119,25 @@ for k in invguiddict:
             invguiddict[k]["Length"] = sizedict["4mUpright"]
         elif invguiddict[k]["Length"] == 3:  # 3x3m gets mapped to 3
             invguiddict[k]["Length"] = sizedict["3m3x3Upright"]
+        continue
+
+    # batteries
+    if v.find(" battery ") >= 0:
+        if v.find(" beam ") >= 0:
+            invguiddict[k]["Length"] = 4
+        elif v.find(" medium ") >= 0:
+            invguiddict[k]["Length"] = sizedict["2m2x2"]
+        elif v.find(" large ") >= 0:
+            invguiddict[k]["Length"] = sizedict["3x3Upright"]
+        continue
+
+    # square backed corners
+    if invguiddict[k]["Name"].find("Square backed corner") >= 0:
+        invguiddict[k]["Length"] = 2
+        continue
+    if invguiddict[k]["Name"].find("1m to 3m slope transition right") >= 0:
+        invguiddict[k]["Length"] = 2
+        continue
 
 
 # manual fixes
