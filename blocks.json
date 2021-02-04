@@ -435,7 +435,7 @@
 		"Name": "Wood beam (4m)"
 	},
 	"05537cc1-9df6-4395-a3d4-1db6226c62b5": {
-		"Length": 3,
+		"Length": 90,
 		"Material": "Missing",
 		"Name": "One Axis Turret (3m)"
 	},
@@ -500,7 +500,7 @@
 		"Name": "steam control 1m"
 	},
 	"063eb06e-57e0-43dd-b85e-90baed4f025c": {
-		"Length": 2,
+		"Length": 62,
 		"Material": "Missing",
 		"Name": "RTG 2m"
 	},
@@ -1085,7 +1085,7 @@
 		"Name": "Hercules2000"
 	},
 	"0cd79e3c-3f93-4b7e-adcd-316d94605e04": {
-		"Length": 50,
+		"Length": 91,
 		"Material": "Missing",
 		"Name": "Turret Block One Axis 5m"
 	},
@@ -2815,7 +2815,7 @@
 		"Name": "Core_SimpleWeapon"
 	},
 	"23028693-0c0d-43c9-a2a4-60211007a6ad": {
-		"Length": 3,
+		"Length": 90,
 		"Material": "Missing",
 		"Name": "Extra mesh 0 of Turret Block One Axis 3m"
 	},
@@ -4200,7 +4200,7 @@
 		"Name": "Mannequin arm upper left"
 	},
 	"344a6bb2-dada-45f3-ba66-6fdbbb57f394": {
-		"Length": 4,
+		"Length": 64,
 		"Material": "Missing",
 		"Name": "RTG 4m"
 	},
@@ -6910,7 +6910,7 @@
 		"Name": "Glass square corner (right)(2m)"
 	},
 	"58799537-721b-4e4f-9d65-ecb920a2d71c": {
-		"Length": 3,
+		"Length": 92,
 		"Material": "Missing",
 		"Name": "RTG 3x3m"
 	},
@@ -7875,7 +7875,7 @@
 		"Name": "AirFleetMove"
 	},
 	"667a5512-cda6-4ddb-a193-d14b101904e6": {
-		"Length": 4,
+		"Length": 64,
 		"Material": "Missing",
 		"Name": "RTG 4m"
 	},
@@ -8710,7 +8710,7 @@
 		"Name": "Small Custom Jet"
 	},
 	"7161f887-4de6-4b5e-9066-f39d6cad9f16": {
-		"Length": 50,
+		"Length": 91,
 		"Material": "Missing",
 		"Name": "One Axis Turret (5m)"
 	},
@@ -9240,7 +9240,7 @@
 		"Name": "Railing R TA 4m M4"
 	},
 	"77ffeeb5-d3d1-4282-a332-9d72f40cc440": {
-		"Length": 3,
+		"Length": 90,
 		"Material": "Missing",
 		"Name": "Turret Block One Axis 3m"
 	},
@@ -11355,7 +11355,7 @@
 		"Name": "Wood triangle corner (right) (2m)"
 	},
 	"9220be15-31c6-4fe0-bd78-f4af75cd3531": {
-		"Length": 50,
+		"Length": 91,
 		"Material": "Missing",
 		"Name": "Extra mesh 0 of Turret Block One Axis 5m"
 	},
@@ -11680,7 +11680,7 @@
 		"Name": "360 azi only turret removal"
 	},
 	"96231db7-664f-412b-aced-e77ed84a0d93": {
-		"Length": 3,
+		"Length": 90,
 		"Material": "Missing",
 		"Name": "EM0 of Turret Block One Axis 3m"
 	},
@@ -13585,7 +13585,7 @@
 		"Name": "shaft crank cased 1m"
 	},
 	"afbe9284-2044-4276-abe9-d612063f024e": {
-		"Length": 2,
+		"Length": 62,
 		"Material": "Missing",
 		"Name": "RTG 2m"
 	},
@@ -14260,7 +14260,7 @@
 		"Name": "Nuclear Containment Platform"
 	},
 	"b7c60d19-d652-4fcc-af1a-85409c9c131f": {
-		"Length": 50,
+		"Length": 91,
 		"Material": "Missing",
 		"Name": "Turret Block One Axis (5m)"
 	},
@@ -15150,7 +15150,7 @@
 		"Name": "Metal 1m offset left"
 	},
 	"c310aa38-b723-4a66-8700-47cffe7647f4": {
-		"Length": 3,
+		"Length": 90,
 		"Material": "Missing",
 		"Name": "Turret Block One Axis (3m)"
 	},
@@ -15290,7 +15290,7 @@
 		"Name": "Glass down slope (4m)"
 	},
 	"c50611e2-ff08-473c-a33d-237e0b09cb85": {
-		"Length": 50,
+		"Length": 91,
 		"Material": "Missing",
 		"Name": "EM0 of Turret Block One Axis 5m"
 	},
@@ -18155,7 +18155,7 @@
 		"Name": "Laser Tips"
 	},
 	"e8d04f75-a134-452e-a04a-af5172d65040": {
-		"Length": 3,
+		"Length": 92,
 		"Material": "Missing",
 		"Name": "RTG 3x3m"
 	},

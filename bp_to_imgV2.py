@@ -58,35 +58,35 @@ rot_tangent = np.array([
                         [ 0, 0,-1]]) #23
 rot_bitangent = np.cross(rot_normal, rot_tangent)
 
-#transpose
+# transpose
 rot_normal = rot_normal.T
 rot_tangent = rot_tangent.T
 rot_bitangent = rot_bitangent.T
 
-#load blocks and materials configuration
+# load blocks and materials configuration
 with open("blocks.json", "r") as f:
     blocks = json.loads(f.read())
 with open("materials.json", "r") as f:
     materials = json.loads(f.read())
-#add missing "Invisible" keys to materials
+# add missing "Invisible" keys to materials
 for k in materials:
     if "Invisible" not in materials[k]:
         materials[k]["Invisible"] = False
     materials[k]["Color"] = np.array(materials[k]["Color"])
 
 
-#Blueprint:
-#CSI: block color
-#COL: craft colors ["float,float,float"]
-#SCs:
-#BLP: block position ["int,int,int"]
-#BLR: block rotation [int]
-#BP1
-#BP2
-#BCI: maybe block color index
-#BEI:
+# Blueprint:
+# CSI: block color
+# COL: craft colors ["float,float,float"]
+# SCs:
+# BLP: block position ["int,int,int"]
+# BLR: block rotation [int]
+# BP1
+# BP2
+# BCI: maybe block color index
+# BEI:
 
-#BlockIds: block ids [int]
+# BlockIds: block ids [int]
 
 async def process_blueprint(fname, silent=False, standaloneMode=False):
     """Load and init blueprint data. Returns blueprint, calculation times, image filename"""
@@ -96,31 +96,31 @@ async def process_blueprint(fname, silent=False, standaloneMode=False):
         bp = json.load(f)
     ts1 = time.time() - ts1
     if not silent: print("JSON parse completed in", ts1, "s")
-    #convert to numpy data
+    # convert to numpy data
     ts2 = time.time()
     __convert_blueprint(bp)
     ts2 = time.time() - ts2
     if not silent: print("Conversion completed in", ts2, "s")
-    #fetch infos
+    # fetch infos
     ts3 = time.time()
     bp_infos = __fetch_infos(bp)
     ts3 = time.time() - ts3
     if not silent: print("Infos gathered in", ts3, "s")
-    #create top, side, front view matrices
+    # create top, side, front view matrices
     ts4 = time.time()
     top_mats, side_mats, front_mats = __create_view_matrices(bp)
     ts4 = time.time() - ts4
     if not silent: print("View matrices completed in", ts4, "s")
-    #create images
+    # create images
     ts5 = time.time()
     main_img = __create_images(top_mats, side_mats, front_mats, bp_infos)
     ts5 = time.time() - ts5
     if not silent: print("Image creation completed in", ts5, "s")
-    #save image
+    # save image
     main_img_fname = fname[:-10] + "_view.png"
     if not cv2.imwrite(main_img_fname, main_img):
         print("ERROR: image could not be saved", main_img_fname)
-    #return
+    # return
     if standaloneMode:
         return bp, [ts1, ts2, ts3, ts4, ts5], main_img
     else:
@@ -130,85 +130,88 @@ async def process_blueprint(fname, silent=False, standaloneMode=False):
 def __convert_blueprint(bp):
     """Convert data to numpy data"""
 
-    def blueprint_iter(blueprint):
+    def blueprint_iter(blueprint, parentglobalrotation=quaternion.one, parentglobalposition=0):
         """Iterate blueprint and sub blueprints"""
-        #convert rotation ids to np array
+        # convert rotation ids to np array
         blueprint["BLR"] = np.array(blueprint["BLR"])
-        #convert local rotation to quaternion
+        # convert local rotation to quaternion
         localrot_split = blueprint["LocalRotation"].split(",")
-        localrot = quaternion.as_rotation_matrix(np.quaternion(
-                                                   float(localrot_split[3]),
-                                                   float(localrot_split[0]),
-                                                   float(localrot_split[1]),
-                                                   float(localrot_split[2])))
+        globalrotation = np.quaternion(float(localrot_split[3]),
+                                       float(localrot_split[0]),
+                                       float(localrot_split[1]),
+                                       float(localrot_split[2]))
+        globalrotation *= parentglobalrotation
+        localrot = quaternion.as_rotation_matrix(globalrotation)
         localrot_arg = np.argmax(np.abs(localrot), axis=1)
         localrot_max = np.sign(localrot[[0, 1, 2], localrot_arg])
-        localrot[:,:] = 0
+        localrot[:, :] = 0
         localrot[[0, 1, 2], localrot_arg] = localrot_max
         blueprint["LocalRotation"] = localrot
         
-        #convert local position to np array
+        # convert local position to np array
         blueprint["LocalPosition"] = np.array(blueprint["LocalPosition"].split(","),
                                               dtype=float).round().astype(int)
-        #convert min/max coordinates to np array
+        blueprint["LocalPosition"] = (parentglobalrotation * quaternion.quaternion(*blueprint["LocalPosition"]) *
+                                      parentglobalrotation.conj()).vec.astype(int) + parentglobalposition
+        # convert min/max coordinates to np array
         mincords = np.array(blueprint["MinCords"].split(","),
                                          dtype=float)
         maxcords = np.array(blueprint["MaxCords"].split(","),
                                          dtype=float)
-        #rotate
+        # rotate
         mincords = (blueprint["LocalRotation"] @ mincords) + blueprint["LocalPosition"]
         maxcords = (blueprint["LocalRotation"] @ maxcords) + blueprint["LocalPosition"]
-        #(round to int) ((done after iteration))
-        mincords = mincords#.round().astype(int)
-        maxcords = maxcords#.round().astype(int)
-        #re-min/max
+        # (round to int) ((done after iteration))
+        mincords = mincords# .round().astype(int)
+        maxcords = maxcords# .round().astype(int)
+        # re-min/max
         blueprint["MinCords"] = np.minimum(mincords, maxcords)
         blueprint["MaxCords"] = np.maximum(mincords, maxcords)
         
-        #create new arrays
+        # create new arrays
         blockcount = blueprint["BlockCount"]
         #blockguid_array = np.zeros(blockcount, dtype="<U36") not using guid here
         blockid_array = np.array(blueprint["BlockIds"], dtype=int)
-        #block loop
+        # block loop
         for i in range(blockcount):
-            #blockguid_array[i] = bp["ItemDictionary"][str(blueprint["BlockIds"][i])] not using guid here
+            # blockguid_array[i] = bp["ItemDictionary"][str(blueprint["BlockIds"][i])] not using guid here
             blueprint["BLP"][i] = blueprint["BLP"][i].split(",")
             
-        blueprint["BlockIds"] = blockid_array #guid_array not using guid here
+        blueprint["BlockIds"] = blockid_array # guid_array not using guid here
         
-        #rotate block position via local rotation and add local position
+        # rotate block position via local rotation and add local position
         blockposition_array = np.array(blueprint["BLP"],dtype=float).T
         blockposition_array = np.dot(blueprint["LocalRotation"],blockposition_array).T
         blueprint["BLP"] = blockposition_array.round().astype(int) + blueprint["LocalPosition"]
 
-        #check min/max coords with blp
+        # check min/max coords with blp
         #mincords = np.min(blueprint["BLP"], 0)
         #maxcords = np.max(blueprint["BLP"], 0)
         #print(mincords, maxcords)
         #print(blueprint["MinCords"], blueprint["MaxCords"])
-        #re-min/max
+        # re-min/max
         #blueprint["MinCords"] = np.minimum(mincords, blueprint["MinCords"])
         #blueprint["MaxCords"] = np.maximum(mincords, blueprint["MaxCords"])
         
-        #rotate rot_normal, rot_tangent and rot_bitangent via local rotation
-        blueprint["RotNormal"] = np.dot(blueprint["LocalRotation"],rot_normal).T.round().astype(int)
-        blueprint["RotTangent"] = np.dot(blueprint["LocalRotation"],rot_tangent).T.round().astype(int)
-        blueprint["RotBitangent"] = np.dot(blueprint["LocalRotation"],rot_bitangent).T.round().astype(int)
+        # rotate rot_normal, rot_tangent and rot_bitangent via local rotation
+        blueprint["RotNormal"] = np.dot(blueprint["LocalRotation"], rot_normal).T.round().astype(int)
+        blueprint["RotTangent"] = np.dot(blueprint["LocalRotation"], rot_tangent).T.round().astype(int)
+        blueprint["RotBitangent"] = np.dot(blueprint["LocalRotation"], rot_bitangent).T.round().astype(int)
         
-        #sub blueprint iteration
+        # sub blueprint iteration
         for sub_bp in blueprint["SCs"]:
-            blueprint_iter(sub_bp)
-            #merge min/max
+            blueprint_iter(sub_bp, globalrotation, blueprint["LocalPosition"])
+            # merge min/max
             blueprint["MinCords"] = np.minimum(blueprint["MinCords"],sub_bp["MinCords"])
             blueprint["MaxCords"] = np.maximum(blueprint["MaxCords"],sub_bp["MaxCords"])
         
-    #item dictionary conversion
-    bp["ItemDictionary"] = {int(k):v for k,v in bp["ItemDictionary"].items()}
-    #main bp fix
+    # item dictionary conversion
+    bp["ItemDictionary"] = {int(k): v for k, v in bp["ItemDictionary"].items()}
+    # main bp fix
     bp["Blueprint"]["LocalRotation"] = "0,0,0,1"
     bp["Blueprint"]["LocalPosition"] = "0,0,0"
     blueprint_iter(bp["Blueprint"])
-    #set size
+    # set size
     bp["Blueprint"]["MinCords"] = bp["Blueprint"]["MinCords"].round().astype(int)
     bp["Blueprint"]["MaxCords"] = bp["Blueprint"]["MaxCords"].round().astype(int)
     bp["Blueprint"]["Size"] = bp["Blueprint"]["MaxCords"] - bp["Blueprint"]["MinCords"] + 1
@@ -216,8 +219,7 @@ def __convert_blueprint(bp):
 
 def __fetch_infos(bp):
     """Gathers important information of blueprint"""
-    infos = {}
-    infos["Name"] = bp.get("Name")
+    infos = {"Name": bp.get("Name")}
     if infos["Name"] is None:
         infos["Name"] = "Unknown"
     infos["Blocks"] = bp.get("SavedTotalBlockCount")
@@ -246,12 +248,12 @@ def __create_view_matrices(bp):
     def blueprint_iter(blueprint, mincords, blueprint_desc = "main"):
         """Iterate blueprint and sub blueprints"""
         nonlocal actual_min_cords
-        #subtract min coords
+        # subtract min coords
         blueprint["BLP"] -= mincords
         #print("ViewMat at", blueprint_desc)
 
         if True:
-            #numpyfication
+            # numpyfication
             a_guid = np.vectorize(itemdict.get)(blueprint["BlockIds"])
             missing_block = blocks.get("missing")
             a_length = np.vectorize(lambda x: blocks.get(x, missing_block).get("Length"))(a_guid)
@@ -267,12 +269,12 @@ def __create_view_matrices(bp):
                 """Fills color_mat and height_mat with selected blocks (sel_arr as index and pos_sel_arr as position).
                 axisY is the height axis."""
                 nonlocal a_color, a_invisible
-                #create slicing indices for axes
+                # create slicing indices for axes
                 axisA = axisX
                 axisB = axisZ+1 if axisZ > axisX else None
                 axisS = axisZ - axisX
                 
-                #selection of higher height
+                # selection of higher height
                 #if height_mat.shape[0] <= np.max(pos_sel_arr[:, axisX]):
                 #    print("x Axis overflow:", height_mat.shape[0], "to", np.max(pos_sel_arr[:, axisX]))
                 #    return
@@ -280,163 +282,169 @@ def __create_view_matrices(bp):
                 #    print("y Axis overflow:", height_mat.shape[1], "to", np.max(pos_sel_arr[:, axisZ]))
                 #    return
                 height_sel_arr = height_mat[pos_sel_arr[:, axisX], pos_sel_arr[:, axisZ]] < pos_sel_arr[:, axisY]
-                #position of selection
+                # position of selection
                 height_pos_sel_arr = pos_sel_arr[height_sel_arr]
                 
-                #select only max height for each x,z coord
-                #sort index of heights
+                # select only max height for each x,z coord
+                # sort index of heights
                 sorted_index = np.argsort(height_pos_sel_arr[:, axisY], axis=0)[::-1]
-                #sort pos
+                # sort pos
                 sorted_pos = height_pos_sel_arr[sorted_index]
-                #find index of unique (x,z) coords
+                # find index of unique (x,z) coords
                 unique_pos, unique_index = np.unique(sorted_pos[:, axisA:axisB:axisS], return_index=True, axis=0)
                 
-                #coloring
+                # coloring
                 color_mat[unique_pos[:, 0], unique_pos[:, 1]] = a_color[sel_arr][height_sel_arr][sorted_index][unique_index]
-                #new height
+                # new height
                 height_mat[unique_pos[:, 0], unique_pos[:, 1]] = sorted_pos[:, axisY][unique_index]
 
 
-            #upright beam init loop (truss beams)
+            # upright beam init loop (truss beams)
             for i in range(61, 65):
-                #block selection
+                # block selection
                 a_sel, = np.nonzero(a_length == i)
                 if len(a_sel) == 0: continue
                 
-                #set length & rot
+                # set length & rot
                 a_length[a_sel] -= 60
                 a_dir[a_sel] = a_dir_tan[a_sel]
 
 
-            #sideways beam init loop
+            # sideways beam init loop
             for i in [80, 81]:
-                #block selection
+                # block selection
                 a_sel, = np.nonzero(a_length == i)
                 if len(a_sel) == 0: continue
                 
-                #set length & rot
+                # set length & rot
                 a_length[a_sel] = 2
-                if i & 0b1: #odd is mirrored
+                if i & 0b1: # odd is mirrored
                     a_dir[a_sel] = -a_dir_bitan[a_sel]
                 else:
                     a_dir[a_sel] = a_dir_bitan[a_sel]
-            
-            
-            #centered beam init loop
+
+            # centered beam init loop
             centerbeamsizes = {50: 5, 51: 7, 52: 9, 70: 3}
             for i in range(50, 53):
-                #block selection
+                # block selection
                 a_sel, = np.nonzero(a_length == i)
                 if len(a_sel) == 0: continue
 
                 cbeam_len = centerbeamsizes[i]
                 
-                #inital offset
+                # inital offset
                 a_pos[a_sel] -= (cbeam_len >> 1) * (a_dir_bitan[a_sel])
 
-                #set length & rot
+                # set length & rot
                 a_length[a_sel] = cbeam_len
                 a_dir[a_sel] = a_dir_bitan[a_sel]
 
-
-            #centered upright beam init loop
+            # centered upright beam init loop
             for i in [70]:
-                #block selection
+                # block selection
                 a_sel, = np.nonzero(a_length == i)
                 if len(a_sel) == 0: continue
                 
                 cbeam_len = centerbeamsizes[i]
                 print("test")
-                #inital offset
+                # initial offset
                 a_pos[a_sel] -= (cbeam_len >> 1) * (a_dir_tan[a_sel])
 
-                #set length & rot
+                # set length & rot
                 a_length[a_sel] = cbeam_len
                 a_dir[a_sel] = a_dir_tan[a_sel]
-            
-            
-            #single length loop (also fills centered beams)
+
+            # single length loop (also fills centered beams)
             for i in range(9, 0, -1):
-                #block selection
+                # block selection
                 a_sel, = np.nonzero(a_length == i)
                 if len(a_sel) == 0: continue
                 a_pos_sel = a_pos[a_sel]
                 
-                #fill
+                # fill
                 fill_color_and_height(top_color, top_height, a_sel, a_pos_sel, 0, 2, 1)
                 fill_color_and_height(side_color, side_height, a_sel, a_pos_sel, 1, 2, 0)
                 fill_color_and_height(front_color, front_height, a_sel, a_pos_sel, 1, 0, 2)
 
-                #min cords
+                # min cords
                 actual_min_cords = np.minimum(np.amin(a_pos, 0), actual_min_cords)
                 
-                #step
+                # step
                 a_length[a_sel] -= 1
                 a_pos[a_sel] += a_dir[a_sel]
 
-
-            #sideways area init loop
+            # sideways area init loop
             for i in range(82, 86):
-                #block selection
+                # block selection
                 a_sel, = np.nonzero(a_length == i)
                 if len(a_sel) == 0: continue
 
-                #reorient tangent
-                if i & 0b1: #odd
+                # reorient tangent
+                if i & 0b1:  # odd
                     a_dir_bitan[a_sel] = -a_dir[a_sel]
                 else:
                     a_dir_bitan[a_sel] = a_dir[a_sel]
 
-                #set length
-                a_length[a_sel] = (i >> 1) - 8 #map to 33 and 34
+                # set length
+                a_length[a_sel] = (i >> 1) - 8  # map to 33 and 34
 
-            
-            #area loop
-            areasizes = {33: 3, 34: 5, 35: 7}
-            for i  in range(33, 36):
-                #block selection
+            # upright area init loop
+            for i in range(90, 92):
+                # block selection
                 a_sel, = np.nonzero(a_length == i)
                 if len(a_sel) == 0: continue
 
-                #range & limits
+                # reorient tangent
+                a_dir_tan[a_sel] = a_dir[a_sel]
+
+                # set length
+                a_length[a_sel] = i - 57
+
+            # area loop
+            areasizes = {33: 3, 34: 5, 35: 7}
+            for i  in range(33, 36):
+                # block selection
+                a_sel, = np.nonzero(a_length == i)
+                if len(a_sel) == 0: continue
+
+                # range & limits
                 arearng = range(areasizes[i])
                 areamax = areasizes[i] - 1
 
-                #inital offset
+                # inital offset
                 a_pos[a_sel] -= (areamax >> 1) * (a_dir_bitan[a_sel] + a_dir_tan[a_sel])
                 
                 for j in arearng:
                     for k in arearng:
-                        #select position here as loop changes a_pos
+                        # select position here as loop changes a_pos
                         a_pos_sel = a_pos[a_sel]
-                        #fill
+                        # fill
                         fill_color_and_height(top_color, top_height, a_sel, a_pos_sel, 0, 2, 1)
                         fill_color_and_height(side_color, side_height, a_sel, a_pos_sel, 1, 2, 0)
                         fill_color_and_height(front_color, front_height, a_sel, a_pos_sel, 1, 0, 2)
-                        #min cords
+                        # min cords
                         actual_min_cords = np.minimum(np.amin(a_pos, 0), actual_min_cords)
-                        #step
+                        # step
                         if k < areamax:
                             if j % 2 == 0:
                                 a_pos[a_sel] += a_dir_bitan[a_sel]
                             else:
                                 a_pos[a_sel] -= a_dir_bitan[a_sel]
                     
-                    #tangential step
+                    # tangential step
                     a_pos[a_sel] += a_dir_tan[a_sel]
 
-                #set length to zero
+                # set length to zero
                 a_length[a_sel] = 0
 
-
-            #sideways volume init loop
+            # sideways volume init loop
             for i in range(86, 90):
-                #block selection
+                # block selection
                 a_sel, = np.nonzero(a_length == i)
                 if len(a_sel) == 0: continue
 
-                #reorient tangent
-                if i & 0b1: #odd
+                # reorient tangent
+                if i & 0b1:  # odd
                     mem_dir = -a_dir_bitan[a_sel]
                     a_dir_bitan[a_sel] = -a_dir[a_sel]
                 else:
@@ -444,13 +452,27 @@ def __create_view_matrices(bp):
                     a_dir_bitan[a_sel] = a_dir[a_sel]
                 a_dir[a_sel] = mem_dir
 
-                #set length
-                a_length[a_sel] = (i >> 1) - 3 #map to 40 and 41
+                # set length
+                a_length[a_sel] = (i >> 1) - 3  # map to 40 and 41
+
+            # upright volume init loop
+            for i in range(92, 93):
+                # block selection
+                a_sel, = np.nonzero(a_length == i)
+                if len(a_sel) == 0: continue
+
+                # reorient directions
+                mem_dir = a_dir_tan[a_sel]
+                a_dir_tan[a_sel] = a_dir[a_sel]
+                a_dir[a_sel] = mem_dir
+
+                # set length
+                a_length[a_sel] = 42
 
 
-            #volume loop
-            volumesize = {40: 3, 41: 5}
-            volumedepth = {40: 2, 41: 3}
+            # volume loop
+            volumesize = {40: 3, 41: 5, 42: 3}
+            volumedepth = {40: 2, 41: 3, 42: 3}
             for i in range(40, 42):
                 #block selection
                 a_sel, = np.nonzero(a_length == i)
@@ -810,12 +832,12 @@ async def speed_test(fname):
     print("t5:", np.sum(t5)/testlen, "dt:", np.sum(np.abs(t5-np.sum(t5)/testlen))/testlen)
     
     blueprint = bp["Blueprint"]
-    #show image
+    # show image
     cv2.imshow("Blueprint", main_img)
 
 if __name__ == "__main__":
-    #file
-    fname = "../example blueprints/IFV.blueprint"
+    # file
+    fname = "../example blueprints/Carrier.blueprint"
 
     import asyncio
     
