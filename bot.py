@@ -46,24 +46,25 @@ async def on_ready():
     for guild in bot.guilds:
         print(f"{guild.name} (id: {guild.id})")
 
-    #set activity text
-    act = discord.Game("Create simplified images of blueprint files. Use bp!print to print last file. Use bp!help for commands. Private chat supported.")
+    # set activity text
+    act = discord.Game("Create simplified images of blueprint files. Use bp!print to print last file. "
+                       "Use bp!help for commands. Private chat supported.")
     await bot.change_presence(status=discord.Status.online, activity=act)
 
 
 @bot.event
 async def on_message(message):
     """Handle all messages"""
-    #skip all bot messages
+    # skip all bot messages
     if message.author.bot:
         return 0
 
-    #mode
+    # mode
     mode = GCM.getMode(message.guild, message.channel)
-    if (mode == 1) or ( ((mode == 2) or (mode is None)) and bot.user.mentioned_in(message) ):
+    if (mode == 1) or (((mode == 2) or (mode is None)) and bot.user.mentioned_in(message)):
         bpcount = await process_attachments(message)
 
-    #command processing
+    # command processing
     await bot.process_commands(message)
 
 
@@ -86,13 +87,12 @@ async def cmd_mode(ctx, mode):
     if ctx.guild is None:
         return
 
-    #check mode
+    # check mode
     if not GCM.setMode(ctx.guild, ctx.channel, mode):
         raise commands.errors.BadArgument("Mode could not be set")
     
-    await ctx.message.add_reaction("\U0001f197") #:ok:
+    await ctx.message.add_reaction("\U0001f197")  # :ok:
     
-
 
 @bot.command(name="test", help="For testing stuff. (Author only)")
 @commands.check(cc_is_author)
@@ -109,9 +109,9 @@ async def on_command_error(ctx, error):
     #[print(k, v) for k,v in vars(error).items()]
     if type(error) == commands.errors.CheckFailure:
         # permission error
-        await ctx.message.add_reaction("\U0001f4a9") # :poop:
+        await ctx.message.add_reaction("\U0001f4a9")  # :poop:
     else:
-        await ctx.message.add_reaction("\u2753") # :question:
+        await ctx.message.add_reaction("\u2753")  # :question:
 
 
 @bot.event
@@ -119,10 +119,10 @@ async def on_reaction_add(reaction, user):
     """React to thumbs down reaction on image"""
     #print("Found reaction", reaction, "from user", user)
     if reaction.message.author == bot.user:
-        if reaction.emoji == "\U0001f44e": #:thumbsdown:
+        if reaction.emoji == "\U0001f44e":  # :thumbsdown:
             print("Thumbs down on bot mesasge")
     #else:
-    #    if reaction.emoji == "\U0001f44e": #:thumbsdown:
+    #    if reaction.emoji == "\U0001f44e":  # :thumbsdown:
     #        print("Thumbs down")
 
 
@@ -130,16 +130,16 @@ async def process_attachments(message):
     """Checks, processes and sends attachments of message.
     Returns processed blueprint count"""
     global lastError
-    #already checked in on_message
-    #skip messages from self
+    # already checked in on_message
+    # skip messages from self
     #if message.author == bot.user:
     #    return 0
-    #skip all bot messages
+    # skip all bot messages
     #if message.author.bot:
     #    return 0
 
     bpcount = 0
-    #iterate attachments
+    # iterate attachments
     for attachm in message.attachments:
         if attachm.filename.endswith(".blueprint") or attachm.filename.endswith(".blueprint_ba"):
             bpcount += 1
@@ -163,11 +163,21 @@ async def process_attachments(message):
                 f.write(content)
             # process blueprint
             try:
-                combined_img_file = await bp_to_imgV2.process_blueprint(filename)
+                combined_img_file, timing = await bp_to_imgV2.process_blueprint(filename)
                 # files
                 file = discord.File(combined_img_file)
                 # upload
-                await message.channel.send(file=file)
+                sendtiming = None
+                for keyword in ["stats", "statistics", "timing", "time"]:
+                    if keyword in message.content:
+                        sendtiming = f"JSON parse completed in {timing[0]:.3f}s.\n" \
+                                     f"Conversion completed in {timing[1]:.3f}s.\n" \
+                                     f"Infos gathered in {timing[2]:.3f}s.\n" \
+                                     f"View matrices completed in {timing[3]:.3f}s.\n" \
+                                     f"Image creation completed in {timing[4]:.3f}s.\n" \
+                                     f"Total time: {(timing[0]+timing[1]+timing[2]+timing[3]+timing[4]):.3f}s"
+                        break
+                await message.channel.send(content=sendtiming, file=file)
                 # delete image file
                 os.remove(combined_img_file)
             except:

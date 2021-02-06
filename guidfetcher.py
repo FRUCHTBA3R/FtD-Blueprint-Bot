@@ -22,7 +22,7 @@ for root, dirs, files in os.walk(ftdmodsfolder):
             with open(c_file, "r") as f:
                 try:
                     data = json.loads(f.read())
-                    data = {v:{"Name":k} for k,v in data.items()}
+                    data = {v: {"Name": k} for k, v in data.items()}
                     extrainvguiddict.update(data)
                 except:
                     print("json load failed for file:", c_file)
@@ -41,22 +41,46 @@ for root, dirs, files in os.walk(ftdmodsfolder):
                     print("json load failed for file:", c_file)
                     data = {}
                 if "ComponentId" in data:
+                    sizeinfo = data.get("SizeInfo")
+                    if type(sizeinfo) is dict:
+                        sizeinfo = {"SizeNeg": sizeinfo.get("SizeNeg"), "SizePos": sizeinfo.get("SizePos")}
+
                     if data["ComponentId"]["Name"] in guiddict:
-                        extrainvguiddict[guiddict[data["ComponentId"]["Name"]]] = {"Name":data["ComponentId"]["Name"]}
-                    guiddict[data["ComponentId"]["Name"]] = data["ComponentId"]["Guid"]
+                        old_si = guiddict[data["ComponentId"]["Name"]].get("SizeInfo")
+                        sizeinfo = sizeinfo if old_si is None else old_si
+                        extrainvguiddict[guiddict[data["ComponentId"]["Name"]]["GUID"]] = \
+                            {"Name": data["ComponentId"]["Name"], "SizeInfo": sizeinfo}
+                    guiddict[data["ComponentId"]["Name"]] = {"GUID": data["ComponentId"]["Guid"], "SizeInfo": sizeinfo}
+
 # invert dict with values as dict
-invguiddict = {v:{"Name":k} for k,v in guiddict.items()}
+invguiddict = {v["GUID"]: {"Name": k, "SizeInfo": v["SizeInfo"]} for k, v in guiddict.items()}
 if len(extrainvguiddict) > 0:
     print(len(invguiddict), "&", len(extrainvguiddict))
-    invguiddict.update(extrainvguiddict)
+    # invguiddict.update(extrainvguiddict)
+    for k in extrainvguiddict:
+        if k not in invguiddict:
+            invguiddict[k] = extrainvguiddict[k]
     print("->", len(invguiddict))
-
 
 # load config
 materials = None
 materials_file = "materials.json"
 with open(materials_file, "r") as f:
     materials = json.loads(f.read())
+
+# create positive size dict [x][y][z]
+#sizedict_pos = {0: {0: {0: 0}}}
+#sizedict_pos_next_index = 1
+
+# create negative size dict [x][y][z]
+#sizedict_neg = {0: {0: {0: 0}}}
+#sizedict_neg_next_index = 1
+
+# create id to size dict
+sizeiddict = {0: {0: {0: {0: {0: {0: 1}}}}}}
+sizeiddict_nextid = 2
+
+# create sizedict (old)
 sizedict = {"1m": 1, "2m": 2, "3m": 3, "4m": 4, "6m": 6, "8m": 8,
             "1x1": 1, "3x3": 33, "5x5": 34, "7x7": 35,
             "2m3x3": 40, "3m5x5": 41, "3m3x3": 42, "2m2x2": 43,
@@ -66,20 +90,77 @@ sizedict = {"1m": 1, "2m": 2, "3m": 3, "4m": 4, "6m": 6, "8m": 8,
             "3x3Upright": 90, "5x5Upright": 91, "3m3x3Upright": 92,
             }
 
-#map
+
+# sizedict update function
+def update_sizedict(elem):
+    """Update positiv and negativ sizedict with contents of elem. Set elem['SizeIdPos'] and elem['SizeIdNeg']."""
+    global sizeiddict, sizeiddict_nextid
+    sizeinfo = elem.get("SizeInfo")
+    if sizeinfo is None:
+        elem["SizeId"] = 1
+        if "SizeInfo" in elem:
+            del elem["SizeInfo"]
+        return
+    # positive
+    # size = sizeinfo["SizePos"]
+    # x, y, z = size["x"], size["y"], size["z"]
+    # if not (x in sizedict_pos and y in sizedict_pos[x] and z in sizedict_pos[x][y]):
+    #     if x not in sizedict_pos:
+    #         sizedict_pos[x] = {y: {z: 0}}
+    #     if y not in sizedict_pos[x]:
+    #         sizedict_pos[x][y] = {z: 0}
+    #     sizedict_pos[x][y][z] = sizedict_pos_next_index
+    #     elem["SizeIdPos"] = sizedict_pos_next_index
+    #     sizedict_pos_next_index += 1
+    # else:
+    #     elem["SizeIdPos"] = sizedict_pos[x][y][z]
+    # # negative
+    # size = sizeinfo["SizeNeg"]
+    # x, y, z = size["x"], size["y"], size["z"]
+    # if not (x in sizedict_neg and y in sizedict_neg[x] and z in sizedict_neg[x][y]):
+    #     if x not in sizedict_neg:
+    #         sizedict_neg[x] = {y: {z: 0}}
+    #     if y not in sizedict_neg[x]:
+    #         sizedict_neg[x][y] = {z: 0}
+    #     sizedict_neg[x][y][z] = sizedict_neg_next_index
+    #     elem["SizeIdNeg"] = sizedict_neg_next_index
+    #     sizedict_neg_next_index += 1
+    # else:
+    #     elem["SizeIdNeg"] = sizedict_neg[x][y][z]
+
+    # read
+    precurrent = None
+    current = sizeiddict
+    for sel in ["SizePos", "SizeNeg"]:
+        size = sizeinfo[sel]
+        for i in ["x", "y", "z"]:
+            if size[i] not in current:
+                current[size[i]] = {}
+            precurrent = current
+            current = current[size[i]]
+    if type(current) is dict:
+        precurrent[size["z"]] = sizeiddict_nextid
+        sizeiddict_nextid += 1
+    elem["SizeId"] = precurrent[size["z"]]
+    del elem["SizeInfo"]
+
+
+# map
 for k in invguiddict:
-    v = invguiddict[k]["Name"].lower().replace("(", "").replace(")", "")
+    elem = invguiddict[k]
+    update_sizedict(elem)
+    v = elem["Name"].lower().replace("(", "").replace(")", "")
     v = f" {v} "
-    invguiddict[k]["Material"] = "Missing"  # default material
-    invguiddict[k]["Length"] = 1  # default length
+    elem["Material"] = "Missing"  # default material
+    elem["Length"] = 1  # default length
     for m in materials:
         ml = f" {m.lower()} "
         if v.find(ml) >= 0:
-            invguiddict[k]["Material"] = m
+            elem["Material"] = m
             break
     for size in sizedict:
         if v.find(size) >= 0:
-            invguiddict[k]["Length"] = sizedict[size]
+            elem["Length"] = sizedict[size]
             break
 
     # wheels
@@ -139,6 +220,9 @@ for k in invguiddict:
         invguiddict[k]["Length"] = 2
         continue
 
+    # engines
+
+
 
 # manual fixes
 invguiddict["867cea4e-6ea4-4fe2-a4a1-b6230308f8f1"]["Length"] = 4
@@ -167,14 +251,36 @@ invguiddict["09d28633-cff1-4cc4-9e11-161f350dbf60"]["Length"] = sizedict["3x3"] 
 
 
 # missing
-invguiddict["missing"] = {"Name": "Missing", "Length": 1, "Material": "Missing"}
-invguiddict["missing rotation"] = {"Name": "Missing Rotation", "Length": 1, "Material": "Missing Rotation"}
+invguiddict["missing"] = {"Name": "Missing", "Length": 1, "Material": "Missing", "SizeId": 0}
+invguiddict["missing rotation"] = {"Name": "Missing Rotation", "Length": 1, "Material": "Missing Rotation", "SizeId": 0}
 
-# save
+# save blocks
 blocks_file = "blocks.json"
 with open(blocks_file, "w") as f:
     json.dump(invguiddict, f, indent="\t", sort_keys=True)
-            
+
+# save sizedict
+sizedict_save = {}  # {"SizeIdPos": {}, "SizeIdNeg": {}}
+for x in sizeiddict:
+    for y in sizeiddict[x]:
+        for z in sizeiddict[x][y]:
+            for a in sizeiddict[x][y][z]:
+                for b in sizeiddict[x][y][z][a]:
+                    for c in sizeiddict[x][y][z][a][b]:
+                        sizedict_save[sizeiddict[x][y][z][a][b][c]] = {"xp": x, "yp": y, "zp": z,
+                                                                       "xn": a, "yn": b, "zn": c}
+#for x in sizedict_pos:
+#    for y in sizedict_pos[x]:
+#        for z in sizedict_pos[x][y]:
+#            sizedict_save["SizeIdPos"][sizedict_pos[x][y][z]] = {"x": x, "y": y, "z": z}
+#for x in sizedict_neg:
+#    for y in sizedict_neg[x]:
+#        for z in sizedict_neg[x][y]:
+#            sizedict_save["SizeIdNeg"][sizedict_neg[x][y][z]] = {"x": x, "y": y, "z": z}
+sizedict_file = "size_id_dictionary.json"
+with open(sizedict_file, "w") as f:
+    json.dump(sizedict_save, f, indent="\t", sort_keys=True)
+
 # print
 print(len(guiddict), "->", len(invguiddict))
 # for v in list(invguiddict.values())[100:200]:

@@ -73,6 +73,11 @@ for k in materials:
     if "Invisible" not in materials[k]:
         materials[k]["Invisible"] = False
     materials[k]["Color"] = np.array(materials[k]["Color"])
+# load size id dictionary
+with open("size_id_dictionary.json", "r") as f:
+    size_id_dict = json.load(f)
+size_id_dict = {int(k): v for k, v in size_id_dict.items()}
+
 
 
 # Blueprint:
@@ -124,7 +129,7 @@ async def process_blueprint(fname, silent=False, standaloneMode=False):
     if standaloneMode:
         return bp, [ts1, ts2, ts3, ts4, ts5], main_img
     else:
-        return main_img_fname
+        return main_img_fname, [ts1, ts2, ts3, ts4, ts5]
 
 
 def __convert_blueprint(bp):
@@ -170,6 +175,9 @@ def __convert_blueprint(bp):
         
         # create new arrays
         blockcount = blueprint["BlockCount"]
+        if blockcount != len(blueprint["BLP"]):
+            blockcount = len(blueprint["BLP"])
+            print("[WARN] Block count is not equal to length of block position array.")
         #blockguid_array = np.zeros(blockcount, dtype="<U36") not using guid here
         blockid_array = np.array(blueprint["BlockIds"], dtype=int)
         # block loop
@@ -219,26 +227,35 @@ def __convert_blueprint(bp):
 
 def __fetch_infos(bp):
     """Gathers important information of blueprint"""
+    def safe_max(a, b):
+        """Returns max(a,b) or the one which is not None or None if both are None."""
+        if a is None:
+            return b
+        if b is None:
+            return a
+        return max(a, b)
+
     infos = {"Name": bp.get("Name")}
     if infos["Name"] is None:
         infos["Name"] = "Unknown"
-    infos["Blocks"] = bp.get("SavedTotalBlockCount")
+    infos["Blocks"] = safe_max(bp.get("SavedTotalBlockCount"), bp["Blueprint"].get("TotalBlockCount"))
     if infos["Blocks"] is None:
+        print("Error while gathering blueprint block count info.")
         infos["Blocks"] = "?"
     try:
         infos["Cost"] = str(round(bp.get("SavedMaterialCost")))
     except Exception as err:
-        print("Error while gathering blueprint info:", err)
+        print("Error while gathering blueprint cost info:", err)
         infos["Cost"] = "?"
     try:
         infos["Size"] = "W:{0} H:{1} L:{2}".format(*bp.get("Blueprint").get("Size"))
     except Exception as err:
-        print("Error while gathering blueprint info:", err)
+        print("Error while gathering blueprint size info:", err)
         infos["Size"] = "?"
     try:
         infos["Author"] = bp.get("Blueprint").get("AuthorDetails").get("CreatorReadableName")
     except Exception as err:
-        print("Error while gathering blueprint info:", err)
+        print("Error while gathering blueprint author info:", err)
         infos["Author"] = "Unknown"
     return infos
 
@@ -248,175 +265,83 @@ def __create_view_matrices(bp):
     def blueprint_iter(blueprint, mincords, blueprint_desc = "main"):
         """Iterate blueprint and sub blueprints"""
         nonlocal actual_min_cords
-        # subtract min coords
+        # subtract min cords
         blueprint["BLP"] -= mincords
         #print("ViewMat at", blueprint_desc)
 
-        if True:
-            # numpyfication
-            a_guid = np.vectorize(itemdict.get)(blueprint["BlockIds"])
-            missing_block = blocks.get("missing")
-            a_length = np.vectorize(lambda x: blocks.get(x, missing_block).get("Length"))(a_guid)
-            a_pos = blueprint["BLP"]
-            a_dir = blueprint["RotNormal"][blueprint["BLR"]]
-            a_dir_tan = blueprint["RotTangent"][blueprint["BLR"]]
-            a_dir_bitan = blueprint["RotBitangent"][blueprint["BLR"]]
-            a_material = np.vectorize(lambda x: blocks.get(x, missing_block).get("Material"))(a_guid)
-            a_color = np.vectorize(lambda x: materials.get(x)["Color"], signature="()->(n)")(a_material)
-            a_invisible = np.vectorize(lambda x: materials.get(x)["Invisible"])(a_material)
+        # numpyfication
+        a_guid = np.vectorize(itemdict.get)(blueprint["BlockIds"])
+        missing_block = blocks.get("missing")
+        a_length = np.vectorize(lambda x: blocks.get(x, missing_block).get("Length"))(a_guid)
+        # new version
+        a_sizeid = np.vectorize(lambda x: blocks.get(x, missing_block).get("SizeId"))(a_guid)
+        a_sizeid_neg = np.vectorize(lambda x: blocks.get(x, missing_block).get("SizeIdNeg"))(a_guid)
+        # end new
+        a_pos = blueprint["BLP"]
+        a_dir = blueprint["RotNormal"][blueprint["BLR"]]
+        a_dir_tan = blueprint["RotTangent"][blueprint["BLR"]]
+        a_dir_bitan = blueprint["RotBitangent"][blueprint["BLR"]]
+        a_material = np.vectorize(lambda x: blocks.get(x, missing_block).get("Material"))(a_guid)
+        a_color = np.vectorize(lambda x: materials.get(x)["Color"], signature="()->(n)")(a_material)
+        a_invisible = np.vectorize(lambda x: materials.get(x)["Invisible"])(a_material)
 
-            def fill_color_and_height(color_mat, height_mat, sel_arr, pos_sel_arr, axisX, axisZ, axisY):
-                """Fills color_mat and height_mat with selected blocks (sel_arr as index and pos_sel_arr as position).
-                axisY is the height axis."""
-                nonlocal a_color, a_invisible
-                # create slicing indices for axes
-                axisA = axisX
-                axisB = axisZ+1 if axisZ > axisX else None
-                axisS = axisZ - axisX
-                
-                # selection of higher height
-                if height_mat.shape[0] <= np.max(pos_sel_arr[:, axisX]):
-                    errortext = f"x Axis overflow: {height_mat.shape[0]} to {np.max(pos_sel_arr[:, axisX])}\n" \
-                                f"Block guid: {a_guid[sel_arr[np.argmax(pos_sel_arr[:, axisX])]]}"
-                    raise IndexError(errortext)
-                if height_mat.shape[1] <= np.max(pos_sel_arr[:, axisZ]):
-                    errortext = f"x Axis overflow: {height_mat.shape[1]} to {np.max(pos_sel_arr[:, axisZ])}\n" \
-                                f"Block guid: {a_guid[sel_arr[np.argmax(pos_sel_arr[:, axisZ])]]}"
-                    raise IndexError(errortext)
-                height_sel_arr = height_mat[pos_sel_arr[:, axisX], pos_sel_arr[:, axisZ]] < pos_sel_arr[:, axisY]
-                # position of selection
-                height_pos_sel_arr = pos_sel_arr[height_sel_arr]
-                
-                # select only max height for each x,z coord
-                # sort index of heights
-                sorted_index = np.argsort(height_pos_sel_arr[:, axisY], axis=0)[::-1]
-                # sort pos
-                sorted_pos = height_pos_sel_arr[sorted_index]
-                # find index of unique (x,z) coords
-                unique_pos, unique_index = np.unique(sorted_pos[:, axisA:axisB:axisS], return_index=True, axis=0)
-                
-                # coloring
-                color_mat[unique_pos[:, 0], unique_pos[:, 1]] = a_color[sel_arr][height_sel_arr][sorted_index][unique_index]
-                # new height
-                height_mat[unique_pos[:, 0], unique_pos[:, 1]] = sorted_pos[:, axisY][unique_index]
+        def fill_color_and_height(color_mat, height_mat, sel_arr, pos_sel_arr, axisX, axisZ, axisY):
+            """Fills color_mat and height_mat with selected blocks (sel_arr as index and pos_sel_arr as position).
+            axisY is the height axis."""
+            nonlocal a_color, a_invisible
+            # create slicing indices for axes
+            axisA = axisX
+            axisB = axisZ+1 if axisZ > axisX else None
+            axisS = axisZ - axisX
 
+            # selection of higher height
+            if height_mat.shape[0] <= np.max(pos_sel_arr[:, axisX]):
+                errortext = f"x Axis overflow: {height_mat.shape[0]} to {np.max(pos_sel_arr[:, axisX])}\n" \
+                            f"Block guid: {a_guid[sel_arr[np.argmax(pos_sel_arr[:, axisX])]]}"
+                raise IndexError(errortext)
+            if height_mat.shape[1] <= np.max(pos_sel_arr[:, axisZ]):
+                errortext = f"x Axis overflow: {height_mat.shape[1]} to {np.max(pos_sel_arr[:, axisZ])}\n" \
+                            f"Block guid: {a_guid[sel_arr[np.argmax(pos_sel_arr[:, axisZ])]]}"
+                raise IndexError(errortext)
+            height_sel_arr = height_mat[pos_sel_arr[:, axisX], pos_sel_arr[:, axisZ]] < pos_sel_arr[:, axisY]
+            # position of selection
+            height_pos_sel_arr = pos_sel_arr[height_sel_arr]
 
-            # upright beam init loop (truss beams)
-            for i in range(61, 65):
-                # block selection
-                a_sel, = np.nonzero(a_length == i)
-                if len(a_sel) == 0: continue
-                
-                # set length & rot
-                a_length[a_sel] -= 60
-                a_dir[a_sel] = a_dir_tan[a_sel]
+            # select only max height for each x,z coord
+            # sort index of heights
+            sorted_index = np.argsort(height_pos_sel_arr[:, axisY], axis=0)[::-1]
+            # sort pos
+            sorted_pos = height_pos_sel_arr[sorted_index]
+            # find index of unique (x,z) cords
+            unique_pos, unique_index = np.unique(sorted_pos[:, axisA:axisB:axisS], return_index=True, axis=0)
 
+            # coloring
+            color_mat[unique_pos[:, 0], unique_pos[:, 1]] = a_color[sel_arr][height_sel_arr][sorted_index][unique_index]
+            # new height
+            height_mat[unique_pos[:, 0], unique_pos[:, 1]] = sorted_pos[:, axisY][unique_index]
 
-            # sideways beam init loop
-            for i in [80, 81]:
-                # block selection
-                a_sel, = np.nonzero(a_length == i)
-                if len(a_sel) == 0: continue
-                
-                # set length & rot
-                a_length[a_sel] = 2
-                if i & 0b1: # odd is mirrored
-                    a_dir[a_sel] = -a_dir_bitan[a_sel]
-                else:
-                    a_dir[a_sel] = a_dir_bitan[a_sel]
+        # positiv size
+        for sizeid in size_id_dict:
+            # block selection
+            a_sel, = np.nonzero(a_sizeid == sizeid)
+            if len(a_sel) == 0:
+                continue
 
-            # centered beam init loop
-            centerbeamsizes = {50: 5, 51: 7, 52: 9, 70: 3}
-            for i in range(50, 53):
-                # block selection
-                a_sel, = np.nonzero(a_length == i)
-                if len(a_sel) == 0: continue
+            # load size
+            xp = size_id_dict[sizeid]["xp"]
+            yp = size_id_dict[sizeid]["yp"]
+            zp = size_id_dict[sizeid]["zp"]
+            xn = size_id_dict[sizeid]["xn"]
+            yn = size_id_dict[sizeid]["yn"]
+            zn = size_id_dict[sizeid]["zn"]
 
-                cbeam_len = centerbeamsizes[i]
-                
-                # inital offset
-                a_pos[a_sel] -= (cbeam_len >> 1) * (a_dir_bitan[a_sel])
+            # initial position
+            a_pos[a_sel] -= zn * a_dir[a_sel] + yn * a_dir_tan[a_sel] + xn * a_dir_bitan[a_sel]
 
-                # set length & rot
-                a_length[a_sel] = cbeam_len
-                a_dir[a_sel] = a_dir_bitan[a_sel]
-
-            # centered upright beam init loop
-            for i in [70]:
-                # block selection
-                a_sel, = np.nonzero(a_length == i)
-                if len(a_sel) == 0: continue
-                
-                cbeam_len = centerbeamsizes[i]
-                # initial offset
-                a_pos[a_sel] -= (cbeam_len >> 1) * (a_dir_tan[a_sel])
-
-                # set length & rot
-                a_length[a_sel] = cbeam_len
-                a_dir[a_sel] = a_dir_tan[a_sel]
-
-            # single length loop (also fills centered beams)
-            for i in range(9, 0, -1):
-                # block selection
-                a_sel, = np.nonzero(a_length == i)
-                if len(a_sel) == 0: continue
-                a_pos_sel = a_pos[a_sel]
-                
-                # fill
-                fill_color_and_height(top_color, top_height, a_sel, a_pos_sel, 0, 2, 1)
-                fill_color_and_height(side_color, side_height, a_sel, a_pos_sel, 1, 2, 0)
-                fill_color_and_height(front_color, front_height, a_sel, a_pos_sel, 1, 0, 2)
-
-                # min cords
-                actual_min_cords = np.minimum(np.amin(a_pos, 0), actual_min_cords)
-                
-                # step
-                a_length[a_sel] -= 1
-                a_pos[a_sel] += a_dir[a_sel]
-
-            # sideways area init loop
-            for i in range(82, 86):
-                # block selection
-                a_sel, = np.nonzero(a_length == i)
-                if len(a_sel) == 0: continue
-
-                # reorient tangent
-                if i & 0b1:  # odd
-                    a_dir_bitan[a_sel] = -a_dir[a_sel]
-                else:
-                    a_dir_bitan[a_sel] = a_dir[a_sel]
-
-                # set length
-                a_length[a_sel] = (i >> 1) - 8  # map to 33 and 34
-
-            # upright area init loop
-            for i in range(90, 92):
-                # block selection
-                a_sel, = np.nonzero(a_length == i)
-                if len(a_sel) == 0: continue
-
-                # reorient tangent
-                a_dir_tan[a_sel] = a_dir[a_sel]
-
-                # set length
-                a_length[a_sel] = i - 57
-
-            # area loop
-            areasizes = {33: 3, 34: 5, 35: 7}
-            for i  in range(33, 36):
-                # block selection
-                a_sel, = np.nonzero(a_length == i)
-                if len(a_sel) == 0: continue
-
-                # range & limits
-                arearng = range(areasizes[i])
-                areamax = areasizes[i] - 1
-
-                # initial offset
-                a_pos[a_sel] -= (areamax >> 1) * (a_dir_bitan[a_sel] + a_dir_tan[a_sel])
-                
-                for j in arearng:
-                    for k in arearng:
+            # volume loop
+            for j in range(xp + xn + 1):
+                for k in range(yp + yn + 1):
+                    for l in range(zp + zn + 1):
                         # select position here as loop changes a_pos
                         a_pos_sel = a_pos[a_sel]
                         # fill
@@ -424,164 +349,260 @@ def __create_view_matrices(bp):
                         fill_color_and_height(side_color, side_height, a_sel, a_pos_sel, 1, 2, 0)
                         fill_color_and_height(front_color, front_height, a_sel, a_pos_sel, 1, 0, 2)
                         # min cords
-                        actual_min_cords = np.minimum(np.amin(a_pos, 0), actual_min_cords)
-                        # step
-                        if k < areamax:
-                            if j % 2 == 0:
-                                a_pos[a_sel] += a_dir_bitan[a_sel]
+                        actual_min_cords = np.minimum(np.amin(a_pos_sel, 0), actual_min_cords)
+                        # step in z direction (dir)
+                        if l < zp + zn:
+                            if k & 0b1 == 0:  # even
+                                a_pos[a_sel] += a_dir[a_sel]
                             else:
-                                a_pos[a_sel] -= a_dir_bitan[a_sel]
-                    
-                    # tangential step
-                    a_pos[a_sel] += a_dir_tan[a_sel]
+                                a_pos[a_sel] -= a_dir[a_sel]
+                    # step in y direction (tan)
+                    if k < yp + yn:
+                        if j & 0b1 == 0:  # even
+                            a_pos[a_sel] += a_dir_tan[a_sel]
+                        else:
+                            a_pos[a_sel] -= a_dir_tan[a_sel]
+                # step in x direction (bitan)
+                if j < xp + xn:
+                    a_pos[a_sel] += a_dir_bitan[a_sel]
 
-                # set length to zero
-                a_length[a_sel] = 0
-
-            # sideways volume init loop
-            for i in range(86, 90):
-                # block selection
-                a_sel, = np.nonzero(a_length == i)
-                if len(a_sel) == 0: continue
-
-                # reorient tangent
-                if i & 0b1:  # odd
-                    mem_dir = -a_dir_bitan[a_sel]
-                    a_dir_bitan[a_sel] = -a_dir[a_sel]
-                else:
-                    mem_dir = a_dir_bitan[a_sel]
-                    a_dir_bitan[a_sel] = a_dir[a_sel]
-                a_dir[a_sel] = mem_dir
-
-                # set length
-                a_length[a_sel] = (i >> 1) - 3  # map to 40 and 41
-
-            # upright volume init loop
-            for i in range(92, 93):
-                # block selection
-                a_sel, = np.nonzero(a_length == i)
-                if len(a_sel) == 0: continue
-
-                # reorient directions
-                mem_dir = a_dir_tan[a_sel]
-                a_dir_tan[a_sel] = a_dir[a_sel]
-                a_dir[a_sel] = mem_dir
-
-                # set length
-                a_length[a_sel] = 42
-
-            # volume loop
-            volumesize = {40: 3, 41: 5, 42: 3, 43: 2}
-            volumedepth = {40: 2, 41: 3, 42: 3, 43: 2}
-            for i in range(40, 44):
-                # block selection
-                a_sel, = np.nonzero(a_length == i)
-                if len(a_sel) == 0: continue
-
-                # range & limits
-                arearng = range(volumesize[i])
-                areamax = volumesize[i] - 1
-
-                # note: - a_dir_bitan due to 2x2x2 orientation
-                # inital offset
-                a_pos[a_sel] -= (areamax >> 1) * (-a_dir_bitan[a_sel] + a_dir_tan[a_sel])
-                a_dir_times_vol = volumedepth[i] * a_dir[a_sel]
-                
-                for j in arearng:
-                    for k in arearng:
-                        for l in range(volumedepth[i]):
-                            # select position here as loop changes a_pos
-                            a_pos_sel = a_pos[a_sel]
-                            # fill
-                            fill_color_and_height(top_color, top_height, a_sel, a_pos_sel, 0, 2, 1)
-                            fill_color_and_height(side_color, side_height, a_sel, a_pos_sel, 1, 2, 0)
-                            fill_color_and_height(front_color, front_height, a_sel, a_pos_sel, 1, 0, 2)
-                            # min cords
-                            actual_min_cords = np.minimum(np.amin(a_pos, 0), actual_min_cords)
-                            # step
-                            a_pos[a_sel] += a_dir[a_sel]
-                            
-                        a_pos[a_sel] -= a_dir_times_vol
-                        # bitangential step
-                        if k < areamax:
-                            if j % 2 == 0:
-                                a_pos[a_sel] -= a_dir_bitan[a_sel]
-                            else:
-                                a_pos[a_sel] += a_dir_bitan[a_sel]
-                    
-                    # tangential step
-                    a_pos[a_sel] += a_dir_tan[a_sel]
-
-                # set length to zero
-                a_length[a_sel] = 0
-
-            # are all length values zero
-            if np.any(a_length != 0):
-                print("[WARN] Blocks with unknown / unimplemented length were found!")
+        # old: !!min cords dont use a_pos_sel!!
+        # # upright beam init loop (truss beams)
+        # for i in range(61, 65):
+        #     # block selection
+        #     a_sel, = np.nonzero(a_length == i)
+        #     if len(a_sel) == 0: continue
+        #
+        #     # set length & rot
+        #     a_length[a_sel] -= 60
+        #     a_dir[a_sel] = a_dir_tan[a_sel]
+        #
+        # # sideways beam init loop
+        # for i in [80, 81]:
+        #     # block selection
+        #     a_sel, = np.nonzero(a_length == i)
+        #     if len(a_sel) == 0: continue
+        #
+        #     # set length & rot
+        #     a_length[a_sel] = 2
+        #     if i & 0b1: # odd is mirrored
+        #         a_dir[a_sel] = -a_dir_bitan[a_sel]
+        #     else:
+        #         a_dir[a_sel] = a_dir_bitan[a_sel]
+        #
+        # # centered beam init loop
+        # centerbeamsizes = {50: 5, 51: 7, 52: 9, 70: 3}
+        # for i in range(50, 53):
+        #     # block selection
+        #     a_sel, = np.nonzero(a_length == i)
+        #     if len(a_sel) == 0: continue
+        #
+        #     cbeam_len = centerbeamsizes[i]
+        #
+        #     # inital offset
+        #     a_pos[a_sel] -= (cbeam_len >> 1) * (a_dir_bitan[a_sel])
+        #
+        #     # set length & rot
+        #     a_length[a_sel] = cbeam_len
+        #     a_dir[a_sel] = a_dir_bitan[a_sel]
+        #
+        # # centered upright beam init loop
+        # for i in [70]:
+        #     # block selection
+        #     a_sel, = np.nonzero(a_length == i)
+        #     if len(a_sel) == 0: continue
+        #
+        #     cbeam_len = centerbeamsizes[i]
+        #     # initial offset
+        #     a_pos[a_sel] -= (cbeam_len >> 1) * (a_dir_tan[a_sel])
+        #
+        #     # set length & rot
+        #     a_length[a_sel] = cbeam_len
+        #     a_dir[a_sel] = a_dir_tan[a_sel]
+        #
+        # # single length loop (also fills centered beams)
+        # for i in range(9, 0, -1):
+        #     # block selection
+        #     a_sel, = np.nonzero(a_length == i)
+        #     if len(a_sel) == 0:
+        #         continue
+        #     a_pos_sel = a_pos[a_sel]
+        #
+        #     # fill
+        #     fill_color_and_height(top_color, top_height, a_sel, a_pos_sel, 0, 2, 1)
+        #     fill_color_and_height(side_color, side_height, a_sel, a_pos_sel, 1, 2, 0)
+        #     fill_color_and_height(front_color, front_height, a_sel, a_pos_sel, 1, 0, 2)
+        #
+        #     # min cords
+        #     actual_min_cords = np.minimum(np.amin(a_pos, 0), actual_min_cords)
+        #
+        #     # step
+        #     a_length[a_sel] -= 1
+        #     a_pos[a_sel] += a_dir[a_sel]
+        #
+        # # sideways area init loop
+        # for i in range(82, 86):
+        #     # block selection
+        #     a_sel, = np.nonzero(a_length == i)
+        #     if len(a_sel) == 0: continue
+        #
+        #     # reorient tangent
+        #     if i & 0b1:  # odd
+        #         a_dir_bitan[a_sel] = -a_dir[a_sel]
+        #     else:
+        #         a_dir_bitan[a_sel] = a_dir[a_sel]
+        #
+        #     # set length
+        #     a_length[a_sel] = (i >> 1) - 8  # map to 33 and 34
+        #
+        # # upright area init loop
+        # for i in range(90, 92):
+        #     # block selection
+        #     a_sel, = np.nonzero(a_length == i)
+        #     if len(a_sel) == 0: continue
+        #
+        #     # reorient tangent
+        #     a_dir_tan[a_sel] = a_dir[a_sel]
+        #
+        #     # set length
+        #     a_length[a_sel] = i - 57
+        #
+        # # area loop
+        # areasizes = {33: 3, 34: 5, 35: 7}
+        # for i  in range(33, 36):
+        #     # block selection
+        #     a_sel, = np.nonzero(a_length == i)
+        #     if len(a_sel) == 0: continue
+        #
+        #     # range & limits
+        #     arearng = range(areasizes[i])
+        #     areamax = areasizes[i] - 1
+        #
+        #     # initial offset
+        #     a_pos[a_sel] -= (areamax >> 1) * (a_dir_bitan[a_sel] + a_dir_tan[a_sel])
+        #
+        #     for j in arearng:
+        #         for k in arearng:
+        #             # select position here as loop changes a_pos
+        #             a_pos_sel = a_pos[a_sel]
+        #             # fill
+        #             fill_color_and_height(top_color, top_height, a_sel, a_pos_sel, 0, 2, 1)
+        #             fill_color_and_height(side_color, side_height, a_sel, a_pos_sel, 1, 2, 0)
+        #             fill_color_and_height(front_color, front_height, a_sel, a_pos_sel, 1, 0, 2)
+        #             # min cords
+        #             actual_min_cords = np.minimum(np.amin(a_pos, 0), actual_min_cords)
+        #             # step
+        #             if k < areamax:
+        #                 if j % 2 == 0:
+        #                     a_pos[a_sel] += a_dir_bitan[a_sel]
+        #                 else:
+        #                     a_pos[a_sel] -= a_dir_bitan[a_sel]
+        #
+        #         # tangential step
+        #         a_pos[a_sel] += a_dir_tan[a_sel]
+        #
+        #     # set length to zero
+        #     a_length[a_sel] = 0
+        #
+        # # sideways volume init loop
+        # for i in range(86, 90):
+        #     # block selection
+        #     a_sel, = np.nonzero(a_length == i)
+        #     if len(a_sel) == 0: continue
+        #
+        #     # reorient tangent
+        #     if i & 0b1:  # odd
+        #         mem_dir = -a_dir_bitan[a_sel]
+        #         a_dir_bitan[a_sel] = -a_dir[a_sel]
+        #     else:
+        #         mem_dir = a_dir_bitan[a_sel]
+        #         a_dir_bitan[a_sel] = a_dir[a_sel]
+        #     a_dir[a_sel] = mem_dir
+        #
+        #     # set length
+        #     a_length[a_sel] = (i >> 1) - 3  # map to 40 and 41
+        #
+        # # upright volume init loop
+        # for i in range(92, 93):
+        #     # block selection
+        #     a_sel, = np.nonzero(a_length == i)
+        #     if len(a_sel) == 0: continue
+        #
+        #     # reorient directions
+        #     mem_dir = a_dir_tan[a_sel]
+        #     a_dir_tan[a_sel] = a_dir[a_sel]
+        #     a_dir[a_sel] = mem_dir
+        #
+        #     # set length
+        #     a_length[a_sel] = 42
+        #
+        # # volume loop
+        # volumesize = {40: 3, 41: 5, 42: 3, 43: 2}
+        # volumedepth = {40: 2, 41: 3, 42: 3, 43: 2}
+        # for i in range(40, 44):
+        #     # block selection
+        #     a_sel, = np.nonzero(a_length == i)
+        #     if len(a_sel) == 0: continue
+        #
+        #     # range & limits
+        #     arearng = range(volumesize[i])
+        #     areamax = volumesize[i] - 1
+        #
+        #     # note: - a_dir_bitan due to 2x2x2 orientation
+        #     # inital offset
+        #     a_pos[a_sel] -= (areamax >> 1) * (-a_dir_bitan[a_sel] + a_dir_tan[a_sel])
+        #     a_dir_times_vol = volumedepth[i] * a_dir[a_sel]
+        #
+        #     for j in arearng:
+        #         for k in arearng:
+        #             for l in range(volumedepth[i]):
+        #                 # select position here as loop changes a_pos
+        #                 a_pos_sel = a_pos[a_sel]
+        #                 # fill
+        #                 fill_color_and_height(top_color, top_height, a_sel, a_pos_sel, 0, 2, 1)
+        #                 fill_color_and_height(side_color, side_height, a_sel, a_pos_sel, 1, 2, 0)
+        #                 fill_color_and_height(front_color, front_height, a_sel, a_pos_sel, 1, 0, 2)
+        #                 # min cords
+        #                 actual_min_cords = np.minimum(np.amin(a_pos, 0), actual_min_cords)
+        #                 # step
+        #                 a_pos[a_sel] += a_dir[a_sel]
+        #
+        #             a_pos[a_sel] -= a_dir_times_vol
+        #             # bitangential step
+        #             if k < areamax:
+        #                 if j % 2 == 0:
+        #                     a_pos[a_sel] -= a_dir_bitan[a_sel]
+        #                 else:
+        #                     a_pos[a_sel] += a_dir_bitan[a_sel]
+        #
+        #         # tangential step
+        #         a_pos[a_sel] += a_dir_tan[a_sel]
+        #
+        #     # set length to zero
+        #     a_length[a_sel] = 0
+        #
+        # # are all length values zero
+        # if np.any(a_length != 0):
+        #     print("[WARN] Blocks with unknown / unimplemented length were found!")
         
-        
-        else:
-            # block loop
-            for i in range(blueprint["BlockCount"]):
-                b_guid = itemdict[blueprint["BlockIds"][i]]
-                try:
-                    b_length = blocks[b_guid]["Length"]
-                    b_pos = blueprint["BLP"][i]
-                    b_dir = blueprint["RotNormal"][blueprint["BLR"][i]]
-                    b_material = blocks[b_guid]["Material"]
-                    b_color = materials[b_material]["Color"]
-                    b_invisible = materials[b_material]["Invisible"]
-                    if type(b_length) == int:
-                        for l in range(b_length):
-                            #top
-                            if b_pos[1] >= top_height[b_pos[0], b_pos[2]]:
-                                if b_invisible:
-                                    n_color = top_color[b_pos[0], b_pos[2]] + b_color
-                                else: n_color = b_color
-                                top_color[b_pos[0], b_pos[2]] = n_color
-                                top_height[b_pos[0], b_pos[2]] = b_pos[1]
-                            #side
-                            if b_pos[0] >= side_height[b_pos[1], b_pos[2]]:
-                                if b_invisible:
-                                    n_color = side_color[b_pos[1], b_pos[2]] + b_color
-                                else: n_color = b_color
-                                side_color[b_pos[1], b_pos[2]] = n_color
-                                side_height[b_pos[1], b_pos[2]] = b_pos[0]
-                            #front
-                            if b_pos[2] >= front_height[b_pos[1], b_pos[0]]:
-                                if b_invisible:
-                                    n_color = front_color[b_pos[1], b_pos[0]] + b_color
-                                else: n_color = b_color
-                                front_color[b_pos[1], b_pos[0]] = n_color
-                                front_height[b_pos[1], b_pos[0]] = b_pos[2]
-                            #min cords
-                            actual_min_cords = np.minimum(actual_min_cords, b_pos)
-                            #step
-                            b_pos += b_dir
-                    else:
-                        print("Length not implemented", b_length)
-                except Exception as e:
-                    print(e)
-                    #print("Missing GUID", b_guid)
-        
-        #sub blueprints iteration
-        for i,sub_bp in enumerate(blueprint["SCs"]):
+        # sub blueprints iteration
+        for i, sub_bp in enumerate(blueprint["SCs"]):
             blueprint_iter(sub_bp, mincords, blueprint_desc+":"+str(i))
 
-    #calculate min cords again, cause "MinCords" are not always true
+    # calculate min cords again, cause "MinCords" are not always true
     actual_min_cords = np.full((3), np.iinfo(np.int32).max, dtype=np.int32)
-    #create matrices
+    # create matrices
     top_color = np.full((*bp["Blueprint"]["Size"][[0,2]], 3), np.array([255, 118, 33]), dtype=np.uint16)
     top_height = np.full(bp["Blueprint"]["Size"][[0,2]], -12345, dtype=int)
     side_color = np.full((*bp["Blueprint"]["Size"][[1,2]], 3), np.array([255, 118, 33]), dtype=np.uint16)
     side_height = np.full(bp["Blueprint"]["Size"][[1,2]], -12345, dtype=int)
     front_color = np.full((*bp["Blueprint"]["Size"][[1,0]], 3), np.array([255, 118, 33]), dtype=np.uint16)
     front_height = np.full(bp["Blueprint"]["Size"][[1,0]], -12345, dtype=int)
-    #blueprint iteration
+    # blueprint iteration
     itemdict = bp["ItemDictionary"]
     blueprint_iter(bp["Blueprint"], bp["Blueprint"]["MinCords"])
-    #re-center based on actual min coordinates
-    #print("Actual min cords:", actual_min_cords)
+    # re-center based on actual min coordinates
+    # print("Actual min cords:", actual_min_cords)
     if np.any(actual_min_cords < bp["Blueprint"]["MinCords"]):
         top_color = np.roll(top_color, (-actual_min_cords[0], -actual_min_cords[2]), (0,1))
         top_height = np.roll(top_height, (-actual_min_cords[0], -actual_min_cords[2]), (0,1))
@@ -590,12 +611,12 @@ def __create_view_matrices(bp):
         front_color = np.roll(front_color, (-actual_min_cords[1], -actual_min_cords[0]), (0,1))
         front_height = np.roll(front_height, (-actual_min_cords[1], -actual_min_cords[0]), (0,1))
 
-    #flip
+    # flip
     side_color = cv2.flip(side_color, 0)
     side_height = cv2.flip(side_height, 0)
     front_color = cv2.flip(front_color, -1)
     front_height = cv2.flip(front_height, -1)
-    #print(side_height)
+    # print(side_height)
     
     return ([top_color, top_height],#, actual_min_cords[1]],
             [side_color, side_height],#, actual_min_cords[0]],
@@ -837,7 +858,7 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     # file
-    fname = "../example blueprints/Crossbones.blueprint"
+    fname = "../example blueprints/MT_RUSA_T34_85.blueprint"
 
     import asyncio
     

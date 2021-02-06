@@ -45,14 +45,11 @@ class GuildconfigManager():
 ##        d[key] = value
 ##        self.saveConfig()
 
-
     def __len__(self):
         return len(self.config)
 
-
     def __iter__(self):
         return self.config.__iter__()
-
 
     def __contains__(self, key):
         d = self.config
@@ -65,11 +62,9 @@ class GuildconfigManager():
         else:
             return d.__contains__(key)
 
-
     def get(self, key):
         """Get self.config[key]."""
         return self.config[key]
-
 
     def setMode(self, guild, channel, mode):
         """Set mode (int or str) for channel of guild. Return True if success"""
@@ -92,18 +87,20 @@ class GuildconfigManager():
         self.config[guild_id][channel_id] = mode
         self.saveConfig()
         return True
-    
 
     def getMode(self, guild, channel):
         """Get mode (int) for channel of guild."""
-        if guild is None or channel is None:
+        if guild is None:
+            return self.modes["on"]
+        if channel is None:
             return None
         guild_id = guild.id
         channel_id = channel.id
         if guild_id is None or channel_id is None:
             return None
         g = self.config.get(str(guild_id))
-        if g is None: return None
+        if g is None:
+            return None
         return g.get(str(channel_id))
 
     
