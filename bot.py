@@ -73,7 +73,7 @@ async def cmd_print(ctx):
     """Find and print last blueprint in channel"""
     print_cmd(ctx)
     async for message in ctx.history(limit=30, oldest_first=False):
-        bpcount = await process_attachments(message)
+        bpcount = await process_attachments(message, ctx)
         if bpcount != 0:
             break
 
@@ -126,7 +126,7 @@ async def on_reaction_add(reaction, user):
     #        print("Thumbs down")
 
 
-async def process_attachments(message):
+async def process_attachments(message, invokemessage=None):
     """Checks, processes and sends attachments of message.
     Returns processed blueprint count"""
     global lastError
@@ -169,7 +169,8 @@ async def process_attachments(message):
                 # upload
                 sendtiming = None
                 for keyword in ["stats", "statistics", "timing", "time"]:
-                    if keyword in message.content:
+                    content_to_search = message.content if invokemessage is None else invokemessage.message.content
+                    if keyword in content_to_search:
                         sendtiming = f"JSON parse completed in {timing[0]:.3f}s.\n" \
                                      f"Conversion completed in {timing[1]:.3f}s.\n" \
                                      f"Infos gathered in {timing[2]:.3f}s.\n" \
