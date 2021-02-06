@@ -1,7 +1,7 @@
 # FtD-Blueprint-Bot
 ***This readme is still beeing worked on***
 
-Discord bot which creates top, front and side view of an uploaded .blueprint file.
+Discord bot for the game [From The Depths](https://fromthedepthsgame.com/) which creates top, front and side view of an uploaded .blueprint file.
 
 ### Installation
 Add it to your server with this [invite link](https://discord.com/api/oauth2/authorize?client_id=759429992521662464&permissions=34880&scope=bot).
