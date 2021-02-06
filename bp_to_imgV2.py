@@ -296,11 +296,11 @@ def __create_view_matrices(bp):
 
             # selection of higher height
             if height_mat.shape[0] <= np.max(pos_sel_arr[:, axisX]):
-                errortext = f"x Axis overflow: {height_mat.shape[0]} to {np.max(pos_sel_arr[:, axisX])}\n" \
+                errortext = f"Axis overflow: {height_mat.shape[0]} to {np.max(pos_sel_arr[:, axisX])}\n" \
                             f"Block guid: {a_guid[sel_arr[np.argmax(pos_sel_arr[:, axisX])]]}"
                 raise IndexError(errortext)
             if height_mat.shape[1] <= np.max(pos_sel_arr[:, axisZ]):
-                errortext = f"x Axis overflow: {height_mat.shape[1]} to {np.max(pos_sel_arr[:, axisZ])}\n" \
+                errortext = f"Axis overflow: {height_mat.shape[1]} to {np.max(pos_sel_arr[:, axisZ])}\n" \
                             f"Block guid: {a_guid[sel_arr[np.argmax(pos_sel_arr[:, axisZ])]]}"
                 raise IndexError(errortext)
             height_sel_arr = height_mat[pos_sel_arr[:, axisX], pos_sel_arr[:, axisZ]] < pos_sel_arr[:, axisY]
@@ -334,14 +334,20 @@ def __create_view_matrices(bp):
             xn = size_id_dict[sizeid]["xn"]
             yn = size_id_dict[sizeid]["yn"]
             zn = size_id_dict[sizeid]["zn"]
+            size_x = xp + xn
+            size_y = yp + yn
+            size_z = zp + zn
 
             # initial position
-            a_pos[a_sel] -= zn * a_dir[a_sel] + yn * a_dir_tan[a_sel] + xn * a_dir_bitan[a_sel]
+            a_pos[a_sel] -= zn * a_dir[a_sel] + yn * a_dir_tan[a_sel] + xp * a_dir_bitan[a_sel]  # here xp instead ...
+            # ... of xn as the negative x axis in game is the bitan direction here
+            a_z_times_dir = a_dir[a_sel] * size_z
+            a_y_times_dir = a_dir_tan[a_sel] * size_y
 
             # volume loop
-            for j in range(xp + xn + 1):
-                for k in range(yp + yn + 1):
-                    for l in range(zp + zn + 1):
+            for j in range(size_x + 1):
+                for k in range(size_y + 1):
+                    for l in range(size_z + 1):
                         # select position here as loop changes a_pos
                         a_pos_sel = a_pos[a_sel]
                         # fill
@@ -351,19 +357,17 @@ def __create_view_matrices(bp):
                         # min cords
                         actual_min_cords = np.minimum(np.amin(a_pos_sel, 0), actual_min_cords)
                         # step in z direction (dir)
-                        if l < zp + zn:
-                            if k & 0b1 == 0:  # even
-                                a_pos[a_sel] += a_dir[a_sel]
-                            else:
-                                a_pos[a_sel] -= a_dir[a_sel]
+                        if l < size_z:
+                            a_pos[a_sel] += a_dir[a_sel]
+                    # reset z axis
+                    a_pos[a_sel] -= a_z_times_dir
                     # step in y direction (tan)
-                    if k < yp + yn:
-                        if j & 0b1 == 0:  # even
-                            a_pos[a_sel] += a_dir_tan[a_sel]
-                        else:
-                            a_pos[a_sel] -= a_dir_tan[a_sel]
+                    if k < size_y:
+                        a_pos[a_sel] += a_dir_tan[a_sel]
+                # reset y axis
+                a_pos[a_sel] -= a_y_times_dir
                 # step in x direction (bitan)
-                if j < xp + xn:
+                if j < size_x:
                     a_pos[a_sel] += a_dir_bitan[a_sel]
 
         # old: !!min cords dont use a_pos_sel!!
