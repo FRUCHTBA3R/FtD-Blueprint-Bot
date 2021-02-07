@@ -210,7 +210,7 @@ async def handle_blueprint_error(message, error, bpfilename, bpgameverison):
         bpgameverison = "?"
     else:
         if bpgameverison[0] < 2:
-            warn_gv = " Blueprint is from an older game version. Consider re-saving and then re-uploading."
+            warn_gv = "\nBlueprint is from an older game version. Consider re-saving and then re-uploading."
         bpgameverison = ".".join([str(e) for e in bpgameverison])
 
     # log to console
@@ -232,7 +232,7 @@ async def handle_blueprint_error(message, error, bpfilename, bpgameverison):
         return
     # send
     await ownerUser.send(traceback_string())
-    await message.channel.send(f"You found an error! Details were send to {ownerUser.name}" + warn_gv)
+    await message.channel.send(f"You found an error! Details were send to {ownerUser.name}." + warn_gv)
 
 
 bot.run(TOKEN)
