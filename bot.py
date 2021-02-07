@@ -163,7 +163,7 @@ async def process_attachments(message, invokemessage=None):
                 f.write(content)
             # process blueprint
             try:
-                combined_img_file, timing = await bp_to_imgV2.process_blueprint(filename)
+                combined_img_file, timing, bpgameversion = await bp_to_imgV2.process_blueprint(filename)
                 # files
                 file = discord.File(combined_img_file)
                 # upload
@@ -173,7 +173,6 @@ async def process_attachments(message, invokemessage=None):
                     if keyword in content_to_search:
                         sendtiming = f"JSON parse completed in {timing[0]:.3f}s.\n" \
                                      f"Conversion completed in {timing[1]:.3f}s.\n" \
-                                     f"Infos gathered in {timing[2]:.3f}s.\n" \
                                      f"View matrices completed in {timing[3]:.3f}s.\n" \
                                      f"Image creation completed in {timing[4]:.3f}s.\n" \
                                      f"Total time: {(timing[0]+timing[1]+timing[2]+timing[3]+timing[4]):.3f}s"
@@ -183,7 +182,7 @@ async def process_attachments(message, invokemessage=None):
                 os.remove(combined_img_file)
             except:
                 lastError = sys.exc_info()
-                await handle_blueprint_error(message, lastError, attachm.filename)
+                await handle_blueprint_error(message, lastError, attachm.filename, bpgameversion)
             
             # delete blueprint file
             os.remove(filename)
@@ -191,13 +190,13 @@ async def process_attachments(message, invokemessage=None):
     return bpcount
 
 
-async def handle_blueprint_error(message, error, bpfilename):
+async def handle_blueprint_error(message, error, bpfilename, bpgameverison):
     """Sends error notification to channel where message was received and error informations to bot owner."""
     def traceback_string():
         etype, value, tb = error
         exceptionList = traceback.format_exception_only(etype, value)
         tracebackList = traceback.extract_tb(tb)
-        s = f"Traceback of `{bpfilename}`:\n"
+        s = f"Traceback of `{bpfilename}` with game version {bpgameverison}:\n"
         for elem in tracebackList:
             s += f"File `{elem.filename}`, line {elem.lineno}, in `{elem.name}`\n```{elem.line}```"
         for elem in exceptionList:
@@ -205,6 +204,15 @@ async def handle_blueprint_error(message, error, bpfilename):
         return s
 
     global bot
+    # outdated game version warning
+    warn_gv = ""
+    if bpgameverison is None:
+        bpgameverison = "?"
+    else:
+        if bpgameverison[0] < 2:
+            warn_gv = " Blueprint is from an older game version. Consider re-saving and then re-uploading."
+        bpgameverison = ".".join([str(e) for e in bpgameverison])
+
     # log to console
     traceback.print_exception(*error)
     # log to channel and bot owner chat
@@ -214,17 +222,17 @@ async def handle_blueprint_error(message, error, bpfilename):
         bot.owner_id = appinfo.owner.id
         ownerId = bot.owner_id
         if ownerId is None or ownerId == 0:
-            await message.channel.send("You found an error! Could not send details to bot owner.")
+            await message.channel.send("You found an error! Could not send details to bot owner." + warn_gv)
             return
     # fetch owner
     try:
         ownerUser = await bot.fetch_user(ownerId)
     except (discord.NotFound, discord.HTTPException):
-        await message.channel.send("You found an error! Could not send details to bot owner.")
+        await message.channel.send("You found an error! Could not send details to bot owner." + warn_gv)
         return
     # send
     await ownerUser.send(traceback_string())
-    await message.channel.send(f"You found an error! Details were send to {ownerUser.name}")
+    await message.channel.send(f"You found an error! Details were send to {ownerUser.name}" + warn_gv)
 
 
 bot.run(TOKEN)
