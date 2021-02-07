@@ -78,7 +78,8 @@ with open("size_id_dictionary.json", "r") as f:
     size_id_dict = json.load(f)
 size_id_dict = {int(k): v for k, v in size_id_dict.items()}
 
-
+# store game version
+bp_gameversion = None
 
 # Blueprint:
 # CSI: block color
@@ -95,6 +96,8 @@ size_id_dict = {int(k): v for k, v in size_id_dict.items()}
 
 async def process_blueprint(fname, silent=False, standaloneMode=False):
     """Load and init blueprint data. Returns blueprint, calculation times, image filename"""
+    global  bp_gameversion
+    bp_gameversion = None
     if not silent: print("Processing blueprint \"", fname, "\"", sep="")
     ts1 = time.time()
     with open(fname, "r") as f:
@@ -129,7 +132,7 @@ async def process_blueprint(fname, silent=False, standaloneMode=False):
     if standaloneMode:
         return bp, [ts1, ts2, ts3, ts4, ts5], main_img
     else:
-        return main_img_fname, [ts1, ts2, ts3, ts4, ts5], bp_gameversion
+        return main_img_fname, [ts1, ts2, ts3, ts4, ts5]
 
 
 def __convert_blueprint(bp):

@@ -163,7 +163,7 @@ async def process_attachments(message, invokemessage=None):
                 f.write(content)
             # process blueprint
             try:
-                combined_img_file, timing, bpgameversion = await bp_to_imgV2.process_blueprint(filename)
+                combined_img_file, timing = await bp_to_imgV2.process_blueprint(filename)
                 # files
                 file = discord.File(combined_img_file)
                 # upload
@@ -182,7 +182,7 @@ async def process_attachments(message, invokemessage=None):
                 os.remove(combined_img_file)
             except:
                 lastError = sys.exc_info()
-                await handle_blueprint_error(message, lastError, attachm.filename, bpgameversion)
+                await handle_blueprint_error(message, lastError, attachm.filename, bp_to_imgV2.bp_gameversion)
             
             # delete blueprint file
             os.remove(filename)
