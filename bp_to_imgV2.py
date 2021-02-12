@@ -160,7 +160,7 @@ def __convert_blueprint(bp):
         blueprint["LocalPosition"] = np.array(blueprint["LocalPosition"].split(","),
                                               dtype=float).round().astype(int)
         blueprint["LocalPosition"] = (parentglobalrotation * quaternion.quaternion(*blueprint["LocalPosition"]) *
-                                      parentglobalrotation.conj()).vec.astype(int) + parentglobalposition
+                                      parentglobalrotation.inverse()).vec.astype(int) + parentglobalposition
         # convert min/max coordinates to np array
         mincords = np.array(blueprint["MinCords"].split(","),
                                          dtype=float)
@@ -659,7 +659,7 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     # file
-    fname = "../example blueprints/exampleAllRotationTurret.blueprint"
+    fname = "../example blueprints/exampleAllRotationSpinblock.blueprint"
 
     import asyncio
     
