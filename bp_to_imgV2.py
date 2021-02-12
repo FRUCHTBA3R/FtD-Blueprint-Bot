@@ -148,7 +148,7 @@ def __convert_blueprint(bp):
                                        float(localrot_split[0]),
                                        float(localrot_split[1]),
                                        float(localrot_split[2]))
-        globalrotation *= parentglobalrotation
+        globalrotation = parentglobalrotation * globalrotation
         localrot = quaternion.as_rotation_matrix(globalrotation)
         localrot_arg = np.argmax(np.abs(localrot), axis=1)
         localrot_max = np.sign(localrot[[0, 1, 2], localrot_arg])
@@ -557,7 +557,7 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
     fontFace = cv2.FONT_HERSHEY_SIMPLEX
     # find max size text
     if bp_infos is None:
-        info_img = np.full((front_img.shape[1],front_img.shape[1],3), np.array([255, 118, 33]),
+        info_img = np.full((front_img.shape[1],front_img.shape[1], 3), np.array([255, 118, 33]),
                        dtype=np.uint8)
         fontScale = 12./cv2.getTextSize("I", fontFace, 1, 1)[0][1]  # scale to 12 pixels
         cv2.putText(info_img, "Error", (5,info_img.shape[0]//2), fontFace,
@@ -659,7 +659,7 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     # file
-    fname = "../example blueprints/LightArmorBaracke.blueprint"
+    fname = "../example blueprints/exampleAllRotationTurret.blueprint"
 
     import asyncio
     
