@@ -1,82 +1,89 @@
 {
 	"Missing": {
-		"Color": [255, 0, 204]
+		"Color": [255, 0, 204],
+		"Keywords": ["Missing"]
 	},
 	"Missing Rotation": {
-		"Color": [0, 251, 255]
+		"Color": [0, 251, 255],
+		"Keywords": ["Missing Rotation"]
 	},
 	"Metal": {
-		"Color": [115, 115, 115]
+		"Color": [115, 115, 115],
+		"Keywords": ["Metal"]
 	},
 	"Wood": {
-		"Color": [33, 100, 176]
+		"Color": [33, 100, 176],
+		"Keywords": ["Wood", "Stairs"]
 	},
 	"Alloy": {
-		"Color": [199, 199, 199]
+		"Color": [199, 199, 199],
+		"Keywords": ["Alloy"]
 	},
 	"Stone": {
-		"Color": [155, 242, 231]
+		"Color": [155, 242, 231],
+		"Keywords": ["Stone"]
 	},
 	"Lead": {
-		"Color": [41, 41, 41]
+		"Color": [41, 41, 41],
+		"Keywords": ["Lead"]
 	},
 	"Heavy Armour": {
-		"Color": [118, 118, 132]
+		"Color": [118, 118, 132],
+		"Keywords": ["Heavy Armour"]
 	},
 	"Rubber": {
-		"Color": [44, 71, 34]
+		"Color": [44, 71, 34],
+		"Keywords": ["Rubber"]
 	},
 	"Applique": {
-		"Color": [196, 164, 144]
+		"Color": [196, 164, 144],
+		"Keywords": ["Applique"]
 	},
 	"Reinforced Wood": {
-		"Color": [23, 80, 156]
+		"Color": [23, 80, 156],
+		"Keywords": ["Reinforced Wood"]
 	},
 	"ERA": {
-		"Color": [66, 66, 66]
+		"Color": [66, 66, 66],
+		"Keywords": ["ERA"]
 	},
 	"Barrel": {
-		"Color": [90, 90, 90]
+		"Color": [90, 90, 90],
+		"Keywords": ["Barrel", "Muzzle Brake", "Bore"]
 	},
-	"Muzzle Brake": {
-		"Color": [90, 90, 90]
+	"Mantlet": {
+		"Color": [170, 170, 170],
+		"Keywords": ["Mantlet"]
 	},
 	"Laser": {
-		"Color": [0, 147, 173]
+		"Color": [0, 147, 173],
+		"Keywords": ["Laser"]
 	},
 	"Glass": {
 		"Invisible": true,
-		"Color": [255, 255, 255]
+		"Color": [204, 186, 185],
+		"Keywords": ["Glass", "Window Block"]
 	},
 	"Railing": {
 		"Invisible": true,
-		"Color": [255, 255, 255]
+		"Color": [115, 115, 115],
+		"Keywords": ["Railing"]
 	},
 	"Wheel": {
-		"Color": [31, 15, 14]
+		"Color": [31, 15, 14],
+		"Keywords": ["Wheel"]
 	},
 	"Wing": {
-		"Color": [212, 213, 163]
+		"Color": [212, 213, 163],
+		"Keywords": ["Wing","Control Surface","Helicopter","Aileron","Tailplane",
+					"Flight Surface","Aero Rudder","Aero Elevator","Heliblade"]
 	},
-	"Control Surface": {
-		"Color": [212, 213, 163]
+	"Propeller": {
+		"Color": [118, 142, 119],
+		"Keywords": ["Propeller", "Rudder", "Paddle"]
 	},
-	"Helicopter": {
-		"Color": [212, 213, 163]
-	},
-	"Aileron": {
-		"Color": [212, 213, 163]
-	},
-	"Flight Surface": {
-		"Color": [212, 213, 163]
-	},
-	"Aero Rudder": {
-		"Color": [212, 213, 163]
-	},
-	"Aero Elevator": {
-		"Color": [212, 213, 163]
-	},
-	"Heliblade": {
-		"Color": [212, 213, 163]
+	"Detection": {
+		"Color": [85, 147, 131],
+		"Keywords": ["Range Finder", "Camera", "Sonar", "Radar"]
 	}
 }
