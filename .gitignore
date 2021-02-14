@@ -8,3 +8,4 @@ bot_avatar.xcf
 /venv/
 /.idea/
 slash_command_request.py
+!legend.png

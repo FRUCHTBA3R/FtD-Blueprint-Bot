@@ -1,5 +1,6 @@
 import os
 import json
+import legend_generator as legend
 
 # search every file for json tag ComponentId
 FORCE_COMPLETE_FILE_SEARCH = True
@@ -70,14 +71,6 @@ materials = None
 materials_file = "materials.json"
 with open(materials_file, "r") as f:
     materials = json.load(f)
-
-# create positive size dict [x][y][z]
-#sizedict_pos = {0: {0: {0: 0}}}
-#sizedict_pos_next_index = 1
-
-# create negative size dict [x][y][z]
-#sizedict_neg = {0: {0: {0: 0}}}
-#sizedict_neg_next_index = 1
 
 # create id to size dict
 sizeiddict = {0: {0: {0: {0: {0: {0: 1}}}}}}
@@ -246,14 +239,6 @@ for x in sizeiddict:
                     for c in sizeiddict[x][y][z][a][b]:
                         sizedict_save[sizeiddict[x][y][z][a][b][c]] = {"xp": x, "yp": y, "zp": z,
                                                                        "xn": a, "yn": b, "zn": c}
-#for x in sizedict_pos:
-#    for y in sizedict_pos[x]:
-#        for z in sizedict_pos[x][y]:
-#            sizedict_save["SizeIdPos"][sizedict_pos[x][y][z]] = {"x": x, "y": y, "z": z}
-#for x in sizedict_neg:
-#    for y in sizedict_neg[x]:
-#        for z in sizedict_neg[x][y]:
-#            sizedict_save["SizeIdNeg"][sizedict_neg[x][y][z]] = {"x": x, "y": y, "z": z}
 sizedict_file = "size_id_dictionary.json"
 with open(sizedict_file, "w") as f:
     json.dump(sizedict_save, f, indent="\t", sort_keys=True)
@@ -262,6 +247,9 @@ with open(sizedict_file, "w") as f:
 print(len(guiddict), "->", len(invguiddict))
 # for v in list(invguiddict.values())[100:200]:
 #    print(v)
-    
+
+# re-generate legend
+legend.generate()
+
 input("Press Enter key to exit")
 exit()

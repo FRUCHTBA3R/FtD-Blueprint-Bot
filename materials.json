@@ -57,7 +57,7 @@
 	},
 	"Laser": {
 		"Color": [0, 147, 173],
-		"Keywords": ["Laser"]
+		"Keywords": ["Laser", "Lens"]
 	},
 	"Glass": {
 		"Invisible": true,
@@ -85,5 +85,18 @@
 	"Detection": {
 		"Color": [85, 147, 131],
 		"Keywords": ["Range Finder", "Camera", "Sonar", "Radar"]
+	},
+	"Electronic": {
+		"Color": [0, 213, 224],
+		"Keywords": ["Battery", "AI", "Failsafe", "Electric"]
+	},
+	"Engine": {
+		"Color": [0, 134, 224],
+		"Keywords": ["Steam", "Jet Engine", "Fuel Engine", "Nuclear Engine", "Turbocharger", "Carburettor",
+				"Crank", "Fuel", "Injector", "Supercharger", "Gearbox", "Jet", "Ion"]
+	},
+	"Cannon Interior": {
+		"Color": [0, 80, 255],
+		"Keywords": ["Ammo", "Predictor", "Pellets", "Gauge", "Recoil Absorber", "Particle Tube"]
 	}
 }

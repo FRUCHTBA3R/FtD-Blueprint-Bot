@@ -557,11 +557,11 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
     fontFace = cv2.FONT_HERSHEY_SIMPLEX
     # find max size text
     if bp_infos is None:
-        info_img = np.full((front_img.shape[1],front_img.shape[1], 3), np.array([255, 118, 33]),
+        info_img = np.full((front_img.shape[1], front_img.shape[1], 3), np.array([255, 118, 33]),
                        dtype=np.uint8)
         fontScale = 12./cv2.getTextSize("I", fontFace, 1, 1)[0][1]  # scale to 12 pixels
-        cv2.putText(info_img, "Error", (5,info_img.shape[0]//2), fontFace,
-                    fontScale, (255,255,255))
+        cv2.putText(info_img, "Error", (5, info_img.shape[0]//2), fontFace,
+                    fontScale, (255, 255, 255))
     else:
         # find max length text
         maxlen = 0
@@ -604,7 +604,7 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
         py = pixel-baseline+pixel//2
         for k in bp_infos:
             txt = f"{k}: {bp_infos[k]}"
-            cv2.putText(info_img, txt, (px,py), fontFace, fontScale, (255,255,255), fontThickness)
+            cv2.putText(info_img, txt, (px, py), fontFace, fontScale, (255, 255, 255), fontThickness)
             py += pixel+pixel
 
     darkBlue = np.array([255, 100, 0])

@@ -20,7 +20,7 @@
 		"SizeId": 1
 	},
 	"0083a83e-a716-4c67-aa49-d14fbcd00248": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Huge Ion Thruster circular",
 		"SizeId": 24
 	},
@@ -30,7 +30,7 @@
 		"SizeId": 1
 	},
 	"0096dd3a-44ff-4a6d-b51a-a79973bc8163": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small jet intake hull",
 		"SizeId": 1
 	},
@@ -90,7 +90,7 @@
 		"SizeId": 1
 	},
 	"01490183-a574-421a-971f-6e84cbeb8053": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "ai",
 		"SizeId": 1
 	},
@@ -120,7 +120,7 @@
 		"SizeId": 1
 	},
 	"01a87958-93cf-4efa-857f-10913b0573d9": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Crank Shaft",
 		"SizeId": 1
 	},
@@ -185,12 +185,12 @@
 		"SizeId": 1
 	},
 	"026cef2b-1879-4392-869f-ceaf2499c621": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "steam mat metallic",
 		"SizeId": 1
 	},
 	"0282cebc-6bd2-46ea-bfe7-31d798586420": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "gun130Single Cas Shield Steam",
 		"SizeId": 1
 	},
@@ -200,7 +200,7 @@
 		"SizeId": 1
 	},
 	"02ea8321-aaff-4d03-8c50-20c241a82632": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Huge Ion Thruster",
 		"SizeId": 24
 	},
@@ -220,7 +220,7 @@
 		"SizeId": 1
 	},
 	"031b15ac-dce2-4169-bc66-61c9248bb60e": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "fuel mat",
 		"SizeId": 1
 	},
@@ -285,7 +285,7 @@
 		"SizeId": 1
 	},
 	"03e7cf3a-7858-448f-ae06-80eda61d0848": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Railgun battery",
 		"SizeId": 1
 	},
@@ -340,7 +340,7 @@
 		"SizeId": 1
 	},
 	"043e9b00-4a2f-41b8-bf2f-4aaa4442f138": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Carburettor",
 		"SizeId": 1
 	},
@@ -400,7 +400,7 @@
 		"SizeId": 2
 	},
 	"04e5fdcc-a272-4226-879f-d92205da02b2": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "electric motor stator 5m",
 		"SizeId": 1
 	},
@@ -410,7 +410,7 @@
 		"SizeId": 1
 	},
 	"04f3dae4-5e19-42bb-9324-670da42356b1": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Router",
 		"SizeId": 1
 	},
@@ -475,7 +475,7 @@
 		"SizeId": 1
 	},
 	"060c216c-e0be-42de-88d5-0b33c0ef274f": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Gauge increase",
 		"SizeId": 1
 	},
@@ -500,7 +500,7 @@
 		"SizeId": 1
 	},
 	"0639fbba-70be-4398-857c-6786dab39bea": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Steam Control (Small)",
 		"SizeId": 1
 	},
@@ -600,7 +600,7 @@
 		"SizeId": 4
 	},
 	"076a6b5d-a700-40d9-8d7f-4b514cf35f1c": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "fuel mat Ramp",
 		"SizeId": 1
 	},
@@ -615,7 +615,7 @@
 		"SizeId": 1
 	},
 	"078b7202-f156-4936-8ca3-860055a20f1c": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Nuclear Engine Core",
 		"SizeId": 50
 	},
@@ -650,7 +650,7 @@
 		"SizeId": 1
 	},
 	"08101f92-442f-41c8-913e-e5c264463b58": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Jet Intake Add-On",
 		"SizeId": 1
 	},
@@ -745,22 +745,22 @@
 		"SizeId": 1
 	},
 	"094e242e-85be-433b-b64a-1c951695568f": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Shaft Crank Cased (3m)",
 		"SizeId": 12
 	},
 	"095d00bb-c27a-4700-a495-93e0bee8013a": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Gauge Increase Corner",
 		"SizeId": 1
 	},
 	"0968bf8a-0fb3-4774-be1e-11ea979768bb": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Extra mesh 0 of Jet Combuster",
 		"SizeId": 1
 	},
 	"097ba044-a197-4a2e-92ce-4ad0359318cf": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "steam mat",
 		"SizeId": 1
 	},
@@ -785,7 +785,7 @@
 		"SizeId": 2
 	},
 	"099721b5-f13c-41f5-bd8e-ae765f04c909": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Fragmentation Pellets",
 		"SizeId": 1
 	},
@@ -800,7 +800,7 @@
 		"SizeId": 2
 	},
 	"09bec717-8b13-40ab-8468-0630cae1e964": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "5m Cased Crank",
 		"SizeId": 27
 	},
@@ -845,7 +845,7 @@
 		"SizeId": 1
 	},
 	"0a1aa046-e841-4813-907e-6567e596a079": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Input Feeder",
 		"SizeId": 1
 	},
@@ -920,7 +920,7 @@
 		"SizeId": 1
 	},
 	"0b4eb14a-bf99-4bbc-a435-78893ecf3207": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "steam Ramp",
 		"SizeId": 1
 	},
@@ -1170,7 +1170,7 @@
 		"SizeId": 3
 	},
 	"0dcfa03c-5d3f-4dbb-aafe-87464dbc4a76": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Extra mesh 0 of Jet Combuster",
 		"SizeId": 1
 	},
@@ -1235,7 +1235,7 @@
 		"SizeId": 1
 	},
 	"0e7206f7-2bb9-44ad-b698-e90f3f5622d7": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "electric motor rotor 1m",
 		"SizeId": 1
 	},
@@ -1265,7 +1265,7 @@
 		"SizeId": 1
 	},
 	"0ebd2228-ecfc-4c98-b371-352cba410794": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet intake add-on 1m (sides)",
 		"SizeId": 1
 	},
@@ -1280,7 +1280,7 @@
 		"SizeId": 53
 	},
 	"0ee68719-f284-49d3-a436-85195d4f832f": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Inline turbocharger (right)",
 		"SizeId": 2
 	},
@@ -1395,7 +1395,7 @@
 		"SizeId": 1
 	},
 	"102a51bf-f83b-43a0-b2bb-0e91a095a2bb": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Ion Thruster",
 		"SizeId": 1
 	},
@@ -1450,12 +1450,12 @@
 		"SizeId": 1
 	},
 	"10c9e65e-ea35-47c9-a8a7-4de86c6438b8": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Steam Control (Large)",
 		"SizeId": 12
 	},
 	"10cfc57f-e12f-4809-8d13-aa39851dcc40": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "anim-shaft crank split 1m base",
 		"SizeId": 1
 	},
@@ -1535,7 +1535,7 @@
 		"SizeId": 1
 	},
 	"120b90ce-8434-4e44-a32f-7e5da874eaf7": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Solid Ammo Clip (4m shells)",
 		"SizeId": 4
 	},
@@ -1555,7 +1555,7 @@
 		"SizeId": 1
 	},
 	"12284194-fc09-4827-84f5-913db4fb4a68": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Ejector Rear",
 		"SizeId": 1
 	},
@@ -1625,7 +1625,7 @@
 		"SizeId": 1
 	},
 	"12e26b7f-d42f-4af0-b134-129f8aed8a90": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet intake add-on",
 		"SizeId": 1
 	},
@@ -1640,7 +1640,7 @@
 		"SizeId": 1
 	},
 	"1327d1ea-c923-44cf-85b0-eb9e1e272167": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery Catalytic Cracker",
 		"SizeId": 50
 	},
@@ -1665,7 +1665,7 @@
 		"SizeId": 1
 	},
 	"136bf7be-734e-42e7-87cc-43753bdb8b0b": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Storage Box 2m",
 		"SizeId": 1
 	},
@@ -1695,7 +1695,7 @@
 		"SizeId": 4
 	},
 	"13e24625-7a1e-48a4-958c-850c3af85389": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Battery Storage Beam",
 		"SizeId": 4
 	},
@@ -1790,7 +1790,7 @@
 		"SizeId": 1
 	},
 	"15363550-7396-47c6-a60f-3dd8fee0da6b": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "anim-shaft crank split 3m base.obj",
 		"SizeId": 1
 	},
@@ -1800,7 +1800,7 @@
 		"SizeId": 1
 	},
 	"1559c828-00c4-4837-8872-3f7186a9713b": {
-		"Material": "Missing",
+		"Material": "Laser",
 		"Name": "Particle melee lens",
 		"SizeId": 1
 	},
@@ -1850,7 +1850,7 @@
 		"SizeId": 1
 	},
 	"15dfc64c-ccb4-4fac-b8c3-81df7e449350": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "gearbox large",
 		"SizeId": 1
 	},
@@ -1865,7 +1865,7 @@
 		"SizeId": 1
 	},
 	"160f8cdb-f3c8-4c66-93a7-c4d937f4e6cf": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet Electric Generator Small Square",
 		"SizeId": 1
 	},
@@ -1875,12 +1875,12 @@
 		"SizeId": 1
 	},
 	"163aa8ce-b20a-4343-8ac4-9e5dfb91621b": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery Desalter",
 		"SizeId": 50
 	},
 	"164b642c-c99b-48f7-b001-2aeed1badb33": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery X-Junction Pipe",
 		"SizeId": 1
 	},
@@ -2000,7 +2000,7 @@
 		"SizeId": 1
 	},
 	"1912c75a-18c7-4211-920b-566100c51b23": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "steam control 2m",
 		"SizeId": 1
 	},
@@ -2025,7 +2025,7 @@
 		"SizeId": 1
 	},
 	"195cfbb3-005b-40e4-8b9f-4f9beb92be8e": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "AI Mainframe",
 		"SizeId": 1
 	},
@@ -2040,7 +2040,7 @@
 		"SizeId": 1
 	},
 	"1975441e-f05c-40eb-a12d-f94569f79444": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Hydraulic recoil absorber [4m]",
 		"SizeId": 1
 	},
@@ -2075,7 +2075,7 @@
 		"SizeId": 8
 	},
 	"19a3d1a2-574e-4619-91b0-050d3b1201a9": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Electric Motor 5m",
 		"SizeId": 62
 	},
@@ -2105,7 +2105,7 @@
 		"SizeId": 2
 	},
 	"1a1c9de5-6db5-4092-97ac-a4883383fadd": {
-		"Material": "Missing",
+		"Material": "Laser",
 		"Name": "Small PAC lens (cross inputs)",
 		"SizeId": 3
 	},
@@ -2135,7 +2135,7 @@
 		"SizeId": 1
 	},
 	"1ab5006c-9156-4605-a670-68e1c2eb2e9a": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Particle Tube Corner",
 		"SizeId": 1
 	},
@@ -2295,7 +2295,7 @@
 		"SizeId": 1
 	},
 	"1c8a3045-caac-4b50-bfd7-47a353c5d22b": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "electric motor rotor 3m",
 		"SizeId": 1
 	},
@@ -2305,12 +2305,12 @@
 		"SizeId": 4
 	},
 	"1cbba583-ef54-4de9-9364-4e7371bf4ac3": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Solid Ammo Clip (6m shells)",
 		"SizeId": 28
 	},
 	"1cbd9bbc-c7ee-4369-874f-98cc3aada2f8": {
-		"Material": "Barrel",
+		"Material": "Cannon Interior",
 		"Name": "Ammo barrel empty removal",
 		"SizeId": 1
 	},
@@ -2350,7 +2350,7 @@
 		"SizeId": 1
 	},
 	"1d206e3b-4641-4002-9d3d-940036154408": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Ion Thruster circular",
 		"SizeId": 1
 	},
@@ -2375,7 +2375,7 @@
 		"SizeId": 1
 	},
 	"1d809197-ad6e-4eae-a7a1-c9bd5dc7bb04": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Steam Engine Tips",
 		"SizeId": 1
 	},
@@ -2415,7 +2415,7 @@
 		"SizeId": 28
 	},
 	"1dd8ea35-7567-4f17-91d5-dadf26e49e2c": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Siren Harpoon Battery",
 		"SizeId": 1
 	},
@@ -2460,7 +2460,7 @@
 		"SizeId": 1
 	},
 	"1e76e0e0-fe54-4913-a367-021a4ce8aa3f": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel refinery example",
 		"SizeId": 1
 	},
@@ -2495,7 +2495,7 @@
 		"SizeId": 1
 	},
 	"1ed8d87b-f5b6-49b7-a90b-5c22034a4c7e": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "AI Card Slot (Left & Right)",
 		"SizeId": 1
 	},
@@ -2545,7 +2545,7 @@
 		"SizeId": 1
 	},
 	"1fb31e58-d0bf-4234-8e92-ae6e46869e55": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small jet exhaust hull",
 		"SizeId": 1
 	},
@@ -2615,12 +2615,12 @@
 		"SizeId": 1
 	},
 	"2099a233-181e-4f50-9a0e-78a547969a8e": {
-		"Material": "Missing",
+		"Material": "Laser",
 		"Name": "Particle Melee Lens",
 		"SizeId": 1
 	},
 	"209ccbd6-3ea3-4947-b8bd-64667328185b": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Huge Ion Thruster",
 		"SizeId": 24
 	},
@@ -2650,7 +2650,7 @@
 		"SizeId": 3
 	},
 	"20fb7db1-f991-481e-a210-57d3783f59cb": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet Exhaust_square",
 		"SizeId": 1
 	},
@@ -2660,7 +2660,7 @@
 		"SizeId": 1
 	},
 	"2107d65e-b293-4d99-bb91-e34503cf8a6c": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Solid Ammo Clip [2m shells]",
 		"SizeId": 1
 	},
@@ -2675,7 +2675,7 @@
 		"SizeId": 1
 	},
 	"21260a48-aeea-4ca3-b71a-f16959ed5955": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery Pipe 6 way",
 		"SizeId": 1
 	},
@@ -2795,7 +2795,7 @@
 		"SizeId": 1
 	},
 	"227b84ae-4cb8-4cf8-8250-9e5f814e946a": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet Combuster",
 		"SizeId": 1
 	},
@@ -3080,7 +3080,7 @@
 		"SizeId": 24
 	},
 	"259cacdb-4ecc-4210-8615-452b626790c0": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "AI Tips",
 		"SizeId": 1
 	},
@@ -3095,7 +3095,7 @@
 		"SizeId": 1
 	},
 	"25b76b08-c665-4ec0-85f2-add700dafbf9": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Fall of Shot Predictor",
 		"SizeId": 1
 	},
@@ -3110,7 +3110,7 @@
 		"SizeId": 3
 	},
 	"25de3069-7ff9-41a6-8e84-4870f72ea086": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "ai mat Bump",
 		"SizeId": 1
 	},
@@ -3135,12 +3135,12 @@
 		"SizeId": 1
 	},
 	"261a60dd-5a01-4e6f-b7e8-a56bb21e2ad9": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet intake",
 		"SizeId": 24
 	},
 	"263990d5-065a-4b39-9212-c408651f0973": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet Hunter VLS",
 		"SizeId": 1
 	},
@@ -3150,7 +3150,7 @@
 		"SizeId": 4
 	},
 	"264a70bb-17be-4c76-bb10-706f152b64e1": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "fuel mat ambient occlusion",
 		"SizeId": 1
 	},
@@ -3185,17 +3185,17 @@
 		"SizeId": 1
 	},
 	"26a604f0-071c-49ca-8a0e-e1d9c959b1c5": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "AI Mainframe",
 		"SizeId": 1
 	},
 	"26a852c0-da52-4232-8e04-69913c8edc13": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Jet Combuster",
 		"SizeId": 1
 	},
 	"26ad750a-dadc-40e8-b052-07158ac41aeb": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet intake feeder side",
 		"SizeId": 1
 	},
@@ -3245,7 +3245,7 @@
 		"SizeId": 1
 	},
 	"2718d6ad-07a2-4d98-bd7e-9cdb2b3f70db": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Ion Thruster",
 		"SizeId": 1
 	},
@@ -3370,12 +3370,12 @@
 		"SizeId": 1
 	},
 	"28d3f08f-a374-4931-a295-88cb78ba1ec1": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "steam pipe valve",
 		"SizeId": 1
 	},
 	"28dde6a0-90c6-4256-bc07-9a6ff7aeb751": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet intake_square",
 		"SizeId": 1
 	},
@@ -3415,7 +3415,7 @@
 		"SizeId": 1
 	},
 	"2951ba8b-c4cc-48e3-898e-112c27432423": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Customiser",
 		"SizeId": 1
 	},
@@ -3495,12 +3495,12 @@
 		"SizeId": 1
 	},
 	"2a8501f7-2463-441c-901a-57d1a6573fe6": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Clip (8m shells)",
 		"SizeId": 29
 	},
 	"2a990d46-0140-4ae7-95f5-db9efd76aaa8": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet connector corner",
 		"SizeId": 27
 	},
@@ -3520,7 +3520,7 @@
 		"SizeId": 1
 	},
 	"2b0444a1-9ec4-4c01-804e-a6cf07cb176d": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "AI Card Slot (this version now obsolete)",
 		"SizeId": 1
 	},
@@ -3535,7 +3535,7 @@
 		"SizeId": 1
 	},
 	"2b2d4fdc-8ffa-4399-985a-f9f5ec1263d0": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Jet Exhaust",
 		"SizeId": 1
 	},
@@ -3665,7 +3665,7 @@
 		"SizeId": 3
 	},
 	"2ce73c55-f1e6-438c-b2ca-597a6e93913a": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "ai mat metallic",
 		"SizeId": 1
 	},
@@ -3715,7 +3715,7 @@
 		"SizeId": 1
 	},
 	"2d823ea0-966f-4b65-8e7f-ec1748fc986e": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Oil to fuel refinery",
 		"SizeId": 1
 	},
@@ -3725,7 +3725,7 @@
 		"SizeId": 4
 	},
 	"2da43418-34e2-4621-8db8-dba198622842": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet intake",
 		"SizeId": 24
 	},
@@ -3765,7 +3765,7 @@
 		"SizeId": 1
 	},
 	"2e429412-2982-4335-bf3c-a6c6609c8cbf": {
-		"Material": "Missing",
+		"Material": "Laser",
 		"Name": "Small PAC lens (rear inputs)",
 		"SizeId": 6
 	},
@@ -3780,7 +3780,7 @@
 		"SizeId": 3
 	},
 	"2e709fbe-77ec-4a07-8846-22a8c4619dc1": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "fuel mat Bump",
 		"SizeId": 1
 	},
@@ -3835,7 +3835,7 @@
 		"SizeId": 4
 	},
 	"2eea241a-6a32-41c6-a9e4-d082c7e854de": {
-		"Material": "Missing",
+		"Material": "Laser",
 		"Name": "PAC lens (rear inputs)",
 		"SizeId": 42
 	},
@@ -3910,7 +3910,7 @@
 		"SizeId": 3
 	},
 	"3032e4b5-d5f3-47dc-9c50-1854a5ec1bae": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Gauge increase left right splitter",
 		"SizeId": 1
 	},
@@ -3955,7 +3955,7 @@
 		"SizeId": 3
 	},
 	"30b85904-0018-4164-9605-84ec968a278b": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "fuel storage tank 4m removal",
 		"SizeId": 1
 	},
@@ -4015,7 +4015,7 @@
 		"SizeId": 1
 	},
 	"311b8f91-5dd2-4871-b8ce-c7be91f76454": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Steam Drill Extension small",
 		"SizeId": 1
 	},
@@ -4025,7 +4025,7 @@
 		"SizeId": 3
 	},
 	"31277649-04ec-45db-adfc-4a7d0a73686a": {
-		"Material": "Barrel",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Barrel",
 		"SizeId": 1
 	},
@@ -4065,7 +4065,7 @@
 		"SizeId": 1
 	},
 	"31bebfa2-5995-4ffc-877f-34ac9a74d504": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "steam pipe tank 3m",
 		"SizeId": 1
 	},
@@ -4110,7 +4110,7 @@
 		"SizeId": 1
 	},
 	"32615b7a-42ed-4ee7-8450-e2bd7a50654b": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel engines",
 		"SizeId": 1
 	},
@@ -4275,7 +4275,7 @@
 		"SizeId": 22
 	},
 	"350d3eb2-a00c-40b0-b81e-e19bbb8e6b1e": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "ai mat Color",
 		"SizeId": 1
 	},
@@ -4325,7 +4325,7 @@
 		"SizeId": 2
 	},
 	"357175b3-cf60-4bad-ab62-109a6b77592d": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery Throughput Pipe",
 		"SizeId": 1
 	},
@@ -4340,17 +4340,17 @@
 		"SizeId": 1
 	},
 	"35cd6905-44d0-4bb3-be0f-20ee2ed670bf": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Steam Shaft Drill Extension 3m",
 		"SizeId": 1
 	},
 	"35d7b71f-0247-4e73-8307-5199180d1cbb": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet controller hull",
 		"SizeId": 24
 	},
 	"35f290a8-8988-41d8-a2dd-7f3e69f8a5d7": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "electric motor rotor 5m",
 		"SizeId": 1
 	},
@@ -4445,7 +4445,7 @@
 		"SizeId": 4
 	},
 	"375f4305-47bc-4abd-8c68-b67cb50e7036": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Solid Ammo Clip (1m shells)",
 		"SizeId": 1
 	},
@@ -4480,7 +4480,7 @@
 		"SizeId": 4
 	},
 	"379c94e6-7f27-42ab-ab45-66e3533ecde8": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Fragmentation Pellets",
 		"SizeId": 1
 	},
@@ -4490,7 +4490,7 @@
 		"SizeId": 1
 	},
 	"37ab683e-f2c6-4444-a394-abf5911c77ce": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "fuel mat height",
 		"SizeId": 1
 	},
@@ -4540,7 +4540,7 @@
 		"SizeId": 12
 	},
 	"382b9ebb-03a5-4384-abfa-d7c74f7a9f46": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Parts Box (empty)",
 		"SizeId": 1
 	},
@@ -4565,7 +4565,7 @@
 		"SizeId": 1
 	},
 	"38e9a85a-ac7d-4cb0-bd43-a5ae2099640c": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Battery Storage Beam",
 		"SizeId": 4
 	},
@@ -4585,7 +4585,7 @@
 		"SizeId": 1
 	},
 	"3943557b-35d7-4fb1-86dc-db9d8d8db339": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "fuel mat Metallic",
 		"SizeId": 1
 	},
@@ -4650,7 +4650,7 @@
 		"SizeId": 4
 	},
 	"3a12af42-508e-4827-b061-2c6b4e75f946": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small jet controller_small_square",
 		"SizeId": 1
 	},
@@ -4675,7 +4675,7 @@
 		"SizeId": 1
 	},
 	"3a77144e-04c6-49ea-8d60-3419b9f00f5b": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet plane",
 		"SizeId": 1
 	},
@@ -4720,7 +4720,7 @@
 		"SizeId": 8
 	},
 	"3af2aa7c-86c8-47f5-896d-26d9622cdea8": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Steam Jet",
 		"SizeId": 1
 	},
@@ -4760,12 +4760,12 @@
 		"SizeId": 1
 	},
 	"3b3b8073-7bde-4184-836b-3f1c8418eee4": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery Junction Pipe",
 		"SizeId": 1
 	},
 	"3b67ec16-9ccd-47de-8753-53617df90c61": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Clip (3m shells)",
 		"SizeId": 3
 	},
@@ -4875,7 +4875,7 @@
 		"SizeId": 16
 	},
 	"3d6d4fca-b7a9-44f3-a888-d3e43a79331a": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Gauge increase",
 		"SizeId": 1
 	},
@@ -4900,7 +4900,7 @@
 		"SizeId": 1
 	},
 	"3dd5c28f-501e-436a-821d-46874ca9c5d1": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small jet combuster hull",
 		"SizeId": 1
 	},
@@ -4925,7 +4925,7 @@
 		"SizeId": 1
 	},
 	"3e13f498-d8fa-4cff-8f4e-923ce65b6b8f": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small jet compressor_small_square",
 		"SizeId": 1
 	},
@@ -5080,7 +5080,7 @@
 		"SizeId": 1
 	},
 	"4065138e-5908-45f9-b056-e2ddd7765ffc": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "High Explosive Pellets",
 		"SizeId": 1
 	},
@@ -5095,7 +5095,7 @@
 		"SizeId": 1
 	},
 	"40b6b44a-4bc9-41a9-8ce0-6ebf43853e54": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Injector",
 		"SizeId": 1
 	},
@@ -5120,7 +5120,7 @@
 		"SizeId": 12
 	},
 	"40fa2c17-3397-47e2-a570-06c4f0b1c3c6": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet fuel injector",
 		"SizeId": 1
 	},
@@ -5180,7 +5180,7 @@
 		"SizeId": 1
 	},
 	"41f497f0-7f23-4d77-a204-d61644912d26": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Steam Engines",
 		"SizeId": 1
 	},
@@ -5190,7 +5190,7 @@
 		"SizeId": 1
 	},
 	"41f8d920-d038-4bd9-b84d-01603ac7a534": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "5m Huge Gearbox",
 		"SizeId": 59
 	},
@@ -5215,7 +5215,7 @@
 		"SizeId": 1
 	},
 	"4222c732-5fcb-4b4a-9249-64bb3fc8ef6c": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small jet intake pipe straight box",
 		"SizeId": 1
 	},
@@ -5265,7 +5265,7 @@
 		"SizeId": 1
 	},
 	"42da61ac-9a3e-4146-9ae4-5d70580e1176": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery Pipe",
 		"SizeId": 1
 	},
@@ -5300,7 +5300,7 @@
 		"SizeId": 1
 	},
 	"4339eff5-b327-448d-88c1-6c84955ca031": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Gearbox Huge",
 		"SizeId": 1
 	},
@@ -5375,7 +5375,7 @@
 		"SizeId": 1
 	},
 	"442dd6e0-29d0-4457-9fa8-72deb3f25b62": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery Hull Pipe",
 		"SizeId": 1
 	},
@@ -5475,12 +5475,12 @@
 		"SizeId": 2
 	},
 	"45659004-18ff-4ce9-ae33-3548fd914f45": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Inline turbocharger (left)",
 		"SizeId": 2
 	},
 	"45683ff6-78dd-48ae-9c67-d53fbd765bcc": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small jet engine generator",
 		"SizeId": 1
 	},
@@ -5535,7 +5535,7 @@
 		"SizeId": 1
 	},
 	"462f80ed-2611-4cf8-a204-c7a66ea241da": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Clip (6m shells)",
 		"SizeId": 28
 	},
@@ -5595,7 +5595,7 @@
 		"SizeId": 1
 	},
 	"4747150c-b534-4605-8d3c-449bd0f04687": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Steam Drill Extension",
 		"SizeId": 1
 	},
@@ -5635,7 +5635,7 @@
 		"SizeId": 1
 	},
 	"47c8ddc8-9dca-4363-a39e-95dd28008e30": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Hardener Pellets",
 		"SizeId": 1
 	},
@@ -5655,7 +5655,7 @@
 		"SizeId": 1
 	},
 	"47da23fc-17bb-4a66-9c6d-fb66fddb3be6": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Supercharger",
 		"SizeId": 1
 	},
@@ -5690,7 +5690,7 @@
 		"SizeId": 4
 	},
 	"48678652-cad7-40ae-918f-af432b37fdf9": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Particle tube 1m",
 		"SizeId": 1
 	},
@@ -5890,7 +5890,7 @@
 		"SizeId": 3
 	},
 	"4b2109f7-abfc-46b7-b752-f9423b6f2e35": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Inline turbocharger (left)",
 		"SizeId": 2
 	},
@@ -5960,7 +5960,7 @@
 		"SizeId": 1
 	},
 	"4bd38234-b485-4a94-bc2d-d3fc80d89955": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "High Explosive Pellets",
 		"SizeId": 1
 	},
@@ -5970,7 +5970,7 @@
 		"SizeId": 2
 	},
 	"4c24445d-a29b-446e-b03f-29e570e9d47d": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Engine Generator",
 		"SizeId": 1
 	},
@@ -6025,7 +6025,7 @@
 		"SizeId": 1
 	},
 	"4d1e042a-9377-46a1-ac30-8b3ca17364aa": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "crank 5m",
 		"SizeId": 1
 	},
@@ -6055,7 +6055,7 @@
 		"SizeId": 1
 	},
 	"4d9a507f-84a3-456a-8b60-6d1bf48816ca": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery Flare Stack",
 		"SizeId": 54
 	},
@@ -6090,7 +6090,7 @@
 		"SizeId": 4
 	},
 	"4dd5c902-6c7c-4e9a-a970-31fb67f44dd4": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo 2x2m",
 		"SizeId": 51
 	},
@@ -6210,7 +6210,7 @@
 		"SizeId": 1
 	},
 	"4f87eff7-616b-4663-8f11-cd7a7ddd3649": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Storage Box (2m)",
 		"SizeId": 2
 	},
@@ -6245,7 +6245,7 @@
 		"SizeId": 4
 	},
 	"50317a96-320e-45b8-b4bf-c40bbe210474": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "anim-shaft crank split 3m spinner.obj",
 		"SizeId": 1
 	},
@@ -6265,7 +6265,7 @@
 		"SizeId": 4
 	},
 	"50626002-c1bc-41a3-ade6-ee83ba4c548a": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Huge Jet Engine flush",
 		"SizeId": 24
 	},
@@ -6285,7 +6285,7 @@
 		"SizeId": 15
 	},
 	"50df4724-4d51-46e5-bfa4-62f12ae3722d": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Hardener Pellets",
 		"SizeId": 1
 	},
@@ -6300,7 +6300,7 @@
 		"SizeId": 6
 	},
 	"510faa5d-9e2e-4709-aecb-ea4a3c010dff": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "(CARD) Naval AI",
 		"SizeId": 1
 	},
@@ -6315,7 +6315,7 @@
 		"SizeId": 3
 	},
 	"5154dcf9-57f8-48f2-9503-5db1f1dc9ea5": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Storage Box (4m, empty)",
 		"SizeId": 4
 	},
@@ -6335,7 +6335,7 @@
 		"SizeId": 2
 	},
 	"51a668f6-7c6e-4b90-8370-301413d45017": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "electric motor rotor 3m",
 		"SizeId": 1
 	},
@@ -6375,7 +6375,7 @@
 		"SizeId": 1
 	},
 	"521acb1b-936d-42c1-9599-cd03f916a419": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "ammo 2x2 empty removal",
 		"SizeId": 1
 	},
@@ -6490,7 +6490,7 @@
 		"SizeId": 1
 	},
 	"52ff74a3-3d0f-4b2f-bfe3-23ff12f74354": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Gauge cooler splitter",
 		"SizeId": 1
 	},
@@ -6500,7 +6500,7 @@
 		"SizeId": 1
 	},
 	"532c3d76-ede3-4fbf-bf87-8e82b3acc73b": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Steam Shaft Drill Head 3m",
 		"SizeId": 2
 	},
@@ -6540,12 +6540,12 @@
 		"SizeId": 24
 	},
 	"537f0e83-8db0-42c4-a55a-6dc435ab0bba": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "electric motor rotor 1m",
 		"SizeId": 1
 	},
 	"5383f12d-1df0-4125-b3e8-59eb1afbf721": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Jet Combuster",
 		"SizeId": 1
 	},
@@ -6560,7 +6560,7 @@
 		"SizeId": 64
 	},
 	"53e6bf65-1cae-467c-ac1a-f1b933e15b1c": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet intake front",
 		"SizeId": 1
 	},
@@ -6705,7 +6705,7 @@
 		"SizeId": 4
 	},
 	"55ac222d-69c7-4a14-8bab-39432308ab0b": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Circling airplane AI",
 		"SizeId": 1
 	},
@@ -6760,7 +6760,7 @@
 		"SizeId": 6
 	},
 	"56450137-c20f-4793-972c-fb3fe56ae8d5": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Battery Storage Medium (mirror)",
 		"SizeId": 53
 	},
@@ -6780,12 +6780,12 @@
 		"SizeId": 3
 	},
 	"565d294e-f413-4c2a-87d3-4f609bb698b9": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Jet Exhaust",
 		"SizeId": 1
 	},
 	"565faf2e-346d-4ba5-b9d3-99601ad33c74": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Recoil absorber",
 		"SizeId": 1
 	},
@@ -6825,7 +6825,7 @@
 		"SizeId": 44
 	},
 	"56b29112-55f3-4e0a-9279-f6437adb2847": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery",
 		"SizeId": 50
 	},
@@ -6835,7 +6835,7 @@
 		"SizeId": 43
 	},
 	"56c27d46-39b3-4ac1-b4f7-71c118d8dde9": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Battery Storage Large",
 		"SizeId": 32
 	},
@@ -6850,7 +6850,7 @@
 		"SizeId": 64
 	},
 	"5715bbc9-3fc3-4b00-b869-962fb9ec7358": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Crank 5m base",
 		"SizeId": 1
 	},
@@ -6895,7 +6895,7 @@
 		"SizeId": 24
 	},
 	"5779ca53-65ce-491b-8a93-16b39aa99e9f": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "fuel storage box removal",
 		"SizeId": 1
 	},
@@ -6935,7 +6935,7 @@
 		"SizeId": 1
 	},
 	"57d0b848-3bf5-45db-bfe2-447933aee7fd": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Gearbox Large",
 		"SizeId": 30
 	},
@@ -7010,17 +7010,17 @@
 		"SizeId": 1
 	},
 	"58ae1262-6ccd-48ca-ac6f-2eb825aa7b42": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small jet intake piped",
 		"SizeId": 1
 	},
 	"58ba2272-9c86-495b-b2b2-751eda4aafb8": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet connector",
 		"SizeId": 24
 	},
 	"58c26f4a-5993-468a-b188-f497002066f9": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery Catalytic Cracker",
 		"SizeId": 50
 	},
@@ -7030,7 +7030,7 @@
 		"SizeId": 1
 	},
 	"58f677fa-2af3-453e-8f63-9b4e0a13c968": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Particle Tube 4m",
 		"SizeId": 4
 	},
@@ -7050,7 +7050,7 @@
 		"SizeId": 1
 	},
 	"593cb2ec-b110-4f18-8b25-f0ba9bd28bcc": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "fuel storage tank 3x3 removal",
 		"SizeId": 1
 	},
@@ -7095,12 +7095,12 @@
 		"SizeId": 4
 	},
 	"59bb426a-2a0c-44b2-9f41-70c4d11ae914": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Solid Ammo Clip [1m shells]",
 		"SizeId": 1
 	},
 	"59e0ca88-f390-48d0-ade1-0c08f629c4f2": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet extra combuster",
 		"SizeId": 1
 	},
@@ -7140,7 +7140,7 @@
 		"SizeId": 1
 	},
 	"5a403a89-09c7-40f3-bd8f-18c15a4fbfce": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet controller_square",
 		"SizeId": 1
 	},
@@ -7150,7 +7150,7 @@
 		"SizeId": 3
 	},
 	"5a5b609e-4b9f-4baf-8dd0-f13f9732e0ef": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small jet generator hull",
 		"SizeId": 1
 	},
@@ -7220,7 +7220,7 @@
 		"SizeId": 1
 	},
 	"5b84fed1-d11c-4c4d-b0f8-e83fd645d3ac": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Storage Box 3m x 3m",
 		"SizeId": 1
 	},
@@ -7235,7 +7235,7 @@
 		"SizeId": 1
 	},
 	"5bc5c1ae-815b-4db9-9957-bc04400c5981": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Solid Ammo Clip [4m shells]",
 		"SizeId": 1
 	},
@@ -7245,7 +7245,7 @@
 		"SizeId": 1
 	},
 	"5bd210b0-2377-45c8-9287-ec607acbbe60": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Hydraulic recoil absorber (1m)",
 		"SizeId": 1
 	},
@@ -7320,7 +7320,7 @@
 		"SizeId": 1
 	},
 	"5d8870cd-d401-4b52-a3dc-641c02b3b31f": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Storage Box",
 		"SizeId": 1
 	},
@@ -7370,7 +7370,7 @@
 		"SizeId": 1
 	},
 	"5e1e82d0-8b8f-4db1-a6b7-63b1eea6e701": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "(CARD) Aerial AI",
 		"SizeId": 1
 	},
@@ -7440,7 +7440,7 @@
 		"SizeId": 1
 	},
 	"5ef97d26-1196-4b1a-ba1d-fd539c26b684": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "AI Breadboard",
 		"SizeId": 1
 	},
@@ -7475,7 +7475,7 @@
 		"SizeId": 2
 	},
 	"5f60635f-ce02-4522-9c6f-1266814ce86e": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "7x3x14 broadside battery B",
 		"SizeId": 1
 	},
@@ -7525,7 +7525,7 @@
 		"SizeId": 1
 	},
 	"605aee1b-cdea-495f-9f23-b44d97fe0359": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Engine",
 		"SizeId": 1
 	},
@@ -7540,7 +7540,7 @@
 		"SizeId": 24
 	},
 	"607de9e4-0ffc-41e7-a5b0-752bd3f0cee0": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "steam control 1m",
 		"SizeId": 1
 	},
@@ -7570,7 +7570,7 @@
 		"SizeId": 8
 	},
 	"60f4ce7b-3d0e-4ba8-8799-9cdb2ddf7e26": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Crank 1m base",
 		"SizeId": 1
 	},
@@ -7585,7 +7585,7 @@
 		"SizeId": 1
 	},
 	"61683d9c-848c-4ae9-945e-62b12f8b44c3": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery Pipe 5 way",
 		"SizeId": 1
 	},
@@ -7635,7 +7635,7 @@
 		"SizeId": 1
 	},
 	"6209370e-abeb-4ec1-b523-dc21ea33fe0c": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Turbocharger (left)",
 		"SizeId": 8
 	},
@@ -7660,7 +7660,7 @@
 		"SizeId": 1
 	},
 	"6254e6e2-221c-48d3-871e-57c9fab2280c": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "steam mat Bump",
 		"SizeId": 1
 	},
@@ -7680,7 +7680,7 @@
 		"SizeId": 1
 	},
 	"628f7750-7134-4dc8-970a-549fd7d7e5e8": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Jet extra intake",
 		"SizeId": 1
 	},
@@ -7755,7 +7755,7 @@
 		"SizeId": 1
 	},
 	"63889002-e666-4ff4-9cc1-cca01a8de2ce": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Circling tank AI",
 		"SizeId": 1
 	},
@@ -7780,7 +7780,7 @@
 		"SizeId": 1
 	},
 	"63c50a3a-338f-451c-88cf-a5fe2489f26c": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "steam mat Smoothness",
 		"SizeId": 1
 	},
@@ -7810,7 +7810,7 @@
 		"SizeId": 2
 	},
 	"645a71be-2a80-4228-b036-9de863576708": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Gauge Increase Corner",
 		"SizeId": 1
 	},
@@ -7830,7 +7830,7 @@
 		"SizeId": 3
 	},
 	"649fc6c3-2f0c-4197-8777-e44e86696d60": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Customiser 2 modules",
 		"SizeId": 1
 	},
@@ -7925,7 +7925,7 @@
 		"SizeId": 1
 	},
 	"65fd12f5-da0c-44ee-9c6b-77d8ad2504c7": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Recoil absorber",
 		"SizeId": 1
 	},
@@ -8010,12 +8010,12 @@
 		"SizeId": 1
 	},
 	"66e3efae-4d73-4f4e-adbd-85e2573580e4": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Clip (2m shells)",
 		"SizeId": 2
 	},
 	"66e7be90-449c-4d87-b731-533c34ff98df": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Electric Engine",
 		"SizeId": 1
 	},
@@ -8035,7 +8035,7 @@
 		"SizeId": 1
 	},
 	"6767c701-de14-4a23-8822-29e90df4247b": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "fuel mat smoothness",
 		"SizeId": 1
 	},
@@ -8050,7 +8050,7 @@
 		"SizeId": 1
 	},
 	"6785811b-60fb-48f2-ac17-642ab69d1dde": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Fall of Shot Predictor",
 		"SizeId": 1
 	},
@@ -8135,12 +8135,12 @@
 		"SizeId": 1
 	},
 	"6883abf5-7665-4e7e-8b3e-a45111b1d006": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet Engine_square",
 		"SizeId": 1
 	},
 	"68a25044-bf38-4998-9814-60942a980c26": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery",
 		"SizeId": 50
 	},
@@ -8160,7 +8160,7 @@
 		"SizeId": 1
 	},
 	"68de38c4-7876-41a7-8030-d5099d86bc0a": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Frontal hovercraft AI",
 		"SizeId": 1
 	},
@@ -8225,7 +8225,7 @@
 		"SizeId": 3
 	},
 	"69fdb913-b462-4f88-a614-620462c253a6": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo 2x2m Left",
 		"SizeId": 52
 	},
@@ -8320,7 +8320,7 @@
 		"SizeId": 4
 	},
 	"6ae7c977-3f62-414e-98aa-5dc0da89b376": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "(CARD) Naval AI",
 		"SizeId": 1
 	},
@@ -8330,12 +8330,12 @@
 		"SizeId": 4
 	},
 	"6b31206e-4c01-46e2-814e-dcdf587fa415": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Steam Drill Head small",
 		"SizeId": 1
 	},
 	"6b66730e-78db-46fa-8bf0-e84b0246e8e4": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "crank 5m base",
 		"SizeId": 1
 	},
@@ -8350,7 +8350,7 @@
 		"SizeId": 4
 	},
 	"6bcaa132-06af-423a-9998-8f73161a2f73": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery Coker",
 		"SizeId": 50
 	},
@@ -8555,7 +8555,7 @@
 		"SizeId": 1
 	},
 	"6dc8ae9e-3284-4026-9a92-cdd473e66057": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet intake pipe straight",
 		"SizeId": 1
 	},
@@ -8620,7 +8620,7 @@
 		"SizeId": 1
 	},
 	"6e7ce425-b02d-46c0-bbfd-8604d3b68feb": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet extra compressor",
 		"SizeId": 1
 	},
@@ -8640,7 +8640,7 @@
 		"SizeId": 8
 	},
 	"6ebe5e2b-ef9a-4849-b234-131b25579adf": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Inline turbocharger (right)",
 		"SizeId": 2
 	},
@@ -8745,7 +8745,7 @@
 		"SizeId": 4
 	},
 	"703d6094-850b-45fc-a01c-25ceddd49dcb": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Gauge cooling unit",
 		"SizeId": 1
 	},
@@ -8805,7 +8805,7 @@
 		"SizeId": 1
 	},
 	"7153a366-b5b7-46e5-b4c0-26d2e5b8f6e7": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Custom Jet",
 		"SizeId": 1
 	},
@@ -8815,7 +8815,7 @@
 		"SizeId": 33
 	},
 	"7181452f-f87b-4aad-ae3c-daa56c8533f1": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Battery Charger",
 		"SizeId": 1
 	},
@@ -8850,7 +8850,7 @@
 		"SizeId": 1
 	},
 	"723aa6ef-8ffc-4634-84d7-1a95059baa4a": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Steam Drill Head",
 		"SizeId": 1
 	},
@@ -8890,7 +8890,7 @@
 		"SizeId": 1
 	},
 	"72cbc06f-d3b6-48fc-8d16-a32c2ad70d8b": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Steam Drill Extension medium",
 		"SizeId": 1
 	},
@@ -8960,7 +8960,7 @@
 		"SizeId": 1
 	},
 	"7383557f-abe2-4bcc-849f-89b6c0d02c78": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Storage Box (empty)",
 		"SizeId": 1
 	},
@@ -8980,7 +8980,7 @@
 		"SizeId": 1
 	},
 	"73be5bb2-53f2-4cdc-abcd-6264837a44c2": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Particle Tube 2m",
 		"SizeId": 2
 	},
@@ -8990,12 +8990,12 @@
 		"SizeId": 21
 	},
 	"73d5190b-3a68-4db6-979d-19425ea08b7f": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "AI",
 		"SizeId": 1
 	},
 	"73e005ed-bbaa-4346-bdfa-f29376ff01ec": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Gauge Increase",
 		"SizeId": 1
 	},
@@ -9005,7 +9005,7 @@
 		"SizeId": 2
 	},
 	"73f6af7d-4700-4e4e-b352-f3cd4f476de4": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet Exhaust Connector Square",
 		"SizeId": 1
 	},
@@ -9030,7 +9030,7 @@
 		"SizeId": 3
 	},
 	"7432d98d-be02-4ee8-ab9e-12db4f109907": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Extra mesh 0 of Electric Engine",
 		"SizeId": 1
 	},
@@ -9045,7 +9045,7 @@
 		"SizeId": 1
 	},
 	"743fbce9-9073-49b4-aa15-4a22a5a2f1e5": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery Pipe 2m",
 		"SizeId": 2
 	},
@@ -9065,7 +9065,7 @@
 		"SizeId": 1
 	},
 	"7489ebd4-92d2-4641-9db4-139bb592fc34": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Jet Fuel Injector",
 		"SizeId": 1
 	},
@@ -9110,7 +9110,7 @@
 		"SizeId": 1
 	},
 	"74eea193-5ded-4a89-a2fe-357d3caef5fa": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet intake add-on 1m",
 		"SizeId": 1
 	},
@@ -9185,7 +9185,7 @@
 		"SizeId": 1
 	},
 	"7617f09a-15ee-4bbf-940f-fa6dd81e35e4": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Jet controller",
 		"SizeId": 1
 	},
@@ -9220,12 +9220,12 @@
 		"SizeId": 1
 	},
 	"7676bdb0-2cc4-4966-8d71-b1025244d911": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Solid Ammo Clip (3m shells)",
 		"SizeId": 3
 	},
 	"7679b4ba-7c96-49b5-b08f-e209fdc43d3e": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "ai mat Ramp",
 		"SizeId": 1
 	},
@@ -9290,7 +9290,7 @@
 		"SizeId": 1
 	},
 	"77642c0c-277f-4a7d-9d08-f3f161d8e69c": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "(CARD) Land AI",
 		"SizeId": 1
 	},
@@ -9355,7 +9355,7 @@
 		"SizeId": 7
 	},
 	"7836f02d-9d50-476c-8701-d0e4eda43de3": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Clip (1m shells)",
 		"SizeId": 1
 	},
@@ -9365,7 +9365,7 @@
 		"SizeId": 1
 	},
 	"78514976-87cf-4d89-85cd-9d0df590a317": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Battery Charger",
 		"SizeId": 1
 	},
@@ -9420,7 +9420,7 @@
 		"SizeId": 1
 	},
 	"79015536-c137-4c87-a337-99dcf3deff81": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Storage Tank",
 		"SizeId": 1
 	},
@@ -9465,7 +9465,7 @@
 		"SizeId": 1
 	},
 	"796801e0-cd1e-4d1f-ab11-af5f1f18a705": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Huge Ion Thruster_round",
 		"SizeId": 1
 	},
@@ -9500,7 +9500,7 @@
 		"SizeId": 3
 	},
 	"79ded200-1814-4d4c-8ac2-9bae934068d5": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "electric motor stator 3m",
 		"SizeId": 1
 	},
@@ -9520,7 +9520,7 @@
 		"SizeId": 1
 	},
 	"79ef49d5-7876-41a7-8030-d5099d86bc0a": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Circling hovercraft AI",
 		"SizeId": 1
 	},
@@ -9570,7 +9570,7 @@
 		"SizeId": 1
 	},
 	"7adb64aa-e7a3-4610-8401-118b729c17cd": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "gun152twin A Shield Steam",
 		"SizeId": 1
 	},
@@ -9610,7 +9610,7 @@
 		"SizeId": 1
 	},
 	"7b5b9d32-d63c-4b3a-8330-ad7c058f3dfd": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "ai mat occlusion",
 		"SizeId": 1
 	},
@@ -9620,7 +9620,7 @@
 		"SizeId": 64
 	},
 	"7b672666-b275-454f-968f-506e93987800": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Ejector Backwards",
 		"SizeId": 30
 	},
@@ -9725,12 +9725,12 @@
 		"SizeId": 24
 	},
 	"7d048bb4-637a-4744-962a-1d0406f1f962": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Predictor",
 		"SizeId": 1
 	},
 	"7d0855c6-25fb-46c9-8687-64b0dd8f8e13": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "steam mat height",
 		"SizeId": 1
 	},
@@ -9790,12 +9790,12 @@
 		"SizeId": 1
 	},
 	"7db4bbe4-10be-4305-8613-9301728a1958": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Nuclear Engine Tips",
 		"SizeId": 1
 	},
 	"7dbc7512-6d18-428c-b647-d1b7c5c12e13": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "EMP Pellets",
 		"SizeId": 1
 	},
@@ -10210,7 +10210,7 @@
 		"SizeId": 1
 	},
 	"82106938-610c-4a66-8fe3-8cde947e707a": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet intake Hull",
 		"SizeId": 24
 	},
@@ -10240,12 +10240,12 @@
 		"SizeId": 24
 	},
 	"8277a5c7-344e-475d-b084-03ade5ded3b8": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "AI",
 		"SizeId": 1
 	},
 	"82850c4b-ccfd-40dd-95fb-182b39d724d7": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Battery Storage Large",
 		"SizeId": 32
 	},
@@ -10270,7 +10270,7 @@
 		"SizeId": 1
 	},
 	"82b2446e-c12e-436a-8340-76d38372ead1": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Parts Box",
 		"SizeId": 1
 	},
@@ -10340,7 +10340,7 @@
 		"SizeId": 1
 	},
 	"83b26cf3-9501-4420-9eca-4fb3cfb90736": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small jet intake_small_square",
 		"SizeId": 1
 	},
@@ -10420,7 +10420,7 @@
 		"SizeId": 1
 	},
 	"84b391ce-db19-4cd2-b034-e520fef31cf0": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small jet compressor hull",
 		"SizeId": 1
 	},
@@ -10535,7 +10535,7 @@
 		"SizeId": 4
 	},
 	"8600329a-4b2b-44c7-8e66-634b0d81ce3d": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Battery",
 		"SizeId": 1
 	},
@@ -10625,7 +10625,7 @@
 		"SizeId": 1
 	},
 	"87142f81-71ce-4d60-9b81-4fe5674112db": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "EMP Pellets",
 		"SizeId": 1
 	},
@@ -10740,7 +10740,7 @@
 		"SizeId": 1
 	},
 	"88ceba44-dbe2-4324-bb85-ad5215a25513": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Crank Shaft",
 		"SizeId": 1
 	},
@@ -10795,7 +10795,7 @@
 		"SizeId": 3
 	},
 	"89c3beb4-0fa3-4c3f-a065-7e53497cbe64": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet Exhaust",
 		"SizeId": 24
 	},
@@ -10840,7 +10840,7 @@
 		"SizeId": 1
 	},
 	"89fea01c-551a-4031-997e-1cb8f4a29a12": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "electric motor stator 1m",
 		"SizeId": 1
 	},
@@ -10865,7 +10865,7 @@
 		"SizeId": 1
 	},
 	"8a60f1e1-8c18-4c93-84e6-49ec2b3e955b": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo 2x2m (empty)",
 		"SizeId": 51
 	},
@@ -10880,7 +10880,7 @@
 		"SizeId": 1
 	},
 	"8a96edf6-93c3-47c2-b3ad-894598f262e3": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Gauge cooler corner",
 		"SizeId": 1
 	},
@@ -10915,7 +10915,7 @@
 		"SizeId": 3
 	},
 	"8af05ae6-7876-41a7-8030-d5099d86bc0a": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Bombing run hovercraft AI",
 		"SizeId": 1
 	},
@@ -10950,7 +10950,7 @@
 		"SizeId": 3
 	},
 	"8b6eafd7-080c-44e6-85e8-99b1704e8391": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Clip [6m shells]",
 		"SizeId": 1
 	},
@@ -11030,7 +11030,7 @@
 		"SizeId": 4
 	},
 	"8ccc8d39-5a97-4cb2-b708-d3ffefd5dc19": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "AI Connector (5 way)",
 		"SizeId": 1
 	},
@@ -11080,7 +11080,7 @@
 		"SizeId": 1
 	},
 	"8d3c9c6c-50f9-4de4-8a44-419759f7386a": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet intake feeder front",
 		"SizeId": 1
 	},
@@ -11095,7 +11095,7 @@
 		"SizeId": 1
 	},
 	"8d70c55b-d200-4f56-a159-28646427d4b1": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Gauge Increase Port",
 		"SizeId": 1
 	},
@@ -11135,7 +11135,7 @@
 		"SizeId": 1
 	},
 	"8e2cb19b-db70-41f4-b398-62c38fd22d2d": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet Compressor",
 		"SizeId": 24
 	},
@@ -11145,7 +11145,7 @@
 		"SizeId": 1
 	},
 	"8e8bf08f-ed83-4e89-b002-01e24896d793": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Particle Tube",
 		"SizeId": 1
 	},
@@ -11205,7 +11205,7 @@
 		"SizeId": 1
 	},
 	"8f9262a7-68b0-4761-89fd-194431d7fffe": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "shaft crank cased 1m",
 		"SizeId": 1
 	},
@@ -11315,7 +11315,7 @@
 		"SizeId": 1
 	},
 	"909d4325-c399-40d8-8000-d05066582148": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Engine Tips",
 		"SizeId": 1
 	},
@@ -11360,7 +11360,7 @@
 		"SizeId": 1
 	},
 	"90f8b002-fcf6-4312-b69a-df06221872de": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "fuel storage box 2m removal",
 		"SizeId": 1
 	},
@@ -11430,7 +11430,7 @@
 		"SizeId": 4
 	},
 	"91cca4a9-a40f-43eb-9ba5-34c738b03d1f": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Turbocharger (right)",
 		"SizeId": 8
 	},
@@ -11515,7 +11515,7 @@
 		"SizeId": 1
 	},
 	"929909ee-a8be-45df-bcc5-f3c7334c5c47": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "ammo box 2m removal",
 		"SizeId": 1
 	},
@@ -11585,7 +11585,7 @@
 		"SizeId": 1
 	},
 	"938de6f7-632e-4303-b387-486baaaa3462": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Clip [3m shells]",
 		"SizeId": 1
 	},
@@ -11595,7 +11595,7 @@
 		"SizeId": 1
 	},
 	"93c6e594-4bea-419c-93f6-8d1f6c3463ec": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Gauge cooler 5way",
 		"SizeId": 1
 	},
@@ -11620,7 +11620,7 @@
 		"SizeId": 1
 	},
 	"940c455d-ddf4-4541-9187-93ce269e8abc": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo parts box removal",
 		"SizeId": 1
 	},
@@ -11635,7 +11635,7 @@
 		"SizeId": 4
 	},
 	"9413049d-a4f7-4c1c-8b8a-d2f1f4c18e53": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Storage Box (4m)",
 		"SizeId": 4
 	},
@@ -11780,7 +11780,7 @@
 		"SizeId": 1
 	},
 	"95cabc9c-5c2a-4428-859d-99c044721532": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Solid Ammo Clip [6m shells]",
 		"SizeId": 1
 	},
@@ -11795,7 +11795,7 @@
 		"SizeId": 1
 	},
 	"95e34566-9234-4559-b601-9a0b9b7c11e5": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Jet Intake",
 		"SizeId": 1
 	},
@@ -11855,7 +11855,7 @@
 		"SizeId": 1
 	},
 	"96c9d85c-425a-4744-8ff3-36a364ceb99d": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Steam Shaft Drill Extension 1m",
 		"SizeId": 1
 	},
@@ -11885,7 +11885,7 @@
 		"SizeId": 24
 	},
 	"973c1ee1-2dc4-4cd7-be7c-32a37cb405de": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Solid Ammo Clip (8m shells)",
 		"SizeId": 29
 	},
@@ -11910,7 +11910,7 @@
 		"SizeId": 4
 	},
 	"97ab0a32-c1c7-4663-a497-574fb15d9318": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small jet controller hull",
 		"SizeId": 1
 	},
@@ -11960,7 +11960,7 @@
 		"SizeId": 1
 	},
 	"982fa366-d7aa-4369-9bc7-e66e13b2a2a5": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet intake pipe bend",
 		"SizeId": 1
 	},
@@ -12010,7 +12010,7 @@
 		"SizeId": 1
 	},
 	"9896747c-39a5-43bc-8ba9-ccf2f645cca1": {
-		"Material": "Missing",
+		"Material": "Laser",
 		"Name": "PAC lens (symmetric)",
 		"SizeId": 42
 	},
@@ -12050,7 +12050,7 @@
 		"SizeId": 64
 	},
 	"996cdf27-bebf-4999-9a2d-a54893ba70c6": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Storage Tank (empty)",
 		"SizeId": 1
 	},
@@ -12095,7 +12095,7 @@
 		"SizeId": 1
 	},
 	"99f681b3-9b3f-4d86-abf8-2e93dc4b7316": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Clip [2m shells]",
 		"SizeId": 1
 	},
@@ -12110,7 +12110,7 @@
 		"SizeId": 1
 	},
 	"9a3f63f4-48b6-4fe0-9f59-9fac3d073750": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Gauge Increase",
 		"SizeId": 1
 	},
@@ -12190,7 +12190,7 @@
 		"SizeId": 1
 	},
 	"9baeb3da-3d15-497c-b298-bd87bc8b9a2c": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Carburettor",
 		"SizeId": 1
 	},
@@ -12250,7 +12250,7 @@
 		"SizeId": 1
 	},
 	"9c5510a2-ed71-486f-8117-d199957dfb14": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "730mm quad mortar battery",
 		"SizeId": 1
 	},
@@ -12290,7 +12290,7 @@
 		"SizeId": 1
 	},
 	"9cb1e9cb-065c-4652-af14-adc96e666cca": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Steam Jet",
 		"SizeId": 1
 	},
@@ -12300,17 +12300,17 @@
 		"SizeId": 1
 	},
 	"9cfb35eb-6259-4bfe-9751-6cc1c5d4c2d6": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet connector hull",
 		"SizeId": 24
 	},
 	"9d1b69bb-8b89-45f9-a23a-d449ddc68d66": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Storage Tank",
 		"SizeId": 1
 	},
 	"9d2bd64c-e3af-4f17-80e3-678428997b62": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Customiser [single module]",
 		"SizeId": 1
 	},
@@ -12410,7 +12410,7 @@
 		"SizeId": 3
 	},
 	"9e39a47e-f190-435a-9ed0-650c2b205f27": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet generator hull",
 		"SizeId": 24
 	},
@@ -12420,7 +12420,7 @@
 		"SizeId": 1
 	},
 	"9e73d32c-a955-47f9-965b-fb39df3e3a33": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "AI Connector (6 way)",
 		"SizeId": 1
 	},
@@ -12500,7 +12500,7 @@
 		"SizeId": 6
 	},
 	"9f418d0a-18b7-4e53-ac8b-acb49270fd9a": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Circling ship AI",
 		"SizeId": 1
 	},
@@ -12550,7 +12550,7 @@
 		"SizeId": 1
 	},
 	"9f955c2e-ccfa-416a-8c4f-4b3d29a774f3": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet Exhaust",
 		"SizeId": 24
 	},
@@ -12560,7 +12560,7 @@
 		"SizeId": 1
 	},
 	"9f97c3df-a0a3-4fa4-8570-094a2e65d8aa": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery Desalter",
 		"SizeId": 50
 	},
@@ -12570,7 +12570,7 @@
 		"SizeId": 1
 	},
 	"9fdc179e-5e89-4b4a-8bca-3f1b895b3d41": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Ion Thruster_round",
 		"SizeId": 1
 	},
@@ -12700,7 +12700,7 @@
 		"SizeId": 1
 	},
 	"a18bf56d-f18b-4495-9919-968965e6bc04": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Particle Tube 2m",
 		"SizeId": 2
 	},
@@ -12725,7 +12725,7 @@
 		"SizeId": 2
 	},
 	"a2093923-5529-4037-a0f1-2d10b3359077": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Custom Jet",
 		"SizeId": 1
 	},
@@ -12810,7 +12810,7 @@
 		"SizeId": 1
 	},
 	"a31d4438-03b8-4cf2-ad7d-ff7c07fbf60c": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet Compressor hull",
 		"SizeId": 24
 	},
@@ -12860,7 +12860,7 @@
 		"SizeId": 1
 	},
 	"a38094a8-0c60-44db-8ca7-cbb3c18e8054": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet intake add-on (sides)",
 		"SizeId": 1
 	},
@@ -12870,7 +12870,7 @@
 		"SizeId": 1
 	},
 	"a3a6bcf8-b764-4c92-b43d-d4c91c4a68c7": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Storage Box",
 		"SizeId": 1
 	},
@@ -12955,7 +12955,7 @@
 		"SizeId": 1
 	},
 	"a52c86ec-8f2c-4c0e-8487-8aa12ba93dd0": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small jet generator",
 		"SizeId": 1
 	},
@@ -13070,7 +13070,7 @@
 		"SizeId": 1
 	},
 	"a6c501a7-ec4e-4fb9-a5c5-df401c8f7a7d": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Battery",
 		"SizeId": 1
 	},
@@ -13080,7 +13080,7 @@
 		"SizeId": 4
 	},
 	"a6def349-1d6d-49f0-ba96-e3d1050d7f95": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Hydraulic recoil absorber [1m]",
 		"SizeId": 1
 	},
@@ -13100,7 +13100,7 @@
 		"SizeId": 1
 	},
 	"a70f015e-a9fe-45f1-958c-fc501ec7e2ea": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet Engine flush",
 		"SizeId": 1
 	},
@@ -13150,7 +13150,7 @@
 		"SizeId": 1
 	},
 	"a783daba-b6c2-4d87-aee8-ee1791f45587": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery Pipe 3m",
 		"SizeId": 3
 	},
@@ -13170,7 +13170,7 @@
 		"SizeId": 8
 	},
 	"a7d890a0-c06d-445a-9a94-566676cf97b6": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet intake feeder",
 		"SizeId": 1
 	},
@@ -13215,7 +13215,7 @@
 		"SizeId": 1
 	},
 	"a8a5bdac-01a2-4399-88a7-121505c1eadd": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet intake add-on",
 		"SizeId": 1
 	},
@@ -13260,7 +13260,7 @@
 		"SizeId": 2
 	},
 	"a91233a6-a786-4ca8-b50f-9faca5cb3733": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Gearbox Small",
 		"SizeId": 1
 	},
@@ -13280,7 +13280,7 @@
 		"SizeId": 1
 	},
 	"a9763554-b190-4861-95fd-f97584923683": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small jet connector corner",
 		"SizeId": 1
 	},
@@ -13345,7 +13345,7 @@
 		"SizeId": 2
 	},
 	"aa3c8fc6-5182-4e23-bd7f-7c6bfb018218": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "AI",
 		"SizeId": 1
 	},
@@ -13355,7 +13355,7 @@
 		"SizeId": 1
 	},
 	"aa7bf257-9376-46f1-b9bf-48dcfbf52b4f": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "(CARD) Fortress AI",
 		"SizeId": 1
 	},
@@ -13370,7 +13370,7 @@
 		"SizeId": 4
 	},
 	"aa8b1906-ecb0-45f4-8f64-99491155e123": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery Coker",
 		"SizeId": 50
 	},
@@ -13390,7 +13390,7 @@
 		"SizeId": 1
 	},
 	"aaba7cf7-f668-4262-8407-fe67126535fb": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Electric Engine",
 		"SizeId": 1
 	},
@@ -13520,12 +13520,12 @@
 		"SizeId": 1
 	},
 	"ac65ce78-2e21-465e-a28b-07ebbd65805e": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Gauge cooler 4way",
 		"SizeId": 1
 	},
 	"acb4bf6e-b10e-4a6f-b9dc-b22be888c096": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Hydraulic recoil absorber (8m)",
 		"SizeId": 29
 	},
@@ -13565,7 +13565,7 @@
 		"SizeId": 1
 	},
 	"ad3867b5-6146-44b8-a539-6ab08311e5fe": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet Stabiliser",
 		"SizeId": 1
 	},
@@ -13595,7 +13595,7 @@
 		"SizeId": 1
 	},
 	"ad965629-9b13-448b-ab7a-7e69afad2fb4": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Hover Jet",
 		"SizeId": 1
 	},
@@ -13665,7 +13665,7 @@
 		"SizeId": 4
 	},
 	"aea2161d-ff43-4b10-ac0e-933fb5809faa": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "(CARD) Aerial AI",
 		"SizeId": 1
 	},
@@ -13735,7 +13735,7 @@
 		"SizeId": 4
 	},
 	"afbc81cf-82bc-4f9b-a96d-079f5cd12130": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Shaft Crank Cased (1m)",
 		"SizeId": 1
 	},
@@ -13755,7 +13755,7 @@
 		"SizeId": 1
 	},
 	"afd0ce81-107a-4760-a2cd-cc1ada1bb07f": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Solid Ammo Clip [3m shells]",
 		"SizeId": 1
 	},
@@ -13765,7 +13765,7 @@
 		"SizeId": 1
 	},
 	"aff5ed68-2394-437b-be1f-230d66c8bf06": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "shaft crank cased 3m",
 		"SizeId": 1
 	},
@@ -13820,7 +13820,7 @@
 		"SizeId": 1
 	},
 	"b093f1e8-7129-4f1b-83ab-737363aceb52": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Jet Extra Combuster",
 		"SizeId": 1
 	},
@@ -14045,12 +14045,12 @@
 		"SizeId": 1
 	},
 	"b359201f-39f5-403f-9def-4872b26e724b": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Particle Tube 3m",
 		"SizeId": 3
 	},
 	"b35a6e3e-79a1-4856-b187-47e7678c729c": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Jet extra combuster",
 		"SizeId": 1
 	},
@@ -14065,7 +14065,7 @@
 		"SizeId": 4
 	},
 	"b399de56-91c5-4be8-b308-dc39ea4ead35": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "ai mat smoothness",
 		"SizeId": 1
 	},
@@ -14095,12 +14095,12 @@
 		"SizeId": 1
 	},
 	"b3a89e5e-0ab9-447e-8691-a06b4319b654": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Steam Drill Head medium",
 		"SizeId": 1
 	},
 	"b3c69380-05df-471b-ba65-7d842e72cdb3": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "ai mat height",
 		"SizeId": 1
 	},
@@ -14175,12 +14175,12 @@
 		"SizeId": 1
 	},
 	"b4f7c190-084d-446c-b7eb-17851f1e45ec": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "steam mat AO",
 		"SizeId": 1
 	},
 	"b50989c9-03d4-4201-a8d4-459dcea86b05": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet Engine",
 		"SizeId": 1
 	},
@@ -14195,12 +14195,12 @@
 		"SizeId": 1
 	},
 	"b5370d3a-03cc-42c8-99a8-894ca06d118b": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "APS Ammo",
 		"SizeId": 1
 	},
 	"b53ca365-d2ad-4263-ae00-942eed1ac6b8": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "gun60Gatling SS Ammo R",
 		"SizeId": 1
 	},
@@ -14225,12 +14225,12 @@
 		"SizeId": 1
 	},
 	"b58d67f2-1907-4ad1-93d5-531321914e49": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "9x3x14 broadside battery A",
 		"SizeId": 1
 	},
 	"b5a7c610-935d-4bb5-abd5-b96c7a3e2082": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Failsafe",
 		"SizeId": 1
 	},
@@ -14325,12 +14325,12 @@
 		"SizeId": 1
 	},
 	"b6af6060-a5bc-44dd-be3c-4ed683e4d81f": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet intake top",
 		"SizeId": 1
 	},
 	"b6ca9cff-6943-402c-9808-9596685b7709": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Gauge cooling unit",
 		"SizeId": 1
 	},
@@ -14355,7 +14355,7 @@
 		"SizeId": 12
 	},
 	"b705ab62-7d00-48c8-8f1e-799db064762a": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "fuel pipes",
 		"SizeId": 1
 	},
@@ -14365,7 +14365,7 @@
 		"SizeId": 1
 	},
 	"b720f7ba-8c9a-46b1-b174-4bfcec8b67fa": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Huge Jet Engine_square",
 		"SizeId": 1
 	},
@@ -14375,7 +14375,7 @@
 		"SizeId": 1
 	},
 	"b74c27c0-081a-45b7-8e81-cdd84ff33490": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Huge Jet Engine",
 		"SizeId": 24
 	},
@@ -14395,7 +14395,7 @@
 		"SizeId": 1
 	},
 	"b799b159-3bab-45f8-92e4-3107bca46513": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Particle Tube Terminator",
 		"SizeId": 1
 	},
@@ -14455,7 +14455,7 @@
 		"SizeId": 60
 	},
 	"b841c6ea-6911-4fd1-95ab-232a6df17cca": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Ejector",
 		"SizeId": 30
 	},
@@ -14555,7 +14555,7 @@
 		"SizeId": 1
 	},
 	"b9457302-db10-49ad-98e2-1c44cdca24b9": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Railgun battery",
 		"SizeId": 1
 	},
@@ -14575,7 +14575,7 @@
 		"SizeId": 1
 	},
 	"b9c6a6bf-a61a-44eb-bf89-ee414711fed2": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Particle Tube 3m",
 		"SizeId": 3
 	},
@@ -14605,7 +14605,7 @@
 		"SizeId": 1
 	},
 	"b9fabb99-ff73-4018-8521-08441d2f18cf": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet controller",
 		"SizeId": 24
 	},
@@ -14640,12 +14640,12 @@
 		"SizeId": 4
 	},
 	"ba60a2a9-b4f9-4bed-9a72-091ed6e41182": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small jet connector",
 		"SizeId": 1
 	},
 	"ba6c6d35-4fa2-4c74-b6a3-55aa5ff77714": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Engine Generator",
 		"SizeId": 1
 	},
@@ -14740,7 +14740,7 @@
 		"SizeId": 3
 	},
 	"bbe92c52-4eb0-44e7-a1cf-119266d3d8e5": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet combuster hull",
 		"SizeId": 24
 	},
@@ -14900,7 +14900,7 @@
 		"SizeId": 1
 	},
 	"be5a6f25-a471-44c4-951c-f116463d1a0a": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Gauge Increase Port",
 		"SizeId": 1
 	},
@@ -14970,7 +14970,7 @@
 		"SizeId": 2
 	},
 	"bf547b48-7d33-4fae-8cd2-bbb6fc2c02f1": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Nuclear Engine",
 		"SizeId": 1
 	},
@@ -14985,7 +14985,7 @@
 		"SizeId": 1
 	},
 	"bf7db04a-6d4c-43c2-acdd-b6befec02d34": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "shaft crank 1m",
 		"SizeId": 1
 	},
@@ -15030,12 +15030,12 @@
 		"SizeId": 19
 	},
 	"bff69a50-fb76-4376-9ece-fd17d71e1e84": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small jet exhaust_small_square",
 		"SizeId": 1
 	},
 	"c0033db5-650a-4d86-af33-3a9fb72a471d": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Turbocharger (right)",
 		"SizeId": 8
 	},
@@ -15065,7 +15065,7 @@
 		"SizeId": 2
 	},
 	"c048135d-714b-4e9a-8508-877f26e3de3e": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "steam mat Paint",
 		"SizeId": 1
 	},
@@ -15085,7 +15085,7 @@
 		"SizeId": 2
 	},
 	"c0577484-fdc7-43d4-bb51-a4d3fc378141": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Bombing run airplane AI",
 		"SizeId": 1
 	},
@@ -15125,7 +15125,7 @@
 		"SizeId": 1
 	},
 	"c0b07b2b-3e92-4ba7-896e-71ff7284de03": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery L-Junction Pipe (right)",
 		"SizeId": 1
 	},
@@ -15155,7 +15155,7 @@
 		"SizeId": 3
 	},
 	"c0eecb94-0410-4031-9015-2ec4b8fd4c80": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Steam Shaft Drill Head 5m",
 		"SizeId": 2
 	},
@@ -15175,7 +15175,7 @@
 		"SizeId": 1
 	},
 	"c107f90f-68bb-4f16-b023-960e72e1fa3a": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Customiser 1 module",
 		"SizeId": 1
 	},
@@ -15255,7 +15255,7 @@
 		"SizeId": 1
 	},
 	"c1ecd60f-5cbb-4c81-acb6-d2ff407311b7": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet compressor_square",
 		"SizeId": 1
 	},
@@ -15370,7 +15370,7 @@
 		"SizeId": 1
 	},
 	"c3f26ef6-22f2-4a04-bb49-aa66cc949188": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Clip (4m shells)",
 		"SizeId": 4
 	},
@@ -15380,7 +15380,7 @@
 		"SizeId": 1
 	},
 	"c40ae12e-bf54-40ad-aa30-2278d78f86bc": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Shaft Crank (3m)",
 		"SizeId": 12
 	},
@@ -15400,7 +15400,7 @@
 		"SizeId": 1
 	},
 	"c4426511-155e-4837-8d28-20947c63f660": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Clip [1m shells]",
 		"SizeId": 1
 	},
@@ -15540,12 +15540,12 @@
 		"SizeId": 4
 	},
 	"c5bb6398-319b-47c1-a5ef-c6ce9af4e9a6": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet fuel injector",
 		"SizeId": 1
 	},
 	"c5bbf9e7-bb49-4f4f-8e72-fda016385d13": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet engine generator square",
 		"SizeId": 1
 	},
@@ -15595,7 +15595,7 @@
 		"SizeId": 1
 	},
 	"c65f67f3-15bf-4ac9-9df2-9b5fcc0269e4": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Particle Tube 4m",
 		"SizeId": 4
 	},
@@ -15660,7 +15660,7 @@
 		"SizeId": 1
 	},
 	"c74d81fe-10d9-4390-a49a-968ec1389027": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Turbocharger (left)",
 		"SizeId": 8
 	},
@@ -15695,7 +15695,7 @@
 		"SizeId": 4
 	},
 	"c7a5936e-9c61-4dcd-88ea-ac16da80b712": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "electric motor rotor 5m",
 		"SizeId": 1
 	},
@@ -15725,7 +15725,7 @@
 		"SizeId": 1
 	},
 	"c7d3ffb8-3ceb-40ae-a2b0-69c1f4d59462": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Jet Controller",
 		"SizeId": 1
 	},
@@ -15775,7 +15775,7 @@
 		"SizeId": 1
 	},
 	"c89978fc-2b10-494d-8824-6717f24a8048": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery Corner Pipe",
 		"SizeId": 1
 	},
@@ -15790,12 +15790,12 @@
 		"SizeId": 1
 	},
 	"c8d6a952-7f6a-4792-9db6-e77d45301757": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Extra mesh 0 of Electric Engine",
 		"SizeId": 1
 	},
 	"c8fe583a-357b-4fa6-86f1-fc2de639c909": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Electric Engine",
 		"SizeId": 1
 	},
@@ -15810,7 +15810,7 @@
 		"SizeId": 1
 	},
 	"c937c1c0-d6f3-46b4-af96-d1842a240fb3": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Electric Motor 1m",
 		"SizeId": 1
 	},
@@ -15950,7 +15950,7 @@
 		"SizeId": 7
 	},
 	"cacc9c8b-9149-4adf-a86c-5cf5f4b035b8": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Jet Compressor",
 		"SizeId": 1
 	},
@@ -15965,7 +15965,7 @@
 		"SizeId": 3
 	},
 	"caf0647d-6347-40c7-9f7b-22bfc11721e2": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "anim-shaft crank split 1m spinner",
 		"SizeId": 1
 	},
@@ -15975,7 +15975,7 @@
 		"SizeId": 1
 	},
 	"cb07b57a-dd8f-491f-b7bb-cf45f32c0eac": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet engine generator",
 		"SizeId": 1
 	},
@@ -15990,7 +15990,7 @@
 		"SizeId": 1
 	},
 	"cb34921b-381f-455d-aac2-e95c6e71a9ca": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet Exhaust Connector Small Square",
 		"SizeId": 1
 	},
@@ -16015,7 +16015,7 @@
 		"SizeId": 1
 	},
 	"cbe68b75-1568-494e-8caf-c9e5336faea7": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Steam Shaft Drill Extension 5m",
 		"SizeId": 1
 	},
@@ -16050,7 +16050,7 @@
 		"SizeId": 1
 	},
 	"cc38cd23-d066-4926-877b-65229237b45a": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet combuster_square",
 		"SizeId": 1
 	},
@@ -16155,7 +16155,7 @@
 		"SizeId": 1
 	},
 	"cdc656c1-2266-470b-872c-79faa65dcaae": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Steam Shaft Drill Head 1m",
 		"SizeId": 2
 	},
@@ -16205,7 +16205,7 @@
 		"SizeId": 1
 	},
 	"ce5dcc45-d764-476f-bb17-240e3c1d22bb": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Solid Ammo Clip [8m shells]",
 		"SizeId": 1
 	},
@@ -16225,7 +16225,7 @@
 		"SizeId": 1
 	},
 	"ce84541b-a7f2-4d49-9074-040217580385": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Shaft Crank (1m)",
 		"SizeId": 1
 	},
@@ -16325,7 +16325,7 @@
 		"SizeId": 1
 	},
 	"d0536a5b-7d16-4a76-8eb7-1228fffc8eee": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "AI",
 		"SizeId": 1
 	},
@@ -16360,7 +16360,7 @@
 		"SizeId": 3
 	},
 	"d09d9804-fcd2-4f05-8739-948bce8d4702": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "fuel mat Bump",
 		"SizeId": 1
 	},
@@ -16415,7 +16415,7 @@
 		"SizeId": 1
 	},
 	"d13556da-e6dc-4c49-a9ec-b47517709da5": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Ejector",
 		"SizeId": 30
 	},
@@ -16505,7 +16505,7 @@
 		"SizeId": 1
 	},
 	"d2550253-f55a-48e2-8f57-c3931c0359da": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Gauge Increase Top",
 		"SizeId": 1
 	},
@@ -16520,7 +16520,7 @@
 		"SizeId": 6
 	},
 	"d2890fa7-5068-4b3f-8e45-e8637c815664": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Hydraulic recoil absorber [2m]",
 		"SizeId": 1
 	},
@@ -16530,7 +16530,7 @@
 		"SizeId": 1
 	},
 	"d2b4f5e2-6b5f-4960-b683-6847612122a3": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Nuclear Engine Core",
 		"SizeId": 50
 	},
@@ -16645,7 +16645,7 @@
 		"SizeId": 1
 	},
 	"d401bed1-2346-4eef-86aa-c303556f2138": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery Pipe 4m",
 		"SizeId": 4
 	},
@@ -16660,7 +16660,7 @@
 		"SizeId": 1
 	},
 	"d40c0a33-eb4f-4fa0-8550-0e7a680eb275": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Storage Box (2m, empty)",
 		"SizeId": 2
 	},
@@ -16760,7 +16760,7 @@
 		"SizeId": 4
 	},
 	"d514c1bb-c3f6-4690-a1eb-7aa7b639584a": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Clip [8m shells]",
 		"SizeId": 1
 	},
@@ -16800,7 +16800,7 @@
 		"SizeId": 2
 	},
 	"d55c7c82-df73-4497-9377-0888faf5ed6c": {
-		"Material": "Barrel",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Barrel",
 		"SizeId": 1
 	},
@@ -16815,7 +16815,7 @@
 		"SizeId": 1
 	},
 	"d58a0103-c23e-456e-a742-bcba6bc4e655": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "ai mat",
 		"SizeId": 1
 	},
@@ -16850,7 +16850,7 @@
 		"SizeId": 1
 	},
 	"d5fd03fa-78ce-4038-bfa6-6fd62c0775d1": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "shaft crank 3m",
 		"SizeId": 1
 	},
@@ -16875,7 +16875,7 @@
 		"SizeId": 3
 	},
 	"d62b91f6-8356-4fbc-8415-6405e04cba92": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet Exhaust Hull",
 		"SizeId": 24
 	},
@@ -16890,7 +16890,7 @@
 		"SizeId": 3
 	},
 	"d661f0e7-7f81-4227-80dd-f93aed873630": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Storage Box (3x3m)",
 		"SizeId": 32
 	},
@@ -16900,7 +16900,7 @@
 		"SizeId": 1
 	},
 	"d676e16b-cc4c-4887-944e-77e9d07c7d30": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Storage Box (3x3m, empty)",
 		"SizeId": 32
 	},
@@ -16945,7 +16945,7 @@
 		"SizeId": 1
 	},
 	"d70ce1e2-9281-4a59-80f3-c7633bea22e7": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "gearbox small",
 		"SizeId": 1
 	},
@@ -17005,7 +17005,7 @@
 		"SizeId": 1
 	},
 	"d7cd17a5-ca85-4437-a57b-029fb27c794b": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Engines",
 		"SizeId": 1
 	},
@@ -17055,7 +17055,7 @@
 		"SizeId": 1
 	},
 	"d84b0c14-0a96-41bf-a2e1-d7d2a68ed10d": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo 2m (empty)",
 		"SizeId": 2
 	},
@@ -17065,7 +17065,7 @@
 		"SizeId": 1
 	},
 	"d87d212e-09de-4da5-ac0f-0dff9f754d9b": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "gun130Single Cas Shield Steam",
 		"SizeId": 1
 	},
@@ -17110,7 +17110,7 @@
 		"SizeId": 2
 	},
 	"d93c6734-111d-483d-b3fa-0e169f7b04f5": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Jet Compressor",
 		"SizeId": 1
 	},
@@ -17135,7 +17135,7 @@
 		"SizeId": 1
 	},
 	"d9606921-04b3-43e6-811e-507a639ba1fc": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Processor",
 		"SizeId": 8
 	},
@@ -17150,7 +17150,7 @@
 		"SizeId": 1
 	},
 	"d9a36701-b452-4364-a2f0-cc822af38cd0": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Customiser 4 modules",
 		"SizeId": 1
 	},
@@ -17170,7 +17170,7 @@
 		"SizeId": 1
 	},
 	"d9bf798f-c50d-4654-b85e-66d69bd09925": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "ammo 2x2 left empty removal",
 		"SizeId": 1
 	},
@@ -17235,7 +17235,7 @@
 		"SizeId": 1
 	},
 	"da8f95fa-756d-4968-a217-7b8616fdb89c": {
-		"Material": "Barrel",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Barrel (empty)",
 		"SizeId": 1
 	},
@@ -17285,7 +17285,7 @@
 		"SizeId": 1
 	},
 	"db555a7c-41aa-4027-94bc-ea7b69e0c7d3": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet Square Exhaust",
 		"SizeId": 1
 	},
@@ -17315,7 +17315,7 @@
 		"SizeId": 1
 	},
 	"db9cc494-8adc-4b89-b217-eea643475b90": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "steam mat Color",
 		"SizeId": 1
 	},
@@ -17365,7 +17365,7 @@
 		"SizeId": 1
 	},
 	"dc520fd8-c1cc-424d-a554-7d4e63e32e81": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet extra combuster",
 		"SizeId": 1
 	},
@@ -17410,7 +17410,7 @@
 		"SizeId": 3
 	},
 	"dd18a826-a6ec-4acb-a944-3dd334a521b0": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Parts Box",
 		"SizeId": 1
 	},
@@ -17465,7 +17465,7 @@
 		"SizeId": 3
 	},
 	"ddee4f0c-e9de-4a73-b87f-c34d674450cb": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Failsafe",
 		"SizeId": 1
 	},
@@ -17490,7 +17490,7 @@
 		"SizeId": 2
 	},
 	"de391c68-e69d-45a1-822d-cf1bf1083422": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small jet combuster_small_square",
 		"SizeId": 1
 	},
@@ -17510,12 +17510,12 @@
 		"SizeId": 1
 	},
 	"de647f1a-51fe-42f1-961a-033ed13cc190": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet controller",
 		"SizeId": 24
 	},
 	"de655a70-1b6f-4549-a810-029356047512": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Electric Motor 3m",
 		"SizeId": 1
 	},
@@ -17615,7 +17615,7 @@
 		"SizeId": 1
 	},
 	"df687d3b-ad26-49bb-86be-ed694e880252": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "(CARD) Fortress AI",
 		"SizeId": 1
 	},
@@ -17715,7 +17715,7 @@
 		"SizeId": 8
 	},
 	"e0f5e9a7-a384-48f9-9ec5-fe6aac81c440": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Hydraulic recoil absorber (6m)",
 		"SizeId": 28
 	},
@@ -17725,12 +17725,12 @@
 		"SizeId": 1
 	},
 	"e118d626-7cef-49b1-8114-5ca8f23e94f1": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Box",
 		"SizeId": 1
 	},
 	"e11fa46b-459a-4229-a82b-d371f5c0a14d": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet Engine",
 		"SizeId": 1
 	},
@@ -17760,7 +17760,7 @@
 		"SizeId": 1
 	},
 	"e1734121-5cf2-4dd1-8c88-fe9d3cfac16b": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Electric Engines",
 		"SizeId": 1
 	},
@@ -17855,7 +17855,7 @@
 		"SizeId": 1
 	},
 	"e244e917-038a-484b-9965-73a50cff6e94": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery Flare Stack",
 		"SizeId": 54
 	},
@@ -17915,7 +17915,7 @@
 		"SizeId": 1
 	},
 	"e2f88044-ea52-4b2d-9a7f-3812dcf1615c": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Supercharger",
 		"SizeId": 1
 	},
@@ -17945,17 +17945,17 @@
 		"SizeId": 1
 	},
 	"e34ec225-dda1-47fc-b56a-746da1965349": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Predictor",
 		"SizeId": 1
 	},
 	"e3629274-8e2e-41ed-8315-d84f8db05995": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery L-Junction Pipe (left)",
 		"SizeId": 1
 	},
 	"e3881245-a6b1-4d55-90eb-b2b4c5810daf": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Jet intake",
 		"SizeId": 1
 	},
@@ -17990,7 +17990,7 @@
 		"SizeId": 1
 	},
 	"e3d22373-253f-4f48-9638-77d756473c6b": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet extra compressor",
 		"SizeId": 1
 	},
@@ -18135,7 +18135,7 @@
 		"SizeId": 4
 	},
 	"e62413c3-e841-4eda-9e2a-ceaec75e8b64": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo 2m",
 		"SizeId": 2
 	},
@@ -18185,7 +18185,7 @@
 		"SizeId": 37
 	},
 	"e6a79e11-78c2-47b2-b189-356a1b5df190": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Battery Storage Medium (mirror)",
 		"SizeId": 53
 	},
@@ -18245,7 +18245,7 @@
 		"SizeId": 1
 	},
 	"e76f2d5f-3a04-4807-a077-8715394a7ee3": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Jet fuel injector",
 		"SizeId": 1
 	},
@@ -18435,7 +18435,7 @@
 		"SizeId": 1
 	},
 	"e9ad01a7-9842-4b01-9aba-61df935d79c1": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Crank 3m base",
 		"SizeId": 1
 	},
@@ -18485,7 +18485,7 @@
 		"SizeId": 4
 	},
 	"ea8ea6cd-22d9-4c21-aea3-fedfbd062a29": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "AI Connector (5 way)",
 		"SizeId": 1
 	},
@@ -18530,7 +18530,7 @@
 		"SizeId": 48
 	},
 	"eb609418-1810-4555-9e66-c64127bd690b": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet Compressor",
 		"SizeId": 24
 	},
@@ -18555,7 +18555,7 @@
 		"SizeId": 1
 	},
 	"ec02bde0-5d7f-4730-9611-343525088173": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "fuel mat Color",
 		"SizeId": 1
 	},
@@ -18580,7 +18580,7 @@
 		"SizeId": 1
 	},
 	"ec715453-8194-474d-8a36-71e7f9ed4fe7": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "APS ammo feeder removal",
 		"SizeId": 1
 	},
@@ -18665,12 +18665,12 @@
 		"SizeId": 1
 	},
 	"edb1b2eb-dac7-4c4f-8967-35f61c75fd93": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Processor",
 		"SizeId": 8
 	},
 	"edd65760-896f-4f6a-ba8c-eb2b072635f4": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "AI Card Slot",
 		"SizeId": 1
 	},
@@ -18715,7 +18715,7 @@
 		"SizeId": 24
 	},
 	"ee3c91af-e797-4efd-973a-5490bed4572c": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Jet extra compressor",
 		"SizeId": 1
 	},
@@ -18725,7 +18725,7 @@
 		"SizeId": 1
 	},
 	"ee47622e-4eb6-4fd0-81f7-97b33adde8d2": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Battery Storage Medium",
 		"SizeId": 49
 	},
@@ -18755,7 +18755,7 @@
 		"SizeId": 4
 	},
 	"eed76165-e122-4ce0-a294-b8d82f2b048a": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "AI Path Viewer",
 		"SizeId": 1
 	},
@@ -18835,7 +18835,7 @@
 		"SizeId": 2
 	},
 	"efb55635-4841-42b3-98f0-9aed90b2e826": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Controller",
 		"SizeId": 1
 	},
@@ -18940,7 +18940,7 @@
 		"SizeId": 1
 	},
 	"f1746662-adec-4054-98bd-94b553bc6c6d": {
-		"Material": "Missing",
+		"Material": "Laser",
 		"Name": "Particle Accelerator Lens",
 		"SizeId": 1
 	},
@@ -18965,7 +18965,7 @@
 		"SizeId": 2
 	},
 	"f1a3b5c5-d281-41f7-b110-8d1d3664c246": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet Stabiliser",
 		"SizeId": 1
 	},
@@ -19010,7 +19010,7 @@
 		"SizeId": 1
 	},
 	"f21dc267-2735-4e75-a862-d48547d71663": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Refinery Pipe 4 way",
 		"SizeId": 1
 	},
@@ -19035,7 +19035,7 @@
 		"SizeId": 1
 	},
 	"f29b1372-f4f3-4305-aa85-5fe214361fb7": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "AI Connector (6 way)",
 		"SizeId": 1
 	},
@@ -19185,12 +19185,12 @@
 		"SizeId": 1
 	},
 	"f45bd228-43c8-482c-824c-71e48e8ef27a": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Solid Ammo Clip (2m shells)",
 		"SizeId": 2
 	},
 	"f460c104-356f-4abe-b96a-97122285348f": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet generator",
 		"SizeId": 24
 	},
@@ -19275,7 +19275,7 @@
 		"SizeId": 1
 	},
 	"f564b14d-49b5-465e-b205-a1dbf14e5e4c": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Gauge Increase Top",
 		"SizeId": 1
 	},
@@ -19330,7 +19330,7 @@
 		"SizeId": 1
 	},
 	"f5f59e22-2ddb-4000-907e-274c0759c18a": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Engines",
 		"SizeId": 1
 	},
@@ -19375,7 +19375,7 @@
 		"SizeId": 1
 	},
 	"f67a1b08-3c9d-4f92-8731-f66dd2aeed60": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "steam pipe tank 1m",
 		"SizeId": 1
 	},
@@ -19465,7 +19465,7 @@
 		"SizeId": 3
 	},
 	"f76f1285-8e30-4a38-889a-6a0969b1e12b": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Clip [4m shells]",
 		"SizeId": 1
 	},
@@ -19490,7 +19490,7 @@
 		"SizeId": 4
 	},
 	"f7c75b5b-b95d-4bdb-a77d-12da69e7ee07": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Battery Storage Medium",
 		"SizeId": 49
 	},
@@ -19550,7 +19550,7 @@
 		"SizeId": 1
 	},
 	"f8ac88b8-55ba-40f4-ac3e-f3575894f3ca": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "fuel storage tank removal",
 		"SizeId": 1
 	},
@@ -19580,7 +19580,7 @@
 		"SizeId": 1
 	},
 	"f9238298-0d42-4341-8ab6-6af3ecdd7e80": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Fuel Storage Box 4m",
 		"SizeId": 1
 	},
@@ -19590,7 +19590,7 @@
 		"SizeId": 64
 	},
 	"f94702c9-cb55-49e3-8cc4-138288fa1f13": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Injector",
 		"SizeId": 1
 	},
@@ -19685,12 +19685,12 @@
 		"SizeId": 1
 	},
 	"faa18ecd-0edf-4167-8c30-8cf2b95f42e1": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Hydraulic recoil absorber (2m)",
 		"SizeId": 2
 	},
 	"faa2ce2d-dd4e-4430-9706-833d578df8a6": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small jet connector hull",
 		"SizeId": 1
 	},
@@ -19745,7 +19745,7 @@
 		"SizeId": 1
 	},
 	"fb321d39-8bf1-40f1-ab31-a10bef897d36": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "gun60Gatling SS Ammo L",
 		"SizeId": 1
 	},
@@ -19820,7 +19820,7 @@
 		"SizeId": 24
 	},
 	"fc52407e-bec1-441a-8828-68441c418deb": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo 2x2m Left (empty)",
 		"SizeId": 52
 	},
@@ -19840,7 +19840,7 @@
 		"SizeId": 6
 	},
 	"fc88bdab-fa88-4ae9-b3a1-8d06a2e7ef05": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "AI card Slot (Front & Back)",
 		"SizeId": 1
 	},
@@ -19875,7 +19875,7 @@
 		"SizeId": 2
 	},
 	"fcffecd8-0550-4ff6-b85e-36f45cf04be1": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Jet Extra Compressor",
 		"SizeId": 1
 	},
@@ -19915,7 +19915,7 @@
 		"SizeId": 1
 	},
 	"fd4130f0-8e22-4b06-a317-11c0813c92f2": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Input Feeder",
 		"SizeId": 1
 	},
@@ -19925,7 +19925,7 @@
 		"SizeId": 1
 	},
 	"fd4946a4-1633-4627-9728-c1b5dd276ddb": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Hydraulic recoil absorber (4m)",
 		"SizeId": 4
 	},
@@ -19980,12 +19980,12 @@
 		"SizeId": 1
 	},
 	"fdab4d92-8519-4090-b7e1-b794953b44e4": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Jet combuster",
 		"SizeId": 24
 	},
 	"fdb5c872-c58d-4330-be59-844e628167b6": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Ammo Controller",
 		"SizeId": 1
 	},
@@ -20160,7 +20160,7 @@
 		"SizeId": 1
 	},
 	"ff883fab-870a-4560-ab0a-cb32f120242b": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Huge Jet Engine",
 		"SizeId": 24
 	},
