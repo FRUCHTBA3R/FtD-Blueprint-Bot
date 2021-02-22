@@ -288,10 +288,8 @@ def __create_view_matrices(bp):
         # numpyfication
         a_guid = np.vectorize(itemdict.get)(blueprint["BlockIds"])
         missing_block = blocks.get("missing")
-        a_length = np.vectorize(lambda x: blocks.get(x, missing_block).get("Length"))(a_guid)
         # new version
         a_sizeid = np.vectorize(lambda x: blocks.get(x, missing_block).get("SizeId"))(a_guid)
-        a_sizeid_neg = np.vectorize(lambda x: blocks.get(x, missing_block).get("SizeIdNeg"))(a_guid)
         # end new
         a_pos = blueprint["BLP"]
         a_dir = blueprint["RotNormal"][blueprint["BLR"]]
