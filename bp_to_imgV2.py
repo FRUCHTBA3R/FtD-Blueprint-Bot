@@ -262,16 +262,20 @@ def __fetch_infos(bp):
         infos["Author"] = "Unknown"
 
     # gameversion
-    gameversion = bp.get("Blueprint").get("GameVersion").split(".")
-    for i in range(len(gameversion)):
-        if gameversion[i].isnumeric():
-            gameversion[i] = int(gameversion[i])
-        else:
-            numonly = ""
-            for c in gameversion[i]:
-                if c.isnumeric():
-                    numonly += c
-            gameversion[i] = int(numonly)
+    try:
+        gameversion = bp.get("Blueprint").get("GameVersion").split(".")
+        for i in range(len(gameversion)):
+            if gameversion[i].isnumeric():
+                gameversion[i] = int(gameversion[i])
+            else:
+                numonly = ""
+                for c in gameversion[i]:
+                    if c.isnumeric():
+                        numonly += c
+                gameversion[i] = int(numonly)
+    except Exception as err:
+        print("Error while gathering blueprint gameversion info:", err)
+        gameversion = "?"
 
     return infos, gameversion
 
