@@ -395,11 +395,11 @@ def __create_view_matrices(bp):
     # calculate min cords again, cause "MinCords" are not always true
     actual_min_cords = np.full((3), np.iinfo(np.int32).max, dtype=np.int32)
     # create matrices
-    top_color = np.full((*bp["Blueprint"]["Size"][[0, 2]], 3), np.array([255, 118, 33]), dtype=np.uint16)
+    top_color = np.full((*bp["Blueprint"]["Size"][[0, 2]], 3), np.array([255, 118, 33]), dtype=np.uint8)
     top_height = np.full(bp["Blueprint"]["Size"][[0, 2]], -12345, dtype=int)
-    side_color = np.full((*bp["Blueprint"]["Size"][[1, 2]], 3), np.array([255, 118, 33]), dtype=np.uint16)
+    side_color = np.full((*bp["Blueprint"]["Size"][[1, 2]], 3), np.array([255, 118, 33]), dtype=np.uint8)
     side_height = np.full(bp["Blueprint"]["Size"][[1, 2]], -12345, dtype=int)
-    front_color = np.full((*bp["Blueprint"]["Size"][[1, 0]], 3), np.array([255, 118, 33]), dtype=np.uint16)
+    front_color = np.full((*bp["Blueprint"]["Size"][[1, 0]], 3), np.array([255, 118, 33]), dtype=np.uint8)
     front_height = np.full(bp["Blueprint"]["Size"][[1, 0]], -12345, dtype=int)
     # blueprint iteration
     itemdict = bp["ItemDictionary"]
