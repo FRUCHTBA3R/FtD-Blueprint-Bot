@@ -2,23 +2,29 @@ import os
 import sys, traceback
 
 import bp_to_imgV2
+import re
 
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
 load_dotenv()
-TOKEN = os.getenv("DISCORD_TOKEN")
+DO_DEBUG = os.getenv("DO_DEBUG")
+TOKEN = os.getenv("DISCORD_TOKEN") if not DO_DEBUG else os.getenv("DISCORD_TOKEN_DEBUG")
 BP_FOLDER = os.getenv("BLUEPRINT_FOLDER")
 #####AUTHOR = int(os.getenv("AUTHOR"))
 
-#create bp_folder
+# create bp_folder
 if not os.path.exists(BP_FOLDER):
     os.mkdir(BP_FOLDER)
 
-#guild/channel config manager
+# guild/channel config manager
 import guildconfig
 GCM = guildconfig.GuildconfigManager()
+
+# keyword search expression
+keywords_re_dict = {"timing": re.compile("(^|\s)(stats|statistics|timing|time)(\s|$)"),
+                    "nocolor": re.compile("(^|\s)(noc|nocol|nocolor|mat|material|materials)(\s|$)")}
 
 lastError = None
 
@@ -48,7 +54,7 @@ async def on_ready():
 
     # set activity text
     act = discord.Game("Create simplified images of blueprint files. Use bp!print to print last file. "
-                       "Use bp!help for commands. Private chat supported.")
+                        "Use bp!help for commands. Private chat supported.")
     await bot.change_presence(status=discord.Status.online, activity=act)
 
 
@@ -79,7 +85,7 @@ async def cmd_print(ctx):
 
 
 @bot.command(name="mode", help="Set mode for current channel.\nAllowed arguments:\noff   Turned off.\non  Turned on.\nmention  Only react if bot is mentioned.",
-             require_var_positional=False, usage="off | on | mention")
+            require_var_positional=False, usage="off | on | mention")
 @commands.check(cc_is_manager) 
 async def cmd_mode(ctx, mode):
     """Select mode for channel"""
@@ -161,22 +167,24 @@ async def process_attachments(message, invokemessage=None):
             # save file
             with open(filename, "wb") as f:
                 f.write(content)
+            # keyword search
+            content_to_search = message.content if invokemessage is None else invokemessage.message.content
+            content_to_search = content_to_search.lower()
+            do_send_timing = keywords_re_dict["timing"].search(content_to_search) is not None
+            do_player_color = keywords_re_dict["nocolor"].search(content_to_search) is None
             # process blueprint
             try:
-                combined_img_file, timing = await bp_to_imgV2.process_blueprint(filename)
+                combined_img_file, timing = await bp_to_imgV2.process_blueprint(filename, use_player_colors=do_player_color)
                 # files
                 file = discord.File(combined_img_file)
                 # upload
                 sendtiming = None
-                for keyword in ["stats", "statistics", "timing", "time"]:
-                    content_to_search = message.content if invokemessage is None else invokemessage.message.content
-                    if keyword in content_to_search:
-                        sendtiming = f"JSON parse completed in {timing[0]:.3f}s.\n" \
-                                     f"Conversion completed in {timing[1]:.3f}s.\n" \
-                                     f"View matrices completed in {timing[3]:.3f}s.\n" \
-                                     f"Image creation completed in {timing[4]:.3f}s.\n" \
-                                     f"Total time: {(timing[0]+timing[1]+timing[2]+timing[3]+timing[4]):.3f}s"
-                        break
+                if do_send_timing:
+                    sendtiming = f"JSON parse completed in {timing[0]:.3f}s.\n" \
+                                f"Conversion completed in {timing[1]:.3f}s.\n" \
+                                f"View matrices completed in {timing[3]:.3f}s.\n" \
+                                f"Image creation completed in {timing[4]:.3f}s.\n" \
+                                f"Total time: {(timing[0]+timing[1]+timing[2]+timing[3]+timing[4]):.3f}s"
                 await message.channel.send(content=sendtiming, file=file)
                 # delete image file
                 os.remove(combined_img_file)

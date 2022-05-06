@@ -82,19 +82,19 @@ size_id_dict = {int(k): v for k, v in size_id_dict.items()}
 bp_gameversion = None
 
 # Blueprint:
-# CSI: block color
-# COL: craft colors ["float,float,float"]
-# SCs:
+# CSI: block color (color shininess increase?)
+# COL: craft colors ["float,float,float,float"]
+# SCs: sub-constructs
 # BLP: block position ["int,int,int"]
 # BLR: block rotation [int]
 # BP1
 # BP2
-# BCI: maybe block color index
+# BCI: block color index
 # BEI:
 
 # BlockIds: block ids [int]
 
-async def process_blueprint(fname, silent=False, standaloneMode=False):
+async def process_blueprint(fname, silent=False, standaloneMode=False, use_player_colors=True):
     """Load and init blueprint data. Returns blueprint, calculation times, image filename"""
     global  bp_gameversion
     bp_gameversion = None
@@ -116,7 +116,7 @@ async def process_blueprint(fname, silent=False, standaloneMode=False):
     if not silent: print("Infos gathered in", ts3, "s")
     # create top, side, front view matrices
     ts4 = time.time()
-    top_mats, side_mats, front_mats = __create_view_matrices(bp)
+    top_mats, side_mats, front_mats = __create_view_matrices(bp, use_player_colors)
     ts4 = time.time() - ts4
     if not silent: print("View matrices completed in", ts4, "s")
     # create images
@@ -145,9 +145,9 @@ def __convert_blueprint(bp):
         # convert local rotation to quaternion
         localrot_split = blueprint["LocalRotation"].split(",")
         globalrotation = np.quaternion(float(localrot_split[3]),
-                                       float(localrot_split[0]),
-                                       float(localrot_split[1]),
-                                       float(localrot_split[2]))
+                                        float(localrot_split[0]),
+                                        float(localrot_split[1]),
+                                        float(localrot_split[2]))
         globalrotation = parentglobalrotation * globalrotation
         localrot = quaternion.as_rotation_matrix(globalrotation)
         localrot_arg = np.argmax(np.abs(localrot), axis=1)
@@ -158,14 +158,12 @@ def __convert_blueprint(bp):
         
         # convert local position to np array
         blueprint["LocalPosition"] = np.array(blueprint["LocalPosition"].split(","),
-                                              dtype=float).round().astype(int)
+                                                dtype=float).round().astype(int)
         blueprint["LocalPosition"] = (parentglobalrotation * quaternion.quaternion(*blueprint["LocalPosition"]) *
-                                      parentglobalrotation.inverse()).vec.astype(int) + parentglobalposition
+                                        parentglobalrotation.inverse()).vec.astype(int) + parentglobalposition
         # convert min/max coordinates to np array
-        mincords = np.array(blueprint["MinCords"].split(","),
-                                         dtype=float)
-        maxcords = np.array(blueprint["MaxCords"].split(","),
-                                         dtype=float)
+        mincords = np.array(blueprint["MinCords"].split(","), dtype=float)
+        maxcords = np.array(blueprint["MaxCords"].split(","), dtype=float)
         # rotate
         mincords = (blueprint["LocalRotation"] @ mincords) + blueprint["LocalPosition"]
         maxcords = (blueprint["LocalRotation"] @ maxcords) + blueprint["LocalPosition"]
@@ -184,15 +182,17 @@ def __convert_blueprint(bp):
         #blockguid_array = np.zeros(blockcount, dtype="<U36") not using guid here
         blockid_array = np.array(blueprint["BlockIds"], dtype=int)
         # block loop
-        for i in range(blockcount):
-            # blockguid_array[i] = bp["ItemDictionary"][str(blueprint["BlockIds"][i])] not using guid here
-            blueprint["BLP"][i] = blueprint["BLP"][i].split(",")
+        #for i in range(blockcount):
+        #    # blockguid_array[i] = bp["ItemDictionary"][str(blueprint["BlockIds"][i])] not using guid here
+        #    blueprint["BLP"][i] = blueprint["BLP"][i].split(",")
+        blueprint["BLP"] = np.vectorize(lambda x: np.array(x.split(",")).astype(float), signature="()->(n)")(blueprint["BLP"])
             
         blueprint["BlockIds"] = blockid_array # guid_array not using guid here
         
         # rotate block position via local rotation and add local position
-        blockposition_array = np.array(blueprint["BLP"], dtype=float).T
-        blockposition_array = np.dot(blueprint["LocalRotation"], blockposition_array).T
+        #blockposition_array = np.array(blueprint["BLP"], dtype=float).T
+        #blockposition_array = np.dot(blueprint["LocalRotation"], blockposition_array).T
+        blockposition_array = np.dot(blueprint["LocalRotation"], blueprint["BLP"].T).T
         blueprint["BLP"] = blockposition_array.round().astype(int) + blueprint["LocalPosition"]
 
         # check min/max coords with blp
@@ -226,7 +226,12 @@ def __convert_blueprint(bp):
     bp["Blueprint"]["MinCords"] = bp["Blueprint"]["MinCords"].round().astype(int)
     bp["Blueprint"]["MaxCords"] = bp["Blueprint"]["MaxCords"].round().astype(int)
     bp["Blueprint"]["Size"] = bp["Blueprint"]["MaxCords"] - bp["Blueprint"]["MinCords"] + 1
-
+    # player colors
+    color_array = np.vectorize(lambda x: np.array(str.split(x, ",")).astype(float),signature="()->(n)")(bp["Blueprint"]["COL"])
+    # early alpha blending
+    bp["Blueprint"]["COL"] = (255 * color_array[:, 2::-1] * color_array[:, np.newaxis, 3]).astype(np.uint8)
+    bp["Blueprint"]["ONE_MINUS_ALPHA"] = 1. - color_array[:, 3]
+    
 
 def __fetch_infos(bp):
     """Gathers important information of blueprint"""
@@ -280,7 +285,7 @@ def __fetch_infos(bp):
     return infos, gameversion
 
 
-def __create_view_matrices(bp):
+def __create_view_matrices(bp, use_player_colors=True):
     """Create top, side, front view matrices (color matrix and height matrix)"""
     def blueprint_iter(blueprint, mincords, blueprint_desc = "main"):
         """Iterate blueprint and sub blueprints"""
@@ -302,6 +307,11 @@ def __create_view_matrices(bp):
         a_material = np.vectorize(lambda x: blocks.get(x, missing_block).get("Material"))(a_guid)
         a_color = np.vectorize(lambda x: materials.get(x)["Color"], signature="()->(n)")(a_material)
         a_invisible = np.vectorize(lambda x: materials.get(x)["Invisible"])(a_material)
+        
+        # player colors
+        if use_player_colors:
+            a_block_color = bp["Blueprint"]["COL"][blueprint["BCI"]]
+            a_block_one_minus_alpha = bp["Blueprint"]["ONE_MINUS_ALPHA"][blueprint["BCI"]][:, np.newaxis]
 
         def fill_color_and_height(color_mat, height_mat, sel_arr, pos_sel_arr, axisX, axisZ, axisY):
             """Fills color_mat and height_mat with selected blocks (sel_arr as index and pos_sel_arr as position).
@@ -334,7 +344,12 @@ def __create_view_matrices(bp):
             unique_pos, unique_index = np.unique(sorted_pos[:, axisA:axisB:axisS], return_index=True, axis=0)
 
             # coloring
-            color_mat[unique_pos[:, 0], unique_pos[:, 1]] = a_color[sel_arr][height_sel_arr][sorted_index][unique_index]
+            if use_player_colors:
+                color_mat[unique_pos[:, 0], unique_pos[:, 1]] = a_color[sel_arr][height_sel_arr][sorted_index][unique_index] * a_block_one_minus_alpha[sel_arr][height_sel_arr][sorted_index][unique_index]
+                # player color
+                color_mat[unique_pos[:, 0], unique_pos[:, 1]] += a_block_color[sel_arr][height_sel_arr][sorted_index][unique_index]
+            else:
+                color_mat[unique_pos[:, 0], unique_pos[:, 1]] = a_color[sel_arr][height_sel_arr][sorted_index][unique_index]
             # new height
             height_mat[unique_pos[:, 0], unique_pos[:, 1]] = sorted_pos[:, axisY][unique_index]
 
