@@ -100,7 +100,7 @@ async def process_blueprint(fname, silent=False, standaloneMode=False, use_playe
     bp_gameversion = None
     if not silent: print("Processing blueprint \"", fname, "\"", sep="")
     ts1 = time.time()
-    with open(fname, "r") as f:
+    with open(fname, "r", encoding="utf-8") as f:
         bp = json.load(f)
     ts1 = time.time() - ts1
     if not silent: print("JSON parse completed in", ts1, "s")
@@ -308,6 +308,9 @@ def __create_view_matrices(bp, use_player_colors=True):
         a_color = np.vectorize(lambda x: materials.get(x)["Color"], signature="()->(n)")(a_material)
         a_invisible = np.vectorize(lambda x: materials.get(x)["Invisible"])(a_material)
         
+        #print(a_pos[a_guid == "c94e1719-bcc7-4c6a-8563-505fad2f9db9"])
+        #print(a_dir[a_guid == "c94e1719-bcc7-4c6a-8563-505fad2f9db9"])
+        
         # player colors
         if use_player_colors:
             a_block_color = bp["Blueprint"]["COL"][blueprint["BCI"]]
@@ -469,7 +472,7 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
         # height = height.astype
         # resize
         img = cv2.resize(img, (img.shape[1]*upscale_f,img.shape[0]*upscale_f),
-                         interpolation=cv2.INTER_AREA)
+                        interpolation=cv2.INTER_AREA)
 
         if contours:
             # contours
@@ -575,7 +578,7 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
     # find max size text
     if bp_infos is None:
         info_img = np.full((front_img.shape[1], front_img.shape[1], 3), np.array([255, 118, 33]),
-                       dtype=np.uint8)
+                        dtype=np.uint8)
         fontScale = 12./cv2.getTextSize("I", fontFace, 1, 1)[0][1]  # scale to 12 pixels
         cv2.putText(info_img, "Error", (5, info_img.shape[0]//2), fontFace,
                     fontScale, (255, 255, 255))
@@ -628,9 +631,9 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
     
     #combine images
     bottombuffer = np.full((max(0,info_img.shape[0]-top_img.shape[0]),top_img.shape[1],3),
-                           np.array([255, 118, 33]), dtype=np.uint8)
+                            np.array([255, 118, 33]), dtype=np.uint8)
     rightbuffer = np.full((front_img.shape[0],max(0, info_img.shape[1]-front_img.shape[1]),3),
-                           np.array([255, 118, 33]), dtype=np.uint8)
+                            np.array([255, 118, 33]), dtype=np.uint8)
     #border side to front
     side_img[:,-2:] = darkBlue
     front_img[:,:2] = darkBlue
@@ -676,7 +679,7 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     # file
-    fname = "../example blueprints/Crossbones.blueprint"
+    fname = "../example blueprints/exampleBroadsidePounder.blueprint"
 
     import asyncio
     
