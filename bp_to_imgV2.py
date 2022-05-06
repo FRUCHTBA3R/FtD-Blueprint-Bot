@@ -483,10 +483,10 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
             roll_right = np.roll(height, -1, 1)
             
             # difference
-            dup = np.where(height - roll_up > 1, 1, 0)
-            ddown = np.where(height - roll_down > 1, 1, 0)
-            dleft = np.where(height - roll_left > 1, 1, 0)
-            dright = np.where(height - roll_right > 1, 1, 0)
+            dup = np.where(height - roll_up > 1, 1, 0).astype(np.int8) # dtype of where is int32
+            ddown = np.where(height - roll_down > 1, 1, 0).astype(np.int8)
+            dleft = np.where(height - roll_left > 1, 1, 0).astype(np.int8)
+            dright = np.where(height - roll_right > 1, 1, 0).astype(np.int8)
 
             # not used as roll_... is required later
             #cv2 filter2D
@@ -497,10 +497,10 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
             
             # "super" difference
             superable = height > -12345
-            superup = np.where((roll_up == -12345) & superable, 1, 0)
-            superdown = np.where((roll_down == -12345) & superable, 1, 0)
-            superleft = np.where((roll_left == -12345) & superable, 1, 0)
-            superright = np.where((roll_right == -12345) & superable, 1, 0)
+            superup = np.where((roll_up == -12345) & superable, 1, 0).astype(np.int8) # dtype is bool ???
+            superdown = np.where((roll_down == -12345) & superable, 1, 0).astype(np.int8)
+            superleft = np.where((roll_left == -12345) & superable, 1, 0).astype(np.int8)
+            superright = np.where((roll_right == -12345) & superable, 1, 0).astype(np.int8)
             boolsupersum1 = (superup + superdown + superleft + superright) == 1
             superup = (superup == 1) & boolsupersum1
             superdown = (superdown == 1) & boolsupersum1
@@ -510,7 +510,7 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
             # sum, circle, edges
             dsum = dup + ddown + dleft + dright
             booldcircle = dsum == 4
-            dcircle = np.where(booldcircle, 1, 0)
+            dcircle = np.where(booldcircle, 1, 0).astype(np.int8)
             
             # remove circles
             dup[booldcircle] = 0
@@ -522,8 +522,8 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
             booldsum2 = dsum == 2
             boolddiagA = booldsum2 & (dup == dleft)
             boolddiagB = booldsum2 & (dup == dright)
-            ddiagA = np.where(boolddiagA, 1, 0)
-            ddiagB = np.where(boolddiagB, 1, 0)
+            ddiagA = np.where(boolddiagA, 1, 0).astype(np.int8) # dtype of where is int32
+            ddiagB = np.where(boolddiagB, 1, 0).astype(np.int8)
             
             # remove diags
             dup[boolddiagA] = 0
@@ -543,12 +543,19 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
             
             # kronecker upscale
             dupimg = np.kron(dup, linetop)
+            dup = None # does
             ddownimg = np.kron(ddown, linedown)
+            ddown = None # this
             dleftimg = np.kron(dleft, lineleft)
+            dleft = None # help
             drightimg = np.kron(dright, lineright)
+            dright = None # with
             dcircleimg = np.kron(dcircle, linecircle)
+            dcircle = None # memory
             ddiagAimg = np.kron(ddiagA, linediagA)
+            ddiagA = None # consumption
             ddiagBimg = np.kron(ddiagB, linediagB)
+            ddiagB = None # ?
             dimg = dupimg + ddownimg + dleftimg + drightimg + dcircleimg + ddiagAimg + ddiagBimg
 
             img[dimg > 0] = 255
@@ -556,17 +563,17 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
 
     # upscale_f = 5
     # lines
-    linetop = np.zeros((upscale_f, upscale_f))
+    linetop = np.zeros((upscale_f, upscale_f), dtype=np.int8)
     linetop[0] = 1
-    linedown = np.zeros((upscale_f, upscale_f))
+    linedown = np.zeros((upscale_f, upscale_f), dtype=np.int8)
     linedown[-1] = 1
-    lineleft = np.zeros((upscale_f, upscale_f))
+    lineleft = np.zeros((upscale_f, upscale_f), dtype=np.int8)
     lineleft[:, 0] = 1
-    lineright = np.zeros((upscale_f, upscale_f))
+    lineright = np.zeros((upscale_f, upscale_f), dtype=np.int8)
     lineright[:, -1] = 1
-    linecircle = np.zeros((upscale_f, upscale_f))
+    linecircle = np.zeros((upscale_f, upscale_f), dtype=np.int8)
     cv2.circle(linecircle, (upscale_f//2, upscale_f//2), upscale_f//2, 1)
-    linediagB = np.identity(upscale_f)
+    linediagB = np.identity(upscale_f, dtype=np.int8)
     linediagA = np.flip(linediagB, 1)
     # create images
     top_img = create_image(top_mat, upscale_f)
