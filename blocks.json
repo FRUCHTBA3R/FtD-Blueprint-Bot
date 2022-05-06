@@ -1705,7 +1705,7 @@
 		"SizeId": 1
 	},
 	"133eac2c-fd6a-4f69-afff-cba55a438735": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "custom cannon mat height",
 		"SizeId": 1
 	},
@@ -1975,7 +1975,7 @@
 		"SizeId": 1
 	},
 	"1717b7ac-618d-40a5-affe-8f1fb8455f48": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Large cannon top",
 		"SizeId": 1
 	},
@@ -3030,7 +3030,7 @@
 		"SizeId": 7
 	},
 	"23b1fef3-0556-4a51-88fc-d4a223c3e934": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Anti Missile Cannon Controller",
 		"SizeId": 1
 	},
@@ -3315,7 +3315,7 @@
 		"SizeId": 1
 	},
 	"26a2b69c-2c56-49d1-a274-f1f23c0fccb7": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "custom cannon mat Ramp",
 		"SizeId": 1
 	},
@@ -3360,7 +3360,7 @@
 		"SizeId": 1
 	},
 	"26c80b0c-a19a-4bf0-a108-ef7b47899cb4": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "custom cannon mat Paint",
 		"SizeId": 1
 	},
@@ -4155,7 +4155,7 @@
 		"SizeId": 4
 	},
 	"3105bc4e-ed1a-414e-b72e-89157d4e22a1": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "CRAM Cannon",
 		"SizeId": 1
 	},
@@ -5075,7 +5075,7 @@
 		"SizeId": 1
 	},
 	"3d82f1a3-ad2a-4e81-a4e3-cb88c968f6e9": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Particle Cannon",
 		"SizeId": 44
 	},
@@ -5485,7 +5485,7 @@
 		"SizeId": 1
 	},
 	"42fe5bfe-df69-4795-a2b8-343abb85a7f5": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Small cannon top",
 		"SizeId": 1
 	},
@@ -7480,7 +7480,7 @@
 		"SizeId": 1
 	},
 	"5bc696ee-9bb3-4332-8de2-4e1294a6ee59": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "custom cannon mat smoothness",
 		"SizeId": 1
 	},
@@ -8735,7 +8735,7 @@
 		"SizeId": 2
 	},
 	"6d0c24e2-f554-4a09-ab0c-fe8d225ca647": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Particle Cannon",
 		"SizeId": 44
 	},
@@ -8980,7 +8980,7 @@
 		"SizeId": 47
 	},
 	"6fe70dc6-c163-46a6-bef0-69761728b65f": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Large Cannon",
 		"SizeId": 1
 	},
@@ -9090,7 +9090,7 @@
 		"SizeId": 35
 	},
 	"7177c3ed-ddbb-4804-b7c0-4877de57987f": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Particle Cannon Mirror",
 		"SizeId": 44
 	},
@@ -9305,7 +9305,7 @@
 		"SizeId": 1
 	},
 	"742f063f-d0fe-4f41-8717-a2c75c38d5e0": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "30mm Assault Cannon",
 		"SizeId": 3
 	},
@@ -9320,7 +9320,7 @@
 		"SizeId": 4
 	},
 	"7436ddde-1e95-40b8-a3f5-f08cb92b6029": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Simple Cannon Fire",
 		"SizeId": 1
 	},
@@ -11270,7 +11270,7 @@
 		"SizeId": 1
 	},
 	"8b15823d-2a0e-43e4-bcff-54f46d0ff116": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "cannon",
 		"SizeId": 1
 	},
@@ -11650,7 +11650,7 @@
 		"SizeId": 1
 	},
 	"903d6efd-9fd8-4fc8-adfd-80fc0e2f7000": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "custom cannon mat",
 		"SizeId": 1
 	},
@@ -12275,7 +12275,7 @@
 		"SizeId": 1
 	},
 	"9706a7f4-bc2e-475b-aeb0-a034f9f3f45d": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Small Cannon",
 		"SizeId": 1
 	},
@@ -12610,7 +12610,7 @@
 		"SizeId": 1
 	},
 	"9b8657b9-c820-43a0-ad19-25ea45a100f1": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "60mm Auto Cannon",
 		"SizeId": 3
 	},
@@ -13405,7 +13405,7 @@
 		"SizeId": 1
 	},
 	"a51ebc43-76d8-4a33-a305-8becc3dbdd34": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "custom cannon mat Bump",
 		"SizeId": 1
 	},
@@ -14600,7 +14600,7 @@
 		"SizeId": 1
 	},
 	"b3ea8191-f5c9-42f7-b301-fc3144c8d2a5": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Advanced Cannon heatsink",
 		"SizeId": 1
 	},
@@ -14675,7 +14675,7 @@
 		"SizeId": 1
 	},
 	"b50a27d3-3076-4657-91be-b2a00577d2a2": {
-		"Material": "Metal",
+		"Material": "Barrel",
 		"Name": "custom cannon mat metal",
 		"SizeId": 1
 	},
@@ -14835,7 +14835,7 @@
 		"SizeId": 1
 	},
 	"b6ce4a1d-c84b-48a8-ba12-259a97a336bc": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "APS Cannon",
 		"SizeId": 1
 	},
@@ -16095,7 +16095,7 @@
 		"SizeId": 2
 	},
 	"c654f7bb-eeb8-417c-8b18-70c519e3f546": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Advanced Cannon heatsink",
 		"SizeId": 1
 	},
@@ -16335,7 +16335,7 @@
 		"SizeId": 1
 	},
 	"c94e1719-bcc7-4c6a-8563-505fad2f9db9": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "16 pdr Cannon",
 		"SizeId": 1
 	},
@@ -17120,7 +17120,7 @@
 		"SizeId": 65
 	},
 	"d3e8e14a-58e7-4bdd-b1b3-0f37e4723a73": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Shard Cannon",
 		"SizeId": 58
 	},
@@ -17570,7 +17570,7 @@
 		"SizeId": 24
 	},
 	"d8a65146-f2e5-4d1f-a79d-657cd5631002": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "custom cannon mat Color",
 		"SizeId": 1
 	},
@@ -17795,7 +17795,7 @@
 		"SizeId": 4
 	},
 	"db681b78-a5cf-4642-b1d2-92ac55f2cb74": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "custom cannon mat ambient occlusion",
 		"SizeId": 1
 	},
@@ -17930,7 +17930,7 @@
 		"SizeId": 3
 	},
 	"ddc9bad5-3bd3-4e7a-981b-29aeb90f8e61": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Anti Missile Cannon Controller",
 		"SizeId": 1
 	},
@@ -18315,7 +18315,7 @@
 		"SizeId": 1
 	},
 	"e1d1bcae-f5e4-42bb-9781-6dde51b8e390": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "64 pdr Cannon",
 		"SizeId": 2
 	},
@@ -18755,7 +18755,7 @@
 		"SizeId": 1
 	},
 	"e7b84baa-d4cf-48ce-9e2c-062c27b445da": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Cannon Base",
 		"SizeId": 1
 	},
@@ -19060,7 +19060,7 @@
 		"SizeId": 1
 	},
 	"ebe5e7f6-894e-450c-b602-710538e82486": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Particle Cannon Mirror",
 		"SizeId": 44
 	},
