@@ -6,30 +6,30 @@ import cv2
 
 # block rotation directions
 rot_normal = np.array([
-                       [ 0, 0, 1], #0
-                       [ 1, 0, 0], #1
-                       [ 0, 0,-1], #2
-                       [-1, 0, 0], #3
-                       [ 0,-1, 0], #4
-                       [ 0,-1, 0], #5
-                       [ 0,-1, 0], #6
-                       [ 0,-1, 0], #7
-                       [ 0, 1, 0], #8
-                       [ 0, 1, 0], #9
-                       [ 0, 1, 0], #10
-                       [ 0, 1, 0], #11
-                       [ 0, 0, 1], #12
-                       [ 1, 0, 0], #13
-                       [ 0, 0,-1], #14
-                       [-1, 0, 0], #15
-                       [ 0, 0, 1], #16
-                       [ 0, 0,-1], #17
-                       [ 0, 0, 1], #18
-                       [ 0, 0,-1], #19
-                       [ 1, 0, 0], #20
-                       [-1, 0, 0], #21
-                       [ 1, 0, 0], #22
-                       [-1, 0, 0]]) #23
+                        [ 0, 0, 1], #0
+                        [ 1, 0, 0], #1
+                        [ 0, 0,-1], #2
+                        [-1, 0, 0], #3
+                        [ 0,-1, 0], #4
+                        [ 0,-1, 0], #5
+                        [ 0,-1, 0], #6
+                        [ 0,-1, 0], #7
+                        [ 0, 1, 0], #8
+                        [ 0, 1, 0], #9
+                        [ 0, 1, 0], #10
+                        [ 0, 1, 0], #11
+                        [ 0, 0, 1], #12
+                        [ 1, 0, 0], #13
+                        [ 0, 0,-1], #14
+                        [-1, 0, 0], #15
+                        [ 0, 0, 1], #16
+                        [ 0, 0,-1], #17
+                        [ 0, 0, 1], #18
+                        [ 0, 0,-1], #19
+                        [ 1, 0, 0], #20
+                        [-1, 0, 0], #21
+                        [ 1, 0, 0], #22
+                        [-1, 0, 0]]) #23
 #not testet!!!
 rot_tangent = np.array([
                         [ 0, 1, 0], #0
@@ -182,16 +182,16 @@ def __convert_blueprint(bp):
         #blockguid_array = np.zeros(blockcount, dtype="<U36") not using guid here
         blockid_array = np.array(blueprint["BlockIds"], dtype=int)
         # block loop
-        #for i in range(blockcount):
-        #    # blockguid_array[i] = bp["ItemDictionary"][str(blueprint["BlockIds"][i])] not using guid here
-        #    blueprint["BLP"][i] = blueprint["BLP"][i].split(",")
-        blueprint["BLP"] = np.vectorize(lambda x: np.array(x.split(",")).astype(float), signature="()->(n)")(blueprint["BLP"])
-            
+        for i in range(blockcount):
+            # blockguid_array[i] = bp["ItemDictionary"][str(blueprint["BlockIds"][i])] not using guid here
+            blueprint["BLP"][i] = blueprint["BLP"][i].split(",")
+        # below does the same as the loop above, but way slower
+        #blueprint["BLP"] = np.vectorize(lambda x: np.array(x.split(","), dtype=float), signature="()->(n)")(blueprint["BLP"])
+        
         blueprint["BlockIds"] = blockid_array # guid_array not using guid here
         
         # rotate block position via local rotation and add local position
-        #blockposition_array = np.array(blueprint["BLP"], dtype=float).T
-        #blockposition_array = np.dot(blueprint["LocalRotation"], blockposition_array).T
+        blueprint["BLP"] = np.array(blueprint["BLP"], dtype=float)
         blockposition_array = np.dot(blueprint["LocalRotation"], blueprint["BLP"].T).T
         blueprint["BLP"] = blockposition_array.round().astype(int) + blueprint["LocalPosition"]
 
@@ -227,7 +227,10 @@ def __convert_blueprint(bp):
     bp["Blueprint"]["MaxCords"] = bp["Blueprint"]["MaxCords"].round().astype(int)
     bp["Blueprint"]["Size"] = bp["Blueprint"]["MaxCords"] - bp["Blueprint"]["MinCords"] + 1
     # player colors
-    color_array = np.vectorize(lambda x: np.array(str.split(x, ",")).astype(float),signature="()->(n)")(bp["Blueprint"]["COL"])
+    #color_array = np.vectorize(lambda x: np.array(str.split(x, ",")).astype(float),signature="()->(n)")(bp["Blueprint"]["COL"])
+    for i in range(len(bp["Blueprint"]["COL"])):
+        bp["Blueprint"]["COL"][i] = bp["Blueprint"]["COL"][i].split(",")
+    color_array = np.array(bp["Blueprint"]["COL"], dtype=float)
     # early alpha blending
     bp["Blueprint"]["COL"] = (255 * color_array[:, 2::-1] * color_array[:, np.newaxis, 3]).astype(np.uint8)
     bp["Blueprint"]["ONE_MINUS_ALPHA"] = 1. - color_array[:, 3]
@@ -295,18 +298,28 @@ def __create_view_matrices(bp, use_player_colors=True):
         #print("ViewMat at", blueprint_desc)
 
         # numpyfication
-        a_guid = np.vectorize(itemdict.get)(blueprint["BlockIds"])
+        # vectorize is slower
+        #a_guid = np.vectorize(itemdict.get, otypes=["<U36"])(blueprint["BlockIds"])
+        a_guid = np.zeros((len(blueprint["BlockIds"])), dtype="<U36")
+        for i in range(len(a_guid)):
+            a_guid[i] = itemdict.get(blueprint["BlockIds"][i])
         missing_block = blocks.get("missing")
         # new version
-        a_sizeid = np.vectorize(lambda x: blocks.get(x, missing_block).get("SizeId"))(a_guid)
+        #a_sizeid = np.vectorize(lambda x: blocks.get(x, missing_block).get("SizeId"), otypes=[np.uint8])(a_guid)
+        a_sizeid = np.zeros((len(a_guid)), dtype=np.uint8)
+        for i in range(len(a_guid)):
+            a_sizeid[i] = blocks.get(a_guid[i], missing_block).get("SizeId")
         # end new
         a_pos = blueprint["BLP"]
         a_dir = blueprint["RotNormal"][blueprint["BLR"]]
         a_dir_tan = blueprint["RotTangent"][blueprint["BLR"]]
         a_dir_bitan = blueprint["RotBitangent"][blueprint["BLR"]]
-        a_material = np.vectorize(lambda x: blocks.get(x, missing_block).get("Material"))(a_guid)
-        a_color = np.vectorize(lambda x: materials.get(x)["Color"], signature="()->(n)")(a_material)
-        a_invisible = np.vectorize(lambda x: materials.get(x)["Invisible"])(a_material)
+        #a_material = np.vectorize(lambda x: blocks.get(x, missing_block).get("Material"))(a_guid)
+        #a_color = np.vectorize(lambda x: materials.get(x)["Color"], signature="()->(n)")(a_material)
+        #a_invisible = np.vectorize(lambda x: materials.get(x)["Invisible"])(a_material)  # unused
+        a_color = np.zeros((len(a_guid), 3), dtype=np.uint8)
+        for i in range(len(a_guid)):
+            a_color[i] = materials.get(blocks.get(a_guid[i], missing_block).get("Material"))["Color"]
         
         #print(a_pos[a_guid == "c94e1719-bcc7-4c6a-8563-505fad2f9db9"])
         #print(a_dir[a_guid == "c94e1719-bcc7-4c6a-8563-505fad2f9db9"])
@@ -319,7 +332,7 @@ def __create_view_matrices(bp, use_player_colors=True):
         def fill_color_and_height(color_mat, height_mat, sel_arr, pos_sel_arr, axisX, axisZ, axisY):
             """Fills color_mat and height_mat with selected blocks (sel_arr as index and pos_sel_arr as position).
             axisY is the height axis."""
-            nonlocal a_color, a_invisible
+            nonlocal a_color#, a_invisible  # unused
             # create slicing indices for axes
             axisA = axisX
             axisB = axisZ+1 if axisZ > axisX else None
@@ -683,10 +696,11 @@ async def speed_test(fname):
     blueprint = bp["Blueprint"]
     # show image
     cv2.imshow("Blueprint", main_img)
+    #cv2.waitKey()
 
 if __name__ == "__main__":
     # file
-    fname = "../example blueprints/exampleBroadsidePounder.blueprint"
+    fname = "../example blueprints/Nahel_Argama.blueprint"
 
     import asyncio
     
