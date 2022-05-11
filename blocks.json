@@ -370,7 +370,7 @@
 		"SizeId": 62
 	},
 	"046e9d70-5c74-463a-8e74-2720dbe15811": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun60Single Gr Gun",
 		"SizeId": 1
 	},
@@ -550,7 +550,7 @@
 		"SizeId": 1
 	},
 	"06625354-b096-4f9e-acd6-b4c8fc3b5e42": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun40Oct Pdr Gun 2",
 		"SizeId": 1
 	},
@@ -905,7 +905,7 @@
 		"SizeId": 1
 	},
 	"0aa0fa2e-1a85-4493-9c4c-0a69c385395d": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "130mm Casemate",
 		"SizeId": 57
 	},
@@ -925,7 +925,7 @@
 		"SizeId": 1
 	},
 	"0aca3799-5f01-42c6-b0d9-2bf7d5f52944": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun40Twin Mk5 Gun",
 		"SizeId": 1
 	},
@@ -1270,7 +1270,7 @@
 		"SizeId": 1
 	},
 	"0e6e248b-e025-4f63-ba3f-fb2f4224afa4": {
-		"Material": "Missing",
+		"Material": "Laser",
 		"Name": "PAC symmetric",
 		"SizeId": 1
 	},
@@ -1505,7 +1505,7 @@
 		"SizeId": 1
 	},
 	"10dab00b-a89f-49e4-896f-6418f27a1eb6": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "missile mat Smoothness",
 		"SizeId": 1
 	},
@@ -1590,7 +1590,7 @@
 		"SizeId": 1
 	},
 	"1217043c-e786-4555-ba24-46cd1f458bf9": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "3.7\" Gun Shield",
 		"SizeId": 57
 	},
@@ -1780,7 +1780,7 @@
 		"SizeId": 1
 	},
 	"1424eab1-67f8-4d41-9752-eca0415ce403": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun40Quad Mk6 Gun R",
 		"SizeId": 1
 	},
@@ -1805,7 +1805,7 @@
 		"SizeId": 1
 	},
 	"149dc22b-aefa-46f4-a3a7-c226e71e5dc5": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun20Quad 38 Gun Down",
 		"SizeId": 1
 	},
@@ -1955,7 +1955,7 @@
 		"SizeId": 1
 	},
 	"16b67fbc-25d5-4a35-a0df-4941e7abf6ef": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Revolving Blast-Gun",
 		"SizeId": 1
 	},
@@ -2060,7 +2060,7 @@
 		"SizeId": 1
 	},
 	"1895cfd9-487e-47be-8fde-21cafd4b2c54": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile Pod Hatch",
 		"SizeId": 1
 	},
@@ -2315,7 +2315,7 @@
 		"SizeId": 1
 	},
 	"1b9aa074-9b04-4b5c-b30e-35bdfa0e0835": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Small Launcher",
 		"SizeId": 1
 	},
@@ -2745,7 +2745,7 @@
 		"SizeId": 1
 	},
 	"20ca2c5d-6eee-4a37-b0a7-878b5c1a2861": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun40Oct Pdr Gun 6",
 		"SizeId": 1
 	},
@@ -2970,7 +2970,7 @@
 		"SizeId": 1
 	},
 	"2311e4db-a281-448f-ad53-0a6127573a96": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "60mm Grenade Launcher",
 		"SizeId": 1
 	},
@@ -3030,7 +3030,7 @@
 		"SizeId": 7
 	},
 	"23b1fef3-0556-4a51-88fc-d4a223c3e934": {
-		"Material": "Barrel",
+		"Material": "Missile",
 		"Name": "Anti Missile Cannon Controller",
 		"SizeId": 1
 	},
@@ -3160,7 +3160,7 @@
 		"SizeId": 1
 	},
 	"2516337f-72cd-44c5-88c6-b00986459600": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile Pod Gantry",
 		"SizeId": 1
 	},
@@ -3305,7 +3305,7 @@
 		"SizeId": 2
 	},
 	"268d79bf-c266-48ed-b01b-76c8d4d31c92": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "40mm Twin AA Gun",
 		"SizeId": 57
 	},
@@ -3335,7 +3335,7 @@
 		"SizeId": 1
 	},
 	"26b0f142-9419-41f1-9c13-3a2b62437f60": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Small Launcher (Reversed)",
 		"SizeId": 1
 	},
@@ -3475,7 +3475,7 @@
 		"SizeId": 1
 	},
 	"282c353a-d422-4617-a4f5-19ffd03b1a79": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun40Oct Pdr Gun 1",
 		"SizeId": 1
 	},
@@ -3580,7 +3580,7 @@
 		"SizeId": 1
 	},
 	"2a1afa20-ab1d-44a9-8c34-59fecd48de00": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "grenade launch",
 		"SizeId": 1
 	},
@@ -3710,7 +3710,7 @@
 		"SizeId": 2
 	},
 	"2b74668c-7196-4365-8692-639de8da9ee0": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun40oct Pdr Gun 3",
 		"SizeId": 1
 	},
@@ -3825,7 +3825,7 @@
 		"SizeId": 1
 	},
 	"2cf00d3a-02a2-4d77-a432-9b1e7d52aa3a": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Small Gantry + Hatch",
 		"SizeId": 1
 	},
@@ -4045,7 +4045,7 @@
 		"SizeId": 1
 	},
 	"2fc38d7b-c0ed-4d4b-ae02-43b9c4c4fca5": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile Pod Launcher",
 		"SizeId": 1
 	},
@@ -4480,7 +4480,7 @@
 		"SizeId": 1
 	},
 	"3540950a-c00f-46b7-8a34-c48bc9faddb4": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile Single Rack Partial",
 		"SizeId": 1
 	},
@@ -4660,7 +4660,7 @@
 		"SizeId": 1
 	},
 	"37aa24cf-d6a5-4780-9ab4-6a81a0d430fb": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "missile mat Height",
 		"SizeId": 1
 	},
@@ -4985,7 +4985,7 @@
 		"SizeId": 3
 	},
 	"3be0cab1-643b-4e3a-9f49-45995e4eb9fb": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "40mm Octuple AA Gun",
 		"SizeId": 57
 	},
@@ -5075,7 +5075,7 @@
 		"SizeId": 1
 	},
 	"3d82f1a3-ad2a-4e81-a4e3-cb88c968f6e9": {
-		"Material": "Barrel",
+		"Material": "Laser",
 		"Name": "Particle Cannon",
 		"SizeId": 44
 	},
@@ -5535,7 +5535,7 @@
 		"SizeId": 1
 	},
 	"437fdc18-7d37-47d1-81f9-79aede662a26": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Rail Gantry Left",
 		"SizeId": 48
 	},
@@ -5555,7 +5555,7 @@
 		"SizeId": 1
 	},
 	"43d357dd-d896-4f43-a0ff-8c3b091267c4": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Launcher Left",
 		"SizeId": 48
 	},
@@ -5625,7 +5625,7 @@
 		"SizeId": 1
 	},
 	"44cdf22f-f4b9-43bc-aaff-2d4ae6c80503": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Medium Rail Gantry",
 		"SizeId": 1
 	},
@@ -6110,7 +6110,7 @@
 		"SizeId": 43
 	},
 	"4afe98c2-e412-4154-acf8-4a3f27e3610e": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun40Oct Pdr Gun 3",
 		"SizeId": 1
 	},
@@ -6245,7 +6245,7 @@
 		"SizeId": 4
 	},
 	"4cd2c7c4-d426-4052-baab-886280701d88": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile Pod Hatch",
 		"SizeId": 1
 	},
@@ -6380,7 +6380,7 @@
 		"SizeId": 1
 	},
 	"4ecd192d-eada-460a-8e10-110fbc8fd661": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile Winch",
 		"SizeId": 1
 	},
@@ -6505,7 +6505,7 @@
 		"SizeId": 1
 	},
 	"503a44ae-223b-4756-ae9f-fb1ad3fdb4f6": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile Gantry Flat Hatch",
 		"SizeId": 1
 	},
@@ -6870,7 +6870,7 @@
 		"SizeId": 3
 	},
 	"54a66bcd-dc50-401c-8498-3a7d6b7f09e7": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Rail Launcher",
 		"SizeId": 49
 	},
@@ -6990,7 +6990,7 @@
 		"SizeId": 1
 	},
 	"562ded4e-8287-4e30-81cb-03f5e35840af": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Gantry Left",
 		"SizeId": 48
 	},
@@ -7060,7 +7060,7 @@
 		"SizeId": 1
 	},
 	"5697891b-f3d6-4587-9a86-bd4faa29171e": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Huge Hatch",
 		"SizeId": 46
 	},
@@ -7070,7 +7070,7 @@
 		"SizeId": 52
 	},
 	"56b8c974-6eb9-4ef4-888d-aeaba3bcf7a2": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Huge Rail Gantry (invisible)",
 		"SizeId": 45
 	},
@@ -7200,7 +7200,7 @@
 		"SizeId": 1
 	},
 	"58305289-16ea-43cf-9144-2f23b383da81": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "32 pdr Swivel Gun",
 		"SizeId": 2
 	},
@@ -7905,7 +7905,7 @@
 		"SizeId": 1
 	},
 	"6224bab0-2eda-40bb-ae3d-001e75174cf1": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "missile transmitter",
 		"SizeId": 1
 	},
@@ -7925,7 +7925,7 @@
 		"SizeId": 2
 	},
 	"6277b6e0-8396-420e-ac3a-2a99a0a696d5": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun152twin A Gun",
 		"SizeId": 1
 	},
@@ -7950,7 +7950,7 @@
 		"SizeId": 1
 	},
 	"62b82a29-a0ff-4cd2-8828-a2fbea4579b7": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile Pod Gantry With Hatch",
 		"SizeId": 1
 	},
@@ -8020,7 +8020,7 @@
 		"SizeId": 1
 	},
 	"639405b3-d2bf-4eb6-aef3-72f7e62bf151": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Small Gantry",
 		"SizeId": 1
 	},
@@ -8075,7 +8075,7 @@
 		"SizeId": 1
 	},
 	"6473ff00-4233-49b5-9323-bcc900f0c0d7": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun20Single Mk1 Gun",
 		"SizeId": 1
 	},
@@ -8160,7 +8160,7 @@
 		"SizeId": 1
 	},
 	"65638b2f-e9bc-4540-b38b-9639ccbdc3f5": {
-		"Material": "Laser",
+		"Material": "Missile",
 		"Name": "Laser Missile Defence",
 		"SizeId": 1
 	},
@@ -8170,7 +8170,7 @@
 		"SizeId": 3
 	},
 	"657f9bf4-803b-4f65-ad83-d4582d7b7596": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun130Single Cas Gun",
 		"SizeId": 1
 	},
@@ -8450,7 +8450,7 @@
 		"SizeId": 1
 	},
 	"691c73f2-c24a-43a1-a6d6-8abf2b3b6540": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun40Quad Mk6 Gun L",
 		"SizeId": 1
 	},
@@ -8520,7 +8520,7 @@
 		"SizeId": 1
 	},
 	"6a166a7c-dc50-401c-8498-3a7d6b7f09e7": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Launcher",
 		"SizeId": 49
 	},
@@ -8680,7 +8680,7 @@
 		"SizeId": 1
 	},
 	"6c3baef1-88b2-4d3d-8511-14a83e8af177": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun100Gatling DWG Gun",
 		"SizeId": 1
 	},
@@ -8735,7 +8735,7 @@
 		"SizeId": 2
 	},
 	"6d0c24e2-f554-4a09-ab0c-fe8d225ca647": {
-		"Material": "Barrel",
+		"Material": "Laser",
 		"Name": "Particle Cannon",
 		"SizeId": 44
 	},
@@ -8790,7 +8790,7 @@
 		"SizeId": 1
 	},
 	"6d5bce3e-1c99-4b03-b85b-3e39c031e839": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Gantry Right",
 		"SizeId": 1
 	},
@@ -8960,12 +8960,12 @@
 		"SizeId": 1
 	},
 	"6f83b601-29e3-4463-ba3a-9a9337dcc00b": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun40Quad Gun R",
 		"SizeId": 1
 	},
 	"6faa6451-50a0-4f50-ab93-11a25996dbb1": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile Single Rack Full",
 		"SizeId": 1
 	},
@@ -8975,7 +8975,7 @@
 		"SizeId": 4
 	},
 	"6fc05823-7905-4b5e-bde0-858010860e91": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Huge Launcher",
 		"SizeId": 47
 	},
@@ -9050,7 +9050,7 @@
 		"SizeId": 2
 	},
 	"7101e1cb-a501-49bd-8bbe-7a960881e72b": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": ".50 AA gun",
 		"SizeId": 8
 	},
@@ -9090,7 +9090,7 @@
 		"SizeId": 35
 	},
 	"7177c3ed-ddbb-4804-b7c0-4877de57987f": {
-		"Material": "Barrel",
+		"Material": "Laser",
 		"Name": "Particle Cannon Mirror",
 		"SizeId": 44
 	},
@@ -9145,12 +9145,12 @@
 		"SizeId": 1
 	},
 	"7271f74f-d160-4604-a950-cb57f5b73d1f": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun40Oct Pdr  Gun 7",
 		"SizeId": 1
 	},
 	"72750bc6-3f4d-4650-88f4-e1a51d2db249": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Huge Rail Gantry",
 		"SizeId": 45
 	},
@@ -9410,7 +9410,7 @@
 		"SizeId": 1
 	},
 	"75179424-ccae-476d-bd05-df422481bd5f": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun40Oct Pdr Gun 4",
 		"SizeId": 1
 	},
@@ -9520,7 +9520,7 @@
 		"SizeId": 1
 	},
 	"76c9e52e-6386-4e93-ae29-aab2522f3edb": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Rail Gantry (invisible)",
 		"SizeId": 49
 	},
@@ -9600,7 +9600,7 @@
 		"SizeId": 4
 	},
 	"77b3c67d-f649-438c-8e24-5779c0f0bdbf": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Rail Launcher Left",
 		"SizeId": 48
 	},
@@ -9675,7 +9675,7 @@
 		"SizeId": 1
 	},
 	"788170c1-d369-49c1-ba05-2ba0f473ff97": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile 6 way connector",
 		"SizeId": 1
 	},
@@ -9760,7 +9760,7 @@
 		"SizeId": 1
 	},
 	"7973a929-478c-4272-b9f5-93fdcba006ab": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun40oct Pdr Gun 2",
 		"SizeId": 1
 	},
@@ -9925,7 +9925,7 @@
 		"SizeId": 32
 	},
 	"7b95edea-500e-453e-bfcb-33d2b3b083c7": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun94Single 37 Gun",
 		"SizeId": 1
 	},
@@ -9960,7 +9960,7 @@
 		"SizeId": 1
 	},
 	"7c3b6b9d-6313-4f32-a46d-b56e554f562e": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Launcher Right",
 		"SizeId": 1
 	},
@@ -10285,7 +10285,7 @@
 		"SizeId": 1
 	},
 	"7f797f00-46fc-42a6-888d-71bd3ed9af02": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Launcher (reversed) left",
 		"SizeId": 48
 	},
@@ -10990,7 +10990,7 @@
 		"SizeId": 1
 	},
 	"874113a3-3f91-4615-a9fb-008a83566803": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Huge Gantry",
 		"SizeId": 45
 	},
@@ -11025,7 +11025,7 @@
 		"SizeId": 1
 	},
 	"87d9e52e-6386-4e93-ae29-aab2522f3edb": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Gantry",
 		"SizeId": 49
 	},
@@ -11105,7 +11105,7 @@
 		"SizeId": 1
 	},
 	"88e32570-0f4b-4607-8a4b-c5cdc1ad61ff": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile Gantry Aero Hatch",
 		"SizeId": 1
 	},
@@ -11310,12 +11310,12 @@
 		"SizeId": 1
 	},
 	"8ba7a591-3923-4344-9f87-0588c6a1aba0": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Medium Rail Launcher",
 		"SizeId": 1
 	},
 	"8bb3a572-1dd2-4bf4-a6a2-83698310ea82": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Medium Gantry + Aerodynamic Hatch",
 		"SizeId": 2
 	},
@@ -11395,7 +11395,7 @@
 		"SizeId": 51
 	},
 	"8cfd4184-ee25-4431-8c83-b9f0bf214625": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Small Rail Gantry",
 		"SizeId": 1
 	},
@@ -11480,7 +11480,7 @@
 		"SizeId": 1
 	},
 	"8df39505-3dc0-4d77-aeeb-56cc78459f6d": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun130Single Cas Gun",
 		"SizeId": 1
 	},
@@ -11765,7 +11765,7 @@
 		"SizeId": 1
 	},
 	"912404d2-30c9-47c5-8430-5e2834b64271": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Medium Rail Gantry (invisible)",
 		"SizeId": 1
 	},
@@ -12025,7 +12025,7 @@
 		"SizeId": 4
 	},
 	"9424812a-274e-4223-a3ae-9ee86a7db46b": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Launcher (reversed)",
 		"SizeId": 49
 	},
@@ -12135,7 +12135,7 @@
 		"SizeId": 1
 	},
 	"95699d3a-394e-4766-887e-6b8a3645e464": {
-		"Material": "Missing",
+		"Material": "Mantlet",
 		"Name": "Adv. Firing piece",
 		"SizeId": 1
 	},
@@ -12345,7 +12345,7 @@
 		"SizeId": 4
 	},
 	"9815045c-62a7-4bef-90f6-b385a26754ca": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Missile Hatch 2x2",
 		"SizeId": 49
 	},
@@ -12380,7 +12380,7 @@
 		"SizeId": 3
 	},
 	"9849e837-525a-44b9-a192-5a5d40106e71": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile Launch Pad",
 		"SizeId": 1
 	},
@@ -12420,7 +12420,7 @@
 		"SizeId": 1
 	},
 	"98a9e52e-6386-4e93-ae29-aab2522f3edb": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Rail Gantry",
 		"SizeId": 49
 	},
@@ -12640,7 +12640,7 @@
 		"SizeId": 1
 	},
 	"9bff4b97-c652-4da7-99df-ab4a1bd5551e": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Huge Rail Launcher",
 		"SizeId": 45
 	},
@@ -12670,7 +12670,7 @@
 		"SizeId": 1
 	},
 	"9c191453-ca09-4a1f-9467-687dcf6bc950": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "missile receiver",
 		"SizeId": 1
 	},
@@ -12785,7 +12785,7 @@
 		"SizeId": 4
 	},
 	"9d67ab23-eb6f-4108-aca6-5d84ce7186f4": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile Buoy Holder",
 		"SizeId": 1
 	},
@@ -12810,7 +12810,7 @@
 		"SizeId": 1
 	},
 	"9dc8c57f-862b-4292-b626-4a36e523d689": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun40Twin Mk5 Gun",
 		"SizeId": 1
 	},
@@ -12825,7 +12825,7 @@
 		"SizeId": 1
 	},
 	"9dd32e62-77e6-41d1-836a-865e4696955a": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "missile mat Metallic",
 		"SizeId": 1
 	},
@@ -12845,7 +12845,7 @@
 		"SizeId": 1
 	},
 	"9dfd4184-ee25-4431-8c83-b9f0bf214625": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Small Single Rail Gantry",
 		"SizeId": 1
 	},
@@ -12900,7 +12900,7 @@
 		"SizeId": 8
 	},
 	"9eab63ec-ba0a-43a1-84e1-7621b2b92134": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun20Quad 38 Gun Up",
 		"SizeId": 1
 	},
@@ -12940,7 +12940,7 @@
 		"SizeId": 1
 	},
 	"9eedfe02-5a15-45c1-b785-56f5aea76145": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Huge Rail Gantry",
 		"SizeId": 45
 	},
@@ -13045,7 +13045,7 @@
 		"SizeId": 4
 	},
 	"a0150e3e-5c43-452e-9a2e-9217135eaadd": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Autocannon Gun",
 		"SizeId": 1
 	},
@@ -13065,7 +13065,7 @@
 		"SizeId": 3
 	},
 	"a04ebf4d-aa6e-4561-8c9a-4d6817610600": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun94Single 37 Gun",
 		"SizeId": 1
 	},
@@ -13080,7 +13080,7 @@
 		"SizeId": 1
 	},
 	"a08b848b-123c-4617-bf53-792ae034c7b7": {
-		"Material": "Laser",
+		"Material": "Missile",
 		"Name": "Missile Laser Emitter",
 		"SizeId": 1
 	},
@@ -13190,7 +13190,7 @@
 		"SizeId": 1
 	},
 	"a225f24f-81ff-4ea3-afa3-347dcc5ef827": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile Quad Rack Full",
 		"SizeId": 1
 	},
@@ -13355,7 +13355,7 @@
 		"SizeId": 3
 	},
 	"a4038b98-a1fb-4206-8d74-1f62d95a3c76": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Launcher Left",
 		"SizeId": 48
 	},
@@ -13620,7 +13620,7 @@
 		"SizeId": 1
 	},
 	"a7aaf947-f16c-489b-a10e-b48d03e0d209": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Small Rail Launcher",
 		"SizeId": 1
 	},
@@ -13665,7 +13665,7 @@
 		"SizeId": 1
 	},
 	"a85fe5af-6d4a-4fcb-9744-d9d23fff5046": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Missile Hatch 2x2",
 		"SizeId": 49
 	},
@@ -13745,7 +13745,7 @@
 		"SizeId": 1
 	},
 	"a97e03b0-e8da-49e2-9913-ad8c1826d869": {
-		"Material": "Missing",
+		"Material": "Mantlet",
 		"Name": "Firing piece",
 		"SizeId": 1
 	},
@@ -13770,7 +13770,7 @@
 		"SizeId": 1
 	},
 	"aa0525a4-938d-4d13-90c4-b6c4550cea18": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Seeking Missile Launcher",
 		"SizeId": 1
 	},
@@ -13780,7 +13780,7 @@
 		"SizeId": 4
 	},
 	"aa070f63-c454-4f95-82fd-d946a32a1b66": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "150mm Casemate",
 		"SizeId": 52
 	},
@@ -13895,7 +13895,7 @@
 		"SizeId": 1
 	},
 	"ab79eeb1-f584-4a80-8668-7ea0059e40f9": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun20Quad 38 Gun Down",
 		"SizeId": 1
 	},
@@ -14205,7 +14205,7 @@
 		"SizeId": 1
 	},
 	"afa4b4ec-1ddb-43b0-bd80-06545aad5748": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Autocannon Gun",
 		"SizeId": 1
 	},
@@ -14310,7 +14310,7 @@
 		"SizeId": 1
 	},
 	"b0abf5ab-41e7-49b6-b5e2-2aa2c7a9f1dd": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile Component",
 		"SizeId": 1
 	},
@@ -14465,7 +14465,7 @@
 		"SizeId": 1
 	},
 	"b1ef236a-9ecb-406c-b4f0-6ef0fbb50bd1": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Medium Gantry",
 		"SizeId": 1
 	},
@@ -14495,7 +14495,7 @@
 		"SizeId": 1
 	},
 	"b2c8733b-64c8-4c03-a1d6-ef85821cb573": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gunWarp Gun",
 		"SizeId": 1
 	},
@@ -14520,7 +14520,7 @@
 		"SizeId": 1
 	},
 	"b2e1dec3-59f2-4fab-b8ca-9a1ae71d499f": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile Block",
 		"SizeId": 1
 	},
@@ -14635,7 +14635,7 @@
 		"SizeId": 4
 	},
 	"b4855bc9-c79e-4a14-bb67-73dae397de8a": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Gantry Open Right",
 		"SizeId": 1
 	},
@@ -14645,7 +14645,7 @@
 		"SizeId": 1
 	},
 	"b4a45bdc-24d6-4ab4-96d7-04c2a4306870": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun60Gatling SS Gun",
 		"SizeId": 1
 	},
@@ -14740,7 +14740,7 @@
 		"SizeId": 3
 	},
 	"b5d0aab9-9074-4d2a-8654-19e51a6cc467": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun60Gatling SS Gun",
 		"SizeId": 1
 	},
@@ -14770,7 +14770,7 @@
 		"SizeId": 1
 	},
 	"b6231862-bb44-4b9e-97e0-b9d533a05e4d": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "missile mat Ramp",
 		"SizeId": 1
 	},
@@ -14865,7 +14865,7 @@
 		"SizeId": 1
 	},
 	"b72f3028-0c14-4fa5-a8bc-6970268d4ebc": {
-		"Material": "Missing",
+		"Material": "Mantlet",
 		"Name": "Firing piece",
 		"SizeId": 1
 	},
@@ -15010,7 +15010,7 @@
 		"SizeId": 6
 	},
 	"b8bbf947-f16c-489b-a10e-b48d03e0d209": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Small Single Rail Launcher",
 		"SizeId": 1
 	},
@@ -15040,7 +15040,7 @@
 		"SizeId": 1
 	},
 	"b92a4ce6-ea93-4c0c-97d7-494ea611caa9": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "20mm AA gun",
 		"SizeId": 57
 	},
@@ -15085,7 +15085,7 @@
 		"SizeId": 2
 	},
 	"b9de15c2-3c1f-4354-9dde-b2a89dab4b98": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile Controller",
 		"SizeId": 1
 	},
@@ -15285,7 +15285,7 @@
 		"SizeId": 1
 	},
 	"bc3f4b55-39b3-4a99-9823-fe57ec15aa41": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile wireless receiver",
 		"SizeId": 1
 	},
@@ -15310,7 +15310,7 @@
 		"SizeId": 1
 	},
 	"bcd3946d-08e2-4220-9651-f98ffdf85390": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun215Single 64pdr Gun",
 		"SizeId": 1
 	},
@@ -15360,7 +15360,7 @@
 		"SizeId": 1
 	},
 	"bdcfaad2-80c5-4e39-8e4e-d8d888bbb1af": {
-		"Material": "Missing",
+		"Material": "Laser",
 		"Name": "PAC  with rear inputs",
 		"SizeId": 1
 	},
@@ -15410,7 +15410,7 @@
 		"SizeId": 1
 	},
 	"be96a47d-f8b8-4f9b-974e-c5e2c985e1bb": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Gantry Open Left",
 		"SizeId": 1
 	},
@@ -15460,12 +15460,12 @@
 		"SizeId": 4
 	},
 	"bf322b15-bce4-4831-b9d5-0a87b97e53b6": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "missile mat Color",
 		"SizeId": 1
 	},
 	"bf3bb34b-b118-484e-b3d1-81c5110a030a": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Bomb Chute",
 		"SizeId": 1
 	},
@@ -15505,7 +15505,7 @@
 		"SizeId": 1
 	},
 	"bfb82ee6-345a-44a4-84e1-d6706cc8b29d": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Medium Launcher",
 		"SizeId": 1
 	},
@@ -15555,7 +15555,7 @@
 		"SizeId": 1
 	},
 	"c025772c-cec9-4f1b-ae1e-4b64d85d3ace": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile warner",
 		"SizeId": 1
 	},
@@ -15570,12 +15570,12 @@
 		"SizeId": 1
 	},
 	"c04db0be-4eac-4b92-bd90-dd6b1f04ab5f": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun60Single Gr Gun",
 		"SizeId": 1
 	},
 	"c0520e45-bc0c-4e30-b651-80aa3c554dd2": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gunWarp Gun",
 		"SizeId": 1
 	},
@@ -15615,7 +15615,7 @@
 		"SizeId": 4
 	},
 	"c0a9174a-0685-48cc-a930-a3dadf614936": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Rail Gantry (invisible) left",
 		"SizeId": 48
 	},
@@ -16160,7 +16160,7 @@
 		"SizeId": 1
 	},
 	"c743b888-a53c-42b8-b4f0-3afc6d763617": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Medium Launcher (reversed)",
 		"SizeId": 1
 	},
@@ -16625,12 +16625,12 @@
 		"SizeId": 1
 	},
 	"cd788eca-ec52-40d2-bf17-48a6d47e569e": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Gantry Left",
 		"SizeId": 48
 	},
 	"cd7cb034-adf3-4d71-be65-9bca35ff823f": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Huge Gantry",
 		"SizeId": 45
 	},
@@ -16690,7 +16690,7 @@
 		"SizeId": 1
 	},
 	"ce494e45-5ff6-48a7-8936-30163c58ed99": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Bomb Chute",
 		"SizeId": 1
 	},
@@ -16805,7 +16805,7 @@
 		"SizeId": 4
 	},
 	"cf9fec60-662f-4bdf-8396-d4f881143f66": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun20Quad 38 Gun Up",
 		"SizeId": 1
 	},
@@ -17185,7 +17185,7 @@
 		"SizeId": 1
 	},
 	"d44220d6-609e-4b8d-8da9-708aa2d6c4c9": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun215Single 64pdr Gun",
 		"SizeId": 1
 	},
@@ -17220,7 +17220,7 @@
 		"SizeId": 1
 	},
 	"d4c049ac-a49e-48c5-8492-4700bf189459": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun40oct Pdr Gun 1",
 		"SizeId": 1
 	},
@@ -17330,7 +17330,7 @@
 		"SizeId": 2
 	},
 	"d5e936aa-044a-432b-8498-c2a1e202a28b": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun40Oct Pdr Gun 8",
 		"SizeId": 1
 	},
@@ -17385,7 +17385,7 @@
 		"SizeId": 34
 	},
 	"d681f245-adf2-4ae2-95c7-d71bf66532d9": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun100Gatling DWG Gun",
 		"SizeId": 1
 	},
@@ -17580,7 +17580,7 @@
 		"SizeId": 4
 	},
 	"d8c5639a-ff5f-448e-a761-c2f69fac661a": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "40mm Quad AA Gun",
 		"SizeId": 57
 	},
@@ -17635,7 +17635,7 @@
 		"SizeId": 2
 	},
 	"d99edb05-e977-4401-bb4c-f7b4c85e46b7": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Grenade Launcher",
 		"SizeId": 1
 	},
@@ -17720,7 +17720,7 @@
 		"SizeId": 1
 	},
 	"da81fbe5-7d8d-4571-a473-d22dc385dbc5": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "missile mat AO",
 		"SizeId": 1
 	},
@@ -17880,7 +17880,7 @@
 		"SizeId": 1
 	},
 	"dc8f69fe-f97c-404f-996c-1b934afa17b5": {
-		"Material": "Missing",
+		"Material": "Mantlet",
 		"Name": "Adv. Firing piece",
 		"SizeId": 1
 	},
@@ -17930,12 +17930,12 @@
 		"SizeId": 3
 	},
 	"ddc9bad5-3bd3-4e7a-981b-29aeb90f8e61": {
-		"Material": "Barrel",
+		"Material": "Missile",
 		"Name": "Anti Missile Cannon Controller",
 		"SizeId": 1
 	},
 	"ddccde0f-542c-44d1-b14c-bfd24d0b59cc": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Gantry With Hatch Left",
 		"SizeId": 1
 	},
@@ -17945,7 +17945,7 @@
 		"SizeId": 1
 	},
 	"ddde6a1e-6273-4bd9-ba1d-cb3380f38408": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Medium Gantry + Hatch",
 		"SizeId": 8
 	},
@@ -18125,7 +18125,7 @@
 		"SizeId": 1
 	},
 	"df777c1a-1a83-4316-b168-2e5c79a4f9ef": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile Tips",
 		"SizeId": 1
 	},
@@ -18520,7 +18520,7 @@
 		"SizeId": 2
 	},
 	"e3facfbc-0d1a-4b55-bc16-5f5a67c8c553": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Harpoon Gun",
 		"SizeId": 1
 	},
@@ -18905,7 +18905,7 @@
 		"SizeId": 1
 	},
 	"e92c24d5-ff44-42f8-8bc6-20991762221b": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun40Oct Pdr Gun 5",
 		"SizeId": 1
 	},
@@ -18945,7 +18945,7 @@
 		"SizeId": 1
 	},
 	"e9f9bea8-6483-48ee-90ec-0c770258ba45": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Gantry With Hatch Right",
 		"SizeId": 1
 	},
@@ -19005,7 +19005,7 @@
 		"SizeId": 1
 	},
 	"eabeb77e-1b27-46b9-a6d2-3996f4741749": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "missile mat",
 		"SizeId": 1
 	},
@@ -19025,7 +19025,7 @@
 		"SizeId": 2
 	},
 	"eb38713d-831b-4118-8dad-a6551c1f7268": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Large Missile Hatch 4x4",
 		"SizeId": 50
 	},
@@ -19060,7 +19060,7 @@
 		"SizeId": 1
 	},
 	"ebe5e7f6-894e-450c-b602-710538e82486": {
-		"Material": "Barrel",
+		"Material": "Laser",
 		"Name": "Particle Cannon Mirror",
 		"SizeId": 44
 	},
@@ -19180,7 +19180,7 @@
 		"SizeId": 3
 	},
 	"eda0ebb6-6cbd-4fd7-87e7-ddc2e75c5bee": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Huge hatch",
 		"SizeId": 1
 	},
@@ -19425,7 +19425,7 @@
 		"SizeId": 1
 	},
 	"f0a2628f-b20b-463b-aeb1-6a04c794a1f3": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun40Quad Gun L",
 		"SizeId": 1
 	},
@@ -19435,12 +19435,12 @@
 		"SizeId": 1
 	},
 	"f0bc9808-c1d6-49c4-967e-3ff2de9379cf": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Small Rail Gantry (invisible)",
 		"SizeId": 1
 	},
 	"f0be0caa-5e48-4c80-b689-22569637b026": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "gun20Single Mk1 Gun",
 		"SizeId": 1
 	},
@@ -19520,7 +19520,7 @@
 		"SizeId": 1
 	},
 	"f1cc9808-c1d6-49c4-967e-3ff2de9379cf": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Small Single Rail Gantry (invisible)",
 		"SizeId": 1
 	},
@@ -19710,7 +19710,7 @@
 		"SizeId": 1
 	},
 	"f42d0646-7814-451f-aa6e-1b1c64cedb80": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "Harpoon Gun",
 		"SizeId": 1
 	},
@@ -19785,7 +19785,7 @@
 		"SizeId": 3
 	},
 	"f4df33ca-5cc4-4bf1-b0de-030b7e3586a3": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile wireless transmitter",
 		"SizeId": 1
 	},
@@ -19935,7 +19935,7 @@
 		"SizeId": 1
 	},
 	"f6c9fc03-d137-4533-bb5f-37a6de30d545": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "missile mat Bump",
 		"SizeId": 1
 	},
@@ -20165,7 +20165,7 @@
 		"SizeId": 20
 	},
 	"f9f36cb3-cbfd-446a-9313-40f8e31e6e89": {
-		"Material": "Missing",
+		"Material": "Barrel",
 		"Name": "3.7\" Gun",
 		"SizeId": 57
 	},
@@ -20595,7 +20595,7 @@
 		"SizeId": 1
 	},
 	"fe018770-0c06-4bbd-bd75-a7d9fb26b078": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Seeking Missile Launcher",
 		"SizeId": 1
 	},
@@ -20615,7 +20615,7 @@
 		"SizeId": 1
 	},
 	"fe217e36-6185-4a18-93dc-8f41fdd3bb77": {
-		"Material": "Missing",
+		"Material": "Missile",
 		"Name": "Missile strut",
 		"SizeId": 1
 	},

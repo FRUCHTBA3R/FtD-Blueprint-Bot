@@ -49,15 +49,22 @@
 	},
 	"Barrel": {
 		"Color": [90, 90, 90],
-		"Keywords": ["Barrel", "Muzzle Brake", "Bore", "Cannon"]
+		"Keywords": ["Barrel", "Muzzle Brake", "Bore", "Cannon", "Gun", "Blast-Gun", "Grenade", "Casemate",
+			"Bomb Chute"]
 	},
 	"Mantlet": {
 		"Color": [170, 170, 170],
-		"Keywords": ["Mantlet"]
+		"Keywords": ["Mantlet", "Firing piece"]
 	},
 	"Laser": {
 		"Color": [0, 147, 173],
-		"Keywords": ["Laser", "Lens"]
+		"Keywords": ["Laser", "Lens", "PAC", "Particle Cannon"]
+	},
+	"Missile": {
+		"Color": [65, 70, 255],
+		"Keywords": ["Small Launcher", "Medium Launcher", "Large Launcher", "Huge Launcher", "Small Rail Launcher",
+			"Medium Rail Launcher", "Large Rail Launcher", "Huge Rail Launcher", "Small Single Rail Launcher",
+			"Missile", "Gantry", "Huge Hatch"]
 	},
 	"Glass": {
 		"Invisible": true,

@@ -86,7 +86,7 @@ size_id_dict = {int(k): v for k, v in size_id_dict.items()}
 bp_gameversion = None
 
 # load font
-bahnschrift = ImageFont.truetype("bahnschrift.TTF", 14)
+bahnschrift = ImageFont.truetype("bahnschrift.ttf", 14)
 bahnschrift.set_variation_by_axes([300, 85])
 
 # Blueprint:
@@ -333,13 +333,29 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True):
         if create_gif:
             blocks_that_go_bang = ["c94e1719-bcc7-4c6a-8563-505fad2f9db9",  # 16 pounder
                                    "58305289-16ea-43cf-9144-2f23b383da81",  # 32 pounder
-                                   "e1d1bcae-f5e4-42bb-9781-6dde51b8e390"  # 64 pounder
+                                   "e1d1bcae-f5e4-42bb-9781-6dde51b8e390",  # 64 pounder
+                                   "16b67fbc-25d5-4a35-a0df-4941e7abf6ef",  # Revolving Blast-Gun
+                                   "d3e8e14a-58e7-4bdd-b1b3-0f37e4723a73",  # Shard cannon
+                                   "7101e1cb-a501-49bd-8bbe-7a960881e72b",  # .50 AA Gun
+                                   "b92a4ce6-ea93-4c0c-97d7-494ea611caa9",  # 20mm AA gun
+                                   "d8c5639a-ff5f-448e-a761-c2f69fac661a",  # 40mm Quad AA Gun
+                                   "268d79bf-c266-48ed-b01b-76c8d4d31c92",  # 40mm Twin AA Gun
+                                   "3be0cab1-643b-4e3a-9f49-45995e4eb9fb",  # 40mm Octuple AA Gun
+                                   "2311e4db-a281-448f-ad53-0a6127573a96",  # 60mm Grenade Launcher
+                                   "742f063f-d0fe-4f41-8717-a2c75c38d5e0",  # 30mm Assault Cannon
+                                   "9b8657b9-c820-43a0-ad19-25ea45a100f1",  # 60mm Auto Cannon
+                                   "f9f36cb3-cbfd-446a-9313-40f8e31e6e89",  # 3.7" Gun
+                                   "1217043c-e786-4555-ba24-46cd1f458bf9",  # 3.7" Gun Shield
+                                   "0aa0fa2e-1a85-4493-9c4c-0a69c385395d",  # 130mm Casemate
+                                   "aa070f63-c454-4f95-82fd-d946a32a1b66",  # 150mm Casemate
+                                   "",  #
+                                   "",  #
                                    ]
             for cannon_guid in blocks_that_go_bang:
                 cannon, = np.nonzero(a_guid == cannon_guid)
                 if len(cannon) > 0:
-                    firing_animator.append(a_pos[cannon], a_dir[cannon],
-                                           size_id_dict[a_sizeid[cannon[0]]]["zp"] + 1, np.ones(len(cannon)))
+                    firing_animator.append(a_pos[cannon] + a_dir_tan[cannon] * size_id_dict[a_sizeid[cannon[0]]]["yp"],
+                                           a_dir[cannon], size_id_dict[a_sizeid[cannon[0]]]["zp"] + 1, np.ones(len(cannon)))
 
         # player colors
         if use_player_colors:
@@ -821,7 +837,7 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     # file
-    fname = "../example blueprints/examplePounderShip.blueprint"
+    fname = "../example blueprints/exampleAllWeapons.blueprint"
 
     main_img = np.zeros(0)
 
