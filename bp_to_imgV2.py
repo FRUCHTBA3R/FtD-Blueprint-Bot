@@ -125,7 +125,8 @@ async def process_blueprint(fname, silent=False, standaloneMode=False, use_playe
     if not silent: print("Infos gathered in", ts3, "s")
     # create top, side, front view matrices
     ts4 = time.time()
-    top_mats, side_mats, front_mats, firing_animator = __create_view_matrices(bp, use_player_colors=use_player_colors)
+    top_mats, side_mats, front_mats, firing_animator = __create_view_matrices(bp, use_player_colors=use_player_colors,
+                                                                              create_gif=True)
     ts4 = time.time() - ts4
     if not silent: print("View matrices completed in", ts4, "s")
     # create images
@@ -336,26 +337,59 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True):
                                    "e1d1bcae-f5e4-42bb-9781-6dde51b8e390",  # 64 pounder
                                    "16b67fbc-25d5-4a35-a0df-4941e7abf6ef",  # Revolving Blast-Gun
                                    "d3e8e14a-58e7-4bdd-b1b3-0f37e4723a73",  # Shard cannon
-                                   "7101e1cb-a501-49bd-8bbe-7a960881e72b",  # .50 AA Gun
-                                   "b92a4ce6-ea93-4c0c-97d7-494ea611caa9",  # 20mm AA gun
-                                   "d8c5639a-ff5f-448e-a761-c2f69fac661a",  # 40mm Quad AA Gun
-                                   "268d79bf-c266-48ed-b01b-76c8d4d31c92",  # 40mm Twin AA Gun
-                                   "3be0cab1-643b-4e3a-9f49-45995e4eb9fb",  # 40mm Octuple AA Gun
+                                   #"7101e1cb-a501-49bd-8bbe-7a960881e72b",  # .50 AA Gun
+                                   #"b92a4ce6-ea93-4c0c-97d7-494ea611caa9",  # 20mm AA gun
+                                   #"d8c5639a-ff5f-448e-a761-c2f69fac661a",  # 40mm Quad AA Gun
+                                   #"268d79bf-c266-48ed-b01b-76c8d4d31c92",  # 40mm Twin AA Gun
+                                   #"3be0cab1-643b-4e3a-9f49-45995e4eb9fb",  # 40mm Octuple AA Gun
                                    "2311e4db-a281-448f-ad53-0a6127573a96",  # 60mm Grenade Launcher
                                    "742f063f-d0fe-4f41-8717-a2c75c38d5e0",  # 30mm Assault Cannon
                                    "9b8657b9-c820-43a0-ad19-25ea45a100f1",  # 60mm Auto Cannon
                                    "f9f36cb3-cbfd-446a-9313-40f8e31e6e89",  # 3.7" Gun
                                    "1217043c-e786-4555-ba24-46cd1f458bf9",  # 3.7" Gun Shield
                                    "0aa0fa2e-1a85-4493-9c4c-0a69c385395d",  # 130mm Casemate
-                                   "aa070f63-c454-4f95-82fd-d946a32a1b66",  # 150mm Casemate
-                                   "",  #
-                                   "",  #
+                                   "aa070f63-c454-4f95-82fd-d946a32a1b66"   # 150mm Casemate
                                    ]
+            blocks_with_barrels_that_go_bang = ["dc8f69fe-f97c-404f-996c-1b934afa17b5",  # Adv. Firing piece
+                                                "a97e03b0-e8da-49e2-9913-ad8c1826d869",  # Firing piece
+                                                ]
+            largest_axis = np.argmax(bp["Blueprint"]["Size"])
+            # simple cannons loop
             for cannon_guid in blocks_that_go_bang:
                 cannon, = np.nonzero(a_guid == cannon_guid)
                 if len(cannon) > 0:
-                    firing_animator.append(a_pos[cannon] + a_dir_tan[cannon] * size_id_dict[a_sizeid[cannon[0]]]["yp"],
-                                           a_dir[cannon], size_id_dict[a_sizeid[cannon[0]]]["zp"] + 1, np.ones(len(cannon)))
+                    firing_pos = a_pos[cannon] + a_dir_tan[cannon] * size_id_dict[a_sizeid[cannon[0]]]["yp"] + \
+                        a_dir[cannon] * (size_id_dict[a_sizeid[cannon[0]]]["zp"] + 1)
+                    firing_animator.append(firing_pos, a_dir[cannon], np.ones(len(cannon)))
+            # cannons with barrels marching loop
+            for cannon_guid in blocks_with_barrels_that_go_bang:
+                cannon, = np.nonzero(a_guid == cannon_guid)
+                if len(cannon) > 0:
+                    firing_pos = a_pos[cannon] + a_dir_tan[cannon] * size_id_dict[a_sizeid[cannon[0]]]["yp"] + \
+                        a_dir[cannon] * (size_id_dict[a_sizeid[cannon[0]]]["zp"] + 1)
+                    barrel_end_firing_pos = np.empty(firing_pos.shape, dtype=firing_pos.dtype)
+                    for i in range(len(firing_pos)):
+                        slicer = np.index_exp[largest_axis, (largest_axis + 1) % 3, (largest_axis + 2) % 3]
+                        iter_count = 0
+                        while iter_count < 100:
+                            iter_count += 1
+                            # search the largest axis in hopes of getting less false hits
+                            index_largest, = np.nonzero(a_pos[:, slicer[0]] == firing_pos[i, slicer[0]])
+                            if len(index_largest) < 1:
+                                break
+                            index_a, = np.nonzero(a_pos[index_largest, slicer[1]] == firing_pos[i, slicer[1]])
+                            if len(index_a) < 1:
+                                break
+                            index_b, = np.nonzero(a_pos[index_largest[index_a], slicer[2]] == firing_pos[i, slicer[2]])
+                            if len(index_b) < 1:
+                                break
+                            final_index = index_largest[index_a[index_b]][0]
+                            if blocks.get(a_guid[final_index], missing_block).get("Material") \
+                                    not in ["Barrel", "Mantlet"]:
+                                break
+                            firing_pos[i] += (size_id_dict[a_sizeid[final_index]]["zp"] + 1) * a_dir[final_index]
+                        barrel_end_firing_pos[i] = firing_pos[i]
+                    firing_animator.append(barrel_end_firing_pos, a_dir[cannon], np.ones(len(cannon)))
 
         # player colors
         if use_player_colors:
@@ -517,12 +551,6 @@ def __copy_to_image(dst, start_pos, src, mask_start_pos, mask, mask_compare, mas
     alpha = src[(*slicer_src, 3)]/ 255. if src.shape[2] == 4 else np.ones((1, 1))
     alpha = np.expand_dims(alpha, axis=2)
     dst[slicer_dst] = np.where(mask[:, :, np.newaxis], src[(*slicer_src, np.s_[:3])] * alpha + dst[slicer_dst] * (1.-alpha), dst[slicer_dst])
-    #dst[slicer_dst] = np.where(mask[:, :, np.newaxis], 0, dst[slicer_dst])
-    #dst[slicer_dst] = mask[:, :, np.newaxis]
-    #dst[slicer_dst][mask] = src[slicer_src[0], slicer_src[1], :3][mask] * alpha[:, :, np.newaxis] \
-    #    + dst[slicer_dst][mask] * (1. - alpha[:, :, np.newaxis])
-    #alpha = src[slicer_src[0], slicer_src[1], 3] / 255. if src.shape[2] == 4 else np.ones((1, 1))
-    #dst[slicer_dst] = src[(*slicer_src, np.s_[:3])] * alpha + dst[slicer_dst] * (1. - alpha)
 
 
 def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upscale_f=5, gif_args=None):

@@ -50,9 +50,8 @@ class FiringAnimator:
         self.__current_index = None
         self.__total_frames = None
 
-    def append(self, firing_positions, firing_directions, add_dir_to_pos_factor, firing_strengths):
-        self.firing_positions = np.concatenate((self.firing_positions,
-                                                firing_positions + add_dir_to_pos_factor * firing_directions), axis=0)
+    def append(self, firing_positions, firing_directions, firing_strengths):
+        self.firing_positions = np.concatenate((self.firing_positions, firing_positions), axis=0)
         self.firing_directions = np.concatenate((self.firing_directions, firing_directions), axis=0)
         self.firing_strengths = np.concatenate((self.firing_strengths, firing_strengths), axis=0)
 
