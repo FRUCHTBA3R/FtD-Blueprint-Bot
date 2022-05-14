@@ -14,9 +14,6 @@ class FiringAnimator:
                           cv2.imread("firing_animation/frame3.png", cv2.IMREAD_UNCHANGED),
                           cv2.imread("firing_animation/frame4.png", cv2.IMREAD_UNCHANGED),
                           cv2.imread("firing_animation/frame5.png", cv2.IMREAD_UNCHANGED)]
-                         # [cv2.imread("firing_animation/frameB0.png", cv2.IMREAD_UNCHANGED),
-                         #  cv2.imread("firing_animation/frameB1.png", cv2.IMREAD_UNCHANGED),
-                         #  cv2.imread("firing_animation/frameB2.png", cv2.IMREAD_UNCHANGED)]
         self.animation_depth = [0, 1, 2, 2, 3, 3]
         self.animation_origin = np.array([15, 0])
         # front animation
@@ -29,10 +26,9 @@ class FiringAnimator:
         self.animation_front_depth = [1, 4, 6, 6, 7, 7]
         self.animation_front_origin = np.array([15, 15])
         # back animation
-        self.animation_back = [self.animation_front[0],
+        self.animation_back = [None,
                                cv2.imread("firing_animation/frame_back1.png", cv2.IMREAD_UNCHANGED),
-                               cv2.imread("firing_animation/frame_back2.png", cv2.IMREAD_UNCHANGED),
-                               *self.animation_front[3:]]
+                               cv2.imread("firing_animation/frame_back2.png", cv2.IMREAD_UNCHANGED)]
         # anim offsets
         a, b = self.animation_origin
         c, d = self.animation[0].shape[0:2]
@@ -49,6 +45,24 @@ class FiringAnimator:
         self.__current_frame = None
         self.__current_index = None
         self.__total_frames = None
+
+        # pre blend animations
+        for i in range(len(self.animation)):
+            # side animation
+            alpha = self.animation[i][:, :, 3].astype(np.float16) / 255.
+            alpha = np.expand_dims(alpha, axis=2)
+            self.animation[i] = [(self.animation[i][:, :, :3] * alpha).astype(np.uint8), 1. - alpha]
+            # front animation
+            alpha = self.animation_front[i][:, :, 3].astype(np.float16) / 255.
+            alpha = np.expand_dims(alpha, axis=2)
+            self.animation_front[i] = [(self.animation_front[i][:, :, :3] * alpha).astype(np.uint8), 1. - alpha]
+        # back animation
+        for i in [1, 2]:
+            alpha = self.animation_back[i][:, :, 3].astype(np.float16) / 255.
+            alpha = np.expand_dims(alpha, axis=2)
+            self.animation_back[i] = [(self.animation_back[i][:, :, :3] * alpha).astype(np.uint8), 1. - alpha]
+        self.animation_back[0] = self.animation_front[0]
+        self.animation_back.extend(self.animation_front[3:])
 
     def append(self, firing_positions, firing_directions, firing_strengths):
         self.firing_positions = np.concatenate((self.firing_positions, firing_positions), axis=0)
@@ -138,11 +152,11 @@ class FiringAnimator:
         img = self.animation[state]
         depth = self.animation_depth[state]
         if rotation_id == 1:
-            img = np.flipud(np.transpose(img, (1, 0, 2)))
+            img = [np.flipud(np.transpose(img[0], (1, 0, 2))), np.flipud(np.transpose(img[1], (1, 0, 2)))]
         elif rotation_id == 2:
-            img = np.fliplr(img)
+            img = [np.fliplr(img[0]), np.fliplr(img[1])]
         elif rotation_id == 3:
-            img = np.fliplr(np.transpose(img, (1, 0, 2)))
+            img = [np.fliplr(np.transpose(img[0], (1, 0, 2))), np.fliplr(np.transpose(img[1], (1, 0, 2)))]
         elif rotation_id == 4:
             img = self.animation_front[state]
             depth = self.animation_front_depth[state]
@@ -156,3 +170,13 @@ class FiringAnimator:
         #if flipB:
         #    img = np.flipud(img)
         return img, depth, self.__animation_offset_list[rotation_id]
+
+    def clear(self):
+        self.firing_positions = np.zeros((0, 3), dtype=int)
+        self.firing_directions = np.zeros((0, 3), dtype=int)
+        self.firing_strengths = np.zeros(0, dtype=np.float16)
+        self.state = None
+
+        self.__current_frame = None
+        self.__current_index = None
+        self.__total_frames = None

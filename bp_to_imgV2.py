@@ -89,6 +89,9 @@ bp_gameversion = None
 bahnschrift = ImageFont.truetype("bahnschrift.ttf", 14)
 bahnschrift.set_variation_by_axes([300, 85])
 
+# firing animator
+firing_animator = FiringAnimator()
+
 # Blueprint:
 # CSI: block color (color shininess increase?)
 # COL: craft colors ["float,float,float,float"]
@@ -106,7 +109,7 @@ bahnschrift.set_variation_by_axes([300, 85])
 async def process_blueprint(fname, silent=False, standaloneMode=False, use_player_colors=True, create_gif=True,
                             firing_order=2):
     """Load and init blueprint data. Returns blueprint, calculation times, image filename"""
-    global bp_gameversion
+    global bp_gameversion, firing_animator
     bp_gameversion = None
     main_img_fname = fname[:-10] + "_view"
     if not silent:
@@ -131,7 +134,8 @@ async def process_blueprint(fname, silent=False, standaloneMode=False, use_playe
         print("Infos gathered in", ts3, "s")
     # create top, side, front view matrices
     ts4 = time.time()
-    top_mats, side_mats, front_mats, firing_animator = \
+    firing_animator.clear()  # clear here and at the end (if it crashes)
+    top_mats, side_mats, front_mats = \
         __create_view_matrices(bp, use_player_colors=use_player_colors, create_gif=create_gif)
     ts4 = time.time() - ts4
     if not silent:
@@ -150,6 +154,7 @@ async def process_blueprint(fname, silent=False, standaloneMode=False, use_playe
             print("ERROR: image could not be saved", main_img_fname)
     else:
         main_img_fname += ".gif"
+        firing_animator.clear()
     if standaloneMode:
         return bp, [ts1, ts2, ts3, ts4, ts5], main_img
     else:
@@ -314,6 +319,7 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True):
     def blueprint_iter(blueprint, mincords, blueprint_desc = "main"):
         """Iterate blueprint and sub blueprints"""
         nonlocal actual_min_cords
+        global firing_animator
         # subtract min cords
         blueprint["BLP"] -= mincords
         #print("ViewMat at", blueprint_desc)
@@ -510,10 +516,6 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True):
     side_height = np.full(bp["Blueprint"]["Size"][[1, 2]], -12345, dtype=int)
     front_color = np.full((*bp["Blueprint"]["Size"][[1, 0]], 3), np.array([255, 118, 33]), dtype=np.uint8)
     front_height = np.full(bp["Blueprint"]["Size"][[1, 0]], -12345, dtype=int)
-    # firing animation
-    firing_animator = None
-    if create_gif:
-        firing_animator = FiringAnimator()
     # blueprint iteration
     itemdict = bp["ItemDictionary"]
     blueprint_iter(bp["Blueprint"], bp["Blueprint"]["MinCords"])
@@ -536,20 +538,31 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True):
 
     return ([top_color, top_height],  # , actual_min_cords[1]],
             [side_color, side_height],  # , actual_min_cords[0]],
-            [front_color, front_height],  # , actual_min_cords[2]])
-            firing_animator)
+            [front_color, front_height]  # , actual_min_cords[2]])
+            )
 
 
-def __copy_to_image(dst, start_pos, src, mask_start_pos, mask, mask_compare, mask_upscale):
-    if src.shape == (3, ):
-        src = np.array([[src]])
+def __copy_to_image(dst, start_pos, src_preblend, mask_start_pos, mask, mask_compare, mask_upscale):
+    """
+    Copies src_preblend[0] (RGB uint8) to dst at starting_pos with alpha blending.
+    Mask as depth test: mask < mask_compare
+    :param dst: Destination image RGB uint8
+    :param start_pos: [x, y]
+    :param src_preblend: [Source image * source alpha RGB uint8, 1. - alpha float16]
+    :param mask_start_pos: [x, y]
+    :param mask: Depth image
+    :param mask_compare: Depth to compare
+    :param mask_upscale: Scaling for mask
+    """
+    #if src.shape == (3, ):
+    #    src = np.array([[src]])
     # dst slice
     start_pos_dst = np.maximum(start_pos, 0)  # TODO: needs to be clipped to single images
-    end_pos_dst = np.minimum(dst.shape[:2], start_pos + src.shape[:2])
+    end_pos_dst = np.minimum(dst.shape[:2], start_pos + src_preblend[0].shape[:2])
     slicer_dst = np.index_exp[start_pos_dst[0]:end_pos_dst[0], start_pos_dst[1]:end_pos_dst[1]]
     # mask slice
     start_pos_mask = np.maximum(mask_start_pos, 0)
-    end_pos_mask = np.minimum(mask.shape[:2], mask_start_pos + np.array(src.shape[:2])//mask_upscale)
+    end_pos_mask = np.minimum(mask.shape[:2], mask_start_pos + np.array(src_preblend[0].shape[:2])//mask_upscale)
     slicer_mask = np.index_exp[start_pos_mask[0]:end_pos_mask[0], start_pos_mask[1]:end_pos_mask[1]]
     # src slice
     start_pos = start_pos_dst - start_pos
@@ -559,9 +572,8 @@ def __copy_to_image(dst, start_pos, src, mask_start_pos, mask, mask_compare, mas
     mask = mask[slicer_mask] < mask_compare
     mask = mask.repeat(mask_upscale, axis=1).repeat(mask_upscale, axis=0)
     # TODO: alpha channel can be mixed in firing animation images -> src to src_preblend
-    alpha = src[(*slicer_src, 3)] / 255. if src.shape[2] == 4 else np.ones((1, 1))
-    alpha = np.expand_dims(alpha, axis=2)
-    dst[slicer_dst] = np.where(mask[:, :, np.newaxis], src[(*slicer_src, np.s_[:3])] * alpha + dst[slicer_dst] * (1.-alpha), dst[slicer_dst])
+    dst[slicer_dst] = np.where(mask[:, :, np.newaxis], src_preblend[0][slicer_src] + dst[slicer_dst] * src_preblend[1],
+                               dst[slicer_dst])
 
 
 def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upscale_f=5,
@@ -795,7 +807,6 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
         with imageio.get_writer(file_name, format="gif", mode="I", duration=[2.5, 0.1], subrectangles=True) as writer:
             writer.append_data(cv2.cvtColor(res, cv2.COLOR_BGR2RGB))
             gif_args.setup_order(axis=firing_order)
-            #last_frame = res
             for i in gif_args.iter_frames():
                 frame = np.array(res)
                 for axis in range(3):
@@ -838,16 +849,9 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
                             anim_image, anim_depth, anim_offset = anim
                             transformed_pos = position[[axisA, axisB]] * axis_flip_mul + axis_flip_add + gif_border
                             transformed_pos = transformed_pos - anim_offset // upscale_f
-                            #cv2.imshow("height", (height_map[axis] - np.min(height_map[axis]))/(-np.min(height_map[axis])+np.max(height_map[axis])))
-                            #cv2.waitKey()
                             __copy_to_image(frame, transformed_pos * upscale_f + offset, anim_image,
                                             transformed_pos, height_map[axis], position[axis] + anim_depth, upscale_f)
-                            #frame[transformed_pos[0], transformed_pos[1]] = [255, 0, 255]
-                # filter unchanged
-                #last_frame = np.where(np.expand_dims(np.any(frame == last_frame, axis=2), axis=2), 0, frame)
-                #last_frame = np.dstack((last_frame, np.zeros(last_frame.shape[:2], dtype=np.uint8)))
                 writer.append_data(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-                #last_frame = frame
         optimize(file_name)
         # no need to return image, as gif is stored on disk
         return None
@@ -885,7 +889,7 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     # file
-    fname = "../example blueprints/Greenfield.blueprint"
+    fname = "../example blueprints/exampleBroadsidePounder.blueprint"
 
     main_img = np.zeros(0)
 
