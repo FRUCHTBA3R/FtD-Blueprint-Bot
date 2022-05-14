@@ -24,7 +24,9 @@ GCM = guildconfig.GuildconfigManager()
 
 # keyword search expression
 keywords_re_dict = {"timing": re.compile("(^|\s)(stats|statistics|timing|time)(\s|$)"),
-                    "nocolor": re.compile("(^|\s)(noc|nocol|nocolor|mat|material|materials)(\s|$)")}
+                    "nocolor": re.compile("(^|\s)(noc|nocol|nocolor|mat|material|materials)(\s|$)"),
+                    "gif": re.compile("(^|\s)(gif|anim)(\s|$)"),
+                    "random": re.compile("(^|\s)(rand|random)(\s|$)")}
 
 lastError = None
 
@@ -151,14 +153,14 @@ async def process_attachments(message, invokemessage=None):
             bpcount += 1
             try:
                 content = await attachm.read()
-            except discord.HTTPException:
-                print("Downloading the attachment failed:", attachm.filename)
-                continue
             except discord.Forbidden:
                 print("You do not have permissions to access this attachment:", attachm.filename)
                 continue
             except discord.NotFound:
                 print("The attachment was deleted:", attachm.filename)
+                continue
+            except discord.HTTPException:
+                print("Downloading the attachment failed:", attachm.filename)
                 continue
 
             # trigger typing
@@ -172,9 +174,12 @@ async def process_attachments(message, invokemessage=None):
             content_to_search = content_to_search.lower()
             do_send_timing = keywords_re_dict["timing"].search(content_to_search) is not None
             do_player_color = keywords_re_dict["nocolor"].search(content_to_search) is None
+            do_create_gif = keywords_re_dict["gif"].search(content_to_search) is not None
+            do_random_firing_order = -1 if keywords_re_dict["random"].search(content_to_search) is not None else 2
             # process blueprint
             try:
-                combined_img_file, timing = await bp_to_imgV2.process_blueprint(filename, use_player_colors=do_player_color)
+                combined_img_file, timing = await bp_to_imgV2.process_blueprint(filename,
+                    use_player_colors=do_player_color, create_gif=do_create_gif, firing_order=do_random_firing_order)
                 # files
                 file = discord.File(combined_img_file)
                 # upload

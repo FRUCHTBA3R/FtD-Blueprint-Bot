@@ -103,42 +103,53 @@ bahnschrift.set_variation_by_axes([300, 85])
 # BlockIds: block ids [int]
 
 
-async def process_blueprint(fname, silent=False, standaloneMode=False, use_player_colors=True):
+async def process_blueprint(fname, silent=False, standaloneMode=False, use_player_colors=True, create_gif=True,
+                            firing_order=2):
     """Load and init blueprint data. Returns blueprint, calculation times, image filename"""
     global bp_gameversion
     bp_gameversion = None
-    if not silent: print("Processing blueprint \"", fname, "\"", sep="")
+    main_img_fname = fname[:-10] + "_view"
+    if not silent:
+        print("Processing blueprint \"", fname, "\"", sep="")
     ts1 = time.time()
     with open(fname, "r", encoding="utf-8") as f:
         bp = json.load(f)
     ts1 = time.time() - ts1
-    if not silent: print("JSON parse completed in", ts1, "s")
+    if not silent:
+        print("JSON parse completed in", ts1, "s")
     # convert to numpy data
     ts2 = time.time()
     __convert_blueprint(bp)
     ts2 = time.time() - ts2
-    if not silent: print("Conversion completed in", ts2, "s")
+    if not silent:
+        print("Conversion completed in", ts2, "s")
     # fetch infos
     ts3 = time.time()
     bp_infos, bp_gameversion = __fetch_infos(bp)
     ts3 = time.time() - ts3
-    if not silent: print("Infos gathered in", ts3, "s")
+    if not silent:
+        print("Infos gathered in", ts3, "s")
     # create top, side, front view matrices
     ts4 = time.time()
-    top_mats, side_mats, front_mats, firing_animator = __create_view_matrices(bp, use_player_colors=use_player_colors,
-                                                                              create_gif=True)
+    top_mats, side_mats, front_mats, firing_animator = \
+        __create_view_matrices(bp, use_player_colors=use_player_colors, create_gif=create_gif)
     ts4 = time.time() - ts4
-    if not silent: print("View matrices completed in", ts4, "s")
+    if not silent:
+        print("View matrices completed in", ts4, "s")
     # create images
     ts5 = time.time()
-    main_img = __create_images(top_mats, side_mats, front_mats, bp_infos, gif_args=firing_animator)
+    main_img = __create_images(top_mats, side_mats, front_mats, bp_infos, gif_args=firing_animator,
+                               firing_order=firing_order, file_name=main_img_fname)
     ts5 = time.time() - ts5
-    if not silent: print("Image creation completed in", ts5, "s")
+    if not silent:
+        print("Image creation completed in", ts5, "s")
     # save image
-    main_img_fname = fname[:-10] + "_view.png"
-    if not cv2.imwrite(main_img_fname, main_img):
-        print("ERROR: image could not be saved", main_img_fname)
-    # return
+    if not create_gif:
+        main_img_fname += ".png"
+        if not cv2.imwrite(main_img_fname, main_img):  # TODO: raise exception
+            print("ERROR: image could not be saved", main_img_fname)
+    else:
+        main_img_fname += ".gif"
     if standaloneMode:
         return bp, [ts1, ts2, ts3, ts4, ts5], main_img
     else:
@@ -548,12 +559,13 @@ def __copy_to_image(dst, start_pos, src, mask_start_pos, mask, mask_compare, mas
     mask = mask[slicer_mask] < mask_compare
     mask = mask.repeat(mask_upscale, axis=1).repeat(mask_upscale, axis=0)
     # TODO: alpha channel can be mixed in firing animation images -> src to src_preblend
-    alpha = src[(*slicer_src, 3)]/ 255. if src.shape[2] == 4 else np.ones((1, 1))
+    alpha = src[(*slicer_src, 3)] / 255. if src.shape[2] == 4 else np.ones((1, 1))
     alpha = np.expand_dims(alpha, axis=2)
     dst[slicer_dst] = np.where(mask[:, :, np.newaxis], src[(*slicer_src, np.s_[:3])] * alpha + dst[slicer_dst] * (1.-alpha), dst[slicer_dst])
 
 
-def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upscale_f=5, gif_args=None):
+def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upscale_f=5,
+                    gif_args=None, firing_order=2, file_name="unknown"):
     """Create images from view matrices"""
     def create_image(mat, upscale_f, axis):
         """Create single image. Contents of mat will be changed."""
@@ -779,9 +791,11 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
     # gif animation
     # TODO: optimize
     if gif_args:
-        with imageio.get_writer("fire.gif", mode="I", duration=0.1) as writer:
+        file_name += ".gif"
+        with imageio.get_writer(file_name, format="gif", mode="I", duration=[2.5, 0.1], subrectangles=True) as writer:
             writer.append_data(cv2.cvtColor(res, cv2.COLOR_BGR2RGB))
-            gif_args.setup_order(axis=2)
+            gif_args.setup_order(axis=firing_order)
+            #last_frame = res
             for i in gif_args.iter_frames():
                 frame = np.array(res)
                 for axis in range(3):
@@ -829,8 +843,14 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
                             __copy_to_image(frame, transformed_pos * upscale_f + offset, anim_image,
                                             transformed_pos, height_map[axis], position[axis] + anim_depth, upscale_f)
                             #frame[transformed_pos[0], transformed_pos[1]] = [255, 0, 255]
+                # filter unchanged
+                #last_frame = np.where(np.expand_dims(np.any(frame == last_frame, axis=2), axis=2), 0, frame)
+                #last_frame = np.dstack((last_frame, np.zeros(last_frame.shape[:2], dtype=np.uint8)))
                 writer.append_data(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-        optimize("fire.gif")
+                #last_frame = frame
+        optimize(file_name)
+        # no need to return image, as gif is stored on disk
+        return None
 
     return res
 
@@ -865,7 +885,7 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     # file
-    fname = "../example blueprints/exampleAllWeapons.blueprint"
+    fname = "../example blueprints/Greenfield.blueprint"
 
     main_img = np.zeros(0)
 
@@ -883,6 +903,8 @@ if __name__ == "__main__":
             global bp, timing, main_img
             bp, timing, main_img = await process_blueprint(fname, False, True)
         asyncio.run(async_main())
+        if main_img is None:
+            exit()
         cv2.namedWindow("Blueprint", cv2.WINDOW_NORMAL)
         sY, sX, _ = main_img.shape
         sM = min(980 / sY, 1820 / sX)
