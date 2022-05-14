@@ -12,3 +12,4 @@ slash_command_request.py
 invite_links.txt
 fire.gif
 .vscode/launch.json
+!firing_animation/*
