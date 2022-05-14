@@ -142,8 +142,11 @@ async def process_blueprint(fname, silent=False, standaloneMode=False, use_playe
         print("View matrices completed in", ts4, "s")
     # create images
     ts5 = time.time()
-    main_img = __create_images(top_mats, side_mats, front_mats, bp_infos, gif_args=firing_animator,
-                               firing_order=firing_order, file_name=main_img_fname)
+    if create_gif:
+        main_img = __create_images(top_mats, side_mats, front_mats, bp_infos, gif_args=firing_animator,
+                                   firing_order=firing_order, file_name=main_img_fname)
+    else:
+        main_img = __create_images(top_mats, side_mats, front_mats, bp_infos, gif_args=None)
     ts5 = time.time() - ts5
     if not silent:
         print("Image creation completed in", ts5, "s")
