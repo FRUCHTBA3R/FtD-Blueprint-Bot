@@ -944,7 +944,7 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
                                 # laser color bgr = [0, 19, 255]
                                 __line_on_image(frame, transformed_pos * upscale_f, offset, size,
                                                 [np.array([0, 11, 153], dtype=np.uint8), 0.4],
-                                                rotation, 2, 1, transformed_pos, height_map[axis], position[axis],
+                                                rotation, 1, 3, transformed_pos, height_map[axis], position[axis],
                                                 upscale_f)
                         elif firing_type == 3:
                             if gif_args.get_animation_state() is not None:
