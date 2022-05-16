@@ -106,7 +106,7 @@ firing_animator = FiringAnimator()
 # BlockIds: block ids [int]
 
 
-async def process_blueprint(fname, silent=False, standaloneMode=False, use_player_colors=True, create_gif=True,
+async def process_blueprint(fname, silent=False, standaloneMode=False, use_player_colors=True, create_gif=False,
                             firing_order=2):
     """Load and init blueprint data. Returns blueprint, calculation times, image filename"""
     global bp_gameversion, firing_animator
@@ -370,46 +370,61 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True):
                                    "0aa0fa2e-1a85-4493-9c4c-0a69c385395d",  # 130mm Casemate
                                    "aa070f63-c454-4f95-82fd-d946a32a1b66"   # 150mm Casemate
                                    ]
+            blocks_that_go_brrr = ["5cf2b4da-c1b8-4005-930b-73cc39ac9d28"  # (Simple) Laser
+                                   ]
             blocks_with_barrels_that_go_bang = ["dc8f69fe-f97c-404f-996c-1b934afa17b5",  # Adv. Firing piece
-                                                "a97e03b0-e8da-49e2-9913-ad8c1826d869",  # Firing piece
+                                                "a97e03b0-e8da-49e2-9913-ad8c1826d869"  # Firing piece
                                                 ]
+            blocks_with_barrels_that_go_brrr = ["fd2b6afb-da6f-4a8e-bfc0-e4202b87300d",  # Short range laser combiner
+                                                "7dc67bed-fd0f-4145-9525-5840bbcc4822"  # Laser combiner
+                                                ]
+            blocks_with_barrels_that_go_zap = ["9896747c-39a5-43bc-8ba9-ccf2f645cca1",  # PAC lens (symmetric)
+                                               "1a1c9de5-6db5-4092-97ac-a4883383fadd",  # Small PAC lens (cross inputs)
+                                               "2e429412-2982-4335-bf3c-a6c6609c8cbf",  # Small PAC lens (rear inputs)
+                                               "2eea241a-6a32-41c6-a9e4-d082c7e854de",  # PAC lens (rear inputs)
+                                               "f1746662-adec-4054-98bd-94b553bc6c6d",  # Particle Accelerator Lens
+                                               #"2099a233-181e-4f50-9a0e-78a547969a8e",  # Particle Melee Lens
+                                               "3d82f1a3-ad2a-4e81-a4e3-cb88c968f6e9",  # Particle Cannon
+                                               ]
             largest_axis = np.argmax(bp["Blueprint"]["Size"])
             # simple cannons loop
-            for cannon_guid in blocks_that_go_bang:
-                cannon, = np.nonzero(a_guid == cannon_guid)
-                if len(cannon) > 0:
-                    firing_pos = a_pos[cannon] + a_dir_tan[cannon] * size_id_dict[a_sizeid[cannon[0]]]["yp"] + \
-                        a_dir[cannon] * (size_id_dict[a_sizeid[cannon[0]]]["zp"] + 1)
-                    firing_animator.append(firing_pos, a_dir[cannon], np.ones(len(cannon)))
+            for fire_type, blocks_simple in enumerate([blocks_that_go_bang, blocks_that_go_brrr]):
+                for cannon_guid in blocks_simple:
+                    cannon, = np.nonzero(a_guid == cannon_guid)
+                    if len(cannon) > 0:
+                        firing_pos = a_pos[cannon] + a_dir_tan[cannon] * size_id_dict[a_sizeid[cannon[0]]]["yp"] + \
+                            a_dir[cannon] * (size_id_dict[a_sizeid[cannon[0]]]["zp"] + 1)
+                        firing_animator.append(firing_pos, a_dir[cannon], np.full(len(cannon), fire_type + 1, dtype=np.uint8))
             # cannons with barrels marching loop
-            for cannon_guid in blocks_with_barrels_that_go_bang:
-                cannon, = np.nonzero(a_guid == cannon_guid)
-                if len(cannon) > 0:
-                    firing_pos = a_pos[cannon] + a_dir_tan[cannon] * size_id_dict[a_sizeid[cannon[0]]]["yp"] + \
-                        a_dir[cannon] * (size_id_dict[a_sizeid[cannon[0]]]["zp"] + 1)
-                    barrel_end_firing_pos = np.empty(firing_pos.shape, dtype=firing_pos.dtype)
-                    for i in range(len(firing_pos)):
-                        slicer = np.index_exp[largest_axis, (largest_axis + 1) % 3, (largest_axis + 2) % 3]
-                        iter_count = 0
-                        while iter_count < 100:
-                            iter_count += 1
-                            # search the largest axis in hopes of getting less false hits
-                            index_largest, = np.nonzero(a_pos[:, slicer[0]] == firing_pos[i, slicer[0]])
-                            if len(index_largest) < 1:
-                                break
-                            index_a, = np.nonzero(a_pos[index_largest, slicer[1]] == firing_pos[i, slicer[1]])
-                            if len(index_a) < 1:
-                                break
-                            index_b, = np.nonzero(a_pos[index_largest[index_a], slicer[2]] == firing_pos[i, slicer[2]])
-                            if len(index_b) < 1:
-                                break
-                            final_index = index_largest[index_a[index_b]][0]
-                            if blocks.get(a_guid[final_index], missing_block).get("Material") \
-                                    not in ["Barrel", "Mantlet"]:
-                                break
-                            firing_pos[i] += (size_id_dict[a_sizeid[final_index]]["zp"] + 1) * a_dir[final_index]
-                        barrel_end_firing_pos[i] = firing_pos[i]
-                    firing_animator.append(barrel_end_firing_pos, a_dir[cannon], np.ones(len(cannon)))
+            for fire_type, blocks_with_barrels in enumerate([blocks_with_barrels_that_go_bang,
+                    blocks_with_barrels_that_go_brrr, blocks_with_barrels_that_go_zap]):
+                for cannon_guid in blocks_with_barrels:
+                    cannon, = np.nonzero(a_guid == cannon_guid)
+                    if len(cannon) > 0:
+                        firing_pos = a_pos[cannon] + a_dir_tan[cannon] * (size_id_dict[a_sizeid[cannon[0]]]["yp"] // 2) + \
+                            a_dir[cannon] * (size_id_dict[a_sizeid[cannon[0]]]["zp"] + 1)
+                        barrel_end_firing_pos = np.empty(firing_pos.shape, dtype=firing_pos.dtype)
+                        for i in range(len(firing_pos)):
+                            slicer = np.index_exp[largest_axis, (largest_axis + 1) % 3, (largest_axis + 2) % 3]
+                            iter_count = 0
+                            while iter_count < 100:
+                                iter_count += 1
+                                # search the largest axis in hopes of getting less false hits
+                                index_largest, = np.nonzero(a_pos[:, slicer[0]] == firing_pos[i, slicer[0]])
+                                if len(index_largest) < 1:
+                                    break
+                                index_a, = np.nonzero(a_pos[index_largest, slicer[1]] == firing_pos[i, slicer[1]])
+                                if len(index_a) < 1:
+                                    break
+                                index_b, = np.nonzero(a_pos[index_largest[index_a], slicer[2]] == firing_pos[i, slicer[2]])
+                                if len(index_b) < 1:
+                                    break
+                                final_index = index_largest[index_a[index_b]][0]
+                                if blocks.get(a_guid[final_index], missing_block).get("Material") == "Missing":
+                                    break
+                                firing_pos[i] += (size_id_dict[a_sizeid[final_index]]["zp"] + 1) * a_dir[final_index]
+                            barrel_end_firing_pos[i] = firing_pos[i]
+                        firing_animator.append(barrel_end_firing_pos, a_dir[cannon], np.full(len(cannon), fire_type + 1, dtype=np.uint8))
 
         # player colors
         if use_player_colors:
@@ -547,7 +562,7 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True):
 
 def __copy_to_image(dst, start_pos, src_preblend, mask_start_pos, mask, mask_compare, mask_upscale):
     """
-    Copies src_preblend[0] (RGB uint8) to dst at starting_pos with alpha blending.
+    Copies src_preblend[0] (image RGB uint8) to dst at starting_pos with alpha blending.
     Mask as depth test: mask < mask_compare
     :param dst: Destination image RGB uint8
     :param start_pos: [x, y]
@@ -574,9 +589,61 @@ def __copy_to_image(dst, start_pos, src_preblend, mask_start_pos, mask, mask_com
     # masking
     mask = mask[slicer_mask] < mask_compare
     mask = mask.repeat(mask_upscale, axis=1).repeat(mask_upscale, axis=0)
-    # TODO: alpha channel can be mixed in firing animation images -> src to src_preblend
-    dst[slicer_dst] = np.where(mask[:, :, np.newaxis], src_preblend[0][slicer_src] + dst[slicer_dst] * src_preblend[1],
-                               dst[slicer_dst])
+    dst[slicer_dst] = np.where(mask[:, :, np.newaxis], src_preblend[0][slicer_src] + dst[slicer_dst] * src_preblend[1], dst[slicer_dst])
+
+
+def __line_on_image(dst, start_pos, draw_start, draw_size, src_preblend, rotation, line_offset, line_width, mask_start_pos, mask, mask_compare, mask_upscale):
+    """
+    Draws a line with color src_preblend[0] (RGB uint8) to dst at starting_pos with alpha blending.
+    Mask as depth test: mask < mask_compare
+    :param dst: Destination image RGB uint8
+    :param start_pos: [x, y]
+    :param draw_start: [x, y] start coordinate in combined view image
+    :param draw_size: [x, y] size of view
+    :param src_preblend: [Value * alpha RGB uint8, 1. - alpha float16]
+    :param rotation: Rotation of line
+    :param mask_start_pos: [x, y]
+    :param mask: Depth image
+    :param mask_compare: Depth to compare
+    :param mask_upscale: Scaling for mask
+    """
+    #if src.shape == (3, ):
+    #    src = np.array([[src]])
+    # dst slice
+    if rotation == 0:
+        start_pos[0] += line_offset
+        start_pos_dst = start_pos + draw_start
+        end_pos_dst = [start_pos_dst[0] + line_width, dst.shape[1]]
+    elif rotation == 1:
+        start_pos += mask_upscale - 1
+        start_pos[1] -= line_offset
+        end_pos_dst = start_pos + draw_start + 1
+        start_pos_dst = [0, end_pos_dst[1] - line_width]
+    elif rotation == 2:
+        start_pos += mask_upscale
+        start_pos[0] -= line_offset
+        end_pos_dst = start_pos + draw_start
+        start_pos_dst = [end_pos_dst[0] - line_width, 0]
+    elif rotation == 3:
+        start_pos[1] += line_offset
+        start_pos_dst = start_pos + draw_start
+        end_pos_dst = [dst.shape[0], start_pos_dst[1] + line_width]
+    else:
+        start_pos += line_offset
+        start_pos_dst = start_pos + draw_start
+        end_pos_dst = start_pos_dst + line_width
+    start_pos_dst = np.clip(start_pos_dst, draw_start + 2, draw_start + draw_size - 1 - 2)
+    end_pos_dst = np.clip(end_pos_dst, draw_start + 1 + 2, draw_start + draw_size - 2)
+    slicer_dst = np.index_exp[start_pos_dst[0]:end_pos_dst[0], start_pos_dst[1]:end_pos_dst[1]]
+    # mask slice
+    start_pos_mask = np.maximum(mask_start_pos, 0)
+    end_pos_mask = mask.shape[:2]
+    slicer_mask = np.index_exp[start_pos_mask[0]:end_pos_mask[0], start_pos_mask[1]:end_pos_mask[1]]
+    # masking
+    mask = mask[slicer_mask] < mask_compare
+    mask = mask.repeat(mask_upscale, axis=1).repeat(mask_upscale, axis=0)
+    #dst[slicer_dst] = np.where(mask[:, :, np.newaxis], src_preblend[0] + dst[slicer_dst] * src_preblend[1], dst[slicer_dst])
+    dst[slicer_dst] = src_preblend[0] + dst[slicer_dst] * src_preblend[1]
 
 
 def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upscale_f=5,
@@ -635,7 +702,7 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
 
             # "super" difference
             superable = height > -12345
-            superup = np.where((roll_up == -12345) & superable, 1, 0).astype(np.int8) # dtype is bool ???
+            superup = np.where((roll_up == -12345) & superable, 1, 0).astype(np.int8)  # dtype is bool ???
             superdown = np.where((roll_down == -12345) & superable, 1, 0).astype(np.int8)
             superleft = np.where((roll_left == -12345) & superable, 1, 0).astype(np.int8)
             superright = np.where((roll_right == -12345) & superable, 1, 0).astype(np.int8)
@@ -660,7 +727,7 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
             booldsum2 = dsum == 2
             boolddiagA = booldsum2 & (dup == dleft)
             boolddiagB = booldsum2 & (dup == dright)
-            ddiagA = np.where(boolddiagA, 1, 0).astype(np.int8) # dtype of where is int32
+            ddiagA = np.where(boolddiagA, 1, 0).astype(np.int8)  # dtype of where is int32
             ddiagB = np.where(boolddiagB, 1, 0).astype(np.int8)
 
             # remove diags
@@ -782,13 +849,18 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
 
     darkBlue = np.array([255, 100, 0])
 
-    # save shape of side image for later use, so side_img can be freed
-    side_img_shape = tuple(side_img.shape)
+    # save shape of images for later use, so images can be freed
+    side_img_shape = np.array(side_img.shape)
+    front_img_shape = np.array(front_img.shape)
+    top_img_shape = np.array(top_img.shape)
     # combine images
     bottombuffer = np.full((max(0, info_img.shape[0]-top_img.shape[0]), top_img.shape[1], 3),
                            np.array([255, 118, 33]), dtype=np.uint8)
     rightbuffer = np.full((front_img.shape[0], max(0, info_img.shape[1]-front_img.shape[1]), 3),
                           np.array([255, 118, 33]), dtype=np.uint8)
+    # update stored shapes
+    front_img_shape[1] += rightbuffer.shape[1]
+    front_img_shape[0] += bottombuffer.shape[0]
     # border side to front
     side_img[:, -2:] = darkBlue
     front_img[:, :2] = darkBlue
@@ -813,24 +885,31 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
             for i in gif_args.iter_frames():
                 frame = np.array(res)
                 for axis in range(3):
+                    # TODO: these are constant values, create them somewhere else
                     if axis == 0:
+                        # side view
                         axis_flip_add = np.array([side_img_old_shape[0] - 1, 0], dtype=int)
                         axis_flip_mul = np.array([-1, 1], dtype=int)
                         axisA = 1
                         axisB = 2
                         offset = np.zeros(2, dtype=int)
+                        size = side_img_shape[:2]# - 2
                     elif axis == 2:
+                        # front view
                         axis_flip_add = np.array([front_img_old_shape[0] - 1, front_img_old_shape[1] - 1], dtype=int)
                         axis_flip_mul = np.array([-1, -1], dtype=int)
                         axisA = 1
                         axisB = 0
                         offset = np.array([0, side_img_shape[1]], dtype=int)
+                        size = front_img_shape[:2]# - np.array([2, 0])
                     else:
+                        # top view
                         axis_flip_add = np.zeros(2, dtype=int)
                         axis_flip_mul = np.ones(2, dtype=int)
                         axisA = 0
                         axisB = 2
                         offset = np.array([side_img_shape[0], 0], dtype=int)
+                        size = top_img_shape[:2]# - np.array([0, 2])
 
                     for position, direction, strength in gif_args.iter_ordered(axis):
                         rotation = 0
@@ -847,13 +926,36 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
                         elif direction[axis] == -1:
                             rotation = 5
 
-                        anim = gif_args.get_animation(rotation_id=rotation)
-                        if anim is not None:
-                            anim_image, anim_depth, anim_offset = anim
-                            transformed_pos = position[[axisA, axisB]] * axis_flip_mul + axis_flip_add + gif_border
-                            transformed_pos = transformed_pos - anim_offset // upscale_f
-                            __copy_to_image(frame, transformed_pos * upscale_f + offset, anim_image,
-                                            transformed_pos, height_map[axis], position[axis] + anim_depth, upscale_f)
+                        firing_type = gif_args.get_animation_type()
+                        if firing_type == 1:
+                            # normal shot
+                            anim = gif_args.get_animation(rotation_id=rotation)
+                            if anim is not None:
+                                anim_image, anim_depth, anim_offset = anim
+                                transformed_pos = position[[axisA, axisB]] * axis_flip_mul + axis_flip_add + gif_border
+                                transformed_pos = transformed_pos - anim_offset // upscale_f
+                                __copy_to_image(frame, transformed_pos * upscale_f + offset, anim_image,
+                                                transformed_pos, height_map[axis], position[axis] + anim_depth,
+                                                upscale_f)
+                        elif firing_type == 2:
+                            if gif_args.get_animation_state() is not None:
+                                # red laser
+                                transformed_pos = position[[axisA, axisB]] * axis_flip_mul + axis_flip_add + gif_border
+                                # laser color bgr = [0, 19, 255]
+                                __line_on_image(frame, transformed_pos * upscale_f, offset, size,
+                                                [np.array([0, 11, 153], dtype=np.uint8), 0.4],
+                                                rotation, 2, 1, transformed_pos, height_map[axis], position[axis],
+                                                upscale_f)
+                        elif firing_type == 3:
+                            if gif_args.get_animation_state() is not None:
+                                # blue particle beam
+                                transformed_pos = position[[axisA, axisB]] * axis_flip_mul + axis_flip_add + gif_border
+                                # beam color bgr = [201, 121, 80]
+                                __line_on_image(frame, transformed_pos * upscale_f, offset, size,
+                                                [np.array([229, 229, 229], dtype=np.uint8), 0.1],
+                                                rotation, 1, 3, transformed_pos, height_map[axis], position[axis],
+                                                upscale_f)
+
                 writer.append_data(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
         optimize(file_name)
         # no need to return image, as gif is stored on disk
@@ -865,7 +967,7 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
 async def speed_test(fname):
     """Just some speed testing"""
     global main_img, blueprint, bp
-    testlen = 10
+    testlen = 100
     t1 = np.zeros(testlen)
     t2 = np.zeros(testlen)
     t3 = np.zeros(testlen)
@@ -879,20 +981,20 @@ async def speed_test(fname):
         t4[i] = timing[3]
         t5[i] = timing[4]
     print("Timing:")
-    print("t1:", np.sum(t1)/testlen, "dt:", np.sum(np.abs(t1-np.sum(t1)/testlen))/testlen)
-    print("t2:", np.sum(t2)/testlen, "dt:", np.sum(np.abs(t2-np.sum(t2)/testlen))/testlen)
-    print("t3:", np.sum(t3)/testlen, "dt:", np.sum(np.abs(t3-np.sum(t3)/testlen))/testlen)
-    print("t4:", np.sum(t4)/testlen, "dt:", np.sum(np.abs(t4-np.sum(t4)/testlen))/testlen)
-    print("t5:", np.sum(t5)/testlen, "dt:", np.sum(np.abs(t5-np.sum(t5)/testlen))/testlen)
+    print("t1:", np.sum(t1)/testlen, "dt:", np.sum(np.abs(t1-np.sum(t1)/testlen))/testlen, "max:", np.max(t1))
+    print("t2:", np.sum(t2)/testlen, "dt:", np.sum(np.abs(t2-np.sum(t2)/testlen))/testlen, "max:", np.max(t2))
+    print("t3:", np.sum(t3)/testlen, "dt:", np.sum(np.abs(t3-np.sum(t3)/testlen))/testlen, "max:", np.max(t3))
+    print("t4:", np.sum(t4)/testlen, "dt:", np.sum(np.abs(t4-np.sum(t4)/testlen))/testlen, "max:", np.max(t4))
+    print("t5:", np.sum(t5)/testlen, "dt:", np.sum(np.abs(t5-np.sum(t5)/testlen))/testlen, "max:", np.max(t5))
 
     blueprint = bp["Blueprint"]
     # show image
-    cv2.imshow("Blueprint", main_img)
+    #cv2.imshow("Blueprint", main_img)
     #cv2.waitKey()
 
 if __name__ == "__main__":
     # file
-    fname = "../example blueprints/exampleBroadsidePounder.blueprint"
+    fname = "../example blueprints/exampleAllWeapons.blueprint"
 
     main_img = np.zeros(0)
 
@@ -908,7 +1010,7 @@ if __name__ == "__main__":
 
         async def async_main():
             global bp, timing, main_img
-            bp, timing, main_img = await process_blueprint(fname, False, True)
+            bp, timing, main_img = await process_blueprint(fname, False, True, True, False, 2)
         asyncio.run(async_main())
         if main_img is None:
             exit()

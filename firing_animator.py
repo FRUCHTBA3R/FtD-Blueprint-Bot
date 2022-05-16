@@ -6,7 +6,7 @@ class FiringAnimator:
     def __init__(self):
         self.firing_positions = np.zeros((0, 3), dtype=int)
         self.firing_directions = np.zeros((0, 3), dtype=int)
-        self.firing_strengths = np.zeros(0, dtype=np.float16)
+        self.firing_types = np.zeros(0, dtype=np.uint8)
         # side animation
         self.animation = [cv2.imread("firing_animation/frame0.png", cv2.IMREAD_UNCHANGED),
                           cv2.imread("firing_animation/frame1.png", cv2.IMREAD_UNCHANGED),
@@ -64,10 +64,10 @@ class FiringAnimator:
         self.animation_back[0] = self.animation_front[0]
         self.animation_back.extend(self.animation_front[3:])
 
-    def append(self, firing_positions, firing_directions, firing_strengths):
+    def append(self, firing_positions, firing_directions, firing_type):
         self.firing_positions = np.concatenate((self.firing_positions, firing_positions), axis=0)
         self.firing_directions = np.concatenate((self.firing_directions, firing_directions), axis=0)
-        self.firing_strengths = np.concatenate((self.firing_strengths, firing_strengths), axis=0)
+        self.firing_types = np.concatenate((self.firing_types, firing_type), axis=0)
 
     def get_total_frame_count(self):
         if self.state is None:
@@ -126,8 +126,17 @@ class FiringAnimator:
         order = np.argsort(self.firing_positions[:, axis])
         for self.__current_index in order:
             yield self.firing_positions[self.__current_index], self.firing_directions[self.__current_index], \
-                  self.firing_strengths[self.__current_index]
+                  self.firing_types[self.__current_index]
         self.__current_index = None
+
+    def get_animation_type(self):
+        return self.firing_types[self.__current_index]
+
+    def get_animation_state(self):
+        state = self.state[self.__current_index]
+        if state < 0 or state >= len(self.animation):
+            return None
+        return state
 
     def get_animation(self, rotation_id=0):
         """Returns current animation image, animation depth and offset to its origin.
@@ -174,7 +183,7 @@ class FiringAnimator:
     def clear(self):
         self.firing_positions = np.zeros((0, 3), dtype=int)
         self.firing_directions = np.zeros((0, 3), dtype=int)
-        self.firing_strengths = np.zeros(0, dtype=np.float16)
+        self.firing_types = np.zeros(0, dtype=np.uint8)
         self.state = None
 
         self.__current_frame = None
