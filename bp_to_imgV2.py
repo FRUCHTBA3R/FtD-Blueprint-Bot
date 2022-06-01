@@ -122,7 +122,9 @@ async def process_blueprint(fname, silent=False, standaloneMode=False, use_playe
         print("JSON parse completed in", ts1, "s")
     # convert to numpy data
     ts2 = time.time()
-    __convert_blueprint(bp)
+    res = __convert_blueprint(bp)
+    if res.get("force_disable_colors") == True:
+        use_player_colors = False
     ts2 = time.time() - ts2
     if not silent:
         print("Conversion completed in", ts2, "s")
@@ -245,6 +247,7 @@ def __convert_blueprint(bp):
             blueprint["MinCords"] = np.minimum(blueprint["MinCords"], sub_bp["MinCords"])
             blueprint["MaxCords"] = np.maximum(blueprint["MaxCords"], sub_bp["MaxCords"])
 
+    res = {}
     # item dictionary conversion
     bp["ItemDictionary"] = {int(k): v for k, v in bp["ItemDictionary"].items()}
     # main bp fix
@@ -257,12 +260,16 @@ def __convert_blueprint(bp):
     bp["Blueprint"]["Size"] = bp["Blueprint"]["MaxCords"] - bp["Blueprint"]["MinCords"] + 1
     # player colors
     #color_array = np.vectorize(lambda x: np.array(str.split(x, ",")).astype(float),signature="()->(n)")(bp["Blueprint"]["COL"])
-    for i in range(len(bp["Blueprint"]["COL"])):
-        bp["Blueprint"]["COL"][i] = bp["Blueprint"]["COL"][i].split(",")
-    color_array = np.array(bp["Blueprint"]["COL"], dtype=float)
-    # early alpha blending
-    bp["Blueprint"]["COL"] = (255 * color_array[:, 2::-1] * color_array[:, np.newaxis, 3]).astype(np.uint8)
-    bp["Blueprint"]["ONE_MINUS_ALPHA"] = 1. - color_array[:, 3]
+    if bp["Blueprint"].get("COL") is not None:
+        for i in range(len(bp["Blueprint"]["COL"])):
+            bp["Blueprint"]["COL"][i] = bp["Blueprint"]["COL"][i].split(",")
+        color_array = np.array(bp["Blueprint"]["COL"], dtype=float)
+        # early alpha blending
+        bp["Blueprint"]["COL"] = (255 * color_array[:, 2::-1] * color_array[:, np.newaxis, 3]).astype(np.uint8)
+        bp["Blueprint"]["ONE_MINUS_ALPHA"] = 1. - color_array[:, 3]
+    else:
+        res["force_disable_colors"] = True
+    return res
 
 
 def __fetch_infos(bp):
