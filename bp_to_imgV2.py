@@ -358,6 +358,12 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True):
         for i in range(len(a_guid)):
             a_color[i] = materials.get(blocks.get(a_guid[i], missing_block).get("Material"))["Color"]
 
+        # find missing blocks
+        #for i in range(len(a_guid)):
+        #    block = blocks.get(a_guid[i])
+        #    if block is not None and block["Material"] == missing_block["Material"]:
+        #        print(f"Missing block: '{a_guid[i]}'\nwith name: '{block['Name']}'")
+
         if create_gif:
             blocks_that_go_bang = ["c94e1719-bcc7-4c6a-8563-505fad2f9db9",  # 16 pounder
                                    "58305289-16ea-43cf-9144-2f23b383da81",  # 32 pounder
@@ -1001,7 +1007,7 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     # file
-    fname = "../example blueprints/exampleAllWeapons.blueprint"
+    fname = "../example blueprints/50cm_Advanced_Cannon18.blueprint"
 
     main_img = np.zeros(0)
 

@@ -45,7 +45,7 @@
 		"SizeId": 1
 	},
 	"00b9dfc4-ac8f-4fee-bbe0-a76aeeb75627": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Belt feed autoloader (1m shells)",
 		"SizeId": 1
 	},
@@ -300,7 +300,7 @@
 		"SizeId": 1
 	},
 	"03e7cf3a-7858-448f-ae06-80eda61d0848": {
-		"Material": "Electronic",
+		"Material": "Cannon Railgun",
 		"Name": "Railgun battery",
 		"SizeId": 1
 	},
@@ -350,7 +350,7 @@
 		"SizeId": 2
 	},
 	"0433491b-8347-4295-8541-de449ae08941": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "turbine front 1m",
 		"SizeId": 1
 	},
@@ -375,7 +375,7 @@
 		"SizeId": 1
 	},
 	"047c0bc4-aa79-4d32-ace3-f21fbd09797d": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Extra mesh 0 of Turret Block One Axis",
 		"SizeId": 1
 	},
@@ -415,7 +415,7 @@
 		"SizeId": 4
 	},
 	"04d60765-2c11-48eb-b9fa-c3eb847b91d5": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Autoloader (2m shells)",
 		"SizeId": 2
 	},
@@ -1125,7 +1125,7 @@
 		"SizeId": 1
 	},
 	"0cd79e3c-3f93-4b7e-adcd-316d94605e04": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Turret Block One Axis 5m",
 		"SizeId": 1
 	},
@@ -1150,7 +1150,7 @@
 		"SizeId": 1
 	},
 	"0d33b008-4c49-4ef2-81fd-423e8eba4837": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "turbine middle 5m",
 		"SizeId": 1
 	},
@@ -1420,7 +1420,7 @@
 		"SizeId": 2
 	},
 	"10094baf-4ce1-4c57-9e31-017d9ddaece6": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "6-way connector",
 		"SizeId": 1
 	},
@@ -1760,7 +1760,7 @@
 		"SizeId": 1
 	},
 	"13fecfd2-1144-4a7a-a99f-59e40f3c7d21": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "turbine middle 5m W",
 		"SizeId": 1
 	},
@@ -1965,7 +1965,7 @@
 		"SizeId": 1
 	},
 	"16e58d6d-30ce-40ac-a80e-ea153a3608a8": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Boiler Control (Huge)",
 		"SizeId": 25
 	},
@@ -2120,7 +2120,7 @@
 		"SizeId": 1
 	},
 	"1975441e-f05c-40eb-a12d-f94569f79444": {
-		"Material": "Cannon Interior",
+		"Material": "Metal",
 		"Name": "Hydraulic recoil absorber [4m]",
 		"SizeId": 1
 	},
@@ -2245,7 +2245,7 @@
 		"SizeId": 1
 	},
 	"1af1b76e-23df-495e-8bc7-711ce2c221f8": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Boiler (Huge)",
 		"SizeId": 25
 	},
@@ -2330,7 +2330,7 @@
 		"SizeId": 1
 	},
 	"1bf78b40-a568-4645-ac32-5be98a2b84ab": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Autoloader [2m shells]",
 		"SizeId": 1
 	},
@@ -2375,7 +2375,7 @@
 		"SizeId": 1
 	},
 	"1c4e94a1-c36a-4b8f-86be-a9b2ae736a71": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Large Turbine End",
 		"SizeId": 24
 	},
@@ -2470,7 +2470,7 @@
 		"SizeId": 2
 	},
 	"1d5d7744-bb2c-4c92-9778-3e6e2ce6153c": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Boiler 5m Connector",
 		"SizeId": 1
 	},
@@ -2510,7 +2510,7 @@
 		"SizeId": 1
 	},
 	"1dd8c1cf-ce0b-469d-9924-455dae4958f5": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Autoloader (6m shells)",
 		"SizeId": 29
 	},
@@ -2620,12 +2620,12 @@
 		"SizeId": 1
 	},
 	"1f6f9b5a-5f54-4aa2-afae-9590134a00d9": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "EM0 of Turret Block One Axis",
 		"SizeId": 1
 	},
 	"1f80381f-ee86-41d7-a95b-d20df7f9f281": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Turret Block One Axis",
 		"SizeId": 1
 	},
@@ -2780,7 +2780,7 @@
 		"SizeId": 1
 	},
 	"21143ff8-b7f0-486b-b78b-99f72241bc5b": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Boiler 5m Control",
 		"SizeId": 1
 	},
@@ -2875,7 +2875,7 @@
 		"SizeId": 1
 	},
 	"21fc8125-7602-4802-a0ae-8a5c5a7fcc53": {
-		"Material": "Missing",
+		"Material": "Surge Protector",
 		"Name": "Surge Protector 4m",
 		"SizeId": 4
 	},
@@ -2900,7 +2900,7 @@
 		"SizeId": 3
 	},
 	"227791eb-9d17-481e-bece-a2c4c292460e": {
-		"Material": "Missing",
+		"Material": "Cannon Railgun",
 		"Name": "Railgun Magnet Attaching Fixture 1 attachment",
 		"SizeId": 1
 	},
@@ -2915,7 +2915,7 @@
 		"SizeId": 1
 	},
 	"228e59f1-b3de-471a-931f-45735ae6ba7e": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "6-way connector",
 		"SizeId": 1
 	},
@@ -2960,7 +2960,7 @@
 		"SizeId": 1
 	},
 	"23028693-0c0d-43c9-a2a4-60211007a6ad": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Extra mesh 0 of Turret Block One Axis 3m",
 		"SizeId": 1
 	},
@@ -2980,7 +2980,7 @@
 		"SizeId": 3
 	},
 	"23453c1f-3946-4db0-a75e-f8b6dab12569": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Autoloader (3m shells)",
 		"SizeId": 3
 	},
@@ -3155,7 +3155,7 @@
 		"SizeId": 1
 	},
 	"250cb405-65db-4061-9905-7d3a84db1124": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "turbine middle 1m W",
 		"SizeId": 1
 	},
@@ -3200,7 +3200,7 @@
 		"SizeId": 1
 	},
 	"2588c8c7-5347-4d68-b9a0-c794e5fdf408": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Turbine Generator (Large)",
 		"SizeId": 24
 	},
@@ -3210,7 +3210,7 @@
 		"SizeId": 1
 	},
 	"25ae7b90-4e78-49c3-8bd5-59712fc87b77": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Large Turbine Middle",
 		"SizeId": 24
 	},
@@ -3410,7 +3410,7 @@
 		"SizeId": 1
 	},
 	"275b820d-dd55-49aa-9b09-48b58e8ab5da": {
-		"Material": "Wing",
+		"Material": "Propeller",
 		"Name": "Aero Rudder (yaw only)",
 		"SizeId": 1
 	},
@@ -3540,7 +3540,7 @@
 		"SizeId": 4
 	},
 	"29166af0-1ece-4266-a939-e487b26bfba2": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "turbine generator 3m",
 		"SizeId": 1
 	},
@@ -3770,7 +3770,7 @@
 		"SizeId": 1
 	},
 	"2c56eeab-7432-4c31-b413-68b0ee7e2d7c": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Turret Block Elevation only",
 		"SizeId": 1
 	},
@@ -4010,7 +4010,7 @@
 		"SizeId": 1
 	},
 	"2f3a940f-b0fb-42ab-aabf-f1c933fe0264": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Boiler End (Huge)",
 		"SizeId": 25
 	},
@@ -4235,7 +4235,7 @@
 		"SizeId": 1
 	},
 	"31d27098-d572-407b-a2d9-a28036a7ea0c": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "EM0 of Turret Block Two Axis",
 		"SizeId": 1
 	},
@@ -4385,7 +4385,7 @@
 		"SizeId": 4
 	},
 	"337c13cf-00b0-4274-a53e-e5c13b19a8ee": {
-		"Material": "Barrel",
+		"Material": "Cannon Railgun",
 		"Name": "Railgun barrel magnet",
 		"SizeId": 1
 	},
@@ -4405,7 +4405,7 @@
 		"SizeId": 2
 	},
 	"33d7dc96-ff04-4178-8f67-9c380d26f168": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Turbine Generator (Small)",
 		"SizeId": 1
 	},
@@ -4710,7 +4710,7 @@
 		"SizeId": 1
 	},
 	"382a7650-2231-4867-96e4-8d97242a4741": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Sky Fortress Turbine",
 		"SizeId": 12
 	},
@@ -5085,7 +5085,7 @@
 		"SizeId": 4
 	},
 	"3dafc031-0a23-430f-bbca-4c7b8cd523db": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "5m Turbine Middle",
 		"SizeId": 46
 	},
@@ -5195,7 +5195,7 @@
 		"SizeId": 1
 	},
 	"3f175823-2d21-4dd4-93d1-0fb59b7bc54a": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Turbine",
 		"SizeId": 1
 	},
@@ -5515,7 +5515,7 @@
 		"SizeId": 1
 	},
 	"434f4c39-4c01-4e08-adad-263425e394bf": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "turbine middle 3m",
 		"SizeId": 1
 	},
@@ -5970,7 +5970,7 @@
 		"SizeId": 1
 	},
 	"4940eecc-727d-468e-aaae-c6e92c91e2ac": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "turbine end 5m",
 		"SizeId": 1
 	},
@@ -6035,7 +6035,7 @@
 		"SizeId": 1
 	},
 	"4a324cd9-01a1-45c9-9a56-3189e2883354": {
-		"Material": "Missing",
+		"Material": "Surge Protector",
 		"Name": "Surge Protector 2m",
 		"SizeId": 2
 	},
@@ -6615,7 +6615,7 @@
 		"SizeId": 1
 	},
 	"51fe41fd-8ed9-42c1-beb3-0c084b5b3600": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Sky Fortress Turbine",
 		"SizeId": 12
 	},
@@ -6650,7 +6650,7 @@
 		"SizeId": 1
 	},
 	"524cc556-c755-4df0-b396-7cb44d98fcb5": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "5m Turbine Window",
 		"SizeId": 46
 	},
@@ -6960,7 +6960,7 @@
 		"SizeId": 1
 	},
 	"55d399bd-780e-4e8a-bfb3-de15e48704b6": {
-		"Material": "Missing",
+		"Material": "Cannon Railgun",
 		"Name": "Railgun Magnet Attaching Fixture",
 		"SizeId": 1
 	},
@@ -7030,7 +7030,7 @@
 		"SizeId": 1
 	},
 	"565faf2e-346d-4ba5-b9d3-99601ad33c74": {
-		"Material": "Cannon Interior",
+		"Material": "Metal",
 		"Name": "Recoil absorber",
 		"SizeId": 1
 	},
@@ -7485,7 +7485,7 @@
 		"SizeId": 1
 	},
 	"5bd210b0-2377-45c8-9287-ec607acbbe60": {
-		"Material": "Cannon Interior",
+		"Material": "Metal",
 		"Name": "Hydraulic recoil absorber (1m)",
 		"SizeId": 1
 	},
@@ -7525,7 +7525,7 @@
 		"SizeId": 1
 	},
 	"5c8083ca-9aaf-4526-9ffe-4a29665417ab": {
-		"Material": "Missing",
+		"Material": "Surge Protector",
 		"Name": "Surge Protector",
 		"SizeId": 1
 	},
@@ -7675,7 +7675,7 @@
 		"SizeId": 1
 	},
 	"5ed70947-70c6-4e1d-9241-7d670874a07f": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Turbine Front",
 		"SizeId": 1
 	},
@@ -7760,7 +7760,7 @@
 		"SizeId": 4
 	},
 	"605286ea-c827-4c6d-89e5-e35200958907": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "boiler 3m",
 		"SizeId": 1
 	},
@@ -8195,7 +8195,7 @@
 		"SizeId": 1
 	},
 	"65fd12f5-da0c-44ee-9c6b-77d8ad2504c7": {
-		"Material": "Cannon Interior",
+		"Material": "Metal",
 		"Name": "Recoil absorber",
 		"SizeId": 1
 	},
@@ -8690,7 +8690,7 @@
 		"SizeId": 3
 	},
 	"6c710586-6b65-4025-bb5c-1e359f45a352": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "5m Turbine Generator",
 		"SizeId": 25
 	},
@@ -9025,7 +9025,7 @@
 		"SizeId": 2
 	},
 	"704a2934-b07e-41cb-880d-91b3995152a9": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Autoloader (7m shells)",
 		"SizeId": 30
 	},
@@ -9550,7 +9550,7 @@
 		"SizeId": 4
 	},
 	"76fb5718-e965-46ab-9f0c-c82baf648abf": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Compact Turbine",
 		"SizeId": 1
 	},
@@ -9610,7 +9610,7 @@
 		"SizeId": 4
 	},
 	"77ca9b61-8fe2-48d7-8597-e52dd1b5d0c6": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "turbine front 3m",
 		"SizeId": 1
 	},
@@ -9635,7 +9635,7 @@
 		"SizeId": 7
 	},
 	"77ffeeb5-d3d1-4282-a332-9d72f40cc440": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Turret Block One Axis 3m",
 		"SizeId": 1
 	},
@@ -9905,7 +9905,7 @@
 		"SizeId": 1
 	},
 	"7b3d9a90-afdf-469b-899e-76adb2700a5b": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Belt feed autoloader [1m shells]",
 		"SizeId": 1
 	},
@@ -9935,7 +9935,7 @@
 		"SizeId": 1
 	},
 	"7bb4572c-0ee5-42a5-b562-47a573757f41": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Autoloader (5m shells)",
 		"SizeId": 28
 	},
@@ -10450,7 +10450,7 @@
 		"SizeId": 1
 	},
 	"80c2e2bc-94a5-40ff-97a0-90a98cd2c46c": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Turret Block Two Axis",
 		"SizeId": 1
 	},
@@ -10485,7 +10485,7 @@
 		"SizeId": 1
 	},
 	"811379b2-2e27-4268-b821-940766960802": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Boiler (Small)",
 		"SizeId": 1
 	},
@@ -10630,7 +10630,7 @@
 		"SizeId": 1
 	},
 	"82cd9e7d-0315-4e7d-aafe-2330922d62d3": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "turbine AIO",
 		"SizeId": 1
 	},
@@ -10645,7 +10645,7 @@
 		"SizeId": 1
 	},
 	"832b5533-fa5d-45ec-ba4f-2dca1e8f0bba": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Autoloader (8m shells)",
 		"SizeId": 31
 	},
@@ -10685,7 +10685,7 @@
 		"SizeId": 1
 	},
 	"83b06ab4-8278-4f8a-bd6f-bd26747dbd75": {
-		"Material": "Cannon Interior",
+		"Material": "Metal",
 		"Name": "Hydraulic recoil absorber (7m)",
 		"SizeId": 30
 	},
@@ -10950,7 +10950,7 @@
 		"SizeId": 1
 	},
 	"86a9327f-50c1-44d9-aa06-08dc3f25b433": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Autoloader (4m shells)",
 		"SizeId": 4
 	},
@@ -10965,7 +10965,7 @@
 		"SizeId": 4
 	},
 	"86fc7d73-2558-4dce-ad25-0825d2786063": {
-		"Material": "Missing",
+		"Material": "Surge Protector",
 		"Name": "Surge Protector 3m",
 		"SizeId": 3
 	},
@@ -11070,7 +11070,7 @@
 		"SizeId": 1
 	},
 	"886a646f-c407-45c4-bba8-f32808f862c2": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Autoloader [6m shells]",
 		"SizeId": 1
 	},
@@ -11545,7 +11545,7 @@
 		"SizeId": 1
 	},
 	"8f461b33-37cf-4049-b04c-4aa0d2292e2d": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Turret Block One Axis",
 		"SizeId": 1
 	},
@@ -11605,7 +11605,7 @@
 		"SizeId": 1
 	},
 	"8fececf7-673f-43d4-be3e-1534739c594f": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Turret Block One Axis",
 		"SizeId": 1
 	},
@@ -11855,7 +11855,7 @@
 		"SizeId": 2
 	},
 	"9220be15-31c6-4fe0-bd78-f4af75cd3531": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Extra mesh 0 of Turret Block One Axis 5m",
 		"SizeId": 1
 	},
@@ -12095,7 +12095,7 @@
 		"SizeId": 1
 	},
 	"94fcb1f5-b87d-42d6-85c2-4639017336c2": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "autoloader loaded",
 		"SizeId": 1
 	},
@@ -12205,7 +12205,7 @@
 		"SizeId": 1
 	},
 	"96231db7-664f-412b-aced-e77ed84a0d93": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "EM0 of Turret Block One Axis 3m",
 		"SizeId": 1
 	},
@@ -12220,7 +12220,7 @@
 		"SizeId": 1
 	},
 	"967daf81-ee88-4182-8a7d-276a3ef3db87": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "turbine end 1m",
 		"SizeId": 1
 	},
@@ -12260,7 +12260,7 @@
 		"SizeId": 1
 	},
 	"96d312d8-1a18-4823-836c-39383afff657": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Boiler 5m",
 		"SizeId": 1
 	},
@@ -12540,7 +12540,7 @@
 		"SizeId": 1
 	},
 	"9a564782-3a07-472b-ae06-5a7dfd123e7d": {
-		"Material": "Missing",
+		"Material": "Surge Protector",
 		"Name": "Surge Protector",
 		"SizeId": 1
 	},
@@ -12675,7 +12675,7 @@
 		"SizeId": 1
 	},
 	"9c1e83ca-c225-41d9-bded-f9d6e8dc6bca": {
-		"Material": "Cannon Interior",
+		"Material": "Metal",
 		"Name": "Hydraulic recoil absorber (5m)",
 		"SizeId": 28
 	},
@@ -12800,7 +12800,7 @@
 		"SizeId": 3
 	},
 	"9da4b2a1-a69a-472d-ad2f-a65a9a36e6ea": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "5m Turbine Front",
 		"SizeId": 46
 	},
@@ -13000,7 +13000,7 @@
 		"SizeId": 24
 	},
 	"9f96d700-d8bc-4aa1-bce8-f284a9117bc7": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Turbine End",
 		"SizeId": 1
 	},
@@ -13535,7 +13535,7 @@
 		"SizeId": 4
 	},
 	"a6def349-1d6d-49f0-ba96-e3d1050d7f95": {
-		"Material": "Cannon Interior",
+		"Material": "Metal",
 		"Name": "Hydraulic recoil absorber [1m]",
 		"SizeId": 1
 	},
@@ -13565,7 +13565,7 @@
 		"SizeId": 1
 	},
 	"a725683f-a0a3-4afa-b25a-06c3e14db53c": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Turret Block Two Axis",
 		"SizeId": 1
 	},
@@ -13965,7 +13965,7 @@
 		"SizeId": 9
 	},
 	"ac2d906e-4ff2-47bf-a8a8-4381a50ad5bc": {
-		"Material": "Missing",
+		"Material": "Surge Protector",
 		"Name": "Surge Protector 4m",
 		"SizeId": 4
 	},
@@ -13990,7 +13990,7 @@
 		"SizeId": 1
 	},
 	"acb4bf6e-b10e-4a6f-b9dc-b22be888c096": {
-		"Material": "Cannon Interior",
+		"Material": "Metal",
 		"Name": "Hydraulic recoil absorber (8m)",
 		"SizeId": 31
 	},
@@ -14130,7 +14130,7 @@
 		"SizeId": 1
 	},
 	"ae863b85-af05-40ee-a092-c97eb733d6fc": {
-		"Material": "Missing",
+		"Material": "Cannon Railgun",
 		"Name": "Railgun Magnet Attaching Fixture",
 		"SizeId": 1
 	},
@@ -14435,7 +14435,7 @@
 		"SizeId": 4
 	},
 	"b1d93008-a91a-4c8b-a7ac-fe9a339f3e4a": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "turbine middle 1m",
 		"SizeId": 1
 	},
@@ -14510,7 +14510,7 @@
 		"SizeId": 3
 	},
 	"b2d6996a-dfa0-430a-9461-a092b354577f": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Autoloader [5m shells]",
 		"SizeId": 1
 	},
@@ -14620,7 +14620,7 @@
 		"SizeId": 4
 	},
 	"b44be747-32cb-41b7-9e1e-21472534b4b8": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Boiler (Large)",
 		"SizeId": 24
 	},
@@ -14790,7 +14790,7 @@
 		"SizeId": 1
 	},
 	"b6451534-5052-41d1-898d-7f2036ec68d6": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Autoloader [8m shells]",
 		"SizeId": 1
 	},
@@ -14910,7 +14910,7 @@
 		"SizeId": 51
 	},
 	"b7c60d19-d652-4fcc-af1a-85409c9c131f": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Turret Block One Axis (5m)",
 		"SizeId": 35
 	},
@@ -14980,7 +14980,7 @@
 		"SizeId": 1
 	},
 	"b87cbd21-faba-40de-9fca-a1f1a9178a21": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "5m Turbine End",
 		"SizeId": 46
 	},
@@ -15050,7 +15050,7 @@
 		"SizeId": 1
 	},
 	"b9457302-db10-49ad-98e2-1c44cdca24b9": {
-		"Material": "Electronic",
+		"Material": "Cannon Railgun",
 		"Name": "Railgun battery",
 		"SizeId": 1
 	},
@@ -15320,7 +15320,7 @@
 		"SizeId": 1
 	},
 	"bd32505c-29b2-4ff2-aa27-4ab3018b6706": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Boiler Connector (Huge)",
 		"SizeId": 25
 	},
@@ -15395,7 +15395,7 @@
 		"SizeId": 1
 	},
 	"be32e36b-a876-455c-9e73-229acf91ff88": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Autoloader [3m shells]",
 		"SizeId": 1
 	},
@@ -15700,7 +15700,7 @@
 		"SizeId": 1
 	},
 	"c125728d-3952-44cd-939e-84f8290fbd9f": {
-		"Material": "Missing",
+		"Material": "Surge Protector",
 		"Name": "Surge Protector 2m",
 		"SizeId": 2
 	},
@@ -15855,7 +15855,7 @@
 		"SizeId": 2
 	},
 	"c310aa38-b723-4a66-8700-47cffe7647f4": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Turret Block One Axis (3m)",
 		"SizeId": 34
 	},
@@ -15980,7 +15980,7 @@
 		"SizeId": 4
 	},
 	"c50611e2-ff08-473c-a33d-237e0b09cb85": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "EM0 of Turret Block One Axis 5m",
 		"SizeId": 1
 	},
@@ -16055,7 +16055,7 @@
 		"SizeId": 1
 	},
 	"c5cec892-2e43-4905-9d28-44fc8ecb5cc7": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Turret Block Two Axis",
 		"SizeId": 1
 	},
@@ -16340,7 +16340,7 @@
 		"SizeId": 1
 	},
 	"c955dfe4-7fa7-4ce6-92b8-3b5c5596ff8e": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Autoloader [7m shells]",
 		"SizeId": 1
 	},
@@ -16465,7 +16465,7 @@
 		"SizeId": 1
 	},
 	"caeab2bf-c814-43f2-a220-e13b6d557034": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Turbine Middle",
 		"SizeId": 1
 	},
@@ -17010,7 +17010,7 @@
 		"SizeId": 6
 	},
 	"d2890fa7-5068-4b3f-8e45-e8637c815664": {
-		"Material": "Cannon Interior",
+		"Material": "Metal",
 		"Name": "Hydraulic recoil absorber [2m]",
 		"SizeId": 1
 	},
@@ -17055,7 +17055,7 @@
 		"SizeId": 1
 	},
 	"d34728c0-95de-49fd-a23d-735c7084556f": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Small Turbine Window",
 		"SizeId": 1
 	},
@@ -17250,7 +17250,7 @@
 		"SizeId": 1
 	},
 	"d5188de8-5e65-4fb9-b022-8cff7ce80b84": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "turbine generator 1m",
 		"SizeId": 1
 	},
@@ -17495,7 +17495,7 @@
 		"SizeId": 1
 	},
 	"d7d56a2b-bc35-4c89-87de-38c99e7d1c2f": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Autoloader (1m shells)",
 		"SizeId": 1
 	},
@@ -17825,7 +17825,7 @@
 		"SizeId": 1
 	},
 	"dbd44b5e-acc7-4797-9c06-a07b19f03bdd": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Large Turbine Front",
 		"SizeId": 24
 	},
@@ -18220,7 +18220,7 @@
 		"SizeId": 8
 	},
 	"e0f5e9a7-a384-48f9-9ec5-fe6aac81c440": {
-		"Material": "Cannon Interior",
+		"Material": "Metal",
 		"Name": "Hydraulic recoil absorber (6m)",
 		"SizeId": 29
 	},
@@ -18375,7 +18375,7 @@
 		"SizeId": 1
 	},
 	"e24b7f1f-7013-4e82-9bb5-546cf8988ee0": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "boiler extension",
 		"SizeId": 1
 	},
@@ -18590,7 +18590,7 @@
 		"SizeId": 1
 	},
 	"e53cdbd0-a3fc-4af9-986a-eab1c683068f": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "boiler 1m",
 		"SizeId": 1
 	},
@@ -18810,12 +18810,12 @@
 		"SizeId": 1
 	},
 	"e86167f3-e3c5-402c-aff1-b3e92696a012": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "turbine middle 3m W",
 		"SizeId": 1
 	},
 	"e866611c-fd53-4547-b8ed-6d8c6f0513e8": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "boiler extension",
 		"SizeId": 1
 	},
@@ -18910,7 +18910,7 @@
 		"SizeId": 1
 	},
 	"e9444d6d-714b-4cd7-aa9d-9527f425fdd7": {
-		"Material": "Barrel",
+		"Material": "Cannon Railgun",
 		"Name": "Railgun barrel magnet",
 		"SizeId": 1
 	},
@@ -19110,7 +19110,7 @@
 		"SizeId": 1
 	},
 	"ecbcd3ac-9937-4351-abd8-a727c0d0ad77": {
-		"Material": "Missing",
+		"Material": "Cannon Railgun",
 		"Name": "Railgun Charger",
 		"SizeId": 1
 	},
@@ -19160,7 +19160,7 @@
 		"SizeId": 1
 	},
 	"ed86d85a-8619-4177-9923-a34e89c3e78f": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "turbine end 3m",
 		"SizeId": 1
 	},
@@ -19420,7 +19420,7 @@
 		"SizeId": 2
 	},
 	"f09de7b3-edfb-47b5-840e-d7a56cc2deda": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Autoloader [4m shells]",
 		"SizeId": 1
 	},
@@ -19815,7 +19815,7 @@
 		"SizeId": 1
 	},
 	"f55d8e9b-953c-42bd-bd7a-4e961db690ee": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Boiler 5m End",
 		"SizeId": 1
 	},
@@ -19905,7 +19905,7 @@
 		"SizeId": 1
 	},
 	"f660de92-bb92-45d0-bf6d-491ef7e02481": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "turbine front 5m",
 		"SizeId": 1
 	},
@@ -20040,7 +20040,7 @@
 		"SizeId": 1
 	},
 	"f7e21c31-f4f2-4df1-97a5-bb18431e8a0b": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Extra mesh 0 of Turret Block Two Axis",
 		"SizeId": 1
 	},
@@ -20175,7 +20175,7 @@
 		"SizeId": 1
 	},
 	"fa01127a-77cd-41f1-be5a-f9b36f956266": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "turbine generator 5m",
 		"SizeId": 1
 	},
@@ -20230,7 +20230,7 @@
 		"SizeId": 1
 	},
 	"faa18ecd-0edf-4167-8c30-8cf2b95f42e1": {
-		"Material": "Cannon Interior",
+		"Material": "Metal",
 		"Name": "Hydraulic recoil absorber (2m)",
 		"SizeId": 2
 	},
@@ -20275,7 +20275,7 @@
 		"SizeId": 1
 	},
 	"fb16b308-2789-4ec2-b69f-fbe3c5ffb8da": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Autoloader [1m shells]",
 		"SizeId": 1
 	},
@@ -20305,7 +20305,7 @@
 		"SizeId": 1
 	},
 	"fb692c79-847a-4935-9275-741ff449ef77": {
-		"Material": "Cannon Interior",
+		"Material": "Metal",
 		"Name": "Hydraulic recoil absorber (3m)",
 		"SizeId": 3
 	},
@@ -20420,7 +20420,7 @@
 		"SizeId": 2
 	},
 	"fcf11f91-bf76-4c35-bae7-7b014260d354": {
-		"Material": "Missing",
+		"Material": "Surge Protector",
 		"Name": "Surge Protector 3m",
 		"SizeId": 3
 	},
@@ -20445,7 +20445,7 @@
 		"SizeId": 1
 	},
 	"fd0d5e77-2074-4c3e-b708-4a2c0cc6f7a4": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Large Turbine Window",
 		"SizeId": 24
 	},
@@ -20485,7 +20485,7 @@
 		"SizeId": 1
 	},
 	"fd4946a4-1633-4627-9728-c1b5dd276ddb": {
-		"Material": "Cannon Interior",
+		"Material": "Metal",
 		"Name": "Hydraulic recoil absorber (4m)",
 		"SizeId": 4
 	},
@@ -20705,7 +20705,7 @@
 		"SizeId": 1
 	},
 	"ff7a46a8-8c43-4030-b6d6-18e3761d43a4": {
-		"Material": "Missing",
+		"Material": "Cannon Railgun",
 		"Name": "Railgun Charger",
 		"SizeId": 1
 	},
