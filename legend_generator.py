@@ -1,8 +1,6 @@
 import json
 import math
 
-import numpy as np
-import cv2
 from PIL import ImageFont, ImageDraw, Image
 
 # load font
@@ -31,12 +29,10 @@ def generate():
     back_space = 10
     top_space = 15
     bottom_space = 15
-    background_color = np.array([255, 118, 33])  # "blueprint" blue
-    img_size = (top_space + max(len(materials) - 1, 0) * 5 + len(materials) * max_height + bottom_space,
-                front_space + max_height + 5 + max_width + back_space,
-                3)
-    img = np.full(img_size, background_color, dtype=np.uint8)
-    pilimg = Image.fromarray(img[:, :, ::-1])
+    background_color = [255, 118, 33]  # "blueprint" blue
+    img_size = (front_space + max_height + 5 + max_width + back_space,
+                top_space + max(len(materials) - 1, 0) * 5 + len(materials) * max_height + bottom_space)
+    pilimg = Image.new("RGB", img_size, tuple(background_color[::-1]))
     draw = ImageDraw.Draw(pilimg)
 
     # image creation
