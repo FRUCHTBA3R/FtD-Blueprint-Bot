@@ -7,6 +7,7 @@ from PIL import ImageFont, ImageDraw, Image
 bahnschrift = ImageFont.truetype("bahnschrift.ttf", 30)
 bahnschrift.set_variation_by_axes([300, 85])
 
+
 def generate():
     """Generate legend image from materials configuration."""
     # load material file
