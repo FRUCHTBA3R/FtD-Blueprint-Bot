@@ -5,7 +5,7 @@ from PIL import ImageFont, ImageDraw, Image
 
 # load font
 bahnschrift = ImageFont.truetype("bahnschrift.ttf", 30)
-bahnschrift.set_variation_by_axes([300, 85])
+bahnschrift.set_variation_by_axes([300, 85])  # start at 75, the smallest width
 
 
 def generate():
@@ -23,7 +23,6 @@ def generate():
     max_width = math.ceil(max_width)
     max_height, max_baseline = bahnschrift.getmetrics()
     max_height += max_baseline
-
 
     # image setup
     front_space = 15
@@ -43,12 +42,15 @@ def generate():
         # fill square with material color
         draw.rectangle((front_space, current_y, front_space+max_height, current_y+max_height),
                        fill=tuple(materials[k]["Color"][::-1]))
-        # put text
+        # text
+        #width = bahnschrift.getlength(k, "L")
+        #bahnschrift.set_variation_by_axes([300, max_width / width * 75])
         draw.text((text_loc_x, current_y), k, font=bahnschrift)
         # next
         current_y += 5 + max_height
 
     # show / save
+    #pilimg.show()
     pilimg.save("legend.png")
 
 
