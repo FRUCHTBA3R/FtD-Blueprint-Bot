@@ -1,12 +1,15 @@
-import json, time
+import json
+import time
+from collections import OrderedDict
+
 import numpy as np
 import quaternion
 import cv2
-from PIL import ImageFont
+from PIL import Image, ImageDraw, ImageFont
 from firing_animator import FiringAnimator
 import imageio
 from pygifsicle import optimize
-#from scipy.signal import convolve2d
+# from scipy.signal import convolve2d
 
 # block rotation directions
 rot_normal = np.array([
@@ -34,7 +37,7 @@ rot_normal = np.array([
                         [-1, 0, 0],  # 21
                         [ 1, 0, 0],  # 22
                         [-1, 0, 0]])  # 23
-#not testet!!!
+# not testet!!!
 rot_tangent = np.array([
                         [ 0, 1, 0],  # 0
                         [ 0, 1, 0],  # 1
@@ -84,10 +87,6 @@ size_id_dict = {int(k): v for k, v in size_id_dict.items()}
 
 # store game version
 bp_gameversion = None
-
-# load font
-bahnschrift = ImageFont.truetype("bahnschrift.ttf", 14)
-bahnschrift.set_variation_by_axes([300, 85])
 
 # firing animator
 firing_animator = FiringAnimator()
@@ -282,20 +281,21 @@ def __fetch_infos(bp):
             return a
         return max(a, b)
 
-    infos = {"Name": bp.get("Name")}
+    infos = OrderedDict()
+    infos["Name"] = bp.get("Name")
     if infos["Name"] is None:
         infos["Name"] = "Unknown"
-    infos["Blocks"] = safe_max(bp.get("SavedTotalBlockCount"), bp["Blueprint"].get("TotalBlockCount"))
+    infos["Blocks"] = f"{safe_max(bp.get('SavedTotalBlockCount'), bp['Blueprint'].get('TotalBlockCount')):,}"
     if infos["Blocks"] is None:
         print("Error while gathering blueprint block count info.")
         infos["Blocks"] = "?"
     try:
-        infos["Cost"] = str(round(bp.get("SavedMaterialCost")))
+        infos["Cost"] = f"{round(bp.get('SavedMaterialCost')):,}"
     except Exception as err:
         print("Error while gathering blueprint cost info:", err)
         infos["Cost"] = "?"
     try:
-        infos["Size"] = "W:{0} H:{1} L:{2}".format(*bp.get("Blueprint").get("Size"))
+        infos["Size"] = "W:{0:,} H:{1:,} L:{2:,}".format(*bp.get("Blueprint").get("Size"))
     except Exception as err:
         print("Error while gathering blueprint size info:", err)
         infos["Size"] = "?"
@@ -305,7 +305,7 @@ def __fetch_infos(bp):
         print("Error while gathering blueprint author info:", err)
         infos["Author"] = "Unknown"
 
-    # gameversion
+    # game version
     try:
         gameversion = bp.get("Blueprint").get("GameVersion").split(".")
         for i in range(len(gameversion)):
@@ -806,60 +806,80 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
     create_image(front_mat, upscale_f, 2)
     front_img, height_map[2] = front_mat
 
+    def fill_info_img():
+        # load font for length measurement
+        bahnschrift_scale = 30
+        bahnschrift = ImageFont.truetype("bahnschrift.ttf", bahnschrift_scale)
+        bahnschrift.set_variation_by_axes([300, 85])
+        min_text_scale = 20
+        # find max size text
+        if bp_infos is None:
+            padding_factor = 2.
+            width = front_img.shape[1]
+            text_length_check = bahnschrift.getlength("Error", "L")
+            text_length_with_padding = padding_factor * text_length_check
+            text_scale = int(width / text_length_with_padding * bahnschrift_scale)
+            if text_scale < min_text_scale:
+                # drop the padding
+                padding_factor = 1.
+                text_scale = max(min_text_scale, int(width / text_length_check * bahnschrift_scale))
+            font = ImageFont.truetype("bahnschrift.ttf", text_scale)
+            font.set_variation_by_axes([300, 85])
+            width = max(width, int(text_scale / bahnschrift_scale * text_length_check))  # int(font.getlength("Error") * padding_factor))
+
+            info_img = Image.new("RGB", (width, width), (255, 118, 33))
+            info_draw = ImageDraw.Draw(info_img)
+            info_draw.text((int(width * (padding_factor - 1.) / 4.), width // 2), "Error", fill=(255, 255, 255), font=font, anchor="lm")
+            info_img = np.array(info_img, dtype=np.uint8)
+
+        else:
+            # find max length text
+            max_length = 0
+            for k in bp_infos:
+                text = f"{k}: {bp_infos[k]}"
+                text_length = bahnschrift.getlength(text, "L")
+                max_length = max(max_length, text_length)
+
+            metric = bahnschrift.getmetrics()
+            length_padded = max_length + (metric[0] + metric[1])  # don't forget to change padding below
+
+            # minimum size
+            width = front_img.shape[1]
+            height = width
+
+            # find text scale
+            text_scale = int(width / length_padded * bahnschrift_scale)
+            if text_scale < min_text_scale:
+                text_scale = min_text_scale
+                width = int(text_scale / bahnschrift_scale * length_padded)
+
+            # load font
+            font = ImageFont.truetype("bahnschrift.ttf", text_scale)
+            # font.set_variation_by_axes([300, 85])
+            metric = font.getmetrics()
+            text_height = metric[0] + metric[1]
+            padding = int(text_height * 0.5)  # don't forget to change padding above
+            line_space = text_height
+            height = max(height, int(len(bp_infos) * (text_height + line_space) + line_space))
+
+            # create image
+            info_img = Image.new("RGB", (width, height), (255, 118, 33))
+            info_draw = ImageDraw.Draw(info_img)
+            y_loc = line_space
+            for k in bp_infos:
+                font.set_variation_by_axes([500, 85])
+                text = f"{k}: "
+                info_draw.text((padding, y_loc), text, fill=(255, 255, 255), font=font)
+                font.set_variation_by_axes([300, 85])
+                info_draw.text((padding + info_draw.textlength(text, font), y_loc), bp_infos[k],
+                               fill=(255, 255, 255), font=font)
+                y_loc += line_space + text_height
+            info_img = np.array(info_img, dtype=np.uint8)
+
+        return info_img
+
     # info img
-    fontFace = cv2.FONT_HERSHEY_SIMPLEX
-    # find max size text
-    if bp_infos is None:
-        info_img = np.full((front_img.shape[1], front_img.shape[1], 3), np.array([255, 118, 33]),
-                           dtype=np.uint8)
-        fontScale = 12. / cv2.getTextSize("I", fontFace, 1, 1)[0][1]  # scale to 12 pixels
-        cv2.putText(info_img, "Error", (5, info_img.shape[0]//2), fontFace,
-                    fontScale, (255, 255, 255))
-    else:
-        # find max length text
-        maxlen = 0
-        maxtxt = None
-        for k in bp_infos:
-            txt = f"{k}: {bp_infos[k]}"
-            if len(txt) > maxlen:
-                maxlen = len(txt)
-                maxtxt = txt
-
-        pixel = 14  # minimum text height in pixel
-
-        # get size of text with scaling 1
-        # (width, height), baseline = cv2.getTextSize(maxtxt, fontFace, 1, 1)
-        # fontScale = pixel/(height+baseline) #scale to "pixel" pixels
-        # above code will result in:
-        fontScale = 0.4375
-
-        # get size of text with scaling "fontScale"
-        (width, height), baseline = cv2.getTextSize(maxtxt, fontFace, fontScale, 1)
-
-        # reverse scaling calculation for text upscaling
-        reverse_scale_height = (top_img.shape[0] / 2 / len(bp_infos)) / (height+baseline)
-        reverse_scale_width = top_img.shape[0] / width / (1 + pixel / width)
-        reverse_scale = min(reverse_scale_height, reverse_scale_width) * fontScale
-        if fontScale < reverse_scale:  # larger scale is possible
-            pixel = int(np.floor(pixel * min(reverse_scale_height, reverse_scale_width)))
-            fontScale = reverse_scale
-
-        # calculate height and limit minimum width/height to top view img height
-        height = len(bp_infos) * (height+baseline) * 2
-        height = max(height, top_img.shape[0])
-        width = width+pixel  # int(np.ceil(width + pixel)) #required width + padding for text
-        width = max(width, top_img.shape[0])
-        info_img = np.full((height, width, 3), np.array([255, 118, 33]), dtype=np.uint8)
-
-        # write info
-        fontThickness = max(1, int(pixel * 0.07))
-        px = pixel//2
-        py = pixel-baseline+pixel//2
-        for k in bp_infos:
-            txt = f"{k}: {bp_infos[k]}"
-            cv2.putText(info_img, txt, (px, py), fontFace, fontScale, (255, 255, 255), fontThickness)
-            py += pixel+pixel
-
+    info_img = fill_info_img()
     darkBlue = np.array([255, 100, 0])
 
     # save shape of images for later use, so images can be freed
