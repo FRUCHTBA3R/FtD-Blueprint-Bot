@@ -2140,7 +2140,7 @@
 		"SizeId": 1
 	},
 	"19945f75-8353-45e1-938f-a548fa05e05e": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Packer x3 (manual orientation)",
 		"SizeId": 1
 	},
@@ -3665,7 +3665,7 @@
 		"SizeId": 2
 	},
 	"2ae437c8-afe6-4d6d-9562-0423227878b2": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Payload compactor",
 		"SizeId": 1
 	},
@@ -8050,7 +8050,7 @@
 		"SizeId": 3
 	},
 	"64109192-fd8e-422b-a9e8-74295d3d74ea": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Six Way Connector",
 		"SizeId": 1
 	},
@@ -14470,7 +14470,7 @@
 		"SizeId": 1
 	},
 	"b20baa46-0a1c-482b-a3f9-bbb8c14520e2": {
-		"Material": "Missing",
+		"Material": "Cannon Loader",
 		"Name": "Packer x3 (automatic orientation)",
 		"SizeId": 1
 	},
@@ -17900,7 +17900,7 @@
 		"SizeId": 1
 	},
 	"dcd5385c-7e4e-4729-ac50-ed1996e97348": {
-		"Material": "Missing",
+		"Material": "Cannon Interior",
 		"Name": "Six Way Connector",
 		"SizeId": 1
 	},

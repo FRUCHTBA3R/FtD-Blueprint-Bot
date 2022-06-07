@@ -108,11 +108,11 @@
 	},
 	"Cannon Interior": {
 		"Color": [0, 80, 255],
-		"Keywords": ["Ammo", "Predictor", "Pellets", "Gauge", "Particle Tube", "6-way", "Turret Block"]
+		"Keywords": ["Ammo", "Predictor", "Pellets", "Gauge", "Particle Tube", "6-way", "Turret Block", "Six Way"]
 	},
 	"Cannon Loader": {
-		"Color": [133, 200, 208],
-		"Keywords": ["Autoloader"]
+		"Color": [66, 126, 255],
+		"Keywords": ["Autoloader", "Payload", "Packer"]
 	},
 	"Cannon Railgun": {
 		"Color": [255, 184, 81],

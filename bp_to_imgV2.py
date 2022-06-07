@@ -361,7 +361,9 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True):
         # find missing blocks
         #for i in range(len(a_guid)):
         #    block = blocks.get(a_guid[i])
-        #    if block is not None and block["Material"] == missing_block["Material"]:
+        #    if block is None:
+        #        print(f"Unknown missing block: '{a_guid[i]}'")
+        #    elif block["Material"] == missing_block["Material"]:
         #        print(f"Missing block: '{a_guid[i]}'\nwith name: '{block['Name']}'")
 
         if create_gif:
@@ -462,6 +464,10 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True):
                 errortext = f"Axis overflow: {height_mat.shape[1]} to {np.max(pos_sel_arr[:, axisZ])}\n" \
                             f"Block guid: {a_guid[sel_arr[np.argmax(pos_sel_arr[:, axisZ])]]}"
                 raise IndexError(errortext)
+
+            # cut through filter
+            #height_sel_arr = np.logical_and(height_mat[pos_sel_arr[:, axisX], pos_sel_arr[:, axisZ]] < pos_sel_arr[:, axisY], pos_sel_arr[:, axisY] < bp["Blueprint"]["Size"][axisY] // 2)
+            # height filter
             height_sel_arr = height_mat[pos_sel_arr[:, axisX], pos_sel_arr[:, axisZ]] < pos_sel_arr[:, axisY]
             # position of selection
             height_pos_sel_arr = pos_sel_arr[height_sel_arr]
@@ -1027,7 +1033,7 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     # file
-    fname = "../example blueprints/50cm_Advanced_Cannon18.blueprint"
+    fname = "../example blueprints/UFCMC_Maine-Coon-Class_Command_Ship.blueprint"
 
     main_img = np.zeros(0)
 
@@ -1043,7 +1049,7 @@ if __name__ == "__main__":
 
         async def async_main():
             global bp, timing, main_img
-            bp, timing, main_img = await process_blueprint(fname, False, True, True, False, 2)
+            bp, timing, main_img = await process_blueprint(fname, False, True, False, False, 2)
         asyncio.run(async_main())
         if main_img is None:
             exit()
