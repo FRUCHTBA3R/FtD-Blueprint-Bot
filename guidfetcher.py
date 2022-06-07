@@ -6,12 +6,12 @@ import legend_generator as legend
 FORCE_COMPLETE_FILE_SEARCH = True
 
 # mods folder of From The Depths
-ftdmodsfolder = "O:/SteamLibrary/steamapps/common/From The Depths/From_The_Depths_Data/StreamingAssets/Mods"
+ftdmodsfolder = "G:/SteamLibrary/steamapps/common/From The Depths/From_The_Depths_Data/StreamingAssets/Mods"
 invalid_file_ends = ["buildguide", "mtl", "wav", "blueprint", "dll", "obj", "cs",
                      "prefab", "mat", "png_hcm.swatch", "jpeg", "cache", "jpg",
                      "png", "animclip", "sln", "csprojAssemblyReference.cache", "csproj",
                      "csproj.FileListAbsolute.txt", "csproj.CopyComplete",
-                     "csproj.CoreCompileInputs.cache", "helpage"]
+                     "csproj.CoreCompileInputs.cache", "helpage", "pdf"]
 guiddict = {}
 extrainvguiddict = {}
 for root, dirs, files in os.walk(ftdmodsfolder):
@@ -50,8 +50,8 @@ for root, dirs, files in os.walk(ftdmodsfolder):
                         sizeinfo = {"SizeNeg": sizeinfo.get("SizeNeg"), "SizePos": sizeinfo.get("SizePos")}
 
                     if data["ComponentId"]["Name"] in guiddict:
-                        old_si = guiddict[data["ComponentId"]["Name"]].get("SizeInfo")
-                        sizeinfo = sizeinfo if old_si is None else old_si
+                        #old_si = guiddict[data["ComponentId"]["Name"]].get("SizeInfo")
+                        #sizeinfo = sizeinfo if old_si is None else old_si
                         extrainvguiddict[guiddict[data["ComponentId"]["Name"]]["GUID"]] = \
                             {"Name": data["ComponentId"]["Name"], "SizeInfo": sizeinfo}
                     guiddict[data["ComponentId"]["Name"]] = {"GUID": data["ComponentId"]["Guid"], "SizeInfo": sizeinfo}

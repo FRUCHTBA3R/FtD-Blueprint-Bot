@@ -1033,7 +1033,7 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     # file
-    fname = "../example blueprints/UFCMC_Maine-Coon-Class_Command_Ship.blueprint"
+    fname = "../example blueprints/missile.blueprint"
 
     main_img = np.zeros(0)
 
