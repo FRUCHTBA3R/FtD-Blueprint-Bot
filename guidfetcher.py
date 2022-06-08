@@ -11,9 +11,15 @@ invalid_file_ends = ["buildguide", "mtl", "wav", "blueprint", "dll", "obj", "cs"
                      "prefab", "mat", "png_hcm.swatch", "jpeg", "cache", "jpg",
                      "png", "animclip", "sln", "csprojAssemblyReference.cache", "csproj",
                      "csproj.FileListAbsolute.txt", "csproj.CopyComplete",
-                     "csproj.CoreCompileInputs.cache", "helpage", "pdf"]
+                     "csproj.CoreCompileInputs.cache", "helpage", "pdf", "manifest"]
+
+# load old blocks
+with open("blocks.json", "r") as f:
+    old_blocks = json.loads(f.read())
+
 guiddict = {}
-extrainvguiddict = {}
+guiddict_noname = {}
+guiddict_nosize = {}
 for root, dirs, files in os.walk(ftdmodsfolder):
     found = False
     for file in files:
@@ -43,19 +49,35 @@ for root, dirs, files in os.walk(ftdmodsfolder):
                     data = json.loads(f.read())
                 except:
                     print("json load failed for file:", c_file)
-                    data = {}
+                    continue
                 if "ComponentId" in data:
+                    guid = data["ComponentId"]["Guid"]
+                    name = data["ComponentId"]["Name"]
                     sizeinfo = data.get("SizeInfo")
                     if type(sizeinfo) is dict:
                         sizeinfo = {"SizeNeg": sizeinfo.get("SizeNeg"), "SizePos": sizeinfo.get("SizePos")}
+                    if name is None:
+                        if sizeinfo is None:
+                            print("No name and no size info on", guid)
+                            continue
+                        print("No name on", guid)
+                        guiddict_noname[guid] = {"SizeInfo": sizeinfo}
+                        continue
+                    elif sizeinfo is None:
+                        guiddict_nosize[guid] = {"Name": name}
+                    if guid in guiddict:
+                        print("Multiple occurrences:", guid, name, sizeinfo)
+                    guiddict[guid] = {"Name": name, "SizeInfo": sizeinfo}
 
-                    if data["ComponentId"]["Name"] in guiddict:
-                        #old_si = guiddict[data["ComponentId"]["Name"]].get("SizeInfo")
-                        #sizeinfo = sizeinfo if old_si is None else old_si
-                        extrainvguiddict[guiddict[data["ComponentId"]["Name"]]["GUID"]] = \
-                            {"Name": data["ComponentId"]["Name"], "SizeInfo": sizeinfo}
-                    guiddict[data["ComponentId"]["Name"]] = {"GUID": data["ComponentId"]["Guid"], "SizeInfo": sizeinfo}
-
+print(f"Number of blocks: Old: {len(old_blocks):,}  New: {len(guiddict):,}  Delta: {(len(guiddict)-len(old_blocks)):,}")
+for k in guiddict:
+    if k not in old_blocks:
+        print(k, "not found in old blocks")
+for k in old_blocks:
+    if k not in guiddict:
+        if old_blocks[k]["SizeId"] != 1:
+            print(old_blocks[k])
+exit(0)
 # invert dict with values as dict
 invguiddict = {v["GUID"]: {"Name": k, "SizeInfo": v["SizeInfo"]} for k, v in guiddict.items()}
 if len(extrainvguiddict) > 0:
