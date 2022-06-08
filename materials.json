@@ -9,11 +9,11 @@
 	},
 	"Metal": {
 		"Color": [115, 115, 115],
-		"Keywords": ["Metal", "Recoil Absorber"]
+		"Keywords": ["Metal", "Recoil Absorber", "Ram"]
 	},
 	"Wood": {
 		"Color": [33, 100, 176],
-		"Keywords": ["Wood", "Stairs"]
+		"Keywords": ["Wood", "Stairs", "Chair"]
 	},
 	"Alloy": {
 		"Color": [199, 199, 199],
@@ -62,13 +62,17 @@
 	},
 	"Laser": {
 		"Color": [0, 147, 173],
-		"Keywords": ["Laser", "Lens", "PAC", "Particle Cannon"]
+		"Keywords": ["Laser", "Lens", "PAC", "Particle Cannon", "Frequency"]
 	},
 	"Missile": {
 		"Color": [65, 70, 255],
 		"Keywords": ["Small Launcher", "Medium Launcher", "Large Launcher", "Huge Launcher", "Small Rail Launcher",
 			"Medium Rail Launcher", "Large Rail Launcher", "Huge Rail Launcher", "Small Single Rail Launcher",
-			"Missile", "Gantry", "Huge Hatch"]
+			"Missile", "Gantry", "Huge Hatch", "Missiles"]
+	},
+	"Drill": {
+		"Color": [0, 143, 155],
+		"Keywords": ["Drill"]
 	},
 	"Glass": {
 		"Invisible": true,
@@ -95,20 +99,22 @@
 	},
 	"Detection": {
 		"Color": [85, 147, 131],
-		"Keywords": ["Range Finder", "Camera", "Sonar", "Radar"]
+		"Keywords": ["Range Finder", "Camera", "Sonar", "Radar", "Warner", "Snooper"]
 	},
 	"Electronic": {
 		"Color": [0, 213, 224],
-		"Keywords": ["Battery", "AI", "Failsafe", "Electric"]
+		"Keywords": ["Battery", "AI", "Failsafe", "Electric", "Wireless Receiver", "Weapon Controller", "PID",
+			"Routines", "Selection", "Identify", "Staggered", "Screen", "Repair", "Shield", "Automated", "Projector"]
 	},
 	"Engine": {
 		"Color": [0, 134, 224],
-		"Keywords": ["Steam", "Jet Engine", "Fuel Engine", "Nuclear Engine", "Turbocharger", "Carburettor",
-				"Crank", "Fuel", "Injector", "Supercharger", "Gearbox", "Jet", "Ion", "Boiler", "Turbine"]
+		"Keywords": ["Steam", "Jet Engine", "Fuel Engine", "Nuclear Engine", "Turbocharger", "Carburettor", "Pipe",
+				"Crank", "Fuel", "Injector", "Supercharger", "Gearbox", "Jet", "Ion", "Boiler", "Turbine", "Radiator"]
 	},
 	"Cannon Interior": {
 		"Color": [0, 80, 255],
-		"Keywords": ["Ammo", "Predictor", "Pellets", "Gauge", "Particle Tube", "6-way", "Turret Block", "Six Way"]
+		"Keywords": ["Ammo", "Predictor", "Pellets", "Gauge", "Particle Tube", "6-way", "Turret Block", "Six Way",
+			"CRAM", "Nuke", "Particle Cannons"]
 	},
 	"Cannon Loader": {
 		"Color": [66, 126, 255],

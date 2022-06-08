@@ -2,16 +2,15 @@ import os
 import json
 import legend_generator as legend
 
-# search every file for json tag ComponentId
-FORCE_COMPLETE_FILE_SEARCH = True
-
 # mods folder of From The Depths
 ftdmodsfolder = "G:/SteamLibrary/steamapps/common/From The Depths/From_The_Depths_Data/StreamingAssets/Mods"
-invalid_file_ends = ["buildguide", "mtl", "wav", "blueprint", "dll", "obj", "cs",
+invalid_file_ends = ["buildguide", "mtl", "wav", "blueprint", "dll", "obj", "object", "cs",
                      "prefab", "mat", "png_hcm.swatch", "jpeg", "cache", "jpg",
                      "png", "animclip", "sln", "csprojAssemblyReference.cache", "csproj",
-                     "csproj.FileListAbsolute.txt", "csproj.CopyComplete",
-                     "csproj.CoreCompileInputs.cache", "helpage", "pdf", "manifest"]
+                     "csproj.FileListAbsolute.txt", "csproj.CopyComplete", "csproj.CoreCompileInputs.cache",
+                     "helpage", "pdf", "manifest", "uielements", "mesh", "material", "texture", "audioclip"]
+invalid_files = ["guidmap.json"]
+valid_file_ends = ["item", "itemduplicateandmodify"]
 
 # load old blocks
 with open("blocks.json", "r") as f:
@@ -21,92 +20,77 @@ guiddict = {}
 guiddict_noname = {}
 guiddict_nosize = {}
 for root, dirs, files in os.walk(ftdmodsfolder):
-    found = False
     for file in files:
-        if file == "guidmap.json":
-            found = True
-            c_file = os.path.join(root, file)
-            with open(c_file, "r") as f:
-                try:
-                    data = json.loads(f.read())
-                    data = {v: {"Name": k} for k, v in data.items()}
-                    extrainvguiddict.update(data)
-                except:
-                    print("json load failed for file:", c_file)
-            break
-    if found or FORCE_COMPLETE_FILE_SEARCH:
-        for file in files:
-            fileend = file.split(".", 1)
-            if len(fileend) < 2:
+        if file in invalid_files:
+            continue
+        fileend = file.split(".")[-1]
+        #if len(fileend) < 2:
+        #    continue
+        #fileend = fileend[-1]
+        #if fileend in invalid_file_ends:
+        #    continue
+        #print(fileend)
+        if fileend not in valid_file_ends:
+            continue
+        data = None
+        c_file = os.path.join(root, file)
+        with open(c_file, "r") as f:
+            try:
+                data = json.loads(f.read())
+            except BaseException:
+                print("json load failed for file:", c_file)
                 continue
-            fileend = fileend[1]
-            if fileend in invalid_file_ends:
-                break
-            data = None
-            c_file = os.path.join(root, file)
-            with open(c_file, "r") as f:
-                try:
-                    data = json.loads(f.read())
-                except:
-                    print("json load failed for file:", c_file)
-                    continue
-                if "ComponentId" in data:
-                    guid = data["ComponentId"]["Guid"]
-                    name = data["ComponentId"]["Name"]
-                    sizeinfo = data.get("SizeInfo")
-                    if type(sizeinfo) is dict:
-                        sizeinfo = {"SizeNeg": sizeinfo.get("SizeNeg"), "SizePos": sizeinfo.get("SizePos")}
-                    if name is None:
-                        if sizeinfo is None:
-                            print("No name and no size info on", guid)
-                            continue
-                        print("No name on", guid)
-                        guiddict_noname[guid] = {"SizeInfo": sizeinfo}
+            if "ComponentId" in data:
+                guid = data["ComponentId"]["Guid"]
+                name = data["ComponentId"]["Name"]
+                sizeinfo = data.get("SizeInfo")
+                if type(sizeinfo) is dict:
+                    sizeinfo = {"SizeNeg": sizeinfo.get("SizeNeg"), "SizePos": sizeinfo.get("SizePos")}
+                variant = data.get("InventoryTabOrVariantId", {}).get("Reference", {}).get("Name", "")
+                if name is None:
+                    if sizeinfo is None:
+                        print("No name and no size info on", guid)
                         continue
-                    elif sizeinfo is None:
-                        guiddict_nosize[guid] = {"Name": name}
-                    if guid in guiddict:
-                        print("Multiple occurrences:", guid, name, sizeinfo)
-                    guiddict[guid] = {"Name": name, "SizeInfo": sizeinfo}
+                    # print("No name on", guid)
+                    guiddict_noname[guid] = {"SizeInfo": sizeinfo, "Name": None, "Variant": variant}
+                    continue
+                elif sizeinfo is None:
+                    # print("No size info on", guid)
+                    guiddict_nosize[guid] = {"Name": name, "SizeInfo": None, "Variant": variant}
+                    continue
+                if guid in guiddict:
+                    print(f"Multiple occurrences: Guid:{guid} Name:{name} SizeInfo:{sizeinfo}")
+                guiddict[guid] = {"Name": name, "SizeInfo": sizeinfo, "Variant": variant}
 
-print(f"Number of blocks: Old: {len(old_blocks):,}  New: {len(guiddict):,}  Delta: {(len(guiddict)-len(old_blocks)):,}")
-for k in guiddict:
-    if k not in old_blocks:
-        print(k, "not found in old blocks")
-for k in old_blocks:
+print(f"No names: {len(guiddict_noname)}; No size info: {len(guiddict_nosize)}")
+# merge
+for k in guiddict_nosize:
     if k not in guiddict:
-        if old_blocks[k]["SizeId"] != 1:
-            print(old_blocks[k])
-exit(0)
-# invert dict with values as dict
-invguiddict = {v["GUID"]: {"Name": k, "SizeInfo": v["SizeInfo"]} for k, v in guiddict.items()}
-if len(extrainvguiddict) > 0:
-    print(len(invguiddict), "&", len(extrainvguiddict))
-    # invguiddict.update(extrainvguiddict)
-    for k in extrainvguiddict:
-        if k not in invguiddict:
-            invguiddict[k] = extrainvguiddict[k]
-    print("->", len(invguiddict))
+        guiddict[k] = guiddict_nosize[k]
+
+#for k in old_blocks:
+#    if k not in guiddict:
+#        if k in guiddict_nosize and k in guiddict_noname:
+#            print(k, "in nosize and noname")
+        #elif k in guiddict_nosize:
+        #    print(k, "in nosize")
+        #elif k in guiddict_noname:
+        #    print(k, "in noname")
+#        if old_blocks[k]["SizeId"] != 1:
+#            print(k, old_blocks[k])
 
 # load config
 materials = None
 materials_file = "materials.json"
 with open(materials_file, "r") as f:
     materials = json.load(f)
+for m in materials:
+    for i in range(len(materials[m]["Keywords"])):
+        materials[m]["Keywords"][i] = f" {materials[m]['Keywords'][i].lower()} "
 
 # create id to size dict
 sizeiddict = {0: {0: {0: {0: {0: {0: 1}}}}}}
 sizeiddict_nextid = 2
-
-# create sizedict (old)
-# sizedict = {"1m": 1, "2m": 2, "3m": 3, "4m": 4, "6m": 6, "8m": 8,
-#            "1x1": 1, "3x3": 33, "5x5": 34, "7x7": 35,
-#            "2m3x3": 40, "3m5x5": 41, "3m3x3": 42, "2m2x2": 43,
-#            " 5m": 50, " 7m": 51, " 9m": 52,
-#            "2mUpright": 62, "3mUpright": 63, "4mUpright": 64, "3mCenteredUpright": 70,
-#            "2mSideways": 80, "1m3x3Sideways": 82, "1m5x5Sideways": 84, "2m3x3Sideways": 86, "3m5x5Sideways": 88,  # mirrored pieces have index + 1
-#            "3x3Upright": 90, "5x5Upright": 91, "3m3x3Upright": 92,
-#            }
 
 
 # sizedict update function
@@ -137,119 +121,83 @@ def update_sizedict(elem):
     del elem["SizeInfo"]
 
 
+count_mat_var = 0
+variant_to_material_count = {}
 # map
-for k in invguiddict:
-    elem = invguiddict[k]
+for k in guiddict:
+    elem = guiddict[k]
     update_sizedict(elem)
     v = elem["Name"].lower().replace("(", "").replace(")", "")
     v = f" {v} "
+    elem["Variant"] = elem["Variant"].lower().replace("(", "").replace(")", "")
+    variant = f" {elem['Variant']} " if elem["Variant"] != "" else None
     elem["Material"] = "Missing"  # default material
-    # elem["Length"] = 1  # default length
+    # set material from name
     for m in materials:
         for keyword in materials[m]["Keywords"]:
-            keywordlow = f" {keyword.lower()} "
-            if v.find(keywordlow) >= 0:
+            if v.find(keyword) >= 0:
                 elem["Material"] = m
                 break
-#    for size in sizedict:
-#        if v.find(size) >= 0:
-#            elem["Length"] = sizedict[size]
-#            break
+    # set material from variation
+    if elem["Material"] == "Missing" and variant is not None:
+        # only add variant to list if name search has failed
+        if variant not in variant_to_material_count:
+            variant_to_material_count[variant] = 0
+        for m in materials:
+            for keyword in materials[m]["Keywords"]:
+                if variant.find(keyword) >= 0:
+                    elem["Material"] = m
+                    count_mat_var += 1
+                    variant_to_material_count[variant] += 1
+                    break
 
-    # # wheels
-    # if v.find(" wheel ") >= 0:
-    #     mirrored = 0
-    #     if v.find(" mirror ") >= 0:
-    #         mirrored = 1
-    #     if invguiddict[k]["Length"] == 1:
-    #         if v.find(" balloon ") >= 0:
-    #             invguiddict[k]["Length"] = sizedict["2mSideways"] + mirrored
-    #         # else just use length 1 which is already set
-    #     elif invguiddict[k]["Length"] == 3:
-    #         if v.find(" balloon ") >= 0:
-    #             invguiddict[k]["Length"] = sizedict["2m3x3Sideways"] + mirrored
-    #         else:
-    #             invguiddict[k]["Length"] = sizedict["1m3x3Sideways"] + mirrored
-    #     elif invguiddict[k]["Length"] == 50: # 5m gets mapped to 50
-    #         if v.find(" balloon ") >= 0:
-    #             invguiddict[k]["Length"] = sizedict["3m5x5Sideways"] + mirrored
-    #         else:
-    #             invguiddict[k]["Length"] = sizedict["1m5x5Sideways"] + mirrored
-    #     continue
-    #
-    # # turrets
-    # if v.find(" turret ") >= 0:
-    #     if invguiddict[k]["Length"] == 3:
-    #         invguiddict[k]["Length"] = sizedict["3x3Upright"]
-    #     elif invguiddict[k]["Length"] == 50:  # 5m gets mapped to 50
-    #         invguiddict[k]["Length"] = sizedict["5x5Upright"]
-    #     continue
-    #
-    # # rtgs
-    # if v.find(" rtg ") >= 0:
-    #     if invguiddict[k]["Length"] == 2:
-    #         invguiddict[k]["Length"] = sizedict["2mUpright"]
-    #     elif invguiddict[k]["Length"] == 4:
-    #         invguiddict[k]["Length"] = sizedict["4mUpright"]
-    #     elif invguiddict[k]["Length"] == 3:  # 3x3m gets mapped to 3
-    #         invguiddict[k]["Length"] = sizedict["3m3x3Upright"]
-    #     continue
-    #
-    # # batteries
-    # if v.find(" battery ") >= 0:
-    #     if v.find(" beam ") >= 0:
-    #         invguiddict[k]["Length"] = 4
-    #     elif v.find(" medium ") >= 0:
-    #         invguiddict[k]["Length"] = sizedict["2m2x2"]
-    #     elif v.find(" large ") >= 0:
-    #         invguiddict[k]["Length"] = sizedict["3x3Upright"]
-    #     continue
-    #
-    # # square backed corners
-    # if invguiddict[k]["Name"].find("Square backed corner") >= 0:
-    #     invguiddict[k]["Length"] = 2
-    #     continue
-    # if invguiddict[k]["Name"].find("1m to 3m slope transition right") >= 0:
-    #     invguiddict[k]["Length"] = 2
-    #     continue
+for k in guiddict:
+    # search for blocks without material but given variant name
+    if guiddict[k]["Material"] == "Missing" and guiddict[k]["Variant"] == "countermeasure":
+        print("Found variant:", k, guiddict[k])
+    del guiddict[k]["Variant"]
 
+count_mis_mat = 0
+for k in guiddict:
+    elem = guiddict[k]["Material"]
+    if elem == "Missing":
+        count_mis_mat += 1
+print(f"Materials set by variation name: {count_mat_var:,}\nMissing materials: {count_mis_mat:,}")
+print("Unused variants:")
+for k, v in variant_to_material_count.items():
+    if v == 0:
+        print(k)
 
 
 # manual fixes
-# invguiddict["867cea4e-6ea4-4fe2-a4a1-b6230308f8f1"]["Length"] = 4
-invguiddict["5e574e3c-24af-409c-b165-f079ba9c1946"]["Material"] = "Metal"
-invguiddict["ab59ab39-179c-4fd8-bad3-2f3251f0a55a"]["Material"] = "Metal"
-invguiddict["c489a675-78ad-461c-b772-b1dc1ae16beb"]["Material"] = "Metal"
-invguiddict["5e236eef-c91e-45bc-afc4-bff4d133ac14"]["Material"] = "Metal"
-invguiddict["e7fc9ece-d2f4-4671-a3e8-77196601cf4e"]["Material"] = "Metal"
-invguiddict["52b78a75-115a-4962-96f1-35177b46ba93"]["Material"] = "Metal"
-invguiddict["275b820d-dd55-49aa-9b09-48b58e8ab5da"]["Material"] = "Wing"  # aero rudder
-# # truss fixes
-# invguiddict["fe88a923-b85b-4471-bce5-8ceb1d0ddb14"]["Length"] = sizedict["4mUpright"]  # truss 4m
-# invguiddict["1dd66387-6293-4fa0-a1da-6f0e4cb80dfa"]["Length"] = sizedict["4mUpright"]  # truss 4m
-# invguiddict["21646640-41cf-42a3-931a-3c40b9c79d83"]["Length"] = sizedict["3mUpright"]  # truss 3m
-# invguiddict["ac24cd04-449e-47b9-bf8c-bf58d9997264"]["Length"] = sizedict["3mUpright"]  # truss 3m
-# invguiddict["de17ff79-e670-4f08-ab59-df1ecac3905b"]["Length"] = sizedict["2mUpright"]  # truss 2m
-# invguiddict["19a1d5ad-99e3-4a18-8943-22a82f554231"]["Length"] = sizedict["2mUpright"]  # truss 2m
-# # mantlet fixes
-# invguiddict["5396a3df-77ca-430a-96bf-bd81324c05ba"]["Length"] = sizedict["2mUpright"]  # aa mantlet 2m
-# invguiddict["627957c0-d34a-46b1-a5eb-c08a34748b77"]["Length"] = sizedict["2mUpright"]  # aa mantlet 2m
-# invguiddict["2f87caef-8e9d-468f-925e-b0bf98e071f3"]["Length"] = sizedict["2mUpright"]  # aa mantlet 2m
-# invguiddict["a4eb415c-7ba9-4e27-a118-2d450c48c236"]["Length"] = sizedict["3mCenteredUpright"]  # elevation mantlet 3m
-# invguiddict["19e0aacf-5bcc-45da-8c4f-a50984514bbf"]["Length"] = sizedict["3mCenteredUpright"]  # elevation mantlet 3m
-# invguiddict["c624a6cd-31dc-49d3-a1e9-5482d06acbc6"]["Length"] = sizedict["3mCenteredUpright"]  # elevation mantlet 3m
-# invguiddict["04e813ed-9011-49bc-b15a-36c5095e56b6"]["Length"] = sizedict["3x3"]  # omni mantlet 3x3
-# invguiddict["09d28633-cff1-4cc4-9e11-161f350dbf60"]["Length"] = sizedict["3x3"]  # omni mantlet 3x3
-
+#guiddict["5e574e3c-24af-409c-b165-f079ba9c1946"]["Material"] = "Metal"  # Duct 5x5
+#guiddict["ab59ab39-179c-4fd8-bad3-2f3251f0a55a"]["Material"] = "Metal"  # Duct 7x7
+#guiddict["c489a675-78ad-461c-b772-b1dc1ae16beb"]["Material"] = "Metal"  # Duct 3x3
+guiddict["5e236eef-c91e-45bc-afc4-bff4d133ac14"]["Material"] = "Metal"  # Duct (3x3)
+guiddict["e7fc9ece-d2f4-4671-a3e8-77196601cf4e"]["Material"] = "Metal"  # Duct (5x5)
+guiddict["52b78a75-115a-4962-96f1-35177b46ba93"]["Material"] = "Metal"  # Duct (7x7)
+guiddict["275b820d-dd55-49aa-9b09-48b58e8ab5da"]["Material"] = "Wing"  # aero rudder
 
 # missing
-invguiddict["missing"] = {"Name": "Missing", "Length": 1, "Material": "Missing", "SizeId": 0}
-invguiddict["missing rotation"] = {"Name": "Missing Rotation", "Length": 1, "Material": "Missing Rotation", "SizeId": 0}
+guiddict["missing"] = {"Name": "Missing", "Length": 1, "Material": "Missing", "SizeId": 0}
+guiddict["missing rotation"] = {"Name": "Missing Rotation", "Length": 1, "Material": "Missing Rotation", "SizeId": 0}
+
+count_new = 0
+for k in guiddict:
+    if k not in old_blocks:
+        count_new += 1
+count_del = 0
+for k in old_blocks:
+    if k not in guiddict:
+        count_del += 1
+print(f"Number of blocks: Old: {len(old_blocks):,}  New: {len(guiddict):,}  Delta: +{count_new:,} | -{count_del:,}")
+if input("Save (y/n)? ").lower() != "y":
+    exit(0)
 
 # save blocks
 blocks_file = "blocks.json"
 with open(blocks_file, "w") as f:
-    json.dump(invguiddict, f, indent="\t", sort_keys=True)
+    json.dump(guiddict, f, indent="\t", sort_keys=True)
 
 # save sizedict
 sizedict_save = {}  # {"SizeIdPos": {}, "SizeIdNeg": {}}
@@ -264,11 +212,6 @@ for x in sizeiddict:
 sizedict_file = "size_id_dictionary.json"
 with open(sizedict_file, "w") as f:
     json.dump(sizedict_save, f, indent="\t", sort_keys=True)
-
-# print
-print(len(guiddict), "->", len(invguiddict))
-# for v in list(invguiddict.values())[100:200]:
-#    print(v)
 
 # re-generate legend
 legend.generate()
