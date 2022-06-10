@@ -104,12 +104,14 @@
 	"Electronic": {
 		"Color": [0, 213, 224],
 		"Keywords": ["Battery", "AI", "Failsafe", "Electric", "Wireless Receiver", "Weapon Controller", "PID",
-			"Routines", "Selection", "Identify", "Staggered", "Screen", "Repair", "Shield", "Automated", "Projector"]
+			"Routines", "Selection", "Identify", "Staggered", "Screen", "Repair", "Shield", "Automated", "Projector",
+			"Control", "Vehicle Controller", "RTG"]
 	},
 	"Engine": {
 		"Color": [0, 134, 224],
 		"Keywords": ["Steam", "Jet Engine", "Fuel Engine", "Nuclear Engine", "Turbocharger", "Carburettor", "Pipe",
-				"Crank", "Fuel", "Injector", "Supercharger", "Gearbox", "Jet", "Ion", "Boiler", "Turbine", "Radiator"]
+				"Crank", "Fuel", "Injector", "Supercharger", "Gearbox", "Jet", "Ion", "Boiler", "Turbine", "Radiator",
+				"nuclear engines"]
 	},
 	"Cannon Interior": {
 		"Color": [0, 80, 255],

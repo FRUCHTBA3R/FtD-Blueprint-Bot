@@ -100,7 +100,7 @@
 		"SizeId": 1
 	},
 	"042cfada-38db-4af5-a1c8-13ddce0da29c": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Spin Block Controller",
 		"SizeId": 8
 	},
@@ -190,7 +190,7 @@
 		"SizeId": 1
 	},
 	"063eb06e-57e0-43dd-b85e-90baed4f025c": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "RTG (2m)",
 		"SizeId": 8
 	},
@@ -555,7 +555,7 @@
 		"SizeId": 57
 	},
 	"1240b6db-1f41-442a-88ce-5ab0944d804b": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Control Terminal",
 		"SizeId": 1
 	},
@@ -610,7 +610,7 @@
 		"SizeId": 3
 	},
 	"14884b06-6834-469d-a996-629b6d155a8f": {
-		"Material": "Wing",
+		"Material": "Electronic",
 		"Name": "Control surface 4m",
 		"SizeId": 4
 	},
@@ -715,7 +715,7 @@
 		"SizeId": 1
 	},
 	"1980c435-9871-470c-973e-9253f8a3b122": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Nuclear Containment Wall",
 		"SizeId": 51
 	},
@@ -940,7 +940,7 @@
 		"SizeId": 4
 	},
 	"20100af6-ccd1-41ff-b7b0-5d2f6bb99f85": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Fortress Controller",
 		"SizeId": 8
 	},
@@ -1050,7 +1050,7 @@
 		"SizeId": 3
 	},
 	"23696e3e-a6c7-4ac3-8ba8-884718dd688c": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Nuclear Containment Wall Slope",
 		"SizeId": 51
 	},
@@ -1550,7 +1550,7 @@
 		"SizeId": 1
 	},
 	"2ed46940-a47c-4283-bf5d-6b52132da9b4": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Vehicle Controller",
 		"SizeId": 8
 	},
@@ -1620,7 +1620,7 @@
 		"SizeId": 3
 	},
 	"30e8ed70-1885-444a-9697-a89d5c524690": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Nuclear Rod Controller",
 		"SizeId": 51
 	},
@@ -1680,7 +1680,7 @@
 		"SizeId": 3
 	},
 	"328006a1-123f-432a-b18b-601dd1284247": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "ACB Controller",
 		"SizeId": 1
 	},
@@ -1730,7 +1730,7 @@
 		"SizeId": 1
 	},
 	"344a6bb2-dada-45f3-ba66-6fdbbb57f394": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "RTG (4m)",
 		"SizeId": 10
 	},
@@ -2315,7 +2315,7 @@
 		"SizeId": 1
 	},
 	"490e286d-0367-40f2-8ed6-60d70a60bdfd": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Nuclear Water inlet and outlet",
 		"SizeId": 51
 	},
@@ -2690,7 +2690,7 @@
 		"SizeId": 1
 	},
 	"536fa669-d522-465a-a67a-589a07aa09ad": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Nuclear Material",
 		"SizeId": 8
 	},
@@ -3000,7 +3000,7 @@
 		"SizeId": 24
 	},
 	"5b609887-c1dd-407b-b3b6-b1eb35d1e818": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Fire control computer",
 		"SizeId": 8
 	},
@@ -3410,7 +3410,7 @@
 		"SizeId": 2
 	},
 	"6a04c57e-0076-4f30-9f99-f92eba7fcd53": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Complex Controller",
 		"SizeId": 8
 	},
@@ -3965,7 +3965,7 @@
 		"SizeId": 3
 	},
 	"79eaae57-56e1-4bb5-a573-bb9c829e8c8e": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Nuclear Containment Corner",
 		"SizeId": 51
 	},
@@ -4145,7 +4145,7 @@
 		"SizeId": 37
 	},
 	"7fcfdaf0-2d2a-43be-842a-423e736ccdd0": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Bread Board",
 		"SizeId": 1
 	},
@@ -4405,7 +4405,7 @@
 		"SizeId": 1
 	},
 	"8768ed82-11cd-4823-a5c3-58ef4e1912a9": {
-		"Material": "Wing",
+		"Material": "Electronic",
 		"Name": "Control surface 3m",
 		"SizeId": 3
 	},
@@ -5145,7 +5145,7 @@
 		"SizeId": 3
 	},
 	"9d5fa98d-ce5c-4e7a-8041-2fee8d28fe35": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Nuclear Control Rod",
 		"SizeId": 4
 	},
@@ -5710,7 +5710,7 @@
 		"SizeId": 1
 	},
 	"ad96a3cc-119e-4842-86cd-c633b1c702bb": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Remote Vehicle Controller",
 		"SizeId": 8
 	},
@@ -5720,7 +5720,7 @@
 		"SizeId": 55
 	},
 	"ae2bb239-d304-4037-b35d-eb7d3ded91bf": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Thrust Controller",
 		"SizeId": 8
 	},
@@ -5910,7 +5910,7 @@
 		"SizeId": 24
 	},
 	"b46c1759-a7c1-4dca-9c15-d0c3329dcaae": {
-		"Material": "Wing",
+		"Material": "Electronic",
 		"Name": "Control surface 2m",
 		"SizeId": 2
 	},
@@ -5995,7 +5995,7 @@
 		"SizeId": 1
 	},
 	"b7b36555-0ab1-4a64-ba01-3017e4809cf6": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Nuclear Containment Platform",
 		"SizeId": 51
 	},
@@ -6475,7 +6475,7 @@
 		"SizeId": 1
 	},
 	"c6b9d38c-01e5-4a37-8493-2b7f7f1d74fb": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Vehicle Controller Small",
 		"SizeId": 1
 	},
@@ -6695,7 +6695,7 @@
 		"SizeId": 1
 	},
 	"ce05e453-eca5-4833-b3c6-bf9373851922": {
-		"Material": "Wing",
+		"Material": "Electronic",
 		"Name": "Control surface 1m",
 		"SizeId": 1
 	},
@@ -6820,7 +6820,7 @@
 		"SizeId": 1
 	},
 	"d24cdfe7-bb26-403d-a854-dfa77506e5fb": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Drive maintainer",
 		"SizeId": 1
 	},
@@ -6855,7 +6855,7 @@
 		"SizeId": 1
 	},
 	"d3924bae-be5a-43a0-be19-64fc7c8d6059": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "LUA Box",
 		"SizeId": 1
 	},
@@ -7420,7 +7420,7 @@
 		"SizeId": 1
 	},
 	"e4dabc7e-9566-4e7d-8d28-cbec2f811798": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Nuclear Containment Wall Corner",
 		"SizeId": 51
 	},
@@ -7535,7 +7535,7 @@
 		"SizeId": 1
 	},
 	"e8d04f75-a134-452e-a04a-af5172d65040": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "RTG (3x3m)",
 		"SizeId": 52
 	},

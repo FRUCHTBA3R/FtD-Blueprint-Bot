@@ -153,7 +153,7 @@ for k in guiddict:
 
 for k in guiddict:
     # search for blocks without material but given variant name
-    if guiddict[k]["Material"] == "Missing" and guiddict[k]["Variant"] == "countermeasure":
+    if guiddict[k]["Material"] == "Missing" and guiddict[k]["Variant"] == "resources":
         print("Found variant:", k, guiddict[k])
     del guiddict[k]["Variant"]
 
