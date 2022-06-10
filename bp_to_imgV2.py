@@ -324,7 +324,7 @@ def __fetch_infos(bp):
     return infos, gameversion
 
 
-def __create_view_matrices(bp, use_player_colors=True, create_gif=True):
+def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_view=None):
     """Create top, side, front view matrices (color matrix and height matrix)"""
     def blueprint_iter(blueprint, mincords, blueprint_desc = "main"):
         """Iterate blueprint and sub blueprints"""
@@ -465,10 +465,13 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True):
                             f"Block guid: {a_guid[sel_arr[np.argmax(pos_sel_arr[:, axisZ])]]}"
                 raise IndexError(errortext)
 
-            # cut through filter
-            #height_sel_arr = np.logical_and(height_mat[pos_sel_arr[:, axisX], pos_sel_arr[:, axisZ]] < pos_sel_arr[:, axisY], pos_sel_arr[:, axisY] < bp["Blueprint"]["Size"][axisY] // 2)
+
             # height filter
             height_sel_arr = height_mat[pos_sel_arr[:, axisX], pos_sel_arr[:, axisZ]] < pos_sel_arr[:, axisY]
+            # cut through filter
+            if cut_view is not None:
+                height_sel_arr = np.logical_and(height_sel_arr,
+                                                pos_sel_arr[:, axisY] < bp["Blueprint"]["Size"][axisY] * cut_view)
             # position of selection
             height_pos_sel_arr = pos_sel_arr[height_sel_arr]
 
@@ -865,7 +868,10 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
             metric = font.getmetrics()
             text_height = metric[0] + metric[1]
             padding = int(text_height * 0.5)  # don't forget to change padding above
-            line_space = text_height
+            line_space_min = text_height * .25
+            line_space_max = text_height
+            line_space = np.clip((height - len(bp_infos) * text_height) / (len(bp_infos) + 1),
+                                 line_space_min, line_space_max)
             height = max(height, int(len(bp_infos) * (text_height + line_space) + line_space))
 
             # create image
@@ -1033,7 +1039,7 @@ async def speed_test(fname):
 
 if __name__ == "__main__":
     # file
-    fname = "../example blueprints/missile.blueprint"
+    fname = "../example blueprints/HMS_Vampire_Vampire_Class.blueprint"
 
     main_img = np.zeros(0)
 
