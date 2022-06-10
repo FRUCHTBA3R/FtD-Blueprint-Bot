@@ -106,7 +106,7 @@ firing_animator = FiringAnimator()
 
 
 async def process_blueprint(fname, silent=False, standaloneMode=False, use_player_colors=True, create_gif=False,
-                            firing_order=2):
+                            firing_order=2, cut_side_top_front=(None, None, None)):
     """Load and init blueprint data. Returns blueprint, calculation times, image filename"""
     global bp_gameversion, firing_animator
     bp_gameversion = None
@@ -137,7 +137,8 @@ async def process_blueprint(fname, silent=False, standaloneMode=False, use_playe
     ts4 = time.time()
     firing_animator.clear()  # clear here and at the end (if it crashes)
     top_mats, side_mats, front_mats = \
-        __create_view_matrices(bp, use_player_colors=use_player_colors, create_gif=create_gif)
+        __create_view_matrices(bp, use_player_colors=use_player_colors, create_gif=create_gif,
+                               cut_side_top_front=cut_side_top_front)
     ts4 = time.time() - ts4
     if not silent:
         print("View matrices completed in", ts4, "s")
@@ -324,7 +325,7 @@ def __fetch_infos(bp):
     return infos, gameversion
 
 
-def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_view=None):
+def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side_top_front=(None, None, None)):
     """Create top, side, front view matrices (color matrix and height matrix)"""
     def blueprint_iter(blueprint, mincords, blueprint_desc = "main"):
         """Iterate blueprint and sub blueprints"""
@@ -469,9 +470,9 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_view
             # height filter
             height_sel_arr = height_mat[pos_sel_arr[:, axisX], pos_sel_arr[:, axisZ]] < pos_sel_arr[:, axisY]
             # cut through filter
-            if cut_view is not None:
-                height_sel_arr = np.logical_and(height_sel_arr,
-                                                pos_sel_arr[:, axisY] < bp["Blueprint"]["Size"][axisY] * cut_view)
+            if cut_side_top_front[axisY] is not None:
+                height_sel_arr = np.logical_and(height_sel_arr, pos_sel_arr[:, axisY] <
+                                                bp["Blueprint"]["Size"][axisY] * cut_side_top_front[axisY])
             # position of selection
             height_pos_sel_arr = pos_sel_arr[height_sel_arr]
 

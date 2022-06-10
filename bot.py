@@ -23,18 +23,29 @@ import guildconfig
 GCM = guildconfig.GuildconfigManager()
 
 # keyword search expression
-keywords_re_dict = {"timing": re.compile("(^|\s)(stats|statistics|timing|time)(\s|$)"),
-                    "nocolor": re.compile("(^|\s)(noc|nocol|nocolor|mat|material|materials)(\s|$)"),
-                    "gif": re.compile("(^|\s)(gif|anim)(\s|$)"),
-                    "random": re.compile("(^|\s)(rand|random)(\s|$)")}
+keywords_re_dict = {"timing": re.compile(r"(?:^|[_*~`\s])(stats|statistics|timing|time)(?:[_*~`\s]|$)"),
+                    "nocolor": re.compile(r"(?:^|[_*~`\s])(noc|nocol|nocolor|mat|material|materials)(?:[_*~`\s]|$)"),
+                    "gif": re.compile(r"(?:^|[_*~`\s])(?:gif|anim)(?# match gif)"
+                                      r"(?:[_*~`\s]+(rand|random))?(?# search rand)(?:[_*~`\s]|$)"),
+                    "cut": re.compile(r"(?:^|[_*~`\s])cut(?:[_*~`\s]|$)(?# match cut)"
+                                      r"(?:.*?(\d*[.,]\d*))?(?# search float once)"
+                                      r"(?:.*?(\d*[.,]\d*))?(?# search float once)"
+                                      r"(?:.*?(\d*[.,]\d*))?(?# search float once)")}
 
 lastError = None
 
 bot = commands.Bot(command_prefix = "bp!")
 
+
 def print_cmd(ctx):
     """Print command information"""
     print(f"[CMD] <{ctx.command}> invoked by '{ctx.author}' in channel '{ctx.channel}'", "" if ctx.guild is None else f"of guild '{ctx.guild}'")
+
+
+def convert_tupel_to_float(tpl):
+    """Convert a tupel of strings and None to list of floats and None:
+    ('1.23', None) -> [1.23, None]"""
+    return [None if elem is None else float(elem) for elem in tpl]
 
 
 async def cc_is_author(ctx):
@@ -174,12 +185,20 @@ async def process_attachments(message, invokemessage=None):
             content_to_search = content_to_search.lower()
             do_send_timing = keywords_re_dict["timing"].search(content_to_search) is not None
             do_player_color = keywords_re_dict["nocolor"].search(content_to_search) is None
-            do_create_gif = keywords_re_dict["gif"].search(content_to_search) is not None
-            do_random_firing_order = -1 if keywords_re_dict["random"].search(content_to_search) is not None else 2
+            do_create_gif = keywords_re_dict["gif"].search(content_to_search)
+            do_random_firing_order = -1 if do_create_gif is not None and do_create_gif.groups()[0] is not None else 2
+            do_cut_args = keywords_re_dict["cut"].search(content_to_search)
+            if do_cut_args is None:
+                do_cut_args = (None, None, None)
+            else:
+                do_cut_args = convert_tupel_to_float(do_cut_args.groups())
+                if do_cut_args[0] is None:
+                    do_cut_args[0] = 0.5
             # process blueprint
             try:
                 combined_img_file, timing = await bp_to_imgV2.process_blueprint(filename,
-                    use_player_colors=do_player_color, create_gif=do_create_gif, firing_order=do_random_firing_order)
+                    use_player_colors=do_player_color, create_gif=do_create_gif, firing_order=do_random_firing_order,
+                    cut_side_top_front=do_cut_args)
                 # files
                 file = discord.File(combined_img_file)
                 # upload
