@@ -66,7 +66,7 @@ async def on_ready():
         print(f"{guild.name} (id: {guild.id})")
 
     # set activity text
-    act = discord.Game("Keywords: stats, nocolor, gif, random. Use bp!print to print last file. "
+    act = discord.Game("Keywords: stats, nocolor, gif, cut. Use bp!print to print last file. "
                         "Use bp!help for commands. Private chat supported.")
     await bot.change_presence(status=discord.Status.online, activity=act)
 
