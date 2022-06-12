@@ -3,6 +3,13 @@
 
 Discord bot for the game [From The Depths](https://fromthedepthsgame.com/) which creates top, front and side view of an uploaded .blueprint file.
 
+### Quick Guide
+You can use the following keywords in your upload message:
+- `gif [rand|random]` to create a front-to-back (or random) firing animation.
+- `cut [<side> [<top> [<front>]]]` where `<side>`, `<top>` and `<front>` are floating point numbers from 0 to 1. This will create a cross section view. Using only `cut` is the same as `cut 0.5`, cutting only the side view at half depth.
+- `noc|nocol|nocolor` to not show the color of painted blocks.
+- `stats|time` to show how long different stages of processing the blueprint took.
+
 ### Installation
 Add it to your server with this [invite link](https://discord.com/api/oauth2/authorize?client_id=759429992521662464&permissions=34880&scope=bot).
 
