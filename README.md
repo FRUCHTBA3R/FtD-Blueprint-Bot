@@ -27,4 +27,4 @@ Only-for-me commands:
 - `bp!test`
 
 ### Supported file formats
-Bot will only accept *.blueprint* or *.blueprint_ba* files.
+Bot will only accept *.blueprint*, *.blueprint_ba* and *.blueprint_bac* files.
