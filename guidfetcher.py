@@ -2,8 +2,12 @@ import os
 import json
 import legend_generator as legend
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # mods folder of From The Depths
-ftdmodsfolder = "G:/SteamLibrary/steamapps/common/From The Depths/From_The_Depths_Data/StreamingAssets/Mods"
+ftdmodsfolder = os.getenv("GAME_DIRECTORY")
 invalid_file_ends = ["buildguide", "mtl", "wav", "blueprint", "dll", "obj", "object", "cs",
                      "prefab", "mat", "png_hcm.swatch", "jpeg", "cache", "jpg",
                      "png", "animclip", "sln", "csprojAssemblyReference.cache", "csproj",
@@ -11,6 +15,8 @@ invalid_file_ends = ["buildguide", "mtl", "wav", "blueprint", "dll", "obj", "obj
                      "helpage", "pdf", "manifest", "uielements", "mesh", "material", "texture", "audioclip"]
 invalid_files = ["guidmap.json"]
 valid_file_ends = ["item", "itemduplicateandmodify"]
+
+assert os.path.isdir(ftdmodsfolder), "Game directory invalid"
 
 # load old blocks
 with open("blocks.json", "r") as f:

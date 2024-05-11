@@ -14,6 +14,11 @@
 		"Name": "Belt feed autoloader (1m shells)",
 		"SizeId": 1
 	},
+	"00d1ccd3-f2a9-43d2-b4fd-cee7efb4372a": {
+		"Material": "Stone",
+		"Name": "Mimic: Hexagon stone",
+		"SizeId": 1
+	},
 	"00d31a4d-d523-43f1-b5c2-f96b33a69a99": {
 		"Material": "Electronic",
 		"Name": "(CARD) Tracker Target Association",
@@ -22,7 +27,12 @@
 	"00e9e62f-8b53-4cca-89ef-2a99a76766da": {
 		"Material": "Cannon Interior",
 		"Name": "Solid Ammo Clip (7m shells)",
-		"SizeId": 30
+		"SizeId": 31
+	},
+	"010b899b-b720-4f92-9ad9-1e5b49d91e54": {
+		"Material": "Propeller",
+		"Name": "Propeller hub",
+		"SizeId": 1
 	},
 	"011e4de9-c66c-4ce6-ad22-2fd6ac9df2a6": {
 		"Material": "Barrel",
@@ -61,8 +71,13 @@
 	},
 	"02f0c77e-2d93-4ecf-baad-5918e1825a96": {
 		"Material": "Engine",
-		"Name": "5m Generator",
-		"SizeId": 60
+		"Name": "Large generator",
+		"SizeId": 62
+	},
+	"0354e225-b1fe-4908-aeb0-0527c64dbd70": {
+		"Material": "Stone",
+		"Name": "Stone beam slope (3m mirrored)",
+		"SizeId": 3
 	},
 	"0358dee0-2d87-4b29-bb73-5c9e3399fd4e": {
 		"Material": "Metal",
@@ -91,7 +106,7 @@
 	},
 	"03fc3659-217c-4189-9da1-1d9ae8b29f2a": {
 		"Material": "Engine",
-		"Name": "Pipe 4 Way (2) (mirror)",
+		"Name": "Steam pipe 4 way (2) (mirror)",
 		"SizeId": 1
 	},
 	"04019f87-c371-4574-acfe-b7086557eaba": {
@@ -121,8 +136,13 @@
 	},
 	"0448ca96-fa37-4389-9ee3-3e7280ffadd3": {
 		"Material": "Engine",
-		"Name": "5m Piston parallel",
-		"SizeId": 62
+		"Name": "Large parallel piston",
+		"SizeId": 63
+	},
+	"04578650-30c2-4c15-9df7-7770d10b1146": {
+		"Material": "Metal",
+		"Name": "Metal beam slope (2m mirrored)",
+		"SizeId": 2
 	},
 	"04993e98-6b77-46d3-ad80-5278550e9b65": {
 		"Material": "Glass",
@@ -164,6 +184,11 @@
 		"Name": "One Axis Turret (3m)",
 		"SizeId": 34
 	},
+	"056465cb-3bf5-41c2-bae3-22371a4a7a8d": {
+		"Material": "Missing",
+		"Name": "ScentedCandleHolder2",
+		"SizeId": 1
+	},
 	"0586026e-8167-4594-a151-dd16df0434f0": {
 		"Material": "Missing",
 		"Name": "Sound block",
@@ -186,7 +211,7 @@
 	},
 	"0639fbba-70be-4398-857c-6786dab39bea": {
 		"Material": "Engine",
-		"Name": "Steam Control (Small)",
+		"Name": "Small steam controller",
 		"SizeId": 1
 	},
 	"063eb06e-57e0-43dd-b85e-90baed4f025c": {
@@ -213,6 +238,11 @@
 		"Material": "Wood",
 		"Name": "Chair",
 		"SizeId": 1
+	},
+	"0709c108-bb69-4a84-98dd-ea7db800268d": {
+		"Material": "Missing",
+		"Name": "Tank Sticky L",
+		"SizeId": 24
 	},
 	"071de01c-2838-485b-bbae-9b3acfdbcdd9": {
 		"Material": "Missing",
@@ -244,6 +274,11 @@
 		"Name": "Alloy 2m to 4m inverse transition right",
 		"SizeId": 4
 	},
+	"08359742-315d-43c5-81be-1dc0db5d318e": {
+		"Material": "Stone",
+		"Name": "Stone beam slope (3m)",
+		"SizeId": 3
+	},
 	"087fe9e0-63cb-4511-adc8-5e7b943dd71b": {
 		"Material": "Rubber",
 		"Name": "Rubber 2m to 3m slope transition (mirrored)",
@@ -266,7 +301,7 @@
 	},
 	"094e242e-85be-433b-b64a-1c951695568f": {
 		"Material": "Engine",
-		"Name": "Shaft Crank Cased (3m)",
+		"Name": "Medium cased crank",
 		"SizeId": 12
 	},
 	"098917ec-d86a-4cee-9c65-7997295bc248": {
@@ -291,7 +326,7 @@
 	},
 	"09bec717-8b13-40ab-8468-0630cae1e964": {
 		"Material": "Engine",
-		"Name": "5m Cased Crank",
+		"Name": "Large cased crank",
 		"SizeId": 27
 	},
 	"09d28633-cff1-4cc4-9e11-161f350dbf60": {
@@ -323,6 +358,11 @@
 		"Material": "Missing",
 		"Name": "Warp Controller",
 		"SizeId": 1
+	},
+	"0a9b2870-831a-4148-8a84-4b95652c6a99": {
+		"Material": "Missing",
+		"Name": "Plasma Collector 5m",
+		"SizeId": 17
 	},
 	"0aa0fa2e-1a85-4493-9c4c-0a69c385395d": {
 		"Material": "Barrel",
@@ -381,7 +421,7 @@
 	},
 	"0c5a2ff0-a0bf-490d-8cd7-219d71a1b629": {
 		"Material": "Propeller",
-		"Name": "Shaft Small Propeller 3m",
+		"Name": "Medium 3m propeller",
 		"SizeId": 24
 	},
 	"0c64d302-c6df-42eb-a0ff-7c90f867ba4b": {
@@ -393,6 +433,11 @@
 		"Material": "Wood",
 		"Name": "Wood wedge (2m)",
 		"SizeId": 2
+	},
+	"0cd861cc-cf38-4fd8-b02b-29140316cd45": {
+		"Material": "Missing",
+		"Name": "Plasma Accelerator 4m",
+		"SizeId": 4
 	},
 	"0d1d97b5-3c99-45bf-8a5d-e7a624b3ddb6": {
 		"Material": "Detection",
@@ -422,7 +467,7 @@
 	"0db0964e-5ad5-4c58-8f48-29d97ab6619c": {
 		"Material": "Glass",
 		"Name": "Glass 4m offset left",
-		"SizeId": 28
+		"SizeId": 29
 	},
 	"0dc84af2-12e8-4523-b5db-284cfc6b5b45": {
 		"Material": "Metal",
@@ -439,14 +484,24 @@
 		"Name": "Wood pole (1m)",
 		"SizeId": 1
 	},
+	"0e0a950f-00fd-472d-b493-159b10cf95ce": {
+		"Material": "Alloy",
+		"Name": "Mimic: Cone Alloy",
+		"SizeId": 1
+	},
 	"0e11729e-09d9-4a3c-83dd-1ee16ed4f2f8": {
 		"Material": "Engine",
-		"Name": "Corner Pipe",
+		"Name": "Steam corner pipe",
 		"SizeId": 1
 	},
 	"0e25d9c8-9b52-40db-9979-3d1492d9ffeb": {
 		"Material": "Engine",
-		"Name": "Shaft Shaft (1m)",
+		"Name": "Small engine shaft",
+		"SizeId": 1
+	},
+	"0e3cc64d-686e-4e97-a806-0adc3e093d14": {
+		"Material": "Rubber",
+		"Name": "Mimic: Sphere rubber",
 		"SizeId": 1
 	},
 	"0eda844f-466e-4855-8f35-bcede968cdf9": {
@@ -456,7 +511,7 @@
 	},
 	"0f172964-3bad-437d-b17c-0b52c8ddc43a": {
 		"Material": "Missing",
-		"Name": "5m Axis-Shifting Gears L",
+		"Name": "Large axis-shifting gears L",
 		"SizeId": 55
 	},
 	"0f1a577f-2ad8-47d1-ace0-ae0c6d95a7c6": {
@@ -476,7 +531,7 @@
 	},
 	"0fa43634-33a6-469e-9689-ffedb05b3a33": {
 		"Material": "Engine",
-		"Name": "Shaft Axis Shifting Gears 3m",
+		"Name": "Medium axis shifting gears",
 		"SizeId": 8
 	},
 	"0fbfae3b-76ac-43f4-be8f-36739389dac7": {
@@ -493,6 +548,11 @@
 		"Material": "Heavy Armour",
 		"Name": "Heavy Armour 1m to 3m inverse transition right",
 		"SizeId": 3
+	},
+	"0ff750d3-d885-40e6-bd43-e2cf2cc9333f": {
+		"Material": "Stone",
+		"Name": "Mimic: Cone stone",
+		"SizeId": 1
 	},
 	"1019c502-0f6e-4958-bb30-b78950ca694f": {
 		"Material": "Rubber",
@@ -521,8 +581,13 @@
 	},
 	"10c9e65e-ea35-47c9-a8a7-4de86c6438b8": {
 		"Material": "Engine",
-		"Name": "Steam Control (Large)",
+		"Name": "Medium steam controller",
 		"SizeId": 12
+	},
+	"10d94d9c-5ace-4348-ac2d-208a49c2273d": {
+		"Material": "Missing",
+		"Name": "Plasma Generator 1m",
+		"SizeId": 1
 	},
 	"10e8b2e3-2a00-46e8-94d5-44c0403df6bf": {
 		"Material": "ERA",
@@ -557,6 +622,11 @@
 	"1240b6db-1f41-442a-88ce-5ab0944d804b": {
 		"Material": "Electronic",
 		"Name": "Control Terminal",
+		"SizeId": 1
+	},
+	"1241b89b-7380-4f0c-9115-c2585ccafa17": {
+		"Material": "Missing",
+		"Name": "Tank Sticky",
 		"SizeId": 1
 	},
 	"1278df17-e3e8-4d29-aa8d-0f779cb60b1d": {
@@ -609,6 +679,11 @@
 		"Name": "Stone pole (3m)",
 		"SizeId": 3
 	},
+	"14562dcc-7d5a-49d5-9a06-e788ceec5f0c": {
+		"Material": "Propeller",
+		"Name": "Rudder Pivot 3m mirror",
+		"SizeId": 20
+	},
 	"14884b06-6834-469d-a996-629b6d155a8f": {
 		"Material": "Electronic",
 		"Name": "Control surface 4m",
@@ -647,7 +722,12 @@
 	"158676b2-faca-421b-b99a-c43667cbe234": {
 		"Material": "Heavy Armour",
 		"Name": "Heavy Armour 4m offset right",
-		"SizeId": 28
+		"SizeId": 29
+	},
+	"158d0c68-0455-4400-8921-927a27e167df": {
+		"Material": "Alloy",
+		"Name": "Mimic: Pentagon alloy",
+		"SizeId": 1
 	},
 	"15d4be68-edf9-44ed-bfda-5522cd9da33f": {
 		"Material": "Wheel",
@@ -674,9 +754,14 @@
 		"Name": "Revolving Blast-Gun",
 		"SizeId": 1
 	},
+	"16e04513-83ef-4844-9721-ec6c711f813e": {
+		"Material": "Missing",
+		"Name": "Plasma Collector 3x3",
+		"SizeId": 24
+	},
 	"16e58d6d-30ce-40ac-a80e-ea153a3608a8": {
 		"Material": "Engine",
-		"Name": "Boiler Control (Huge)",
+		"Name": "Large boiler control",
 		"SizeId": 25
 	},
 	"1725c9ed-29fd-438d-97f6-8f645a1865d4": {
@@ -699,10 +784,25 @@
 		"Name": "Wood inverted triangle corner (left) (1m)",
 		"SizeId": 1
 	},
+	"17dac0b8-5610-45ff-8543-c04a4fed62e3": {
+		"Material": "Missing",
+		"Name": "ScentedCandleHolder2Nice",
+		"SizeId": 1
+	},
 	"1848856b-3feb-4885-8a7b-98b42e7be553": {
 		"Material": "Applique",
 		"Name": "Applique corner 3m (mirror)",
 		"SizeId": 3
+	},
+	"18a11932-204d-4d3c-83f2-c26684c3752d": {
+		"Material": "Glass",
+		"Name": "Glass beam slope (3m mirrored)",
+		"SizeId": 3
+	},
+	"19454c5f-69a1-4675-b5de-fae33f19d8b7": {
+		"Material": "Engine",
+		"Name": "Fuel Pipe L",
+		"SizeId": 1
 	},
 	"195e0661-21dc-4fba-88f1-81481f3bf409": {
 		"Material": "Applique",
@@ -725,9 +825,9 @@
 		"SizeId": 1
 	},
 	"19a3d1a2-574e-4619-91b0-050d3b1201a9": {
-		"Material": "Electronic",
-		"Name": "Electric Motor 5m",
-		"SizeId": 64
+		"Material": "Engine",
+		"Name": "Large crank motor",
+		"SizeId": 60
 	},
 	"19ee2ba3-9443-4a44-97fd-bad9b1443895": {
 		"Material": "Lead",
@@ -776,8 +876,18 @@
 	},
 	"1af1b76e-23df-495e-8bc7-711ce2c221f8": {
 		"Material": "Engine",
-		"Name": "Boiler (Huge)",
+		"Name": "Large boiler",
 		"SizeId": 25
+	},
+	"1b0498b9-baa4-4c83-8441-99c2fb8a4e13": {
+		"Material": "Barrel",
+		"Name": "Recoil Suppression barrel end variant 2",
+		"SizeId": 1
+	},
+	"1b302b13-2754-4044-8db7-80bda725df75": {
+		"Material": "Rubber",
+		"Name": "Rubber beam slope (3m)",
+		"SizeId": 3
 	},
 	"1b59381d-d699-4ead-884f-1e069364bf9b": {
 		"Material": "Propeller",
@@ -788,6 +898,11 @@
 		"Material": "Metal",
 		"Name": "Wedge Metal Back 2m",
 		"SizeId": 2
+	},
+	"1b664796-bb5c-40ee-9db7-6b517c1b28b6": {
+		"Material": "Missing",
+		"Name": "Plasma Connector Hub",
+		"SizeId": 1
 	},
 	"1b672c70-b108-4ec9-b6f6-9f817adf7250": {
 		"Material": "Barrel",
@@ -806,7 +921,7 @@
 	},
 	"1bc2df6d-f59e-40f4-ade3-83a357676123": {
 		"Material": "Engine",
-		"Name": "Pipe",
+		"Name": "Steam pipe 1m",
 		"SizeId": 1
 	},
 	"1c146ed1-3b8d-4171-ab72-42668e6827be": {
@@ -821,7 +936,7 @@
 	},
 	"1c4e94a1-c36a-4b8f-86be-a9b2ae736a71": {
 		"Material": "Engine",
-		"Name": "Large Turbine End",
+		"Name": "Medium turbine pipe connection",
 		"SizeId": 24
 	},
 	"1cb1b512-abc9-463e-868a-6393acfeb5f2": {
@@ -832,7 +947,7 @@
 	"1cbba583-ef54-4de9-9364-4e7371bf4ac3": {
 		"Material": "Cannon Interior",
 		"Name": "Solid Ammo Clip (6m shells)",
-		"SizeId": 29
+		"SizeId": 30
 	},
 	"1ce727a4-fc31-4ced-ab48-a6b03986341f": {
 		"Material": "Heavy Armour",
@@ -862,7 +977,7 @@
 	"1dd8c1cf-ce0b-469d-9924-455dae4958f5": {
 		"Material": "Cannon Loader",
 		"Name": "Autoloader (6m shells)",
-		"SizeId": 29
+		"SizeId": 30
 	},
 	"1ddd4971-348f-4e3b-bac7-23b3082792c4": {
 		"Material": "Missing",
@@ -874,10 +989,15 @@
 		"Name": "Stone 2m offset right",
 		"SizeId": 3
 	},
+	"1dfd4f18-ddd8-4e22-94a8-4012b611e40b": {
+		"Material": "Metal",
+		"Name": "Mimic: Torus metal",
+		"SizeId": 1
+	},
 	"1e27893d-eece-4a43-9de2-6d6636a02f65": {
 		"Material": "Lead",
 		"Name": "Lead 4m offset right",
-		"SizeId": 28
+		"SizeId": 29
 	},
 	"1e311aa8-7a58-4ed9-a62e-bf236cf32982": {
 		"Material": "Wood",
@@ -898,6 +1018,11 @@
 		"Material": "Wheel",
 		"Name": "Balloon wheel 1m mirror",
 		"SizeId": 19
+	},
+	"1ee77a03-577c-433a-acae-c7e40b9ad6b9": {
+		"Material": "Applique",
+		"Name": "Mimic: Hexagon applique",
+		"SizeId": 1
 	},
 	"1fa6e1a9-83fb-4efc-b9bc-19ea0d1005cb": {
 		"Material": "Applique",
@@ -1061,7 +1186,7 @@
 	},
 	"23797716-3986-4ee7-8fed-f7884a10d810": {
 		"Material": "Engine",
-		"Name": "5m Engine Shaft",
+		"Name": "Large engine shaft",
 		"SizeId": 1
 	},
 	"23922e90-9310-44bb-a4b7-1d6911addbf9": {
@@ -1097,7 +1222,7 @@
 	"24182e93-94d4-4b29-8795-a107b21b2695": {
 		"Material": "Cannon Interior",
 		"Name": "Solid Ammo Clip (5m shells)",
-		"SizeId": 28
+		"SizeId": 29
 	},
 	"242be860-8b25-4bdc-91fd-c1fecba9a7f1": {
 		"Material": "Propeller",
@@ -1109,6 +1234,11 @@
 		"Name": "Heavy armour beam (2m)",
 		"SizeId": 2
 	},
+	"24427e85-4575-4654-8d7d-a6133c14eafb": {
+		"Material": "Missing",
+		"Name": "Pivot 4m mirror",
+		"SizeId": 22
+	},
 	"2456a5f2-7ee9-469e-924f-eb45db0f6850": {
 		"Material": "Stone",
 		"Name": "Stone wedge back (1m)",
@@ -1118,6 +1248,11 @@
 		"Material": "Lead",
 		"Name": "Lead triangle corner (right) (3m)",
 		"SizeId": 3
+	},
+	"24acd11b-5c30-4f8b-a585-270bf54de6ba": {
+		"Material": "Propeller",
+		"Name": "Rudder Pivot 4m mirror",
+		"SizeId": 22
 	},
 	"24b4b0d5-8b0f-48bd-bef7-fdad00dede68": {
 		"Material": "Wood",
@@ -1166,12 +1301,12 @@
 	},
 	"2588c8c7-5347-4d68-b9a0-c794e5fdf408": {
 		"Material": "Engine",
-		"Name": "Turbine Generator (Large)",
+		"Name": "Medium turbine generator",
 		"SizeId": 24
 	},
 	"25ae7b90-4e78-49c3-8bd5-59712fc87b77": {
 		"Material": "Engine",
-		"Name": "Large Turbine Middle",
+		"Name": "Medium turbine middle",
 		"SizeId": 24
 	},
 	"25b76297-c884-4d6f-b0de-ee8c096912ba": {
@@ -1207,7 +1342,7 @@
 	"26628920-1c53-4e28-b578-eac6a108bab2": {
 		"Material": "Cannon Interior",
 		"Name": "Ammo Clip (5m shells)",
-		"SizeId": 28
+		"SizeId": 29
 	},
 	"267248a3-baaa-4653-83b3-ce478d600b17": {
 		"Material": "Engine",
@@ -1216,7 +1351,7 @@
 	},
 	"267adeca-82e1-4578-8d3f-85608cd0aa87": {
 		"Material": "Engine",
-		"Name": "Pipe 3 Way",
+		"Name": "Steam pipe 3 way",
 		"SizeId": 1
 	},
 	"267c3871-b012-4856-b640-00bdb3cfe287": {
@@ -1280,7 +1415,7 @@
 		"SizeId": 2
 	},
 	"275b820d-dd55-49aa-9b09-48b58e8ab5da": {
-		"Material": "Wing",
+		"Material": "Propeller",
 		"Name": "Aero Rudder (yaw only)",
 		"SizeId": 1
 	},
@@ -1334,10 +1469,20 @@
 		"Name": "Rubber 1m to 3m slope transition (mirrored)",
 		"SizeId": 3
 	},
+	"2908eb65-10fc-48e3-9ac8-e6eac3215dee": {
+		"Material": "Applique",
+		"Name": "Mimic: Cone applique",
+		"SizeId": 1
+	},
 	"290e5534-4d14-4b0e-a83f-756d89fc0b2e": {
 		"Material": "Rubber",
 		"Name": "Rubber triangle corner (left) (4m)",
 		"SizeId": 4
+	},
+	"2914d8ca-9a2b-4f3b-b891-f983428d7bd4": {
+		"Material": "Alloy",
+		"Name": "Mimic: Tube alloy",
+		"SizeId": 1
 	},
 	"29251fa7-0963-4206-bb08-a144b767fdea": {
 		"Material": "Alloy",
@@ -1349,15 +1494,30 @@
 		"Name": "Heavy armour inverted triangle corner (right) (1m)",
 		"SizeId": 1
 	},
+	"29b3a949-f062-4d96-b53f-0b1acbad4ec4": {
+		"Material": "Missing",
+		"Name": "Plasma Connector 2m",
+		"SizeId": 2
+	},
 	"29c40e04-59fb-45dc-a80b-31ee1c4f82ac": {
 		"Material": "Alloy",
 		"Name": "Alloy square corner (right) (2m)",
 		"SizeId": 2
 	},
+	"29d8a99c-e3b4-4fed-9569-23f34bad60e7": {
+		"Material": "Applique",
+		"Name": "Mimic: Cube applique",
+		"SizeId": 1
+	},
 	"2a0ce564-9c8e-4784-8d35-9b9e36b30c02": {
 		"Material": "Stone",
 		"Name": "Stone square corner (left) (4m)",
 		"SizeId": 4
+	},
+	"2a111efa-3659-4d52-b6ad-631f0cb5e370": {
+		"Material": "Lead",
+		"Name": "Lead beam slope (2m mirrored)",
+		"SizeId": 2
 	},
 	"2a188034-0d97-4592-9a07-caa8b86b8a13": {
 		"Material": "Lead",
@@ -1392,7 +1552,7 @@
 	"2a8501f7-2463-441c-901a-57d1a6573fe6": {
 		"Material": "Cannon Interior",
 		"Name": "Ammo Clip (8m shells)",
-		"SizeId": 31
+		"SizeId": 32
 	},
 	"2a990d46-0140-4ae7-95f5-db9efd76aaa8": {
 		"Material": "Engine",
@@ -1402,7 +1562,7 @@
 	"2ab03e77-3805-4064-81c7-4bf21ebb242f": {
 		"Material": "Cannon Interior",
 		"Name": "Ammo Clip (7m shells)",
-		"SizeId": 30
+		"SizeId": 31
 	},
 	"2ae437c8-afe6-4d6d-9562-0423227878b2": {
 		"Material": "Cannon Loader",
@@ -1428,6 +1588,11 @@
 		"Material": "Propeller",
 		"Name": "Rudder Triangle Small Huge",
 		"SizeId": 2
+	},
+	"2b6935fd-de2b-4d0f-9dde-1aee8e9d74d3": {
+		"Material": "Engine",
+		"Name": "Fuel Pipe Hull",
+		"SizeId": 1
 	},
 	"2be9c88d-be24-4880-aa12-ea8dc685a726": {
 		"Material": "Detection",
@@ -1477,7 +1642,7 @@
 	"2d43288e-d05d-4ae8-8929-85ca0bb2d27d": {
 		"Material": "Propeller",
 		"Name": "Rudder Attachment",
-		"SizeId": 2
+		"SizeId": 19
 	},
 	"2d519ca8-1f12-4a8e-9340-aa6648b5e799": {
 		"Material": "Glass",
@@ -1566,7 +1731,7 @@
 	},
 	"2f3a940f-b0fb-42ab-aabf-f1c933fe0264": {
 		"Material": "Engine",
-		"Name": "Boiler End (Huge)",
+		"Name": "Large boiler end",
 		"SizeId": 25
 	},
 	"2f5f91c0-bebf-4de2-bf70-8d9bc1816997": {
@@ -1594,6 +1759,11 @@
 		"Name": "Applique corner 0.5m",
 		"SizeId": 1
 	},
+	"2fd4fd83-3125-4825-b596-f78ef36375c2": {
+		"Material": "Missing",
+		"Name": "Flamethrower Back",
+		"SizeId": 4
+	},
 	"2ff15f2f-5787-4bf5-92e3-95ee5160903e": {
 		"Material": "Stone",
 		"Name": "Stone 3m square backed corner right",
@@ -1603,6 +1773,11 @@
 		"Material": "Lead",
 		"Name": "Lead triangle corner (left) (3m)",
 		"SizeId": 3
+	},
+	"301ba71b-1868-447f-8a21-a752a0bbc5b8": {
+		"Material": "Lead",
+		"Name": "Mimic: Pentagon lead",
+		"SizeId": 1
 	},
 	"305982c6-9839-419f-954d-1c84740dbf05": {
 		"Material": "Stone",
@@ -1671,7 +1846,12 @@
 	},
 	"31d3adbb-83ec-47aa-b2fa-7c874d710459": {
 		"Material": "Engine",
-		"Name": "Pipe 4 Way (2)",
+		"Name": "Steam pipe 4 way (2)",
+		"SizeId": 1
+	},
+	"31e2129c-ac20-4266-8efd-b07f6200a434": {
+		"Material": "Missing",
+		"Name": "test item",
 		"SizeId": 1
 	},
 	"326a2f34-1bfd-4547-92b1-43a9f0c05dea": {
@@ -1726,13 +1906,23 @@
 	},
 	"33d7dc96-ff04-4178-8f67-9c380d26f168": {
 		"Material": "Engine",
-		"Name": "Turbine Generator (Small)",
+		"Name": "Small turbine generator",
 		"SizeId": 1
 	},
 	"344a6bb2-dada-45f3-ba66-6fdbbb57f394": {
 		"Material": "Electronic",
 		"Name": "RTG (4m)",
 		"SizeId": 10
+	},
+	"344b39ee-beae-4dd4-9693-4cb38dfc6b03": {
+		"Material": "Missing",
+		"Name": "Pivot 2m mirror",
+		"SizeId": 18
+	},
+	"3498643e-7c7f-495f-b6a8-fa8542e83545": {
+		"Material": "Rubber",
+		"Name": "Mimic: Hexagon rubber",
+		"SizeId": 1
 	},
 	"34a95c9b-6680-4a26-8b20-87a92a6eb8fa": {
 		"Material": "Missing",
@@ -1752,6 +1942,11 @@
 	"357175b3-cf60-4bad-ab62-109a6b77592d": {
 		"Material": "Engine",
 		"Name": "Fuel Refinery Throughput Pipe",
+		"SizeId": 1
+	},
+	"3571d5d7-1ab4-4eee-b9b5-4186be122265": {
+		"Material": "Rubber",
+		"Name": "Mimic: Cube rubber",
 		"SizeId": 1
 	},
 	"35abb89b-33b8-4cb4-b3d0-ee132247de8d": {
@@ -1783,6 +1978,16 @@
 		"Material": "Missing",
 		"Name": "Example mod block",
 		"SizeId": 1
+	},
+	"3717e16a-9ce2-45b6-afa3-de71d547510d": {
+		"Material": "Missing",
+		"Name": "ScentedCandleHolder1Nice",
+		"SizeId": 1
+	},
+	"371b89fc-4c2d-416a-a187-62adb945fbb1": {
+		"Material": "Propeller",
+		"Name": "Rudder 2m mirror",
+		"SizeId": 18
 	},
 	"374dc36e-c905-4a79-968a-b8bdd64ecaf0": {
 		"Material": "Rubber",
@@ -1854,6 +2059,11 @@
 		"Name": "Wood beam (3m)",
 		"SizeId": 3
 	},
+	"39c009b3-0704-432e-b179-eef56b81b5d1": {
+		"Material": "Missing",
+		"Name": "ScentedCandleHolder1",
+		"SizeId": 1
+	},
 	"39cf32c0-8fde-4f01-9b68-977624fffe69": {
 		"Material": "Rubber",
 		"Name": "Rubber beam (4m)",
@@ -1901,7 +2111,7 @@
 	},
 	"3af2aa7c-86c8-47f5-896d-26d9622cdea8": {
 		"Material": "Engine",
-		"Name": "Steam Jet",
+		"Name": "Steam jet",
 		"SizeId": 1
 	},
 	"3b0108f0-e792-44e6-80d5-861d32891e6d": {
@@ -1954,6 +2164,11 @@
 		"Name": "Particle Input Port",
 		"SizeId": 1
 	},
+	"3c81571e-6d1f-4ca4-b231-52a2ed0c5684": {
+		"Material": "Propeller",
+		"Name": "Rudder curve large mirror",
+		"SizeId": 1
+	},
 	"3cc75979-18ac-46c4-9a5b-25b327d99410": {
 		"Material": "Alloy",
 		"Name": "Light-weight Alloy Block",
@@ -1961,12 +2176,12 @@
 	},
 	"3cdfdc8b-a6ec-4aa9-bd10-0aab93237825": {
 		"Material": "Engine",
-		"Name": "Pipe (2m)",
+		"Name": "Steam pipe 2m",
 		"SizeId": 2
 	},
 	"3d03785a-21b9-42c7-8acb-17cf43de9d58": {
 		"Material": "Propeller",
-		"Name": "5m Propeller 7m",
+		"Name": "Large 7m propeller",
 		"SizeId": 26
 	},
 	"3d15d678-7c66-4bbe-bd1b-d37b7f4904c5": {
@@ -1989,6 +2204,11 @@
 		"Name": "Range Finder (9m) armour",
 		"SizeId": 16
 	},
+	"3d668ca1-8000-4ad3-85e5-a0443e14c3f4": {
+		"Material": "Missing",
+		"Name": "ScentedCandleHolder5Nice",
+		"SizeId": 1
+	},
 	"3d6d4fca-b7a9-44f3-a888-d3e43a79331a": {
 		"Material": "Cannon Interior",
 		"Name": "Gauge increase",
@@ -2006,7 +2226,7 @@
 	},
 	"3dafc031-0a23-430f-bbca-4c7b8cd523db": {
 		"Material": "Engine",
-		"Name": "5m Turbine Middle",
+		"Name": "Large turbine middle",
 		"SizeId": 46
 	},
 	"3dd5c28f-501e-436a-821d-46874ca9c5d1": {
@@ -2039,6 +2259,11 @@
 		"Name": "Stone 1m to 4m inverse transition right",
 		"SizeId": 4
 	},
+	"3e6e327c-352f-4c8c-b978-7149779a7697": {
+		"Material": "Cannon Interior",
+		"Name": "Incendiary Pellets",
+		"SizeId": 1
+	},
 	"3ec33e9a-b80a-424f-9065-46087c1e4301": {
 		"Material": "Railing",
 		"Name": "Railing TA 1m M3",
@@ -2049,10 +2274,20 @@
 		"Name": "General Purpose Processing Card",
 		"SizeId": 1
 	},
+	"3f0e0e85-2891-473d-bc22-03626afae27d": {
+		"Material": "Propeller",
+		"Name": "Rudder Pivot Square",
+		"SizeId": 1
+	},
 	"3f349a8a-e5a1-4f43-9cc4-cea2f0f5b623": {
 		"Material": "Glass",
 		"Name": "Glass triangle corner (left) (2m)",
 		"SizeId": 2
+	},
+	"3f693a92-169f-4066-b843-175dd898a61c": {
+		"Material": "Applique",
+		"Name": "Mimic: Torus applique",
+		"SizeId": 1
 	},
 	"3f6eb436-9c32-4e9a-8dc2-cef5acc17478": {
 		"Material": "Heavy Armour",
@@ -2061,7 +2296,7 @@
 	},
 	"3f95907f-c66f-4211-96d6-5765857a34de": {
 		"Material": "Engine",
-		"Name": "Shaft Shaft Bearing 1m",
+		"Name": "Small shaft bearing",
 		"SizeId": 1
 	},
 	"3fac543b-7d25-4ea7-8f5c-002025881ca1": {
@@ -2111,7 +2346,7 @@
 	},
 	"41f8d920-d038-4bd9-b84d-01603ac7a534": {
 		"Material": "Engine",
-		"Name": "5m Huge Gearbox",
+		"Name": "Large gearbox",
 		"SizeId": 61
 	},
 	"42033da8-485e-43be-99db-ffe2492767b4": {
@@ -2138,6 +2373,11 @@
 		"Material": "Engine",
 		"Name": "Fuel Refinery Pipe",
 		"SizeId": 1
+	},
+	"42f89f01-c7c1-4c80-a9d8-7161a059dff0": {
+		"Material": "Rubber",
+		"Name": "Rubber beam slope (2m)",
+		"SizeId": 2
 	},
 	"43095483-b1be-4a7e-9228-cee78746d6ac": {
 		"Material": "Rubber",
@@ -2181,8 +2421,8 @@
 	},
 	"4479a607-8cbf-45de-bd6b-1de26e70423b": {
 		"Material": "Engine",
-		"Name": "5m Piston",
-		"SizeId": 62
+		"Name": "Large serial piston",
+		"SizeId": 63
 	},
 	"44b7168c-4c2b-4875-a1b5-f77029cf4658": {
 		"Material": "Alloy",
@@ -2198,6 +2438,11 @@
 		"Material": "Glass",
 		"Name": "Glass 1m to 2m inverse transition left",
 		"SizeId": 2
+	},
+	"4530f64d-a4d9-465c-8160-e69ddcc29d9d": {
+		"Material": "Missile",
+		"Name": "Munition decorator",
+		"SizeId": 1
 	},
 	"455eb785-58ca-4494-b21a-5f2636908104": {
 		"Material": "Rubber",
@@ -2232,7 +2477,7 @@
 	"462f80ed-2611-4cf8-a204-c7a66ea241da": {
 		"Material": "Cannon Interior",
 		"Name": "Ammo Clip (6m shells)",
-		"SizeId": 29
+		"SizeId": 30
 	},
 	"464187d2-ff5c-4d42-9937-0206cffbd883": {
 		"Material": "Laser",
@@ -2254,10 +2499,20 @@
 		"Name": "Compact Repair Tentacle",
 		"SizeId": 1
 	},
+	"4725a5bd-9dd7-4f64-9dc7-54274c324196": {
+		"Material": "Propeller",
+		"Name": "Rudder 3m mirror",
+		"SizeId": 20
+	},
 	"4731964e-37b7-42d4-a3a5-763abb56d27e": {
 		"Material": "Rubber",
 		"Name": "Rubber 2m offset left",
 		"SizeId": 3
+	},
+	"4742763a-b2d7-41ed-9cf8-ec10a561838b": {
+		"Material": "Missing",
+		"Name": "ScentedCandleHolder6",
+		"SizeId": 1
 	},
 	"478efa9f-5743-4238-ad2e-750770d7da11": {
 		"Material": "Wing",
@@ -2319,6 +2574,11 @@
 		"Name": "Nuclear Water inlet and outlet",
 		"SizeId": 51
 	},
+	"4915ebc6-0d3b-4f96-9ba4-765df44f56f1": {
+		"Material": "Propeller",
+		"Name": "Rudder square small mirror",
+		"SizeId": 1
+	},
 	"4927aa86-8882-4b04-8ca7-44052bd00aa9": {
 		"Material": "Wood",
 		"Name": "Wood Block Variant 4",
@@ -2352,6 +2612,11 @@
 	"4996676f-deef-4bf3-9329-ef4f562c1902": {
 		"Material": "Wing",
 		"Name": "Wing 1m",
+		"SizeId": 1
+	},
+	"499e7ed2-204b-4e30-a266-ed42484ec8c5": {
+		"Material": "Mantlet",
+		"Name": "Plasma Mantlet AA",
 		"SizeId": 1
 	},
 	"49a3ae83-4c71-4b9b-b6f3-641ec95105b1": {
@@ -2429,6 +2694,11 @@
 		"Name": "Mock Wheel Mirror",
 		"SizeId": 1
 	},
+	"4ba5f96b-f749-4dd1-a110-1bf178eed0d1": {
+		"Material": "Missing",
+		"Name": "ScentedCandleHolder3",
+		"SizeId": 1
+	},
 	"4bd38234-b485-4a94-bc2d-d3fc80d89955": {
 		"Material": "Cannon Interior",
 		"Name": "High Explosive Pellets",
@@ -2454,6 +2724,16 @@
 		"Name": "Mimic: Cone",
 		"SizeId": 1
 	},
+	"4c3ab614-cc13-4028-a64b-554ffaba7d57": {
+		"Material": "Missing",
+		"Name": "Plasma Chamber 2m",
+		"SizeId": 2
+	},
+	"4c82fd24-9b09-4027-b8fc-b51c6f7cfb08": {
+		"Material": "Propeller",
+		"Name": "Large propeller blade",
+		"SizeId": 28
+	},
 	"4c9b5909-bd2d-439d-afb6-f9ec42979fb7": {
 		"Material": "Glass",
 		"Name": "Glass 4m square backed corner left",
@@ -2466,7 +2746,7 @@
 	},
 	"4d7a6918-e6ed-4328-a7b6-1f5e874618d5": {
 		"Material": "Missing",
-		"Name": "Firebox",
+		"Name": "Small firebox",
 		"SizeId": 1
 	},
 	"4d8b8dca-49ac-4995-b36c-791317b13fc1": {
@@ -2479,6 +2759,11 @@
 		"Name": "Glass 3m to 4m inverse transition left",
 		"SizeId": 4
 	},
+	"4d9442ec-0a9b-4873-aab5-979c6f02ef7f": {
+		"Material": "Missing",
+		"Name": "Plasma Connector L",
+		"SizeId": 1
+	},
 	"4d9a507f-84a3-456a-8b60-6d1bf48816ca": {
 		"Material": "Engine",
 		"Name": "Fuel Refinery Flare Stack",
@@ -2488,6 +2773,11 @@
 		"Material": "Rubber",
 		"Name": "Rubber pole (1m)",
 		"SizeId": 1
+	},
+	"4dac56f1-b3bc-461a-a05a-0227da43ba44": {
+		"Material": "Lead",
+		"Name": "Lead beam slope (2m)",
+		"SizeId": 2
 	},
 	"4daeed6d-fc6a-4490-b038-c61efb4d6ff4": {
 		"Material": "Glass",
@@ -2526,8 +2816,13 @@
 	},
 	"4e4e3ca6-b90d-484d-80e4-6fe6b0261532": {
 		"Material": "Engine",
-		"Name": "Shaft Generator (1m)",
+		"Name": "Small shaft generator",
 		"SizeId": 1
+	},
+	"4e6b4d5b-396f-47cc-97df-63dfc313311c": {
+		"Material": "Propeller",
+		"Name": "Large propeller hub extension",
+		"SizeId": 24
 	},
 	"4f15965a-ff4c-4423-9d18-1056519d7f32": {
 		"Material": "Stone",
@@ -2579,6 +2874,11 @@
 		"Name": "Reinforced Wood 3m",
 		"SizeId": 3
 	},
+	"50c7f99f-6238-4736-97f9-3117a40ef622": {
+		"Material": "Missing",
+		"Name": "Compressor",
+		"SizeId": 1
+	},
 	"50cd1e03-a9f0-4ad3-9385-16b700e53008": {
 		"Material": "Missing",
 		"Name": "Anti roll bar 7m",
@@ -2602,6 +2902,11 @@
 	"515ee20d-20d8-4195-bea5-213e6f1fd929": {
 		"Material": "Engine",
 		"Name": "Cylinder",
+		"SizeId": 1
+	},
+	"517605b0-dbca-46dc-8cdf-dd8d35958065": {
+		"Material": "Engine",
+		"Name": "Fuel Pipe Connector",
 		"SizeId": 1
 	},
 	"5190d6b7-6bf6-4d9a-8a26-0ed2b562a7c2": {
@@ -2631,7 +2936,7 @@
 	},
 	"524cc556-c755-4df0-b396-7cb44d98fcb5": {
 		"Material": "Engine",
-		"Name": "5m Turbine Window",
+		"Name": "Large turbine window",
 		"SizeId": 46
 	},
 	"525d85fc-f4d4-49ea-bebd-dc51bc562adf": {
@@ -2643,6 +2948,11 @@
 		"Material": "Stone",
 		"Name": "Stone 2m to 4m slope transition (mirrored)",
 		"SizeId": 4
+	},
+	"528c4944-a192-4f89-84ba-371a7b88bc1f": {
+		"Material": "Barrel",
+		"Name": "Recoil suppression barrel end",
+		"SizeId": 1
 	},
 	"5292dcab-a674-467a-a21a-702d2c2a152b": {
 		"Material": "Electronic",
@@ -2662,6 +2972,11 @@
 	"52e52d0c-02d7-4965-a46e-93462e083659": {
 		"Material": "Missing",
 		"Name": "Material Storage Locker Small",
+		"SizeId": 2
+	},
+	"52fe948e-788f-4803-8fed-2aba4e8da80f": {
+		"Material": "Heavy Armour",
+		"Name": "Heavy armour beam slope (2m)",
 		"SizeId": 2
 	},
 	"52ff74a3-3d0f-4b2f-bfe3-23ff12f74354": {
@@ -2684,6 +2999,11 @@
 		"Name": "Rubber beam slope diagonal cut (4m)",
 		"SizeId": 4
 	},
+	"5347cc62-5908-418b-9cb5-b8a8b133fa55": {
+		"Material": "Propeller",
+		"Name": "Rudder triangle large mirror",
+		"SizeId": 1
+	},
 	"534b8fe0-1184-4191-a249-d78ba2df3332": {
 		"Material": "Metal",
 		"Name": "Porthole Metal",
@@ -2696,13 +3016,13 @@
 	},
 	"5373c818-c0e4-4cad-afc5-bed89f5236b4": {
 		"Material": "Propeller",
-		"Name": "Shaft Small Small Propeller 3m",
+		"Name": "Small 3m propeller",
 		"SizeId": 24
 	},
 	"53ace348-3082-4b41-9630-197a60f8e658": {
 		"Material": "Lead",
 		"Name": "Lead 4m offset left",
-		"SizeId": 28
+		"SizeId": 29
 	},
 	"542cacd4-c366-4a76-8d01-4ace6c5ce619": {
 		"Material": "Engine",
@@ -2710,8 +3030,8 @@
 		"SizeId": 1
 	},
 	"543fd6c7-fcf3-4df0-a4b2-891a8574b434": {
-		"Material": "Barrel",
-		"Name": "Barrel",
+		"Material": "Cannon Interior",
+		"Name": "CRAM Barrel",
 		"SizeId": 1
 	},
 	"54836777-b634-4a21-ab1e-2b0e426b640f": {
@@ -2741,13 +3061,18 @@
 	},
 	"54adcdbd-920b-43a4-b3d3-667f648505be": {
 		"Material": "Engine",
-		"Name": "Pipe Tank 3m",
+		"Name": "Steam tank 3m",
 		"SizeId": 24
 	},
 	"54b18bde-2698-4840-a2aa-a37efba89ff4": {
 		"Material": "Alloy",
 		"Name": "Alloy 4m offset left",
-		"SizeId": 28
+		"SizeId": 29
+	},
+	"55199069-844a-4cd1-8520-be64c2346fbd": {
+		"Material": "Propeller",
+		"Name": "Rudder trap large huge mirror",
+		"SizeId": 2
 	},
 	"552785c2-43cd-41e6-a13a-818388b93968": {
 		"Material": "Missing",
@@ -2806,7 +3131,7 @@
 	},
 	"565faf2e-346d-4ba5-b9d3-99601ad33c74": {
 		"Material": "Metal",
-		"Name": "Recoil absorber",
+		"Name": "Recoil absorber (Old)",
 		"SizeId": 1
 	},
 	"567281a0-cf1d-4bcf-aaf1-2c2020d8e754": {
@@ -2837,7 +3162,7 @@
 	"5712f568-385b-4d8c-bf66-4f55b7d2099f": {
 		"Material": "Wood",
 		"Name": "Wood 4m offset right",
-		"SizeId": 28
+		"SizeId": 29
 	},
 	"571c4683-f2d6-4a9e-9e64-b2853a6ad51e": {
 		"Material": "Lead",
@@ -2881,8 +3206,8 @@
 	},
 	"57b2c11e-8eea-4e0e-a102-56021b8df30f": {
 		"Material": "Engine",
-		"Name": "5m Reduction Gear",
-		"SizeId": 63
+		"Name": "Large transmission",
+		"SizeId": 64
 	},
 	"57c4c674-9c66-4ab7-9067-81477824785d": {
 		"Material": "Laser",
@@ -2896,8 +3221,8 @@
 	},
 	"57d0b848-3bf5-45db-bfe2-447933aee7fd": {
 		"Material": "Engine",
-		"Name": "Gearbox Large",
-		"SizeId": 32
+		"Name": "Medium gearbox",
+		"SizeId": 33
 	},
 	"57dac102-64bb-45fc-9f62-4322315fc29e": {
 		"Material": "Lead",
@@ -2909,6 +3234,11 @@
 		"Name": "32 pdr Swivel Gun",
 		"SizeId": 2
 	},
+	"5836b06e-1a7e-4d96-ac14-b62e2dc82370": {
+		"Material": "Alloy",
+		"Name": "Alloy beam slope (3m mirrored)",
+		"SizeId": 3
+	},
 	"583b24e6-4f8b-4e6e-bd72-804a6424c816": {
 		"Material": "Glass",
 		"Name": "Glass 1m to 3m inverse transition right",
@@ -2918,6 +3248,21 @@
 		"Material": "Glass",
 		"Name": "Glass 2m to 4m inverse transition right",
 		"SizeId": 4
+	},
+	"5853739b-0971-4777-9328-8a1b860a007e": {
+		"Material": "Rubber",
+		"Name": "Mimic: Cone Rubber",
+		"SizeId": 1
+	},
+	"58588440-9f43-4768-ba9c-92e5758af83c": {
+		"Material": "Propeller",
+		"Name": "Rudder triangle large small mirror",
+		"SizeId": 1
+	},
+	"585b5669-d551-4bbe-b9ee-f7e3c1802773": {
+		"Material": "Wood",
+		"Name": "Articulated chair",
+		"SizeId": 1
 	},
 	"585d7b93-955d-4099-b9f5-2ea41797f419": {
 		"Material": "Glass",
@@ -2972,7 +3317,7 @@
 	"5a0d6e26-7939-437f-ba35-33d9b3cf193f": {
 		"Material": "Metal",
 		"Name": "Metal 4m offset right",
-		"SizeId": 28
+		"SizeId": 29
 	},
 	"5a2c1219-d4e6-4bf4-a67d-c2b6478dc1e0": {
 		"Material": "Wood",
@@ -3039,6 +3384,11 @@
 		"Name": "Laser",
 		"SizeId": 4
 	},
+	"5d5ee6b8-21a2-4aa0-9191-f4f4ac928f89": {
+		"Material": "Stone",
+		"Name": "Stone beam slope (2m)",
+		"SizeId": 2
+	},
 	"5d8870cd-d401-4b52-a3dc-641c02b3b31f": {
 		"Material": "Engine",
 		"Name": "Fuel Storage Box",
@@ -3079,6 +3429,11 @@
 		"Name": "Lead 3m offset right",
 		"SizeId": 4
 	},
+	"5e6065fc-0f02-4b72-9000-fd68ee1f9848": {
+		"Material": "Glass",
+		"Name": "Glass beam slope (2m)",
+		"SizeId": 2
+	},
 	"5e73653e-519c-4f13-9f69-1d80c19151d8": {
 		"Material": "Glass",
 		"Name": "Glass inverted triangle corner (right) (2m)",
@@ -3101,7 +3456,7 @@
 	},
 	"5ed70947-70c6-4e1d-9241-7d670874a07f": {
 		"Material": "Engine",
-		"Name": "Small Turbine Front",
+		"Name": "Small turbine generator connection",
 		"SizeId": 1
 	},
 	"5ef97d26-1196-4b1a-ba1d-fd539c26b684": {
@@ -3154,6 +3509,11 @@
 		"Name": "Shield Generator",
 		"SizeId": 1
 	},
+	"61303e3d-510c-444f-8b29-3dcdf155120c": {
+		"Material": "Barrel",
+		"Name": "Recoil Suppression barrel end variant 4",
+		"SizeId": 1
+	},
 	"61683d9c-848c-4ae9-945e-62b12f8b44c3": {
 		"Material": "Engine",
 		"Name": "Fuel Refinery Pipe 5 way",
@@ -3174,15 +3534,30 @@
 		"Name": "Wedge Metal Front 2m",
 		"SizeId": 2
 	},
+	"61dd5eba-a1fb-4daf-8253-fdca7d8da311": {
+		"Material": "Propeller",
+		"Name": "Rudder 2m",
+		"SizeId": 19
+	},
 	"6209370e-abeb-4ec1-b523-dc21ea33fe0c": {
 		"Material": "Engine",
 		"Name": "Turbocharger (left)",
 		"SizeId": 8
 	},
+	"6221a261-abf5-416c-8db0-8c0a97f79bc5": {
+		"Material": "Missing",
+		"Name": "Plasma Cooler",
+		"SizeId": 1
+	},
 	"6222ad4d-f6d8-48c0-9f27-10e2b64d7481": {
 		"Material": "Laser",
 		"Name": "Laser Emitter",
 		"SizeId": 1
+	},
+	"623a858c-e108-41a7-b28f-c7de61ecf59c": {
+		"Material": "Missing",
+		"Name": "Tank Piercing L",
+		"SizeId": 24
 	},
 	"62568fd8-bb60-4e86-8ad7-3bd91d8dde58": {
 		"Material": "Glass",
@@ -3196,7 +3571,7 @@
 	},
 	"62ecbf4b-19da-481e-8910-6201521c4bd9": {
 		"Material": "Engine",
-		"Name": "Pipe Hull",
+		"Name": "Steam hull pipe",
 		"SizeId": 1
 	},
 	"62f61c31-a453-44ce-87a2-b5ce142fb052": {
@@ -3285,8 +3660,8 @@
 		"SizeId": 4
 	},
 	"6542630e-e790-4c24-9888-c949b4723ee4": {
-		"Material": "Propeller",
-		"Name": "Shaft Propeller Shaft 3m",
+		"Material": "Engine",
+		"Name": "Medium Shaft",
 		"SizeId": 1
 	},
 	"655b4a78-f193-4da9-82bd-6f0c9b4560f1": {
@@ -3322,6 +3697,11 @@
 	"66aa8853-094a-41ef-aa96-a2d658b21305": {
 		"Material": "Stone",
 		"Name": "Stone down slope (2m)",
+		"SizeId": 2
+	},
+	"66c94e72-2465-4e98-9477-353ee614e654": {
+		"Material": "Missing",
+		"Name": "Plasma Generator 2m",
 		"SizeId": 2
 	},
 	"66e3efae-4d73-4f4e-adbd-85e2573580e4": {
@@ -3384,6 +3764,11 @@
 		"Name": "Wood duct (3x3)",
 		"SizeId": 24
 	},
+	"69361de6-a876-4033-953b-5effd0399c2e": {
+		"Material": "Wood",
+		"Name": "Wood beam slope (2m)",
+		"SizeId": 2
+	},
 	"699ccf4d-45a4-4635-ba4d-850a40ba6e0a": {
 		"Material": "Glass",
 		"Name": "Glass square corner (right) (3m)",
@@ -3424,6 +3809,11 @@
 		"Name": "Lead wedge (1m)",
 		"SizeId": 1
 	},
+	"6a267f45-e30a-4067-b640-851019f124d7": {
+		"Material": "Propeller",
+		"Name": "Rudder triangle small mirror",
+		"SizeId": 1
+	},
 	"6a669c92-32c0-478a-b1ee-f2b3d5751487": {
 		"Material": "Railing",
 		"Name": "Railing R TA 2m M3",
@@ -3441,13 +3831,18 @@
 	},
 	"6a8db77a-73a9-45c2-845b-1d3d4804d7ff": {
 		"Material": "Missing",
-		"Name": "Shaft Reduction Gear 3m Mirror",
+		"Name": "Medium transmission mirror",
 		"SizeId": 59
 	},
 	"6a96b58b-862c-4bc2-8701-3340027f061e": {
 		"Material": "Railing",
 		"Name": "Railing R TA 1m M2",
 		"SizeId": 8
+	},
+	"6ad1413f-cd72-4a90-85c6-7d6f68f53c09": {
+		"Material": "Missing",
+		"Name": "ScentedCandleHolder5",
+		"SizeId": 1
 	},
 	"6ad7cafc-e88c-4722-88c0-f5acba190527": {
 		"Material": "Barrel",
@@ -3484,6 +3879,11 @@
 		"Name": "Rubber 4m square backed corner right",
 		"SizeId": 4
 	},
+	"6bf19262-c16d-4c4e-8dcd-57fbe4352acd": {
+		"Material": "Metal",
+		"Name": "Mimic: Cone Metal",
+		"SizeId": 1
+	},
 	"6c0bab88-aa88-4825-9cf5-55df36aa12b8": {
 		"Material": "Rubber",
 		"Name": "Rubber Block",
@@ -3516,8 +3916,13 @@
 	},
 	"6c710586-6b65-4025-bb5c-1e359f45a352": {
 		"Material": "Engine",
-		"Name": "5m Turbine Generator",
+		"Name": "Large turbine generator",
 		"SizeId": 25
+	},
+	"6c81cad9-32e3-4056-b39e-0eca91af153d": {
+		"Material": "Missing",
+		"Name": "Plasma Collector 3m",
+		"SizeId": 36
 	},
 	"6cc4ec54-404c-4989-9f85-9b59824faf96": {
 		"Material": "Wood",
@@ -3552,6 +3957,11 @@
 	"6d26fe2d-c9ce-4d86-b26f-78afbd22b5b6": {
 		"Material": "Electronic",
 		"Name": "(CARD) Propulsion Balancing",
+		"SizeId": 1
+	},
+	"6d2ef5f0-39ee-4541-ab4c-a91f14c1ffd8": {
+		"Material": "Heavy Armour",
+		"Name": "Mimic: Tube heavy armour",
 		"SizeId": 1
 	},
 	"6d3e8b3f-b945-47e9-a77d-e0fcd1c61b69": {
@@ -3652,7 +4062,7 @@
 	"704a2934-b07e-41cb-880d-91b3995152a9": {
 		"Material": "Cannon Loader",
 		"Name": "Autoloader (7m shells)",
-		"SizeId": 30
+		"SizeId": 31
 	},
 	"707f2551-c603-4183-b84d-9cd5a4a52f19": {
 		"Material": "Rubber",
@@ -3704,6 +4114,21 @@
 		"Name": "Missile Radar Buoy Holder",
 		"SizeId": 1
 	},
+	"7232168f-c00b-43b8-99a5-2d31a3ebf53e": {
+		"Material": "Missing",
+		"Name": "ScentedCandleHolder6Nice",
+		"SizeId": 1
+	},
+	"726e2dd1-aff6-4331-bfc6-07ba82db3375": {
+		"Material": "Heavy Armour",
+		"Name": "Mimic: Hexagon heavy armour",
+		"SizeId": 1
+	},
+	"72762b74-b630-477c-9829-5247529fd541": {
+		"Material": "Glass",
+		"Name": "Mimic: Sphere glass",
+		"SizeId": 1
+	},
 	"729b7ea3-59d5-4182-9177-684da6fbe0a9": {
 		"Material": "Glass",
 		"Name": "Glass inverted corner (right) (1m)",
@@ -3724,9 +4149,19 @@
 		"Name": "4m Wing Inverted Corner Right",
 		"SizeId": 23
 	},
+	"732dc5e4-aee5-4f1a-92b0-09739fbf143c": {
+		"Material": "Propeller",
+		"Name": "Rudder 4m mirror",
+		"SizeId": 22
+	},
 	"737a55bf-3ab9-472d-ac49-61309a13ef57": {
 		"Material": "Engine",
-		"Name": "Pipe 3 Way (2)",
+		"Name": "Steam pipe 3 way (2)",
+		"SizeId": 1
+	},
+	"73800909-6e8e-4246-a8b4-09577b266330": {
+		"Material": "Metal",
+		"Name": "Mimic: Pentagon metal",
 		"SizeId": 1
 	},
 	"7383557f-abe2-4bcc-849f-89b6c0d02c78": {
@@ -3779,9 +4214,24 @@
 		"Name": "Hot air balloon Deployer",
 		"SizeId": 1
 	},
+	"7475eb63-9028-4e6f-ab1d-c4c6cae467b2": {
+		"Material": "Rubber",
+		"Name": "Mimic: Tube rubber",
+		"SizeId": 1
+	},
 	"7489ebd4-92d2-4641-9db4-139bb592fc34": {
 		"Material": "Engine",
 		"Name": "Small Jet Fuel Injector",
+		"SizeId": 1
+	},
+	"7490e664-d2f5-4da2-bdd1-1c347cdff129": {
+		"Material": "Missing",
+		"Name": "Mimic: Hexagon",
+		"SizeId": 1
+	},
+	"749880c4-0c02-494b-b4f6-92162cf6d225": {
+		"Material": "Glass",
+		"Name": "Mimic: Pentagon glass",
 		"SizeId": 1
 	},
 	"74c982f4-305f-411e-a8b4-d193315ab3bc": {
@@ -3806,7 +4256,7 @@
 	},
 	"755d86c3-86cd-456f-9256-5a274780faba": {
 		"Material": "Alloy",
-		"Name": "Allow Plate Slope",
+		"Name": "Alloy Plate Slope",
 		"SizeId": 1
 	},
 	"7577e9eb-9f41-48c8-8b6d-cb494b454f49": {
@@ -3854,6 +4304,11 @@
 		"Name": "Large Rail Gantry (invisible)",
 		"SizeId": 49
 	},
+	"76d9466e-1a85-4803-8f96-f2a6510aab04": {
+		"Material": "Heavy Armour",
+		"Name": "Heavy armour beam slope (2m mirrored)",
+		"SizeId": 2
+	},
 	"76dfe171-525a-48ea-8652-b7537aa06572": {
 		"Material": "Missing",
 		"Name": "Front & Back Connector",
@@ -3866,13 +4321,18 @@
 	},
 	"76fb5718-e965-46ab-9f0c-c82baf648abf": {
 		"Material": "Engine",
-		"Name": "Compact Turbine",
+		"Name": "Small compact turbine",
 		"SizeId": 1
 	},
 	"77642c0c-277f-4a7d-9d08-f3f161d8e69c": {
 		"Material": "Electronic",
 		"Name": "(CARD) Land AI",
 		"SizeId": 1
+	},
+	"777dfdef-8c19-4892-b539-e80084223bfb": {
+		"Material": "Missing",
+		"Name": "Plasma Accelerator 2m",
+		"SizeId": 2
 	},
 	"77a64131-75a3-4912-a9a8-7ece10e2c95a": {
 		"Material": "Rubber",
@@ -3889,10 +4349,20 @@
 		"Name": "Alloy 3m offset left",
 		"SizeId": 4
 	},
+	"77c7e5ce-2ff2-4f81-ba44-2968781c18c7": {
+		"Material": "Propeller",
+		"Name": "Rudder Pivot 2m",
+		"SizeId": 19
+	},
 	"77f70295-fe92-4b9a-b677-c6c9ef061862": {
 		"Material": "Railing",
 		"Name": "Railing R TA 4m M4",
 		"SizeId": 7
+	},
+	"7825dc74-e875-4c76-a919-9e98579fa747": {
+		"Material": "Engine",
+		"Name": "Fuel Pipe",
+		"SizeId": 1
 	},
 	"7836f02d-9d50-476c-8701-d0e4eda43de3": {
 		"Material": "Cannon Interior",
@@ -3912,6 +4382,11 @@
 	"787524d3-1b60-44d8-bef2-d42156c55446": {
 		"Material": "Glass",
 		"Name": "Glass triangle corner (right) (1m)",
+		"SizeId": 1
+	},
+	"7877e213-c1cf-4853-ba77-aff431262116": {
+		"Material": "Stone",
+		"Name": "Mimic: Cube stone",
 		"SizeId": 1
 	},
 	"78804e2d-8086-4e40-accb-0b5719be91bf": {
@@ -3949,6 +4424,11 @@
 		"Name": "Glass Inverted (R 2m)",
 		"SizeId": 2
 	},
+	"799b4f34-b4cd-4e5f-8906-9e6ed8cfc799": {
+		"Material": "Rubber",
+		"Name": "Rubber beam slope (3m mirrored)",
+		"SizeId": 3
+	},
 	"79bd4565-912e-478e-95e8-2c8305c13d5e": {
 		"Material": "Stone",
 		"Name": "Stone wedge (2m)",
@@ -3958,6 +4438,11 @@
 		"Material": "Stone",
 		"Name": "Stone 2m to 3m slope transition",
 		"SizeId": 3
+	},
+	"79d580ff-2dc2-42d5-b453-03acde0ef18c": {
+		"Material": "Missing",
+		"Name": "Plasma Connector",
+		"SizeId": 1
 	},
 	"79d73a29-95de-4918-a69f-207149aab6a3": {
 		"Material": "Lead",
@@ -3972,6 +4457,11 @@
 	"79ef49d5-7876-41a7-8030-d5099d86bc0a": {
 		"Material": "Electronic",
 		"Name": "Circling hovercraft AI",
+		"SizeId": 1
+	},
+	"7a38d880-6322-4e50-ab8c-27808bbd34c1": {
+		"Material": "Mantlet",
+		"Name": "Plasma Mantlet Forward",
 		"SizeId": 1
 	},
 	"7a6b25ce-12f3-4d67-83b9-bc4cc7802e4d": {
@@ -3992,17 +4482,22 @@
 	"7b5cb254-9320-4ed1-82fa-2441ee33867b": {
 		"Material": "Rubber",
 		"Name": "Rubber 4m offset right",
-		"SizeId": 28
+		"SizeId": 29
 	},
 	"7b672666-b275-454f-968f-506e93987800": {
 		"Material": "Cannon Interior",
 		"Name": "Ammo Ejector Backwards",
-		"SizeId": 32
+		"SizeId": 33
 	},
 	"7bb4572c-0ee5-42a5-b562-47a573757f41": {
 		"Material": "Cannon Loader",
 		"Name": "Autoloader (5m shells)",
-		"SizeId": 28
+		"SizeId": 29
+	},
+	"7bd17f1f-35d5-48fd-923e-aaba9953b427": {
+		"Material": "Heavy Armour",
+		"Name": "Heavy armour beam slope (3m)",
+		"SizeId": 3
 	},
 	"7c40569c-b0cd-47ba-b963-06664010253e": {
 		"Material": "Rubber",
@@ -4012,6 +4507,16 @@
 	"7c89899e-b28d-4032-8e0a-0321ae8c381e": {
 		"Material": "Rubber",
 		"Name": "Rubber square corner (right) (1m)",
+		"SizeId": 1
+	},
+	"7c979384-c633-475d-8a7c-008843f5640c": {
+		"Material": "Missing",
+		"Name": "Plasma Collector",
+		"SizeId": 1
+	},
+	"7cbc276b-2e3d-4037-9aa8-9fc8c1f7a4fc": {
+		"Material": "Wheel",
+		"Name": "Medium wheel 1m",
 		"SizeId": 1
 	},
 	"7cd6a310-cf17-4f6d-a818-8f29d029778f": {
@@ -4031,7 +4536,7 @@
 	},
 	"7d016aa1-e2b3-4fb0-a51e-8e01df77c6c5": {
 		"Material": "Wheel",
-		"Name": "Shaft Wheel (3m)",
+		"Name": "Medium wheel",
 		"SizeId": 24
 	},
 	"7d1cb6b4-963e-4bd8-b069-3c08e6a4aeac": {
@@ -4043,6 +4548,11 @@
 		"Material": "Stone",
 		"Name": "Stone 1m offset right",
 		"SizeId": 2
+	},
+	"7d3ca7b4-1b99-4e18-a1ee-498fa86b3ef4": {
+		"Material": "Missing",
+		"Name": "Adventure Bell",
+		"SizeId": 1
 	},
 	"7d3f4791-55ac-4193-bdd3-31286f931ed2": {
 		"Material": "Railing",
@@ -4074,6 +4584,11 @@
 		"Name": "Alloy square corner (left) (3m)",
 		"SizeId": 3
 	},
+	"7dda1ddd-3839-4961-9f92-731c65165006": {
+		"Material": "Drill",
+		"Name": "Wide Drill Bit 5x5",
+		"SizeId": 25
+	},
 	"7e0913f6-9961-4697-b9cb-c87ca8b90dd7": {
 		"Material": "Rubber",
 		"Name": "Rubber beam (2m)",
@@ -4096,7 +4611,7 @@
 	},
 	"7ebdfa78-1942-457e-8f30-f178525bb5f1": {
 		"Material": "Engine",
-		"Name": "Shaft Piston (4m)",
+		"Name": "Medium piston (4m)",
 		"SizeId": 4
 	},
 	"7ececcaf-cfd8-4610-8f78-4eb670a9d03e": {
@@ -4107,6 +4622,11 @@
 	"7ee91ac9-0498-468a-aa0e-163c404c8e07": {
 		"Material": "Glass",
 		"Name": "Glass wedge back (3m)",
+		"SizeId": 3
+	},
+	"7f15808a-c4a6-4ae2-a6df-f93183a34623": {
+		"Material": "Glass",
+		"Name": "Glass beam slope (3m)",
 		"SizeId": 3
 	},
 	"7f189a18-7c28-4a4c-a1ee-e4d4335e79d6": {
@@ -4201,7 +4721,7 @@
 	},
 	"811379b2-2e27-4268-b821-940766960802": {
 		"Material": "Engine",
-		"Name": "Boiler (Small)",
+		"Name": "Small boiler",
 		"SizeId": 1
 	},
 	"819dea06-da54-4236-a041-7346e3dad3d2": {
@@ -4231,7 +4751,7 @@
 	},
 	"8266bc4e-7dc4-4c3a-bef9-9dddf4dab8d2": {
 		"Material": "Wheel",
-		"Name": "5m Wheel",
+		"Name": "Large wheel",
 		"SizeId": 24
 	},
 	"82b2446e-c12e-436a-8340-76d38372ead1": {
@@ -4242,7 +4762,7 @@
 	"832b5533-fa5d-45ec-ba4f-2dca1e8f0bba": {
 		"Material": "Cannon Loader",
 		"Name": "Autoloader (8m shells)",
-		"SizeId": 31
+		"SizeId": 32
 	},
 	"8331c71c-5725-472d-ad2e-65e4110982b7": {
 		"Material": "Missing",
@@ -4254,10 +4774,15 @@
 		"Name": "Glass 2m offset right",
 		"SizeId": 3
 	},
+	"83ad981f-3ecb-48ba-ab93-17ce645b9f56": {
+		"Material": "Heavy Armour",
+		"Name": "Mimic: Torus heavy armour",
+		"SizeId": 1
+	},
 	"83b06ab4-8278-4f8a-bd6f-bd26747dbd75": {
 		"Material": "Metal",
 		"Name": "Hydraulic recoil absorber (7m)",
-		"SizeId": 30
+		"SizeId": 31
 	},
 	"83e3a5e9-cfb8-4a0c-9ced-6f53822cd2f1": {
 		"Material": "Alloy",
@@ -4369,6 +4894,11 @@
 		"Name": "Autoloader (4m shells)",
 		"SizeId": 4
 	},
+	"86af4d75-35af-4521-b920-b224bd4e181b": {
+		"Material": "Alloy",
+		"Name": "Mimic: Hexagon alloy",
+		"SizeId": 1
+	},
 	"86f9fcac-6607-45b7-94fc-f0f6f76662bf": {
 		"Material": "Glass",
 		"Name": "Glass 2m to 4m inverse transition left",
@@ -4433,6 +4963,11 @@
 		"Material": "Railing",
 		"Name": "Railing L TA 3m M2",
 		"SizeId": 6
+	},
+	"87e0462a-fdae-422f-b32e-612c8a587c7d": {
+		"Material": "Lead",
+		"Name": "Mimic: Hexagon lead",
+		"SizeId": 1
 	},
 	"882c8ced-9183-4fa2-9661-2b150e3bf769": {
 		"Material": "Heavy Armour",
@@ -4544,6 +5079,11 @@
 		"Name": "Truss 1m",
 		"SizeId": 1
 	},
+	"8be592fa-e116-4b7d-8db0-25cc7f47b9d3": {
+		"Material": "Barrel",
+		"Name": "Elevation barrel end",
+		"SizeId": 1
+	},
 	"8c2aaf82-442e-46a7-9ea5-1b7862cacb87": {
 		"Material": "Alloy",
 		"Name": "Alloy inverted triangle corner (left) (3m)",
@@ -4553,6 +5093,11 @@
 		"Material": "Wood",
 		"Name": "Wood 2m to 4m slope transition right",
 		"SizeId": 4
+	},
+	"8c9a0597-7859-4a6a-a64c-7c455e229aa9": {
+		"Material": "Heavy Armour",
+		"Name": "Heavy armour beam slope (3m mirrored)",
+		"SizeId": 3
 	},
 	"8c9d5fcc-4e49-4b14-b9dc-4d8080e75445": {
 		"Material": "Rubber",
@@ -4588,6 +5133,16 @@
 		"Material": "Missile",
 		"Name": "Small Rail Gantry",
 		"SizeId": 1
+	},
+	"8d0206ef-8e9d-4193-9048-04012bb315d4": {
+		"Material": "Metal",
+		"Name": "Metal beam slope (2m)",
+		"SizeId": 2
+	},
+	"8d17143e-7e7c-490d-910d-76c986cbed69": {
+		"Material": "Missing",
+		"Name": "Tank Standard L",
+		"SizeId": 24
 	},
 	"8d70c55b-d200-4f56-a159-28646427d4b1": {
 		"Material": "Cannon Interior",
@@ -4629,6 +5184,11 @@
 		"Name": "Turret Block One Axis",
 		"SizeId": 1
 	},
+	"8f57fd6b-428c-44fd-ab94-0cc400ae2b24": {
+		"Material": "Stone",
+		"Name": "Mimic: Sphere stone",
+		"SizeId": 1
+	},
 	"8f9dbf41-6c2d-4e7b-855d-b2432c6942a2": {
 		"Material": "Alloy",
 		"Name": "Alloy beam (2m)",
@@ -4661,7 +5221,7 @@
 	},
 	"909e3611-6367-4b6c-ae61-4d909391bd66": {
 		"Material": "Engine",
-		"Name": "Pipe Tank 1m",
+		"Name": "Steam tank 1m",
 		"SizeId": 1
 	},
 	"90c9965a-1dcc-4786-a2d2-6299fed7260f": {
@@ -4677,7 +5237,7 @@
 	"9100db0a-b961-4ec7-9cb9-b171c3436ec0": {
 		"Material": "Wood",
 		"Name": "Wood 4m offset left",
-		"SizeId": 28
+		"SizeId": 29
 	},
 	"91183077-8eac-4e29-a197-9190429ef0ba": {
 		"Material": "Metal",
@@ -4699,6 +5259,11 @@
 		"Name": "Medium Rail Gantry (invisible)",
 		"SizeId": 1
 	},
+	"9177e247-50a4-4345-92df-88e89b2fc617": {
+		"Material": "Missing",
+		"Name": "Pivot 3m mirror",
+		"SizeId": 20
+	},
 	"91b89bcf-5822-4e77-b0cc-8d3271620700": {
 		"Material": "Lead",
 		"Name": "Lead 1m to 4m slope transition",
@@ -4715,8 +5280,8 @@
 		"SizeId": 1
 	},
 	"91db1f04-92a2-47c9-a3ea-be8cf37b60a7": {
-		"Material": "Propeller",
-		"Name": "Shaft Sealed Propeller Shaft 3m",
+		"Material": "Missing",
+		"Name": "Medium 2m sealed shaft",
 		"SizeId": 1
 	},
 	"91e7a486-6b8b-4f76-bf74-096e3c41a7af": {
@@ -4763,6 +5328,11 @@
 		"Material": "Metal",
 		"Name": "Metal 1m to 4m inverse transition right",
 		"SizeId": 4
+	},
+	"92ae17ea-25aa-49f9-9a6f-229675c1fb18": {
+		"Material": "Missing",
+		"Name": "ScentedCandleHolder4",
+		"SizeId": 1
 	},
 	"92d0134d-7fa4-4cf7-9198-f1b0951d1fac": {
 		"Material": "Rubber",
@@ -4844,9 +5414,19 @@
 		"Name": "Misc Material Storage Small",
 		"SizeId": 1
 	},
+	"94b930c8-e5be-4c24-9ccf-8b5c9b9a7489": {
+		"Material": "Lead",
+		"Name": "Lead beam slope (3m mirrored)",
+		"SizeId": 3
+	},
 	"94c39cef-53e1-41b2-bbc6-94a869d79c64": {
 		"Material": "Engine",
 		"Name": "6 Way Pipe",
+		"SizeId": 1
+	},
+	"9500e5fb-4548-41de-934b-6a205bc7b1a1": {
+		"Material": "Propeller",
+		"Name": "Propeller blade",
 		"SizeId": 1
 	},
 	"950c932b-125c-4f99-8d32-f44f8125e983": {
@@ -4909,6 +5489,11 @@
 		"Name": "Steam Shaft Drill Extension 1m",
 		"SizeId": 1
 	},
+	"96fe3c10-7483-4bf9-b050-5e9c8b5e2530": {
+		"Material": "Lead",
+		"Name": "Mimic: Tube lead",
+		"SizeId": 1
+	},
 	"9710b923-9e8c-4762-aa74-bffefb263a7e": {
 		"Material": "Propeller",
 		"Name": "Huge propeller",
@@ -4917,7 +5502,7 @@
 	"973c1ee1-2dc4-4cd7-be7c-32a37cb405de": {
 		"Material": "Cannon Interior",
 		"Name": "Solid Ammo Clip (8m shells)",
-		"SizeId": 31
+		"SizeId": 32
 	},
 	"973d25ff-2ecc-4c01-904a-c42d77560809": {
 		"Material": "Glass",
@@ -4928,6 +5513,11 @@
 		"Material": "Wood",
 		"Name": "Wood 3m to 4m slope transition right",
 		"SizeId": 4
+	},
+	"9794d4c6-f8c8-4f29-b566-6d25a7043fd9": {
+		"Material": "Propeller",
+		"Name": "Rudder trap large small mirror",
+		"SizeId": 1
 	},
 	"97ab0a32-c1c7-4663-a497-574fb15d9318": {
 		"Material": "Engine",
@@ -4984,6 +5574,11 @@
 		"Name": "Large Rail Gantry",
 		"SizeId": 49
 	},
+	"98f097c1-d838-4a3e-8a25-b93518b5b45d": {
+		"Material": "Laser",
+		"Name": "Superheating modulator",
+		"SizeId": 1
+	},
 	"98f6c067-1d29-4d8b-83d6-62faec838220": {
 		"Material": "Rubber",
 		"Name": "Rubber inverted triangle corner (right) (2m)",
@@ -5007,7 +5602,7 @@
 	"9965f5e6-64eb-456c-b0af-434b6fb23603": {
 		"Material": "Heavy Armour",
 		"Name": "Heavy Armour 4m offset left",
-		"SizeId": 28
+		"SizeId": 29
 	},
 	"996cdf27-bebf-4999-9a2d-a54893ba70c6": {
 		"Material": "Engine",
@@ -5018,6 +5613,11 @@
 		"Material": "Engine",
 		"Name": "L-Junction Pipe (left)",
 		"SizeId": 1
+	},
+	"99eeb4c6-c081-4ccc-b71a-d2179e94be94": {
+		"Material": "Missing",
+		"Name": "Plasma Connector 4m",
+		"SizeId": 4
 	},
 	"9a0ae372-beb4-4009-b14e-36ed0715af73": {
 		"Material": "Wood",
@@ -5069,6 +5669,11 @@
 		"Name": "Alloy beam slope diagonal cut (4m)",
 		"SizeId": 4
 	},
+	"9b230797-737a-4ef8-a0e6-fb1a8d069a9a": {
+		"Material": "Missing",
+		"Name": "Plasma Cooler 2m",
+		"SizeId": 2
+	},
 	"9b28100a-6d85-4680-b3f1-e3f068298cd9": {
 		"Material": "Lead",
 		"Name": "Lead triangle corner (left) (1m)",
@@ -5078,6 +5683,11 @@
 		"Material": "Barrel",
 		"Name": "60mm Auto Cannon",
 		"SizeId": 3
+	},
+	"9be257da-2e20-4e40-affe-106c04946f73": {
+		"Material": "Propeller",
+		"Name": "Rudder Pivot Shaft 2m mirror",
+		"SizeId": 18
 	},
 	"9bff4b97-c652-4da7-99df-ab4a1bd5551e": {
 		"Material": "Missile",
@@ -5097,7 +5707,12 @@
 	"9c1e83ca-c225-41d9-bded-f9d6e8dc6bca": {
 		"Material": "Metal",
 		"Name": "Hydraulic recoil absorber (5m)",
-		"SizeId": 28
+		"SizeId": 29
+	},
+	"9c2b7f56-3ff6-4b15-bfcc-929781c10d21": {
+		"Material": "Glass",
+		"Name": "Mimic: Hexagon glass",
+		"SizeId": 1
 	},
 	"9c64eb53-f66f-4966-a9d7-4208f7b0af71": {
 		"Material": "Rubber",
@@ -5123,6 +5738,11 @@
 		"Material": "Engine",
 		"Name": "Jet connector hull",
 		"SizeId": 24
+	},
+	"9d1cb184-75e9-4f86-b60a-fac026e7c711": {
+		"Material": "Alloy",
+		"Name": "Alloy beam slope (2m mirrored)",
+		"SizeId": 2
 	},
 	"9d2ff3d6-abc2-4378-b47c-cad42d4af1bc": {
 		"Material": "Electronic",
@@ -5161,7 +5781,7 @@
 	},
 	"9da4b2a1-a69a-472d-ad2f-a65a9a36e6ea": {
 		"Material": "Engine",
-		"Name": "5m Turbine Front",
+		"Name": "Large turbine generator connection",
 		"SizeId": 46
 	},
 	"9de26959-6d51-4a6e-b575-ec47e6bdafaf": {
@@ -5191,7 +5811,7 @@
 	},
 	"9e41c3e8-db93-41db-9ce3-95b248af6c68": {
 		"Material": "Engine",
-		"Name": "Shaft Shaft (3m)",
+		"Name": "Medium engine shaft",
 		"SizeId": 1
 	},
 	"9e8fd38f-a406-4d87-8186-de37979d4d20": {
@@ -5241,13 +5861,18 @@
 	},
 	"9f96d700-d8bc-4aa1-bce8-f284a9117bc7": {
 		"Material": "Engine",
-		"Name": "Small Turbine End",
+		"Name": "Small turbine pipe connection",
 		"SizeId": 1
 	},
 	"9f97c3df-a0a3-4fa4-8570-094a2e65d8aa": {
 		"Material": "Engine",
 		"Name": "Fuel Refinery Desalter",
 		"SizeId": 52
+	},
+	"9f9f1ee9-7937-4370-8828-ba2828c5d9a4": {
+		"Material": "Lead",
+		"Name": "Mimic: Torus lead",
+		"SizeId": 1
 	},
 	"a00c6e9e-6896-4615-bd03-97501c2a1523": {
 		"Material": "Wood",
@@ -5261,7 +5886,7 @@
 	},
 	"a054889a-5380-4361-95e0-4482cf8bbe9f": {
 		"Material": "Engine",
-		"Name": "Shaft Piston (2m)",
+		"Name": "Small piston (2m)",
 		"SizeId": 2
 	},
 	"a0945b5c-2f1e-45ce-95fb-721e5657afa7": {
@@ -5279,6 +5904,11 @@
 		"Name": "Crate",
 		"SizeId": 1
 	},
+	"a11496e4-8533-4e2f-8ee3-bf0aae50b4d1": {
+		"Material": "Missing",
+		"Name": "Pivot 2m",
+		"SizeId": 19
+	},
 	"a160804b-15cc-46e2-8ffb-401c2aa01de6": {
 		"Material": "Engine",
 		"Name": "Straight Pipe",
@@ -5289,10 +5919,25 @@
 		"Name": "Lead wedge back (1m)",
 		"SizeId": 1
 	},
+	"a1ba55a3-7a10-448a-bf6a-639179c03889": {
+		"Material": "Rubber",
+		"Name": "Mimic: Pentagon rubber",
+		"SizeId": 1
+	},
+	"a1d9ffb0-4521-40c2-a71e-c0155baa0ab6": {
+		"Material": "Heavy Armour",
+		"Name": "Mimic: Cube heavy armour",
+		"SizeId": 1
+	},
 	"a1ec94dd-9495-467a-8f4f-d173ab20ae00": {
 		"Material": "Stone",
 		"Name": "Stone pole (2m)",
 		"SizeId": 2
+	},
+	"a1fb0330-6320-474d-b58c-f43830f6eff1": {
+		"Material": "Drill",
+		"Name": "Wide drill bit 7x7",
+		"SizeId": 26
 	},
 	"a243f091-0a79-452e-a34e-1d3c26b8d45d": {
 		"Material": "Heavy Armour",
@@ -5317,7 +5962,7 @@
 	"a2983545-008e-4926-a54a-89cc56de8f48": {
 		"Material": "Metal",
 		"Name": "Metal 4m offset left",
-		"SizeId": 28
+		"SizeId": 29
 	},
 	"a2b2dfdc-d014-466b-8d45-9432c9866f6a": {
 		"Material": "Heavy Armour",
@@ -5331,7 +5976,7 @@
 	},
 	"a3114f91-5182-4803-9ec6-fc1e6a7f9a87": {
 		"Material": "Missing",
-		"Name": "Firebox",
+		"Name": "Medium firebox",
 		"SizeId": 1
 	},
 	"a31d4438-03b8-4cf2-ad7d-ff7c07fbf60c": {
@@ -5354,10 +5999,20 @@
 		"Name": "Wing strut",
 		"SizeId": 1
 	},
+	"a3840b74-2a1a-440e-b5be-6dded6aca7c0": {
+		"Material": "Detection",
+		"Name": "Camera 90 Alternative",
+		"SizeId": 1
+	},
 	"a38cee19-5de4-4a83-ad48-54257af58a4e": {
 		"Material": "Lead",
 		"Name": "Lead triangle corner (right) (1m)",
 		"SizeId": 1
+	},
+	"a3a6f339-8ebb-4a2e-a27d-6b76937590f7": {
+		"Material": "Glass",
+		"Name": "Glass beam slope (2m mirrored)",
+		"SizeId": 2
 	},
 	"a3d914e9-697d-425f-abda-a6b21b4de952": {
 		"Material": "Electronic",
@@ -5366,13 +6021,23 @@
 	},
 	"a3ea3972-d2c4-409d-8f77-5be9e2809da0": {
 		"Material": "Engine",
-		"Name": "Pipe Valve",
+		"Name": "Steam pipe valve",
 		"SizeId": 1
 	},
 	"a3ea61a8-018c-4277-afd9-ac0a34faa759": {
 		"Material": "Alloy",
 		"Name": "Alloy down slope (3m)",
 		"SizeId": 3
+	},
+	"a3edc805-8355-4fb3-8d94-d5c19d1a86d9": {
+		"Material": "Cannon Interior",
+		"Name": "Gauge increase top 3 connections",
+		"SizeId": 1
+	},
+	"a447ddab-2856-4edb-9a75-b6f3348b20d8": {
+		"Material": "Engine",
+		"Name": "Fuel Pipe 2m",
+		"SizeId": 2
 	},
 	"a4b0d100-c480-4697-b606-489d80a6d376": {
 		"Material": "Alloy",
@@ -5391,7 +6056,7 @@
 	},
 	"a5556bd2-0d78-48d1-bfa6-dbdd08443680": {
 		"Material": "Engine",
-		"Name": "Shaft Shaft Bearing 3m",
+		"Name": "Medium shaft bearing",
 		"SizeId": 12
 	},
 	"a56e0dcf-94e4-48a0-b8b9-5e33e0ab69cf": {
@@ -5403,6 +6068,11 @@
 		"Material": "Barrel",
 		"Name": "Flash Suppression Barrel",
 		"SizeId": 1
+	},
+	"a5ad3190-f3ff-4cfd-860a-9f7328482271": {
+		"Material": "Missing",
+		"Name": "Flamethrower Bottom",
+		"SizeId": 4
 	},
 	"a5bb808a-ef3d-4262-84a6-6d245e3735ea": {
 		"Material": "Wheel",
@@ -5427,6 +6097,11 @@
 	"a6ad7eaa-e826-42d5-b4f5-7358a842623f": {
 		"Material": "Alloy",
 		"Name": "Wedge Alloy Back 1m",
+		"SizeId": 1
+	},
+	"a6c0c162-0447-4c2e-9fb1-25c54be4c4dc": {
+		"Material": "Glass",
+		"Name": "Mimic: Cube glass",
 		"SizeId": 1
 	},
 	"a6cfd078-bc39-4ad8-a47f-49097913a27b": {
@@ -5464,6 +6139,11 @@
 		"Name": "Wooden Material Storage Large",
 		"SizeId": 51
 	},
+	"a77ab356-9f98-45b6-856a-684af858cd45": {
+		"Material": "Heavy Armour",
+		"Name": "Mimic: Pentagon heavy armour",
+		"SizeId": 1
+	},
 	"a783daba-b6c2-4d87-aee8-ee1791f45587": {
 		"Material": "Engine",
 		"Name": "Fuel Refinery Pipe 3m",
@@ -5473,6 +6153,11 @@
 		"Material": "Lead",
 		"Name": "Lead 3m square backed corner left",
 		"SizeId": 3
+	},
+	"a7a1064f-34e9-4d5c-b304-af11e7fe6def": {
+		"Material": "Stone",
+		"Name": "Mimic: Pentagon stone",
+		"SizeId": 1
 	},
 	"a7aaf947-f16c-489b-a10e-b48d03e0d209": {
 		"Material": "Missile",
@@ -5509,6 +6194,11 @@
 		"Name": "Large Missile Hatch 2x2",
 		"SizeId": 48
 	},
+	"a869e113-dde0-4dd9-ac10-c2636f0dc65a": {
+		"Material": "Glass",
+		"Name": "Mimic: Torus glass",
+		"SizeId": 1
+	},
 	"a8aebdd1-1479-4b00-8415-8f6da2018dc6": {
 		"Material": "Heavy Armour",
 		"Name": "Heavy armour triangle corner (right) (4m) mirrored",
@@ -5536,7 +6226,7 @@
 	},
 	"a91233a6-a786-4ca8-b50f-9faca5cb3733": {
 		"Material": "Engine",
-		"Name": "Gearbox Small",
+		"Name": "Small gearbox",
 		"SizeId": 1
 	},
 	"a9763554-b190-4861-95fd-f97584923683": {
@@ -5564,6 +6254,11 @@
 		"Name": "150mm Casemate",
 		"SizeId": 52
 	},
+	"aa083ca5-dcc7-41c4-8261-bf191bc19fa5": {
+		"Material": "Propeller",
+		"Name": "Rudder 3m",
+		"SizeId": 21
+	},
 	"aa09f129-19dd-4f9e-b1e6-b7739fe12d3f": {
 		"Material": "Wing",
 		"Name": "Wing Corner Right",
@@ -5573,6 +6268,11 @@
 		"Material": "Wing",
 		"Name": "4m Wing Corner Left",
 		"SizeId": 22
+	},
+	"aa1e2175-119f-437e-b48f-a47f4714bd3b": {
+		"Material": "Missing",
+		"Name": "Plasma Emitter Destabilizer",
+		"SizeId": 1
 	},
 	"aa355fd9-295c-43f3-9f11-7a781a9808b0": {
 		"Material": "Glass",
@@ -5589,9 +6289,14 @@
 		"Name": "Heavy Armour 3m to 4m inverse transition left",
 		"SizeId": 4
 	},
+	"aabe0adb-fe09-4255-972e-b876cce1b77d": {
+		"Material": "Propeller",
+		"Name": "Rudder Pivot 3m",
+		"SizeId": 21
+	},
 	"aac4a0a5-9ff4-489d-a119-ea1b6e56ea87": {
 		"Material": "Engine",
-		"Name": "5m Axis-Shifting Gears R",
+		"Name": "Large axis-shifting gears R",
 		"SizeId": 51
 	},
 	"aae589dd-4a56-4749-887b-dd4e3f7144e7": {
@@ -5603,6 +6308,11 @@
 		"Material": "Lead",
 		"Name": "Lead triangle corner (left) (2m)",
 		"SizeId": 2
+	},
+	"ab5db452-d91a-49a7-9460-bb5d56372d8e": {
+		"Material": "Applique",
+		"Name": "Mimic: Tube applique",
+		"SizeId": 1
 	},
 	"ab699540-efc8-4592-bc97-204f6a874b3a": {
 		"Material": "Metal",
@@ -5626,7 +6336,7 @@
 	},
 	"abd1afe4-2fb2-4f91-94aa-39d56f94ca05": {
 		"Material": "Wheel",
-		"Name": "Shaft Wheel (1m)",
+		"Name": "Small wheel",
 		"SizeId": 1
 	},
 	"ac09f902-8921-4a58-aad5-c679706697f6": {
@@ -5643,6 +6353,11 @@
 		"Material": "Missing",
 		"Name": "Dance show",
 		"SizeId": 1
+	},
+	"ac12e978-c2f2-4a79-b959-224f835fdef0": {
+		"Material": "Lead",
+		"Name": "Lead beam slope (3m)",
+		"SizeId": 3
 	},
 	"ac24cd04-449e-47b9-bf8c-bf58d9997264": {
 		"Material": "Missing",
@@ -5667,7 +6382,7 @@
 	"acb4bf6e-b10e-4a6f-b9dc-b22be888c096": {
 		"Material": "Metal",
 		"Name": "Hydraulic recoil absorber (8m)",
-		"SizeId": 31
+		"SizeId": 32
 	},
 	"accbfca6-ba3b-49df-83e3-96007b1dc571": {
 		"Material": "Wing",
@@ -5692,6 +6407,11 @@
 	"ad3e7665-cf63-4135-835f-2f743c69bb36": {
 		"Material": "Alloy",
 		"Name": "Alloy triangle corner (right) (1m)",
+		"SizeId": 1
+	},
+	"ad443632-f57b-410d-92e4-c8bb80f519af": {
+		"Material": "Missing",
+		"Name": "ScentedCandleHolder3Nice",
 		"SizeId": 1
 	},
 	"ad7546ec-70d2-485d-ba99-44dc2a8dda70": {
@@ -5749,6 +6469,11 @@
 		"Name": "Metal 2m offset left",
 		"SizeId": 3
 	},
+	"aebf8f22-8967-45ae-9c4d-0562e52cfc5f": {
+		"Material": "Glass",
+		"Name": "Mimic: Tube glass",
+		"SizeId": 1
+	},
 	"aecb98bb-76cd-4d05-8304-acc1392ab596": {
 		"Material": "Alloy",
 		"Name": "Alloy strut",
@@ -5761,7 +6486,7 @@
 	},
 	"afbc81cf-82bc-4f9b-a96d-079f5cd12130": {
 		"Material": "Engine",
-		"Name": "Shaft Crank Cased (1m)",
+		"Name": "Small cased crank",
 		"SizeId": 1
 	},
 	"b06788d5-4715-4168-8f7d-d6380f73fe54": {
@@ -5818,6 +6543,11 @@
 		"Material": "Metal",
 		"Name": "Metal square corner (right) (4m)",
 		"SizeId": 4
+	},
+	"b1957020-d688-46a3-a9c3-463651bdbed0": {
+		"Material": "Lead",
+		"Name": "Mimic: Cone Lead",
+		"SizeId": 1
 	},
 	"b199d3d7-8c91-4b6b-aa60-d4b8da77309f": {
 		"Material": "Stone",
@@ -5906,7 +6636,7 @@
 	},
 	"b44be747-32cb-41b7-9e1e-21472534b4b8": {
 		"Material": "Engine",
-		"Name": "Boiler (Large)",
+		"Name": "Medium boiler",
 		"SizeId": 24
 	},
 	"b46c1759-a7c1-4dca-9c15-d0c3329dcaae": {
@@ -5914,10 +6644,25 @@
 		"Name": "Control surface 2m",
 		"SizeId": 2
 	},
+	"b4cb2e32-aaa6-4bbf-882a-d1908cbf51b9": {
+		"Material": "Barrel",
+		"Name": "Motor driven barrel end",
+		"SizeId": 1
+	},
+	"b4f326cb-64db-46e7-87c3-2d011c58ee2b": {
+		"Material": "Missing",
+		"Name": "Plasma Accelerator 6m",
+		"SizeId": 30
+	},
 	"b50989c9-03d4-4201-a8d4-459dcea86b05": {
 		"Material": "Engine",
 		"Name": "Jet Engine",
 		"SizeId": 1
+	},
+	"b50c4dca-2cfd-4d3e-9c20-469c1fcfd4c0": {
+		"Material": "Wood",
+		"Name": "Wood beam slope (2m mirrored)",
+		"SizeId": 2
 	},
 	"b55a09cd-3aa8-40b0-b3fa-ae07a6941b77": {
 		"Material": "Rubber",
@@ -5944,19 +6689,24 @@
 		"Name": "Alloy beam slope diagonal cut (4m) mirrored",
 		"SizeId": 4
 	},
+	"b5e568e5-67c3-42ba-8c36-b5ba5c431e42": {
+		"Material": "Missing",
+		"Name": "Plasma Emitter Splitter",
+		"SizeId": 1
+	},
 	"b5f4a946-dea1-4f99-93cf-6f0741c3b4e6": {
 		"Material": "Alloy",
 		"Name": "Alloy 2m to 4m inverse transition left",
 		"SizeId": 4
 	},
 	"b6184e42-1647-4bd2-8465-f8b88f76621f": {
-		"Material": "Propeller",
-		"Name": "5m Propeller Shaft",
+		"Material": "Engine",
+		"Name": "Large shaft",
 		"SizeId": 1
 	},
 	"b633f303-0131-489a-ad4c-68b94fc5d93f": {
-		"Material": "Propeller",
-		"Name": "5m 2m Sealed Propeller Shaft",
+		"Material": "Missing",
+		"Name": "Large 2m sealed shaft",
 		"SizeId": 1
 	},
 	"b63b85fc-685e-454f-8f93-31db02b95a05": {
@@ -5987,7 +6737,7 @@
 	"b74cf011-75ce-4408-a0c9-d69cbc45f0ac": {
 		"Material": "Rubber",
 		"Name": "Rubber 4m offset left",
-		"SizeId": 28
+		"SizeId": 29
 	},
 	"b799b159-3bab-45f8-92e4-3107bca46513": {
 		"Material": "Cannon Interior",
@@ -6006,23 +6756,28 @@
 	},
 	"b82023a0-5f10-4648-8230-74b159f6b185": {
 		"Material": "Engine",
-		"Name": "Pipe Vent",
+		"Name": "Steam pipe vent",
 		"SizeId": 1
 	},
 	"b8304b5f-9b20-48b0-b3df-a8187916ed98": {
 		"Material": "Engine",
-		"Name": "5m Piston (mirror)",
-		"SizeId": 62
+		"Name": "Large serial piston (mirror)",
+		"SizeId": 63
 	},
 	"b87cbd21-faba-40de-9fca-a1f1a9178a21": {
 		"Material": "Engine",
-		"Name": "5m Turbine End",
+		"Name": "Large turbine pipe connection",
 		"SizeId": 46
 	},
 	"b88679fb-0325-4c85-942f-ad9c6ed6545b": {
 		"Material": "Wood",
 		"Name": "Wood down slope (2m)",
 		"SizeId": 2
+	},
+	"b88f9bdb-8366-4620-8bb0-4fb0a421519f": {
+		"Material": "Drill",
+		"Name": "Drill Bit 5x5",
+		"SizeId": 25
 	},
 	"b8a325d6-1867-4097-b768-10a6d5888d6f": {
 		"Material": "Heavy Armour",
@@ -6057,6 +6812,11 @@
 	"b9948d0c-d9da-4c22-adb3-ed3fd8509806": {
 		"Material": "Heavy Armour",
 		"Name": "Heavy armour triangle corner (left) (1m)",
+		"SizeId": 1
+	},
+	"b9b3ba3b-441c-4860-b829-f15783c304cc": {
+		"Material": "Lead",
+		"Name": "Mimic: Cube lead",
 		"SizeId": 1
 	},
 	"b9c6a6bf-a61a-44eb-bf89-ee414711fed2": {
@@ -6109,6 +6869,11 @@
 		"Name": "Small jet connector",
 		"SizeId": 1
 	},
+	"bab686db-b19b-4d33-93b6-30e5520b4cfd": {
+		"Material": "Metal",
+		"Name": "Mimic: Tube metal",
+		"SizeId": 1
+	},
 	"bb0337d9-69f7-48f1-9c12-2de83ceff42d": {
 		"Material": "Glass",
 		"Name": "Glass inverted triangle corner (left) (2m)",
@@ -6144,6 +6909,11 @@
 		"Name": "Jet combuster hull",
 		"SizeId": 24
 	},
+	"bbfe300d-4d55-4cbd-8c99-ee0140db99d4": {
+		"Material": "Propeller",
+		"Name": "Rudder Pivot 2m mirror",
+		"SizeId": 18
+	},
 	"bc292fe3-2330-4a01-8615-412a19fd7f6d": {
 		"Material": "Barrel",
 		"Name": "Elevation barrel",
@@ -6166,13 +6936,23 @@
 	},
 	"bd32505c-29b2-4ff2-aa27-4ab3018b6706": {
 		"Material": "Engine",
-		"Name": "Boiler Connector (Huge)",
+		"Name": "Large boiler connector",
 		"SizeId": 25
+	},
+	"bd735d1f-ed33-4da1-9769-9922b94ed68f": {
+		"Material": "Wood",
+		"Name": "Wood beam slope (3m mirrored)",
+		"SizeId": 3
 	},
 	"bdafa446-f615-49cb-94f3-d7652dde6cec": {
 		"Material": "Wood",
 		"Name": "Wood down slope (1m)",
 		"SizeId": 1
+	},
+	"bdcd498c-2b32-4e9d-9333-2a3383c296f5": {
+		"Material": "Rubber",
+		"Name": "Rubber beam slope (2m mirrored)",
+		"SizeId": 2
 	},
 	"bdd365a5-c0df-4d2b-959a-93ecb518bb85": {
 		"Material": "Engine",
@@ -6191,12 +6971,12 @@
 	},
 	"bdfe2fc5-2d18-4c27-a2fe-c1a83f962730": {
 		"Material": "Engine",
-		"Name": "Pipe 4 Way",
+		"Name": "Steam pipe 4 way",
 		"SizeId": 1
 	},
 	"bf008077-997c-4371-a116-57de7d351fe7": {
 		"Material": "Propeller",
-		"Name": "Shaft Small Propeller 1m",
+		"Name": "Small 1m propeller",
 		"SizeId": 1
 	},
 	"bf0db0d2-8582-41d2-bcfe-5299bec3d06b": {
@@ -6233,6 +7013,11 @@
 		"Material": "Engine",
 		"Name": "Air intake duct",
 		"SizeId": 1
+	},
+	"c042392e-e464-4e2d-b0a2-3d325139721b": {
+		"Material": "Metal",
+		"Name": "Metal beam slope (3m)",
+		"SizeId": 3
 	},
 	"c0542188-97dc-4cd5-a275-ede25d9797ba": {
 		"Material": "Laser",
@@ -6306,8 +7091,8 @@
 	},
 	"c11040bb-b868-4ab9-91c6-6a3924cd5c19": {
 		"Material": "Engine",
-		"Name": "Shaft Generator (3m)",
-		"SizeId": 60
+		"Name": "Medium shaft generator",
+		"SizeId": 62
 	},
 	"c125728d-3952-44cd-939e-84f8290fbd9f": {
 		"Material": "Surge Protector",
@@ -6349,6 +7134,11 @@
 		"Name": "Heavy Armour 1m to 3m slope transition right",
 		"SizeId": 2
 	},
+	"c32f6dc0-28d5-4125-a45f-8c9f5b8b94ce": {
+		"Material": "Rubber",
+		"Name": "Mimic: Torus rubber",
+		"SizeId": 1
+	},
 	"c34145c5-bc8c-48c3-bafb-ebda44f1e300": {
 		"Material": "Glass",
 		"Name": "Glass inverted triangle corner (left) (3m)",
@@ -6356,7 +7146,7 @@
 	},
 	"c37830f6-bd7b-4c92-bf6e-cf902bbf8d0b": {
 		"Material": "Engine",
-		"Name": "Shaft Reduction Gear 1m",
+		"Name": "Small transmission",
 		"SizeId": 2
 	},
 	"c384fa33-67c3-4915-a878-4245f4cdcecc": {
@@ -6371,7 +7161,7 @@
 	},
 	"c40ae12e-bf54-40ad-aa30-2278d78f86bc": {
 		"Material": "Engine",
-		"Name": "Shaft Crank (3m)",
+		"Name": "Medium crank",
 		"SizeId": 12
 	},
 	"c4c6b83c-f147-46a9-9a20-d3273c5890cd": {
@@ -6426,7 +7216,7 @@
 	},
 	"c5555c97-f068-435d-8e2a-635bbc184c16": {
 		"Material": "Engine",
-		"Name": "Pipe 3 Way (2) (mirror)",
+		"Name": "Steam pipe 3 way (2)",
 		"SizeId": 1
 	},
 	"c5aaf2f4-ccf1-4c34-9ebf-a16eb5451920": {
@@ -6462,7 +7252,7 @@
 	"c624a6cd-31dc-49d3-a1e9-5482d06acbc6": {
 		"Material": "Mantlet",
 		"Name": "Elevation Mantlet (3m)",
-		"SizeId": 33
+		"SizeId": 28
 	},
 	"c6497cec-51b5-4d94-940e-107990a25afd": {
 		"Material": "Missing",
@@ -6477,6 +7267,11 @@
 	"c6b9d38c-01e5-4a37-8493-2b7f7f1d74fb": {
 		"Material": "Electronic",
 		"Name": "Vehicle Controller Small",
+		"SizeId": 1
+	},
+	"c6ed64d8-b61a-432d-9266-2ab88e98f4c5": {
+		"Material": "Barrel",
+		"Name": "Motor driven barrel start",
 		"SizeId": 1
 	},
 	"c6f2e2ea-a894-449e-800d-473cb73966cb": {
@@ -6524,6 +7319,11 @@
 		"Name": "Wood wedge (3m)",
 		"SizeId": 3
 	},
+	"c8327813-a7fe-4f2b-b1e2-9d5c7e5e5e27": {
+		"Material": "Missing",
+		"Name": "Plasma Chamber 1m",
+		"SizeId": 1
+	},
 	"c855c2f8-716b-44ba-901f-2dbfb4bf1612": {
 		"Material": "Alloy",
 		"Name": "Wedge Alloy Back 3m",
@@ -6539,6 +7339,11 @@
 		"Name": "Rubber 2m to 4m slope transition (mirrored)",
 		"SizeId": 4
 	},
+	"c8e0ef2f-6d2f-43cb-9395-cf8b57a69bf6": {
+		"Material": "Heavy Armour",
+		"Name": "Mimic: Cone Heavy Armour",
+		"SizeId": 1
+	},
 	"c8fe583a-357b-4fa6-86f1-fc2de639c909": {
 		"Material": "Electronic",
 		"Name": "Electric Engine",
@@ -6550,8 +7355,8 @@
 		"SizeId": 1
 	},
 	"c937c1c0-d6f3-46b4-af96-d1842a240fb3": {
-		"Material": "Electronic",
-		"Name": "Electric Motor 1m",
+		"Material": "Engine",
+		"Name": "Small crank motor",
 		"SizeId": 1
 	},
 	"c947b280-da3e-473d-9727-8294bc7d0821": {
@@ -6589,6 +7394,11 @@
 		"Name": "Stone beam slope diagonal cut (4m) mirrored",
 		"SizeId": 4
 	},
+	"ca3fdc49-1cd7-4191-a7b7-a0a1a77689b7": {
+		"Material": "Applique",
+		"Name": "Mimic: Sphere applique",
+		"SizeId": 1
+	},
 	"ca49a92a-1ae1-45c6-9b8f-aad28d9859c1": {
 		"Material": "Heavy Armour",
 		"Name": "Heavy armour triangle corner (right) (3m)",
@@ -6616,7 +7426,7 @@
 	},
 	"caeab2bf-c814-43f2-a220-e13b6d557034": {
 		"Material": "Engine",
-		"Name": "Small Turbine Middle",
+		"Name": "Small turbine middle",
 		"SizeId": 1
 	},
 	"caec26b3-847c-4876-80e1-e6206003ecb5": {
@@ -6644,6 +7454,11 @@
 		"Name": "Alloy 2m to 3m slope transition (mirrored)",
 		"SizeId": 3
 	},
+	"cc968269-d27d-4099-b052-92934999dc7f": {
+		"Material": "Alloy",
+		"Name": "Alloy beam slope (3m)",
+		"SizeId": 3
+	},
 	"ccb16d68-186c-4896-82e3-9e9213271ace": {
 		"Material": "Alloy",
 		"Name": "Alloy 2m offset right",
@@ -6654,6 +7469,11 @@
 		"Name": "Radar 90",
 		"SizeId": 1
 	},
+	"cd05c53c-7af8-49be-ae8b-fbcbf41abbd7": {
+		"Material": "Alloy",
+		"Name": "Alloy beam slope (2m)",
+		"SizeId": 2
+	},
 	"cd06f23c-9a61-448a-864e-529298e5bbd1": {
 		"Material": "Detection",
 		"Name": "Range Finder (7m) armour",
@@ -6661,17 +7481,27 @@
 	},
 	"cd4d4ab6-0652-46dd-b887-71714317f470": {
 		"Material": "Engine",
-		"Name": "Pipe 6 Way",
+		"Name": "Steam pipe 6 way",
 		"SizeId": 1
+	},
+	"cd70b835-0f39-4f01-a43c-34960a2087b8": {
+		"Material": "Propeller",
+		"Name": "Rudder 4m",
+		"SizeId": 23
 	},
 	"cd788eca-ec52-40d2-bf17-48a6d47e569e": {
 		"Material": "Missile",
 		"Name": "Large Gantry Left",
 		"SizeId": 48
 	},
+	"cd7c7590-a55f-4b86-af40-6159998a60fc": {
+		"Material": "Propeller",
+		"Name": "Rudder Pivot Shaft 2m",
+		"SizeId": 19
+	},
 	"cd90265f-4593-446b-9153-623c2f339dc0": {
 		"Material": "Engine",
-		"Name": "Pipe 5 Way",
+		"Name": "Steam pipe 5 way",
 		"SizeId": 1
 	},
 	"cdab7fc2-ebf1-4a85-aacf-6fd1c95498a9": {
@@ -6704,6 +7534,11 @@
 		"Name": "Bomb Chute",
 		"SizeId": 1
 	},
+	"ce545a2c-105b-4576-a854-f70cfbeaf026": {
+		"Material": "Glass",
+		"Name": "Mimic: Cone Glass",
+		"SizeId": 1
+	},
 	"ce77cd15-ad63-425f-ab0c-28b16584d5a1": {
 		"Material": "Wood",
 		"Name": "Stairs",
@@ -6716,12 +7551,12 @@
 	},
 	"ce84541b-a7f2-4d49-9074-040217580385": {
 		"Material": "Engine",
-		"Name": "Shaft Crank (1m)",
+		"Name": "Small crank",
 		"SizeId": 1
 	},
 	"ceae02f9-2a21-40a0-b0d5-fdb0e4975826": {
 		"Material": "Propeller",
-		"Name": "5m Propeller 5m",
+		"Name": "Large 5m propeller",
 		"SizeId": 25
 	},
 	"ceed114a-ddb5-47d4-9b7a-ef1ce9398e09": {
@@ -6759,10 +7594,25 @@
 		"Name": "Stone wedge back (4m)",
 		"SizeId": 4
 	},
+	"d00a6de3-be1a-4ae2-be0b-f7bb14d75052": {
+		"Material": "Engine",
+		"Name": "Steam Shaft Drill Head 5m",
+		"SizeId": 66
+	},
 	"d010466a-44bc-4572-96fb-94ae72f93009": {
 		"Material": "Stone",
 		"Name": "Stone 2m offset left",
 		"SizeId": 3
+	},
+	"d03cabe9-7469-4d89-8676-4a5ee2f024d9": {
+		"Material": "Barrel",
+		"Name": "Recoil suppression barrel start",
+		"SizeId": 1
+	},
+	"d044965b-bae6-49d1-a725-dee6b7e684a0": {
+		"Material": "Lead",
+		"Name": "Mimic: Sphere lead",
+		"SizeId": 1
 	},
 	"d06af565-8e3c-43ce-8449-b2d07167bbec": {
 		"Material": "Wood",
@@ -6787,12 +7637,17 @@
 	"d13556da-e6dc-4c49-a9ec-b47517709da5": {
 		"Material": "Cannon Interior",
 		"Name": "Ammo Ejector",
-		"SizeId": 32
+		"SizeId": 33
 	},
 	"d1424dbf-197c-4b5d-b361-1a2ea39b1e47": {
 		"Material": "Heavy Armour",
 		"Name": "Heavy Armour 3m square backed corner left",
 		"SizeId": 3
+	},
+	"d158a125-2079-4da9-85d6-dae3e602aa5b": {
+		"Material": "Alloy",
+		"Name": "Mimic: Torus alloy",
+		"SizeId": 1
 	},
 	"d15a334b-d951-4991-89f0-cdf2599a9699": {
 		"Material": "Wing",
@@ -6834,6 +7689,11 @@
 		"Name": "Rubber triangle corner (right) (2m)",
 		"SizeId": 2
 	},
+	"d26bbf10-c112-4702-b163-69ddfc9a2991": {
+		"Material": "Propeller",
+		"Name": "Rudder Attachment Mirror",
+		"SizeId": 19
+	},
 	"d279f5fa-c310-494f-83f2-a1963e1e7fa0": {
 		"Material": "Railing",
 		"Name": "Railing R TA 3m M2",
@@ -6851,8 +7711,18 @@
 	},
 	"d34728c0-95de-49fd-a23d-735c7084556f": {
 		"Material": "Engine",
-		"Name": "Small Turbine Window",
+		"Name": "Small turbine window",
 		"SizeId": 1
+	},
+	"d352e0e8-942e-4982-b2b9-46c17e9821f8": {
+		"Material": "Propeller",
+		"Name": "Rudder Pivot 4m",
+		"SizeId": 23
+	},
+	"d387f62e-d820-4068-9326-37348bc8be4c": {
+		"Material": "Wood",
+		"Name": "Wood beam slope (3m)",
+		"SizeId": 3
 	},
 	"d3924bae-be5a-43a0-be19-64fc7c8d6059": {
 		"Material": "Electronic",
@@ -6876,7 +7746,7 @@
 	},
 	"d3e77516-fa1c-4f78-acbe-731bb2a0e698": {
 		"Material": "Engine",
-		"Name": "Shaft Reduction Gear 3m",
+		"Name": "Medium transmission",
 		"SizeId": 65
 	},
 	"d3e8e14a-58e7-4bdd-b1b3-0f37e4723a73": {
@@ -6886,7 +7756,7 @@
 	},
 	"d3f65018-2833-4746-9425-dd78590f4f26": {
 		"Material": "Engine",
-		"Name": "Pipe 4m",
+		"Name": "Steam pipe 4m",
 		"SizeId": 4
 	},
 	"d401bed1-2346-4eef-86aa-c303556f2138": {
@@ -6906,7 +7776,7 @@
 	},
 	"d43a0af4-69e3-4f28-a0fc-9d36b21273e2": {
 		"Material": "Propeller",
-		"Name": "Shaft Large Propeller 3m",
+		"Name": "Medium 5m propeller",
 		"SizeId": 25
 	},
 	"d43b5a55-9e60-48f9-9e77-ac1cfa97dafa": {
@@ -6958,6 +7828,11 @@
 		"Material": "Heavy Armour",
 		"Name": "Heavy armour triangle corner (right) (2m)",
 		"SizeId": 2
+	},
+	"d5b4c6b4-3fb3-4e8e-abea-06066c218eea": {
+		"Material": "Missing",
+		"Name": "Pivot 3m",
+		"SizeId": 21
 	},
 	"d5e50322-fbc0-4e09-bfab-050f431146a9": {
 		"Material": "Lead",
@@ -7084,6 +7959,11 @@
 		"Name": "40mm Quad AA Gun",
 		"SizeId": 57
 	},
+	"d90f51b0-ff15-44c8-8d84-ce7ed263fc8e": {
+		"Material": "Missing",
+		"Name": "Plasma Accelerator 8m",
+		"SizeId": 32
+	},
 	"d92c5b73-d0fd-423e-98fc-76b1cd91b524": {
 		"Material": "Reinforced Wood",
 		"Name": "Reinforced Wood 2m",
@@ -7119,6 +7999,11 @@
 		"Name": "Radiator",
 		"SizeId": 1
 	},
+	"da787874-9e34-4871-9723-2d6db4eaa6fa": {
+		"Material": "Heavy Armour",
+		"Name": "Mimic: Sphere heavy armour",
+		"SizeId": 1
+	},
 	"da80769e-0a55-4e05-bf58-1541842f4e82": {
 		"Material": "Missing",
 		"Name": "Generator",
@@ -7133,6 +8018,11 @@
 		"Material": "Applique",
 		"Name": "Applique corner 3.5m (mirror)",
 		"SizeId": 3
+	},
+	"dae50de2-b76f-4b24-b33e-f713621a3410": {
+		"Material": "Cannon Interior",
+		"Name": "Gauge increase pipe",
+		"SizeId": 1
 	},
 	"dafbcb70-da67-4474-ad22-05e73b827572": {
 		"Material": "Rubber",
@@ -7154,6 +8044,11 @@
 		"Name": "Heavy Armour 2m to 4m slope transition",
 		"SizeId": 4
 	},
+	"db5aa1bc-e064-41bb-bab8-d4f060e97236": {
+		"Material": "Propeller",
+		"Name": "Rudder triangle small huge mirror",
+		"SizeId": 2
+	},
 	"db9ed060-d556-435b-945c-19c923e233d3": {
 		"Material": "Metal",
 		"Name": "Metal down slope (4m)",
@@ -7161,7 +8056,7 @@
 	},
 	"dbd44b5e-acc7-4797-9c06-a07b19f03bdd": {
 		"Material": "Engine",
-		"Name": "Large Turbine Front",
+		"Name": "Medium turbine generator connection",
 		"SizeId": 24
 	},
 	"dc01bf01-a961-48a4-9534-59dfa050538d": {
@@ -7183,6 +8078,11 @@
 		"Material": "Railing",
 		"Name": "Railing R TA 4m M2",
 		"SizeId": 7
+	},
+	"dd38c49a-2af8-4805-9218-5649a3bd9b1d": {
+		"Material": "Missing",
+		"Name": "ScentedCandleHolder4Nice",
+		"SizeId": 1
 	},
 	"dd9dd993-3f46-47ca-bfc0-80f37e183e9b": {
 		"Material": "Propeller",
@@ -7214,6 +8114,11 @@
 		"Name": "Failsafe",
 		"SizeId": 1
 	},
+	"ddf899de-6f4f-49df-ba7c-62f0255439ba": {
+		"Material": "Stone",
+		"Name": "Mimic: Torus stone",
+		"SizeId": 1
+	},
 	"de17ff79-e670-4f08-ab59-df1ecac3905b": {
 		"Material": "Missing",
 		"Name": "Truss 2m",
@@ -7230,14 +8135,19 @@
 		"SizeId": 1
 	},
 	"de655a70-1b6f-4549-a810-029356047512": {
-		"Material": "Electronic",
-		"Name": "Electric Motor 3m",
+		"Material": "Engine",
+		"Name": "Medium crank motor",
 		"SizeId": 1
 	},
 	"de7aab07-7fec-438f-872a-d66b0e942b42": {
 		"Material": "Metal",
 		"Name": "Metal 3m offset right",
 		"SizeId": 4
+	},
+	"deaa6f94-9d44-43aa-afce-1c23425c3aa9": {
+		"Material": "Engine",
+		"Name": "Steam Shaft Drill Extension 5m",
+		"SizeId": 44
 	},
 	"dec02cea-91bb-41fe-9241-8c99711ce1f1": {
 		"Material": "Stone",
@@ -7252,7 +8162,7 @@
 	"def31246-d999-49f8-9daf-acacd802d3ec": {
 		"Material": "Stone",
 		"Name": "Stone 4m offset left",
-		"SizeId": 28
+		"SizeId": 29
 	},
 	"def39d03-c87b-4794-a306-9dc741ff990e": {
 		"Material": "Lead",
@@ -7304,10 +8214,20 @@
 		"Name": "Stone 4m Square backed corner left",
 		"SizeId": 2
 	},
+	"e0dd747b-94b8-4477-aaaa-452a5ba0241c": {
+		"Material": "Missing",
+		"Name": "Tank Standard",
+		"SizeId": 1
+	},
+	"e0e76614-4968-4960-907f-b62377c579c6": {
+		"Material": "Missing",
+		"Name": "Tank Piercing",
+		"SizeId": 1
+	},
 	"e0f5e9a7-a384-48f9-9ec5-fe6aac81c440": {
 		"Material": "Metal",
 		"Name": "Hydraulic recoil absorber (6m)",
-		"SizeId": 29
+		"SizeId": 30
 	},
 	"e0f9e669-4748-4cde-be95-58e47e094253": {
 		"Material": "Engine",
@@ -7323,6 +8243,11 @@
 		"Material": "Stone",
 		"Name": "Stone 1m to 3m slope transition right",
 		"SizeId": 2
+	},
+	"e1926f92-8359-40ff-a815-40cdbcd2c17e": {
+		"Material": "Missing",
+		"Name": "Large Compressor",
+		"SizeId": 24
 	},
 	"e1a58b43-e0e0-4be9-8359-f54d5d15d1fa": {
 		"Material": "Wood",
@@ -7419,6 +8344,11 @@
 		"Name": "Wood Block Variant 11",
 		"SizeId": 1
 	},
+	"e4ab4cf5-c47b-4210-b224-f2d9140ab655": {
+		"Material": "Metal",
+		"Name": "Mimic: Cube metal",
+		"SizeId": 1
+	},
 	"e4dabc7e-9566-4e7d-8d28-cbec2f811798": {
 		"Material": "Engine",
 		"Name": "Nuclear Containment Wall Corner",
@@ -7434,10 +8364,20 @@
 		"Name": "2m Wing Inverted Corner Left",
 		"SizeId": 18
 	},
+	"e57aeec0-562f-41e8-823d-618aaa1f59f1": {
+		"Material": "Missing",
+		"Name": "Plasma Collector Cross",
+		"SizeId": 1
+	},
 	"e581b7dc-da92-421d-9262-a5781c287728": {
 		"Material": "Laser",
 		"Name": "Plasma firingpiece",
 		"SizeId": 1
+	},
+	"e5c97f05-4999-4373-939c-af3a03b2e67c": {
+		"Material": "Missing",
+		"Name": "Plasma Chamber 4m",
+		"SizeId": 4
 	},
 	"e5d065f6-907b-450d-b998-213cdc54eec1": {
 		"Material": "Metal",
@@ -7482,7 +8422,7 @@
 	"e640d817-209a-42af-b478-7627a06296cc": {
 		"Material": "Stone",
 		"Name": "Stone 4m offset right",
-		"SizeId": 28
+		"SizeId": 29
 	},
 	"e69cbb14-5df0-4645-8f11-93ce51207ff8": {
 		"Material": "Wheel",
@@ -7507,6 +8447,11 @@
 	"e71e6f97-fbe8-4bf5-9645-d15179ba0c17": {
 		"Material": "Lead",
 		"Name": "Lead Block",
+		"SizeId": 1
+	},
+	"e78787a3-e8a0-4403-8ee3-7611374c6f66": {
+		"Material": "Applique",
+		"Name": "Mimic: Pentagon applique",
 		"SizeId": 1
 	},
 	"e7fc9ece-d2f4-4671-a3e8-77196601cf4e": {
@@ -7589,6 +8534,11 @@
 		"Name": "Drill",
 		"SizeId": 2
 	},
+	"eaf68f59-b83c-4fcd-977e-2d7f7339e792": {
+		"Material": "Barrel",
+		"Name": "Elevation barrel start",
+		"SizeId": 1
+	},
 	"eb38713d-831b-4118-8dad-a6551c1f7268": {
 		"Material": "Missile",
 		"Name": "Large Missile Hatch 4x4",
@@ -7601,7 +8551,7 @@
 	},
 	"eb8186f4-6c24-48e6-b918-0aaea3bde6c9": {
 		"Material": "Engine",
-		"Name": "5m Engine Shaft Bearing",
+		"Name": "Large shaft bearing",
 		"SizeId": 12
 	},
 	"eb892953-0779-4a27-80b4-c84b8607b6d6": {
@@ -7668,6 +8618,11 @@
 		"Material": "Engine",
 		"Name": "Fuel Processor",
 		"SizeId": 8
+	},
+	"edb49f94-20c4-47e4-b897-9d3c70621c51": {
+		"Material": "Alloy",
+		"Name": "Mimic: Sphere alloy",
+		"SizeId": 1
 	},
 	"edd65760-896f-4f6a-ba8c-eb2b072635f4": {
 		"Material": "Electronic",
@@ -7754,6 +8709,11 @@
 		"Name": "IR Camera 90",
 		"SizeId": 2
 	},
+	"f039a741-1a07-44b5-81f7-317f118dd69a": {
+		"Material": "Stone",
+		"Name": "Stone beam slope (2m mirrored)",
+		"SizeId": 2
+	},
 	"f05191b9-468c-407b-9601-453a46fbaf1a": {
 		"Material": "Missing",
 		"Name": "Fancy Material Storage Small",
@@ -7769,9 +8729,19 @@
 		"Name": "Small Rail Gantry (invisible)",
 		"SizeId": 1
 	},
+	"f0cfb2e8-adc4-47f5-b438-4437226965ab": {
+		"Material": "Propeller",
+		"Name": "Large propeller hub",
+		"SizeId": 24
+	},
 	"f0dad246-5282-4041-baa5-32d7500db8bd": {
 		"Material": "Railing",
 		"Name": "Railing L TA 1m M3",
+		"SizeId": 1
+	},
+	"f0f5a34b-930e-4bcc-91b5-51f42bc1f5c2": {
+		"Material": "Propeller",
+		"Name": "Rudder curve large small mirror",
 		"SizeId": 1
 	},
 	"f1070c58-4f5d-40c2-b5ed-8c08673d71a5": {
@@ -7815,8 +8785,8 @@
 		"SizeId": 1
 	},
 	"f1cd8c28-fa65-48db-8049-1858a7fc6db3": {
-		"Material": "Propeller",
-		"Name": "Shaft Sealed Propeller Shaft 1m",
+		"Material": "Missing",
+		"Name": "Small 2m sealed shaft",
 		"SizeId": 1
 	},
 	"f21dc267-2735-4e75-a862-d48547d71663": {
@@ -7914,6 +8884,11 @@
 		"Name": "Metal pole (2m)",
 		"SizeId": 2
 	},
+	"f53b4e8e-501c-42c2-8e4e-e5d27122af93": {
+		"Material": "Propeller",
+		"Name": "Rudder curve large huge mirror",
+		"SizeId": 2
+	},
 	"f5d09c0f-1a85-40ac-a6d8-2f7f7c416657": {
 		"Material": "Rubber",
 		"Name": "Rubber 1m to 4m slope transition (mirrored)",
@@ -7928,6 +8903,11 @@
 		"Material": "Metal",
 		"Name": "Metal 4m square backed corner right",
 		"SizeId": 4
+	},
+	"f5deb324-dfca-4385-81df-659dddd8b956": {
+		"Material": "Metal",
+		"Name": "Mimic: Sphere metal",
+		"SizeId": 1
 	},
 	"f5e7ac10-3c0c-4999-8287-07245ee81062": {
 		"Material": "Alloy",
@@ -7984,6 +8964,11 @@
 		"Name": "Wood Block Variant",
 		"SizeId": 1
 	},
+	"f739e5ff-6301-48d6-a0e9-ea4109da30a2": {
+		"Material": "Propeller",
+		"Name": "Rudder curve small mirror",
+		"SizeId": 1
+	},
 	"f7667f01-740f-4252-8036-8ec7fcdc89ca": {
 		"Material": "Metal",
 		"Name": "Metal 3m square backed corner right",
@@ -8025,14 +9010,14 @@
 		"SizeId": 4
 	},
 	"f908dad2-4ca1-470b-b786-63ddc91f9432": {
-		"Material": "Propeller",
-		"Name": "Shaft Propeller Shaft 1m",
+		"Material": "Engine",
+		"Name": "Small shaft",
 		"SizeId": 1
 	},
 	"f93d2963-8c36-4546-9c89-03ebd53d4651": {
 		"Material": "Glass",
 		"Name": "Glass 4m offset right",
-		"SizeId": 28
+		"SizeId": 29
 	},
 	"f94702c9-cb55-49e3-8cc4-138288fa1f13": {
 		"Material": "Engine",
@@ -8044,9 +9029,24 @@
 		"Name": "Wood wedge back (1m)",
 		"SizeId": 1
 	},
+	"f9953dfa-d17a-4922-abaa-ef180d3f8152": {
+		"Material": "Stone",
+		"Name": "Mimic: Tube stone",
+		"SizeId": 1
+	},
+	"f99e7998-4047-4958-988e-c4a0b39b147f": {
+		"Material": "Missing",
+		"Name": "Pivot 4m",
+		"SizeId": 23
+	},
 	"f9b1d3e4-c4c8-47eb-9547-b4bf3f3ba730": {
 		"Material": "Rubber",
 		"Name": "Rubber wedge (1m)",
+		"SizeId": 1
+	},
+	"f9e5d07a-cb51-4ff3-8d8b-9bac959e38bf": {
+		"Material": "Metal",
+		"Name": "Mimic: Hexagon metal",
 		"SizeId": 1
 	},
 	"f9f36cb3-cbfd-446a-9313-40f8e31e6e89": {
@@ -8129,6 +9129,11 @@
 		"Name": "Wing Corner Left",
 		"SizeId": 1
 	},
+	"fc36fe21-f51a-44c6-b94a-b7bc6e8c4c60": {
+		"Material": "Alloy",
+		"Name": "Mimic: Cube alloy",
+		"SizeId": 1
+	},
 	"fc42430d-1e52-4825-a115-d603e633f23a": {
 		"Material": "Rubber",
 		"Name": "Rubber square corner (right) (3m)",
@@ -8143,6 +9148,11 @@
 		"Material": "Cannon Interior",
 		"Name": "Ammo 2x2m Left (empty)",
 		"SizeId": 54
+	},
+	"fcc23049-9e4d-4b36-bf63-4cffcfbdbcb7": {
+		"Material": "Barrel",
+		"Name": "Recoil Suppression barrel end variant 3",
+		"SizeId": 1
 	},
 	"fcd1cdc0-0e2e-4b35-918b-5abe344b2ebe": {
 		"Material": "Missing",
@@ -8166,7 +9176,7 @@
 	},
 	"fd0d5e77-2074-4c3e-b708-4a2c0cc6f7a4": {
 		"Material": "Engine",
-		"Name": "Large Turbine Window",
+		"Name": "Medium turbine window",
 		"SizeId": 24
 	},
 	"fd13443a-1f2e-45e1-8978-9b02541a8174": {
@@ -8199,6 +9209,11 @@
 		"Name": "Stone inverted corner (right) (1m)",
 		"SizeId": 1
 	},
+	"fd9e510d-a575-4510-b7ce-81592ebb6959": {
+		"Material": "Missing",
+		"Name": "Plasma Collector Side",
+		"SizeId": 24
+	},
 	"fdab4d92-8519-4090-b7e1-b794953b44e4": {
 		"Material": "Engine",
 		"Name": "Jet combuster",
@@ -8207,7 +9222,7 @@
 	"fdba2b5d-3570-43fb-a9e1-10a0c0bba0ef": {
 		"Material": "Alloy",
 		"Name": "Alloy 4m offset right",
-		"SizeId": 28
+		"SizeId": 29
 	},
 	"fdcbee9f-3473-45a2-ab98-d827eb102274": {
 		"Material": "Lead",
@@ -8218,6 +9233,11 @@
 		"Material": "Lead",
 		"Name": "Lead 1m to 4m slope transition (mirrored)",
 		"SizeId": 4
+	},
+	"fdf79390-2759-4bf9-a72c-d7947fcf6713": {
+		"Material": "Metal",
+		"Name": "Metal beam slope (3m mirrored)",
+		"SizeId": 3
 	},
 	"fe063db5-9a03-4c93-bb4f-c25a4f7c9914": {
 		"Material": "Rubber",
@@ -8239,20 +9259,40 @@
 		"Name": "Corner left",
 		"SizeId": 1
 	},
+	"feb591f0-77db-4707-ba14-029700ee3d4c": {
+		"Material": "Engine",
+		"Name": "Fuel Pipe 4m",
+		"SizeId": 4
+	},
+	"ff112d96-de76-40ff-89e2-b0f7ae0b8db0": {
+		"Material": "Propeller",
+		"Name": "Propeller hub extension",
+		"SizeId": 1
+	},
 	"ff29acc9-e565-47eb-875d-c279d73c8c70": {
 		"Material": "Rubber",
 		"Name": "Rubber wedge back (1m)",
 		"SizeId": 1
 	},
+	"ff66ced4-c241-4d3a-b7e9-51e2db659095": {
+		"Material": "Drill",
+		"Name": "Wide Drill Bit",
+		"SizeId": 24
+	},
 	"ff8b571c-728e-4f81-9bad-3938ae8c540a": {
 		"Material": "Engine",
-		"Name": "Shaft Axis Shifting Gears 1m",
+		"Name": "Small axis shifting gears",
 		"SizeId": 8
 	},
 	"ffa8a7a0-4f05-40f2-81c2-9fef6b60b349": {
 		"Material": "Metal",
 		"Name": "Metal 3m square backed corner left",
 		"SizeId": 3
+	},
+	"ffb331d2-8f72-4be6-b5e7-99053d71fe85": {
+		"Material": "Missing",
+		"Name": "Plasma Emitter Stabilizer",
+		"SizeId": 1
 	},
 	"missing": {
 		"Length": 1,

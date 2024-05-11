@@ -1,4 +1,8 @@
 import json
+import os.path as path
+
+assert path.isfile("blocks.json")
+assert path.isfile("materials.json")
 
 # load blocks and materials configuration
 with open("blocks.json", "r") as f:
