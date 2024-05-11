@@ -95,7 +95,7 @@
 		"SizeId": 3
 	},
 	"03d79bec-7af0-44e7-a012-f2e2dcacff30": {
-		"Material": "Missing",
+		"Material": "Electronic",
 		"Name": "Switch",
 		"SizeId": 1
 	},
@@ -685,7 +685,7 @@
 		"SizeId": 20
 	},
 	"14884b06-6834-469d-a996-629b6d155a8f": {
-		"Material": "Electronic",
+		"Material": "Wing",
 		"Name": "Control surface 4m",
 		"SizeId": 4
 	},
@@ -760,7 +760,7 @@
 		"SizeId": 24
 	},
 	"16e58d6d-30ce-40ac-a80e-ea153a3608a8": {
-		"Material": "Engine",
+		"Material": "Electronic",
 		"Name": "Large boiler control",
 		"SizeId": 25
 	},
@@ -1415,7 +1415,7 @@
 		"SizeId": 2
 	},
 	"275b820d-dd55-49aa-9b09-48b58e8ab5da": {
-		"Material": "Propeller",
+		"Material": "Wing",
 		"Name": "Aero Rudder (yaw only)",
 		"SizeId": 1
 	},
@@ -1595,7 +1595,7 @@
 		"SizeId": 1
 	},
 	"2be9c88d-be24-4880-aa12-ea8dc685a726": {
-		"Material": "Detection",
+		"Material": "Missile",
 		"Name": "Missile Sonar Buoy Holder",
 		"SizeId": 1
 	},
@@ -1955,7 +1955,7 @@
 		"SizeId": 4
 	},
 	"35cd6905-44d0-4bb3-be0f-20ee2ed670bf": {
-		"Material": "Engine",
+		"Material": "Drill",
 		"Name": "Steam Shaft Drill Extension 3m",
 		"SizeId": 1
 	},
@@ -2985,7 +2985,7 @@
 		"SizeId": 1
 	},
 	"532c3d76-ede3-4fbf-bf87-8e82b3acc73b": {
-		"Material": "Engine",
+		"Material": "Drill",
 		"Name": "Steam Shaft Drill Head 3m",
 		"SizeId": 2
 	},
@@ -3030,7 +3030,7 @@
 		"SizeId": 1
 	},
 	"543fd6c7-fcf3-4df0-a4b2-891a8574b434": {
-		"Material": "Cannon Interior",
+		"Material": "Barrel",
 		"Name": "CRAM Barrel",
 		"SizeId": 1
 	},
@@ -4110,7 +4110,7 @@
 		"SizeId": 3
 	},
 	"72091a02-bab4-40a7-9ee0-4c180ee24f99": {
-		"Material": "Detection",
+		"Material": "Missile",
 		"Name": "Missile Radar Buoy Holder",
 		"SizeId": 1
 	},
@@ -4935,7 +4935,7 @@
 		"SizeId": 1
 	},
 	"8768ed82-11cd-4823-a5c3-58ef4e1912a9": {
-		"Material": "Electronic",
+		"Material": "Wing",
 		"Name": "Control surface 3m",
 		"SizeId": 3
 	},
@@ -5485,7 +5485,7 @@
 		"SizeId": 4
 	},
 	"96c9d85c-425a-4744-8ff3-36a364ceb99d": {
-		"Material": "Engine",
+		"Material": "Drill",
 		"Name": "Steam Shaft Drill Extension 1m",
 		"SizeId": 1
 	},
@@ -6640,7 +6640,7 @@
 		"SizeId": 24
 	},
 	"b46c1759-a7c1-4dca-9c15-d0c3329dcaae": {
-		"Material": "Electronic",
+		"Material": "Wing",
 		"Name": "Control surface 2m",
 		"SizeId": 2
 	},
@@ -6800,7 +6800,7 @@
 		"SizeId": 57
 	},
 	"b9457302-db10-49ad-98e2-1c44cdca24b9": {
-		"Material": "Cannon Railgun",
+		"Material": "Electronic",
 		"Name": "Railgun battery",
 		"SizeId": 1
 	},
@@ -7080,7 +7080,7 @@
 		"SizeId": 3
 	},
 	"c0eecb94-0410-4031-9015-2ec4b8fd4c80": {
-		"Material": "Engine",
+		"Material": "Drill",
 		"Name": "Steam Shaft Drill Head 5m",
 		"SizeId": 2
 	},
@@ -7445,7 +7445,7 @@
 		"SizeId": 1
 	},
 	"cbe68b75-1568-494e-8caf-c9e5336faea7": {
-		"Material": "Engine",
+		"Material": "Drill",
 		"Name": "Steam Shaft Drill Extension 5m",
 		"SizeId": 1
 	},
@@ -7515,7 +7515,7 @@
 		"SizeId": 1
 	},
 	"cdc656c1-2266-470b-872c-79faa65dcaae": {
-		"Material": "Engine",
+		"Material": "Drill",
 		"Name": "Steam Shaft Drill Head 1m",
 		"SizeId": 2
 	},
@@ -7525,7 +7525,7 @@
 		"SizeId": 1
 	},
 	"ce05e453-eca5-4833-b3c6-bf9373851922": {
-		"Material": "Electronic",
+		"Material": "Wing",
 		"Name": "Control surface 1m",
 		"SizeId": 1
 	},
@@ -7595,7 +7595,7 @@
 		"SizeId": 4
 	},
 	"d00a6de3-be1a-4ae2-be0b-f7bb14d75052": {
-		"Material": "Engine",
+		"Material": "Drill",
 		"Name": "Steam Shaft Drill Head 5m",
 		"SizeId": 66
 	},
@@ -8145,7 +8145,7 @@
 		"SizeId": 4
 	},
 	"deaa6f94-9d44-43aa-afce-1c23425c3aa9": {
-		"Material": "Engine",
+		"Material": "Drill",
 		"Name": "Steam Shaft Drill Extension 5m",
 		"SizeId": 44
 	},
@@ -9120,7 +9120,7 @@
 		"SizeId": 3
 	},
 	"fb997dde-d192-4be3-93bf-9b8bbb647bc5": {
-		"Material": "Wing",
+		"Material": "Missile",
 		"Name": "Wing missile strut",
 		"SizeId": 1
 	},

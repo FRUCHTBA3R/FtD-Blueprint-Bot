@@ -62,7 +62,7 @@
 	},
 	"Laser": {
 		"Color": [0, 147, 173],
-		"Keywords": ["Laser", "Lens", "PAC", "Particle Cannon", "Frequency"]
+		"Keywords": ["Laser", "Lens", "PAC", "Particle Cannon", "Frequency", "Laser Q"]
 	},
 	"Missile": {
 		"Color": [65, 70, 255],
@@ -105,7 +105,7 @@
 		"Color": [0, 213, 224],
 		"Keywords": ["Battery", "AI", "Failsafe", "Electric", "Wireless Receiver", "Weapon Controller", "PID",
 			"Routines", "Selection", "Identify", "Staggered", "Screen", "Repair", "Shield", "Automated", "Projector",
-			"Control", "Vehicle Controller", "RTG"]
+			"Control", "Vehicle Controller", "RTG", "Switch"]
 	},
 	"Engine": {
 		"Color": [0, 134, 224],
@@ -116,7 +116,7 @@
 	"Cannon Interior": {
 		"Color": [0, 80, 255],
 		"Keywords": ["Ammo", "Predictor", "Pellets", "Gauge", "Particle Tube", "6-way", "Turret Block", "Six Way",
-			"CRAM", "Nuke", "Particle Cannons"]
+			"CRAM", "Nuke", "Particle Cannons", "Ammo Barrel"]
 	},
 	"Cannon Loader": {
 		"Color": [66, 126, 255],

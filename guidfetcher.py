@@ -1,7 +1,7 @@
 import os
 import json
 import legend_generator as legend
-
+from update_blocks_json import set_best_material_for_block
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -139,11 +139,7 @@ for k in guiddict:
     variant = f" {elem['Variant']} " if elem["Variant"] != "" else None
     elem["Material"] = "Missing"  # default material
     # set material from name
-    for m in materials:
-        for keyword in materials[m]["Keywords"]:
-            if v.find(keyword) >= 0:
-                elem["Material"] = m
-                break
+    set_best_material_for_block(elem)
     # set material from variation
     if elem["Material"] == "Missing" and variant is not None:
         # only add variant to list if name search has failed
