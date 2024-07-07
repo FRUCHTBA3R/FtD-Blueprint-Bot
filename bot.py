@@ -196,7 +196,7 @@ async def process_attachments(message, invokemessage=None):
                     do_cut_args[0] = 0.5
             # process blueprint
             try:
-                combined_img_file, timing = await bp_to_imgV2.process_blueprint(filename,
+                combined_img_file, timing = await bp_to_img.process_blueprint(filename,
                     use_player_colors=do_player_color, create_gif=do_create_gif, firing_order=do_random_firing_order,
                     cut_side_top_front=do_cut_args)
                 # files
@@ -214,7 +214,7 @@ async def process_attachments(message, invokemessage=None):
                 os.remove(combined_img_file)
             except:
                 lastError = sys.exc_info()
-                await handle_blueprint_error(message, lastError, attachm.filename, bp_to_imgV2.bp_gameversion)
+                await handle_blueprint_error(message, lastError, attachm.filename, bp_to_img.bp_gameversion)
             
             # delete blueprint file
             os.remove(filename)
