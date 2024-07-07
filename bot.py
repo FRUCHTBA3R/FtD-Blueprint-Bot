@@ -1,7 +1,7 @@
 import os
 import sys, traceback
 
-import bp_to_imgV2
+import bp_to_img
 import re
 
 import discord

@@ -8,12 +8,12 @@ class FiringAnimator:
         self.firing_directions = np.zeros((0, 3), dtype=int)
         self.firing_types = np.zeros(0, dtype=np.uint8)
         # side animation
-        self.animation = [cv2.imread("firing_animation/frame0.png", cv2.IMREAD_UNCHANGED),
-                          cv2.imread("firing_animation/frame1.png", cv2.IMREAD_UNCHANGED),
-                          cv2.imread("firing_animation/frame2.png", cv2.IMREAD_UNCHANGED),
-                          cv2.imread("firing_animation/frame3.png", cv2.IMREAD_UNCHANGED),
-                          cv2.imread("firing_animation/frame4.png", cv2.IMREAD_UNCHANGED),
-                          cv2.imread("firing_animation/frame5.png", cv2.IMREAD_UNCHANGED)]
+        self.animation = [  cv2.imread("firing_animation/frame0.png", cv2.IMREAD_UNCHANGED),
+                            cv2.imread("firing_animation/frame1.png", cv2.IMREAD_UNCHANGED),
+                            cv2.imread("firing_animation/frame2.png", cv2.IMREAD_UNCHANGED),
+                            cv2.imread("firing_animation/frame3.png", cv2.IMREAD_UNCHANGED),
+                            cv2.imread("firing_animation/frame4.png", cv2.IMREAD_UNCHANGED),
+                            cv2.imread("firing_animation/frame5.png", cv2.IMREAD_UNCHANGED)]
         self.animation_depth = [0, 1, 2, 2, 3, 3]
         self.animation_origin = np.array([15, 0])
         # front animation
@@ -26,18 +26,18 @@ class FiringAnimator:
         self.animation_front_depth = [1, 4, 6, 6, 7, 7]
         self.animation_front_origin = np.array([15, 15])
         # back animation
-        self.animation_back = [None,
-                               cv2.imread("firing_animation/frame_back1.png", cv2.IMREAD_UNCHANGED),
-                               cv2.imread("firing_animation/frame_back2.png", cv2.IMREAD_UNCHANGED)]
+        self.animation_back = [ None,
+                                cv2.imread("firing_animation/frame_back1.png", cv2.IMREAD_UNCHANGED),
+                                cv2.imread("firing_animation/frame_back2.png", cv2.IMREAD_UNCHANGED)]
         # anim offsets
         a, b = self.animation_origin
         c, d = self.animation[0].shape[0:2]
         self.__animation_offset_list = np.array([[a, b],
-                                                 [d - 5, c - a - 5],
-                                                 [c - a - 5, d - 5],
-                                                 [-b, c - a - 5],
-                                                 self.animation_front_origin,
-                                                 self.animation_front_origin])
+                                                [d - 5, c - a - 5],
+                                                [c - a - 5, d - 5],
+                                                [-b, c - a - 5],
+                                                self.animation_front_origin,
+                                                self.animation_front_origin])
 
         self.max_frames = len(self.animation) * 5
         self.state = None
@@ -126,7 +126,7 @@ class FiringAnimator:
         order = np.argsort(self.firing_positions[:, axis])
         for self.__current_index in order:
             yield self.firing_positions[self.__current_index], self.firing_directions[self.__current_index], \
-                  self.firing_types[self.__current_index]
+                    self.firing_types[self.__current_index]
         self.__current_index = None
 
     def get_animation_type(self):

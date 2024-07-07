@@ -111,7 +111,7 @@
 		"Color": [0, 134, 224],
 		"Keywords": ["Steam", "Jet Engine", "Fuel Engine", "Nuclear Engine", "Turbocharger", "Carburettor", "Pipe",
 				"Crank", "Fuel", "Injector", "Supercharger", "Gearbox", "Jet", "Ion", "Boiler", "Turbine", "Radiator",
-				"nuclear engines"]
+				"nuclear engines", "Compressor"]
 	},
 	"Cannon Interior": {
 		"Color": [0, 80, 255],
@@ -125,5 +125,9 @@
 	"Cannon Railgun": {
 		"Color": [255, 184, 81],
 		"Keywords": ["Railgun"]
+	},
+	"Flamethrower": {
+		"Color": [0, 134, 240],
+		"Keywords": ["Flamethrower"]
 	}
 }

@@ -1760,7 +1760,7 @@
 		"SizeId": 1
 	},
 	"2fd4fd83-3125-4825-b596-f78ef36375c2": {
-		"Material": "Missing",
+		"Material": "Flamethrower",
 		"Name": "Flamethrower Back",
 		"SizeId": 4
 	},
@@ -2875,7 +2875,7 @@
 		"SizeId": 3
 	},
 	"50c7f99f-6238-4736-97f9-3117a40ef622": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Compressor",
 		"SizeId": 1
 	},
@@ -6070,7 +6070,7 @@
 		"SizeId": 1
 	},
 	"a5ad3190-f3ff-4cfd-860a-9f7328482271": {
-		"Material": "Missing",
+		"Material": "Flamethrower",
 		"Name": "Flamethrower Bottom",
 		"SizeId": 4
 	},
@@ -8245,7 +8245,7 @@
 		"SizeId": 2
 	},
 	"e1926f92-8359-40ff-a815-40cdbcd2c17e": {
-		"Material": "Missing",
+		"Material": "Engine",
 		"Name": "Large Compressor",
 		"SizeId": 24
 	},
