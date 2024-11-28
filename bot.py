@@ -30,7 +30,8 @@ keywords_re_dict = {"timing": re.compile(r"(?:^|[_*~`\s])(stats|statistics|timin
                     "cut": re.compile(r"(?:^|[_*~`\s])cut(?:[_*~`\s]|$)(?# match cut)"
                                       r"(?:.*?(\d*[.,]\d*))?(?# search float once)"
                                       r"(?:.*?(\d*[.,]\d*))?(?# search float once)"
-                                      r"(?:.*?(\d*[.,]\d*))?(?# search float once)")}
+                                      r"(?:.*?(\d*[.,]\d*))?(?# search float once)"),
+                    "aspect": re.compile(r"(?:^|[_*~`\s])(\d+):(\d+)(?:[_*~`\s]|$)")}
 
 lastError = None
 
@@ -188,17 +189,21 @@ async def process_attachments(message, invokemessage=None):
             do_create_gif = keywords_re_dict["gif"].search(content_to_search)
             do_random_firing_order = -1 if do_create_gif is not None and do_create_gif.groups()[0] is not None else 2
             do_cut_args = keywords_re_dict["cut"].search(content_to_search)
+            do_aspectratio_args = keywords_re_dict["aspect"].search(content_to_search)
             if do_cut_args is None:
                 do_cut_args = (None, None, None)
             else:
                 do_cut_args = convert_tupel_to_float(do_cut_args.groups())
                 if do_cut_args[0] is None:
                     do_cut_args[0] = 0.5
+            if do_aspectratio_args:
+                do_aspectratio_args = do_aspectratio_args.groups()
+                do_aspectratio_args = float(do_aspectratio_args[0]) / float(do_aspectratio_args[1])
             # process blueprint
             try:
                 combined_img_file, timing = await bp_to_img.process_blueprint(filename,
                     use_player_colors=do_player_color, create_gif=do_create_gif, firing_order=do_random_firing_order,
-                    cut_side_top_front=do_cut_args)
+                    cut_side_top_front=do_cut_args, force_aspect_ratio=do_aspectratio_args)
                 # files
                 file = discord.File(combined_img_file)
                 # upload

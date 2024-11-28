@@ -106,7 +106,7 @@ firing_animator = FiringAnimator()
 
 
 async def process_blueprint(fname, silent=False, standaloneMode=False, use_player_colors=True, create_gif=False,
-                            firing_order=2, cut_side_top_front=(None, None, None)):
+                            firing_order=2, cut_side_top_front=(None, None, None), force_aspect_ratio=None):
     """Load and init blueprint data. Returns blueprint, calculation times, image filename"""
     global bp_gameversion, firing_animator
     bp_gameversion = None
@@ -146,9 +146,11 @@ async def process_blueprint(fname, silent=False, standaloneMode=False, use_playe
     ts5 = time.time()
     if create_gif:
         main_img = __create_images(top_mats, side_mats, front_mats, bp_infos, gif_args=firing_animator,
-                                    firing_order=firing_order, file_name=main_img_fname)
+                                    firing_order=firing_order, file_name=main_img_fname, 
+                                    aspect_ratio=force_aspect_ratio)
     else:
-        main_img = __create_images(top_mats, side_mats, front_mats, bp_infos, gif_args=None)
+        main_img = __create_images(top_mats, side_mats, front_mats, bp_infos, gif_args=None, 
+                                    aspect_ratio=force_aspect_ratio)
     ts5 = time.time() - ts5
     if not silent:
         print("Image creation completed in", ts5, "s")
@@ -676,7 +678,7 @@ def __line_on_image(dst, start_pos, draw_start, draw_size, src_preblend, rotatio
 
 
 def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upscale_f=5,
-                    gif_args=None, firing_order=2, file_name="unknown"):
+                    gif_args=None, firing_order=2, file_name="unknown", aspect_ratio=None):
     """Create images from view matrices"""
     def create_image(mat, upscale_f, axis):
         """Create single image. Contents of mat will be changed."""
@@ -900,19 +902,61 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
     # info img
     info_img = fill_info_img()
     darkBlue = np.array([255, 100, 0])
+    lightBlue = np.array([255, 118, 33])
 
     # save shape of images for later use, so images can be freed
     side_img_shape = np.array(side_img.shape)
     front_img_shape = np.array(front_img.shape)
     top_img_shape = np.array(top_img.shape)
+    # aspect ratio
+    if type(aspect_ratio) == float and gif_args is None:
+        res_img_shape = [side_img_shape[0] + info_img.shape[0], side_img_shape[1] + info_img.shape[1]]
+        #print("Calc res img size:", res_img_shape)
+        #print("Aspect ratio:", res_img_shape[1] / res_img_shape[0], "wanted:", aspect_ratio)
+        if res_img_shape[1] / res_img_shape[0] > aspect_ratio:
+            # too wide, pad height
+            needed_pixels = int(res_img_shape[1] / aspect_ratio) - res_img_shape[0]
+            pixels_top = needed_pixels // 2
+            pixels_bottom = needed_pixels - pixels_top
+            # top row pixels
+            side_img = np.concatenate((np.full((pixels_top, side_img.shape[1], 3), lightBlue, dtype=np.uint8),
+                                        side_img), 0)
+            side_img_shape[0] += pixels_top
+            front_img = np.concatenate((np.full((pixels_top, front_img.shape[1], 3), lightBlue, dtype=np.uint8),
+                                        front_img), 0)
+            front_img_shape[0] += pixels_top
+            # bottom row pixels
+            top_img = np.concatenate((top_img, 
+                                        np.full((pixels_bottom, top_img.shape[1], 3), lightBlue, dtype=np.uint8)), 0)
+            top_img_shape[0] += pixels_bottom
+            info_img = np.concatenate((info_img,
+                                        np.full((pixels_bottom, info_img.shape[1], 3), lightBlue, dtype=np.uint8)), 0)
+        else:
+            # too high, pad width
+            needed_pixels = int(res_img_shape[0] * aspect_ratio) - res_img_shape[1]
+            pixels_left = needed_pixels // 2
+            pixels_right = needed_pixels - pixels_left
+            # left side pixels
+            side_img = np.concatenate((np.full((side_img.shape[0], pixels_left, 3), lightBlue, dtype=np.uint8),
+                                        side_img), 1)
+            side_img_shape[1] += pixels_left
+            top_img = np.concatenate((np.full((top_img.shape[0], pixels_left, 3), lightBlue, dtype=np.uint8),
+                                        top_img), 1)
+            top_img_shape[1] += pixels_left
+            # right side pixels
+            front_img = np.concatenate((front_img,
+                                        np.full((front_img.shape[0], pixels_right, 3), lightBlue, dtype=np.uint8)), 1)
+            front_img_shape[0] += pixels_right
+            info_img = np.concatenate((info_img,
+                                        np.full((info_img.shape[0], pixels_right, 3), lightBlue, dtype=np.uint8)), 1)
     # combine images
     bottombuffer = np.full((max(0, info_img.shape[0]-top_img.shape[0]), top_img.shape[1], 3),
-                            np.array([255, 118, 33]), dtype=np.uint8)
+                            lightBlue, dtype=np.uint8)
     rightbuffer = np.full((front_img.shape[0], max(0, info_img.shape[1]-front_img.shape[1]), 3),
-                            np.array([255, 118, 33]), dtype=np.uint8)
+                            lightBlue, dtype=np.uint8)
     # update stored shapes
     front_img_shape[1] += rightbuffer.shape[1]
-    front_img_shape[0] += bottombuffer.shape[0]
+    front_img_shape[0] += bottombuffer.shape[0] #  TODO: shouldn't this be top_img_shape[0]
     # border side to front
     side_img[:, -2:] = darkBlue
     front_img[:, :2] = darkBlue
