@@ -9,6 +9,7 @@ You can use the following keywords in your upload message:
 - `cut [<side> [<top> [<front>]]]` where `<side>`, `<top>` and `<front>` are floating point numbers from 0 to 1. This will create a cross section view. Using only `cut` is the same as `cut 0.5`, cutting only the side view at half depth.
 - `noc|nocol|nocolor` to not show the color of painted blocks.
 - `stats|time` to show how long different stages of processing the blueprint took.
+- `<number>:<number>` to set an aspect ratio for the image (e.g. 16:9). Doesn't work with gifs.
 
 ### Installation
 Add it to your server with this [invite link](https://discord.com/api/oauth2/authorize?client_id=759429992521662464&permissions=34880&scope=bot).
