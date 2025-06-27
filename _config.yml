@@ -9,7 +9,7 @@ email: fefafi@netcologne.de
 description: >-
   Discord bot for "From the Depths" which creates images from .blueprint files.
 baseurl: "/FtD-Blueprint-Bot/"
-url: "https://fruchtba3r.github.io/"
+#url: "https://fruchtba3r.github.io/"
 github_username: FRUCHTBA3R
 
 # Exclude from processing.
