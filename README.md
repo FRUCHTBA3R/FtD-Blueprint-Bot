@@ -1,5 +1,5 @@
 # FtD-Blueprint-Bot
-***This readme is still beeing worked on***
+***This readme is still being worked on***
 
 Discord bot for the game [From The Depths](https://fromthedepthsgame.com/) which creates top, front and side view of an uploaded .blueprint file.
 
@@ -12,7 +12,7 @@ You can use the following keywords in your upload message:
 - `<number>:<number>` to set an aspect ratio for the image (e.g. 16:9). Doesn't work with gifs.
 
 ### Installation
-Add it to your server with this [invite link](https://discord.com/api/oauth2/authorize?client_id=759429992521662464&permissions=34880&scope=bot).
+Add it to your server [here](https://fruchtba3r.github.io/FtD-Blueprint-Bot/).
 
 ### Configuration
 The bot has three modes:
