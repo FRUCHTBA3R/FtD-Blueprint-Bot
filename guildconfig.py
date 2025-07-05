@@ -103,13 +103,41 @@ class GuildconfigManager():
             return None
         return g.get(str(channel_id))
 
-    
+    def removeGuild(self, guild):
+        """Removes guild"""
+        if guild is None:
+            return False
+        if str(guild.id) not in self.config:
+            return False
+        del self.config[str(guild.id)]
+        self.saveConfig()
+        return True
+
+    def removeUnused(self, active_guilds):
+        """Remove guild configurations if id is not in active_guilds list.
+        Returns number of removed guilds."""
+        if active_guilds is None or len(active_guilds) == 0:
+            return 0
+        for guild in active_guilds:
+            if str(guild.id) in self.config:
+                self.config[str(guild.id)]["active"] = 1
+        count = 0
+        for key in list(self.config.keys()):
+            if "active" in self.config[key]:
+                del self.config[key]["active"]
+            else:
+                del self.config[key]
+                count += 1
+        if count > 0:
+            self.saveConfig()
+        return count
+
     def saveConfig(self):
         """Save config to file"""
         with open(GUILDCONFIG_FILE, "w") as f:
             json.dump(self.config, f, indent="\t")
-    
-    
+
+
 
 if __name__ == "__main__":
     print("Guildconfig Manager Test")

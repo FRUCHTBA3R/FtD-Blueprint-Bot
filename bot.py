@@ -40,7 +40,7 @@ bot = commands.Bot(command_prefix = "bp!")
 
 def print_cmd(ctx):
     """Print command information"""
-    print(f"[CMD] <{ctx.command}> invoked by '{ctx.author}' in channel '{ctx.channel}'", "" if ctx.guild is None else f"of guild '{ctx.guild}'")
+    print(f"[CMD] <{ctx.command}> invoked in channel '{ctx.channel}'", "" if ctx.guild is None else f"of guild '{ctx.guild}'")
 
 
 def convert_tupel_to_float(tpl):
@@ -62,6 +62,9 @@ def cc_is_manager(ctx):
 @bot.event
 async def on_ready():
     print(f"{bot.user} has connected to Discord!")
+    removed = GCM.removeUnused(bot.guilds)
+    if removed > 0:
+        print(f"Removed {removed} unconnected guilds.")
     print(f"Connected to {len(bot.guilds)} guilds:")
     for guild in bot.guilds:
         print(f"{guild.name} (id: {guild.id})")
@@ -70,6 +73,15 @@ async def on_ready():
     act = discord.Game("Keywords: stats, nocolor, gif, cut. Use bp!print to print last file. "
                         "Use bp!help for commands. Private chat supported.")
     await bot.change_presence(status=discord.Status.online, activity=act)
+
+
+@bot.event
+async def on_guild_remove(guild):
+    success = GCM.removeGuild(guild)
+    if success:
+        print(f"A Guild was removed.")
+    else:
+        print(f"Guild removal unsuccessful.")
 
 
 @bot.event
