@@ -14,3 +14,4 @@ fire.gif
 .vscode/launch.json
 !firing_animation/*
 gifsicle.exe
+!example/*
