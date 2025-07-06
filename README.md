@@ -1,5 +1,10 @@
 # FtD-Blueprint-Bot
-***This readme is still being worked on***
+<picture>
+  <img src="/example/PreDread_Example_Screenshot.png" alt="Ship Screenshot" style="height:300px">
+</picture>
+<picture>
+  <img src="/example/PreDread_Example_view.gif" alt="Ship Blueprint" style="height:300px">
+</picture>
 
 Discord bot for the game [From The Depths](https://fromthedepthsgame.com/) which creates top, front and side view of an uploaded .blueprint file.
 
