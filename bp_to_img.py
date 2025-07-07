@@ -1,6 +1,7 @@
 import json
 import time
 from collections import OrderedDict
+from typing import List, Union
 
 import numpy as np
 import quaternion
@@ -105,17 +106,28 @@ firing_animator = FiringAnimator()
 # BlockIds: block ids [int]
 
 
-async def process_blueprint(fname, silent=False, standaloneMode=False, use_player_colors=True, create_gif=False,
+async def process_blueprint(file: Union[str, List[Union[str, bytes]]], silent=False, standaloneMode=False, use_player_colors=True, create_gif=False,
                             firing_order=2, cut_side_top_front=(None, None, None), force_aspect_ratio=None):
     """Load and init blueprint data. Returns blueprint, calculation times, image filename"""
     global bp_gameversion, firing_animator
     bp_gameversion = None
-    main_img_fname = fname[:-10] + "_view"
     if not silent:
-        print("Processing blueprint \"", fname, "\"", sep="")
+        print("Processing blueprint")
+    # parse file or bytes
     ts1 = time.time()
-    with open(fname, "r", encoding="utf-8") as f:
-        bp = json.load(f)
+    if type(file) == str:
+        fname = file
+        with open(fname, "r", encoding="utf-8") as f:
+            bp = json.load(f)
+    elif type(file) == list and len(file) == 2 \
+    and type(file[0]) == str and type(file[1]) == bytes:#
+        fname = file[0]
+        bp = json.loads(file[1])
+    else:
+        print("ERROR: invalid file args passed")
+        raise FileNotFoundError()
+    file = None  # free up space
+    main_img_fname = fname.rsplit(".", 1)[0] + "_view"
     ts1 = time.time() - ts1
     if not silent:
         print("JSON parse completed in", ts1, "s")

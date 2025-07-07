@@ -158,7 +158,7 @@ async def on_reaction_add(reaction, user):
     #        print("Thumbs down")
 
 
-async def process_attachments(message, invokemessage=None):
+async def process_attachments(message: discord.Message, invokemessage=None):
     """Checks, processes and sends attachments of message.
     Returns processed blueprint count"""
     global lastError
@@ -190,9 +190,9 @@ async def process_attachments(message, invokemessage=None):
             # trigger typing
             await message.channel.trigger_typing()
             filename = BP_FOLDER + "/" + attachm.filename
-            # save file
-            with open(filename, "wb") as f:
-                f.write(content)
+            # save file  # NO use bytes object directly
+            #with open(filename, "wb") as f:
+            #    f.write(content)
             # keyword search
             content_to_search = message.content if invokemessage is None else invokemessage.message.content
             content_to_search = content_to_search.lower()
@@ -213,7 +213,7 @@ async def process_attachments(message, invokemessage=None):
                 do_aspectratio_args = float(do_aspectratio_args[0]) / float(do_aspectratio_args[1])
             # process blueprint
             try:
-                combined_img_file, timing = await bp_to_img.process_blueprint(filename,
+                combined_img_file, timing = await bp_to_img.process_blueprint([filename, content],
                     use_player_colors=do_player_color, create_gif=do_create_gif, firing_order=do_random_firing_order,
                     cut_side_top_front=do_cut_args, force_aspect_ratio=do_aspectratio_args)
                 # files
@@ -234,7 +234,7 @@ async def process_attachments(message, invokemessage=None):
                 await handle_blueprint_error(message, lastError, attachm.filename, bp_to_img.bp_gameversion)
             
             # delete blueprint file
-            os.remove(filename)
+            #os.remove(filename)
 
     return bpcount
 
