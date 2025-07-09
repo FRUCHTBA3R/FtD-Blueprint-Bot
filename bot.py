@@ -35,7 +35,15 @@ keywords_re_dict = {"timing": re.compile(r"(?:^|[_*~`\s])(stats|statistics|timin
 
 lastError = None
 
-bot = commands.Bot(command_prefix = "bp!")
+def my_intents():
+    res = discord.Intents()
+    res.messages = True
+    res.message_content = True
+    res.typing = True
+    res.reactions = True
+    res.guilds = True
+    return res
+bot = commands.Bot(command_prefix = "bp!", intents=my_intents())
 
 
 def print_cmd(ctx):
@@ -49,14 +57,14 @@ def convert_tupel_to_float(tpl):
     return [None if elem is None else float(elem) for elem in tpl]
 
 
-async def cc_is_author(ctx):
-    """Check if command sender is author."""
-    return await bot.is_owner(ctx.author)
+#async def cc_is_author(ctx):
+#    """Check if command sender is author."""
+#    return await bot.is_owner(ctx.author)
 
 
-def cc_is_manager(ctx):
-    """Check if command sender has channel managment permissions."""
-    return (ctx.guild == None) or (ctx.author.permissions_in(ctx.channel).manage_channels)
+#def cc_is_manager(ctx):
+#    """Check if command sender has channel managment permissions."""
+#    return (ctx.guild == None) or (ctx.channel.permissions_for(ctx.author) == discord.Permissions.manage_channels)
 
 
 @bot.event
@@ -112,7 +120,7 @@ async def cmd_print(ctx):
 
 @bot.command(name="mode", help="Set mode for current channel.\nAllowed arguments:\noff   Turned off.\non  Turned on.\nmention  Only react if bot is mentioned.",
             require_var_positional=False, usage="off | on | mention")
-@commands.check(cc_is_manager) 
+@commands.has_permissions(manage_channels=True)
 async def cmd_mode(ctx, mode):
     """Select mode for channel"""
     print_cmd(ctx)
@@ -127,7 +135,7 @@ async def cmd_mode(ctx, mode):
     
 
 @bot.command(name="test", help="For testing stuff. (Author only)")
-@commands.check(cc_is_author)
+@commands.is_owner()
 async def cmd_test(ctx):
     """Testing function"""
     print_cmd(ctx)
@@ -188,7 +196,7 @@ async def process_attachments(message: discord.Message, invokemessage=None):
                 continue
 
             # trigger typing
-            await message.channel.trigger_typing()
+            await message.channel.typing()
             filename = BP_FOLDER + "/" + attachm.filename
             # save file  # NO use bytes object directly
             #with open(filename, "wb") as f:
