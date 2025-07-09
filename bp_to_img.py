@@ -691,7 +691,7 @@ def __line_on_image(dst, start_pos, draw_start, draw_size, src_preblend, rotatio
 
 
 def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upscale_f=5,
-                    gif_args=None, firing_order=2, file_name="unknown", aspect_ratio=None):
+                    gif_args:FiringAnimator|None=None, firing_order=2, file_name="unknown", aspect_ratio=None):
     """Create images from view matrices"""
     def create_image(mat, upscale_f, axis):
         """Create single image. Contents of mat will be changed."""
@@ -987,10 +987,17 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
     # gif animation
     # TODO: optimize
     if gif_args:
+        gif_args.setup_order(axis=firing_order)
         file_name += ".gif"
-        with imageio.get_writer(file_name, format="gif", mode="I", duration=[2.5, 0.1], subrectangles=True) as writer:
+        duration_list = [2500] + [10]*gif_args.get_total_frame_count()  # in ms
+        with imageio.get_writer(file_name, format="gif", mode="i", loop=0,
+                                duration=duration_list,
+                                #disposal=[2]*len(duration_list),  # reset changed image to prev (?)
+                                subrectangles=True,  # most likely obsolete
+                                #transparency=False,  # bad artifacts
+                                optimize=True
+                                ) as writer:
             writer.append_data(cv2.cvtColor(res, cv2.COLOR_BGR2RGB))
-            gif_args.setup_order(axis=firing_order)
             for i in gif_args.iter_frames():
                 frame = np.array(res)
                 for axis in range(3):
@@ -1080,7 +1087,7 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
                                                     rotation, -upscale_f//2, 2*upscale_f+1, transformed_pos, height_map[axis], position[axis],
                                                     upscale_f)
                 writer.append_data(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-        optimize(file_name)
+        #optimize(file_name)  # since update: takes long and bloats file size, do not use
         # no need to return image, as gif is stored on disk
         return None
 
