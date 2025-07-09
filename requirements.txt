@@ -1,0 +1,10 @@
+# pip install -r requirements.txt
+numpy
+numpy-quaternion
+scipy
+opencv-python
+pillow
+imageio
+pygifsicle
+dotenv
+discord.py
