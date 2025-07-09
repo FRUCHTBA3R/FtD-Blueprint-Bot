@@ -1,7 +1,8 @@
+#!/usr/bin/env python3.12
+
 import json
 import time
 from collections import OrderedDict
-from typing import List, Union
 
 import numpy as np
 import quaternion
@@ -106,7 +107,7 @@ firing_animator = FiringAnimator()
 # BlockIds: block ids [int]
 
 
-async def process_blueprint(file: Union[str, List[Union[str, bytes]]], silent=False, standaloneMode=False, use_player_colors=True, create_gif=False,
+async def process_blueprint(file: str | list[str | bytes], silent=False, standaloneMode=False, use_player_colors=True, create_gif=False,
                             firing_order=2, cut_side_top_front=(None, None, None), force_aspect_ratio=None):
     """Load and init blueprint data. Returns blueprint, calculation times, image filename"""
     global bp_gameversion, firing_animator

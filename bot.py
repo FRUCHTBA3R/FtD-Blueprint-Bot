@@ -1,3 +1,5 @@
+#!/usr/bin/env python3.12
+
 import os
 import sys, traceback
 
