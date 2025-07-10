@@ -54,7 +54,7 @@ def my_intents():
 bot = commands.Bot(command_prefix = "bp!", intents=my_intents())
 
 
-def print_cmd(ctx):
+def print_cmd(ctx: commands.Context):
     """Print command information"""
     print(f"[CMD] <{ctx.command}> invoked in channel '{ctx.channel}'", "" if ctx.guild is None else f"of guild '{ctx.guild}'")
 
@@ -117,7 +117,7 @@ async def on_message(message):
 
 
 @bot.command(name="print", help="Print last blueprint uploaded to channel. Only checks last 30 messages.")
-async def cmd_print(ctx):
+async def cmd_print(ctx: commands.Context):
     """Find and print last blueprint in channel"""
     print_cmd(ctx)
     async for message in ctx.history(limit=30, oldest_first=False):
@@ -129,7 +129,7 @@ async def cmd_print(ctx):
 @bot.command(name="mode", help="Set mode for current channel.\nAllowed arguments:\noff   Turned off.\non  Turned on.\nmention  Only react if bot is mentioned.",
             require_var_positional=False, usage="off | on | mention")
 @commands.has_permissions(manage_channels=True)
-async def cmd_mode(ctx, mode):
+async def cmd_mode(ctx: commands.Context, mode):
     """Select mode for channel"""
     print_cmd(ctx)
     if ctx.guild is None:
@@ -140,7 +140,15 @@ async def cmd_mode(ctx, mode):
         raise commands.errors.BadArgument("Mode could not be set")
     
     await ctx.message.add_reaction("\U0001f197")  # :ok:
-    
+
+
+@bot.command(name="pp&tos", help="Send links to privacy policy and terms of service.")
+async def cmd_pptos(ctx: commands.Context):
+    """Send PP and TOS links to chat"""
+    print_cmd(ctx)
+    await ctx.send("[Privacy Policy](https://fruchtba3r.github.io/FtD-Blueprint-Bot/datenschutz/)\n"
+    "[Terms of Service](https://fruchtba3r.github.io/FtD-Blueprint-Bot/tos/)")
+
 
 @bot.command(name="test", help="For testing stuff. (Author only)")
 @commands.is_owner()
@@ -151,7 +159,7 @@ async def cmd_test(ctx):
 
 
 @bot.event
-async def on_command_error(ctx, error):
+async def on_command_error(ctx: commands.Context, error):
     """Command error exception"""
     print(f"[ERR] <cmd:{type(error)}> {error}")
     #[print(k, v) for k,v in vars(error).items()]
