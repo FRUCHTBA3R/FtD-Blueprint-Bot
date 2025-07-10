@@ -5,7 +5,7 @@ permalink: datenschutz/
 
 <h1>Datenschutzerklärung für den Discord Bot „FtD BluePrinter Bot#1052“ (ID: 759429992521662464)</h1>
 
-Letzte Aktualisierung: 3.7.2025
+Letzte Aktualisierung: 10.7.2025
 
 
 <h2>Verantwortlicher</h2>
@@ -26,7 +26,7 @@ Der Discord Bot verarbeitet folgende Daten:
         <b>Nachrichteninhalte</b>: Diese werden eingelesen, um Anweisungen an den Bot zu übermitteln.
     </li>
     <li>
-        <b>Dateianhänge von Nachrichten</b>: Diese werden heruntergeladen, um zu Bildern verarbeitet zu werden.
+        <b>Dateianhänge von Nachrichten</b>: Diese werden eingelesen, um zu Bildern verarbeitet zu werden.
     </li>
     <li>
         <b>Server-IDs und Channel-IDs</b>: Diese werden gespeichert, um server- bzw. kanalspezifische Einstellungen zu verwalten.
@@ -50,7 +50,7 @@ Die Verarbeitung der Daten erfolgt zu folgenden Zwecken:
 
 <ul>
     <li>
-        <b>Dateianhänge</b>: Die heruntergeladenen Dateien werden nach der Verarbeitung umgehend gelöscht.
+        <b>Dateianhänge</b>: Die eingelesenen Dateien werden nicht gespeichert und sind nur während der Verarbeitung vorhanden.
     </li>
     <li>
         <b>Server-IDs und Channel-IDs</b>: Diese werden dauerhaft gespeichert, solange der Server den Bot nutzt oder bis die Löschung vom Serverbetreiber beantragt wird.
