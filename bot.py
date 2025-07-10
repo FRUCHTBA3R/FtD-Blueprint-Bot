@@ -12,9 +12,15 @@ from dotenv import load_dotenv
 
 load_dotenv()
 DO_DEBUG = os.getenv("DO_DEBUG")
-TOKEN = os.getenv("DISCORD_TOKEN") if not DO_DEBUG else os.getenv("DISCORD_TOKEN_DEBUG")
 BP_FOLDER = os.getenv("BLUEPRINT_FOLDER")
 #####AUTHOR = int(os.getenv("AUTHOR"))
+if DO_DEBUG:
+    TOKEN = lambda: os.getenv("DISCORD_TOKEN_DEBUG")
+else:  # load encrypted credential provided with systemd-creds
+    def __token():
+        with open(os.getenv("CREDENTIALS_DIRECTORY") + "/discord_token", "r") as f:
+            return f.read()
+    TOKEN = __token
 
 # create bp_folder
 if not os.path.exists(BP_FOLDER):
@@ -294,4 +300,4 @@ async def handle_blueprint_error(message, error, bpfilename, bpgameverison):
     await message.channel.send(f"You found an error! Details were send to {ownerUser.name}." + warn_gv)
 
 
-bot.run(TOKEN)
+bot.run(TOKEN())
