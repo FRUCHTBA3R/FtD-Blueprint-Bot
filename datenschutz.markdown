@@ -1,6 +1,7 @@
 ---
 layout: default
 permalink: datenschutz/
+title: Datenschutzerklärung
 ---
 
 <h1>Datenschutzerklärung für den Discord Bot „FtD BluePrinter Bot#1052“ (ID: 759429992521662464)</h1>
