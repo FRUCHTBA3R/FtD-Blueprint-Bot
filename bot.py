@@ -51,6 +51,8 @@ def my_intents():
     res.typing = True
     res.reactions = True
     res.guilds = True
+    # for compatibility, will be removed soon
+    res.message_content = True
     return res
 bot = commands.Bot(command_prefix = "bp!", intents=my_intents())
 
@@ -64,6 +66,20 @@ def convert_tupel_to_float(tpl):
     """Convert a tupel of strings and None to list of floats and None:
     ('1.23', None) -> [1.23, None]"""
     return [None if elem is None else float(elem) for elem in tpl]
+
+
+def get_aspect_ratio(txt: str) -> float|None:
+    res = keywords_re_dict["aspect"].search(txt)
+    if res:
+        res = res.groups()
+        res = float(res[0])/float(res[1])
+    return res
+
+
+async def autocomplete_aspect_ratio(interaction: discord.Interaction, txt: str) -> list[discord.app_commands.Choice[str]]:
+    suggested_ratios = {"HDTV 16:9":"16:9", "SDTV 4:3":"4:3", "Square 1:1":"1:1", "Camera 3:2":"3:2", 
+                        "Ultra Wide 21:9":"21:9", "Movie 16:10":"16:10", "Smartphone 6:13":"6:13"}
+    return [discord.app_commands.Choice(name=key, value=val) for key, val in suggested_ratios.items() if txt.lower() in key.lower()]
 
 
 class MessageOrInteraction():
@@ -98,8 +114,12 @@ class MessageOrInteraction():
 class TempFile(discord.File):
     """Discord file, which removes file on disk when going out of scope."""
     def __del__(self):
-        print("File removed:", self.filename)
-        os.remove(self.fp.name)
+        print("Removing file:", self.filename)
+        try:
+            self.close()
+            os.remove(self.fp.name)
+        except:
+            print("[ERR] File could not be removed.")
 
 
 #async def cc_is_author(ctx):
@@ -125,9 +145,12 @@ async def on_ready():
     # set activity text
     act = discord.Game("Keywords: stats, nocolor, gif, cut. Use bp!print to print last file. "
                         "Use bp!help for commands. Private chat supported.")
-    #bot.tree.copy_global_to()
-    await bot.tree.sync()
     await bot.change_presence(status=discord.Status.online, activity=act)
+    
+    # commands
+    slash_group = SlashCmdGroup(name="blueprint", description="...")
+    bot.tree.add_command(slash_group)
+    print(await bot.tree.sync())
 
 
 @bot.event
@@ -194,7 +217,9 @@ async def cmd_pptos(ctx: commands.Context):
 async def cmd_test(ctx):
     """Testing function"""
     print_cmd(ctx)
-    await ctx.channel.send("bp!print")
+    await ctx.channel.send("bp!print")  # recursion test
+    for cmd in bot.tree.walk_commands():
+        await ctx.channel.send(cmd)
 
 
 @bot.event
@@ -215,7 +240,7 @@ async def on_reaction_add(reaction, user):
     #print("Found reaction", reaction, "from user", user)
     if reaction.message.author == bot.user:
         if reaction.emoji == "\U0001f44e":  # :thumbsdown:
-            print("Thumbs down on bot mesasge")
+            print("Thumbs down on bot message")
     #else:
     #    if reaction.emoji == "\U0001f44e":  # :thumbsdown:
     #        print("Thumbs down")
@@ -228,45 +253,75 @@ async def on_reaction_add(reaction, user):
 #    #await interaction.response.send_message(f"Message: ```{message.content}```\nwith {len(message.attachments)} Attachments")
 
 
-async def autocomplete_aspect_ratio(interaction: discord.Interaction, txt: str) -> list[discord.app_commands.Choice[str]]:
-    suggested_ratios = {"HDTV 16:9":"16:9", "SDTV 4:3":"4:3", "Square 1:1":"1:1", "Camera 3:2":"3:2", 
-                        "Ultra Wide 21:9":"21:9", "Movie 16:10":"16:10", "Smartphone 6:13":"6:13"}
-    return [discord.app_commands.Choice(name=key, value=val) for key, val in suggested_ratios.items() if txt.lower() in key.lower()]
+
+class SlashCmdGroup(discord.app_commands.Group):
+
+    @discord.app_commands.command(name="img", description="Create image from blueprint.")
+    @discord.app_commands.describe(
+        blueprint="File",
+        cut_side="Side cut. From 1.0 (closest, all) to 0.0",
+        cut_top="Top cut. From 1.0 (closest, all) to 0.0",
+        cut_front="Front cut. From 1.0 (closest, all) to 0.0",
+        no_color="Disable custom ship color",
+        timing="Show processing times",
+        aspect_ratio="Output aspect ratio <x>:<y> e.g. 16:9"
+    )
+    @discord.app_commands.autocomplete(aspect_ratio=autocomplete_aspect_ratio)
+    async def slash_blueprint(self,
+        interaction: discord.Interaction,
+        blueprint: discord.Attachment,
+        cut_side: PRange[float,0.0,1.0] = None, 
+        cut_top: PRange[float,0.0,1.0] = None, 
+        cut_front: PRange[float,0.0,1.0] = None,
+        no_color: bool = False, 
+        timing: bool = False, 
+        aspect_ratio: str = ""):
+        moi = MessageOrInteraction(interaction)
+        file, content = await process_attachment(moi, blueprint, timing, cut_side_top_front=(cut_side, cut_top, cut_front),
+            use_player_colors=not no_color, force_aspect_ratio=get_aspect_ratio(aspect_ratio))
+        if content is not None or file is not None:
+            await moi.send(content=content, file=file)
 
 
-@bot.tree.command(name="blueprint", description="Create blueprint from file.")
-@discord.app_commands.describe(
-    blueprint="File",
-    cut_side="Side cut. From 1.0 (closest, all) to 0.0",
-    cut_top="Top cut. From 1.0 (closest, all) to 0.0",
-    cut_front="Front cut. From 1.0 (closest, all) to 0.0",
-    no_color="Disable custom ship color",
-    timing="Show processing times",
-    aspect_ratio="Output aspect ratio <x>:<y> e.g. 16:9"
-)
-@discord.app_commands.autocomplete(aspect_ratio=autocomplete_aspect_ratio)
-async def slash_blueprint(
-    interaction: discord.Interaction,
-    blueprint: discord.Attachment,
-    cut_side: PRange[float,0.0,1.0] = None, 
-    cut_top: PRange[float,0.0,1.0] = None, 
-    cut_front: PRange[float,0.0,1.0] = None,
-    no_color: bool = False, 
-    timing: bool = False, 
-    aspect_ratio: str = ""):
-    moi = MessageOrInteraction(interaction)
-    file, content = await process_attachment(moi, blueprint, timing, cut_side_top_front=(cut_side, cut_top, cut_front),
-        use_player_colors=not no_color, force_aspect_ratio=get_aspect_ratio(aspect_ratio))
-    if content is not None or file is not None:
-        await moi.send(content=content, file=file)
+    @discord.app_commands.command(name="gif", description="Create gif from blueprint.")
+    @discord.app_commands.describe(
+        blueprint="File",
+        firing_order="Order in which weapons are fired",
+        cut_side="Side cut. From 1.0 (closest, all) to 0.0",
+        cut_top="Top cut. From 1.0 (closest, all) to 0.0",
+        cut_front="Front cut. From 1.0 (closest, all) to 0.0",
+        no_color="Disable custom ship color",
+        timing="Show processing times",
+        aspect_ratio="Output aspect ratio <x>:<y> e.g. 16:9"
+    )
+    @discord.app_commands.choices(firing_order=[
+        discord.app_commands.Choice(name="Front to Back", value=2),
+        discord.app_commands.Choice(name="Random", value=-1),
+        discord.app_commands.Choice(name="All at once", value=-2),
+        discord.app_commands.Choice(name="Back to Front", value=5),
+        discord.app_commands.Choice(name="Top to Bottom", value=1),
+        discord.app_commands.Choice(name="Bottom to Top", value=4),
+        discord.app_commands.Choice(name="Left to Right", value=3),
+        discord.app_commands.Choice(name="Right to Left", value=0),
+    ])
+    @discord.app_commands.autocomplete(aspect_ratio=autocomplete_aspect_ratio)
+    async def slash_gif(self,
+        interaction: discord.Interaction,
+        blueprint: discord.Attachment,
+        firing_order: discord.app_commands.Choice[int] = 2,
+        cut_side: PRange[float,0.0,1.0] = None, 
+        cut_top: PRange[float,0.0,1.0] = None, 
+        cut_front: PRange[float,0.0,1.0] = None,
+        no_color: bool = False, 
+        timing: bool = False, 
+        aspect_ratio: str = ""):
+        moi = MessageOrInteraction(interaction)
+        file, content = await process_attachment(moi, blueprint, timing, create_gif=True,
+            firing_order=firing_order.value, cut_side_top_front=(cut_side, cut_top, cut_front),
+            use_player_colors=not no_color, force_aspect_ratio=get_aspect_ratio(aspect_ratio))
+        if content is not None or file is not None:
+            await moi.send(content=content, file=file)
 
-
-def get_aspect_ratio(txt: str) -> float|None:
-    res = keywords_re_dict["aspect"].search(txt)
-    if res:
-        res = res.groups()
-        res = float(res[0])/float(res[1])
-    return res
 
 
 async def process_attachment(moi: MessageOrInteraction, attachment: discord.Attachment, do_timing:bool, **kwargs: any
