@@ -108,7 +108,7 @@ firing_animator = FiringAnimator()
 
 
 async def process_blueprint(file: str | list[str | bytes], silent=False, standaloneMode=False, use_player_colors=True, create_gif=False,
-                            firing_order=2, cut_side_top_front=(None, None, None), force_aspect_ratio=None):
+                            firing_order=2, cut_side_top_front:tuple[float|None, float|None, float|None]=(None, None, None), force_aspect_ratio=None):
     """Load and init blueprint data. Returns blueprint, calculation times, image filename"""
     global bp_gameversion, firing_animator
     bp_gameversion = None

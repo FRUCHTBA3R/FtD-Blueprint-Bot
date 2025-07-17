@@ -2,12 +2,14 @@
 
 import os
 import sys, traceback
+from typing import Optional, Sequence
 
 import bp_to_img
 import re
 
 import discord
 from discord.ext import commands
+from discord.app_commands import Range as PRange
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -46,7 +48,6 @@ lastError = None
 def my_intents():
     res = discord.Intents()
     res.messages = True
-    res.message_content = True
     res.typing = True
     res.reactions = True
     res.guilds = True
@@ -63,6 +64,42 @@ def convert_tupel_to_float(tpl):
     """Convert a tupel of strings and None to list of floats and None:
     ('1.23', None) -> [1.23, None]"""
     return [None if elem is None else float(elem) for elem in tpl]
+
+
+class MessageOrInteraction():
+    """Wrapper for Message or Interaction"""
+    def __init__(self, m_or_i: discord.Message | discord.Interaction):
+        self.moi = m_or_i
+    
+    def isMessage(self):
+        return isinstance(self.moi, discord.Message)
+    
+    def isInteraction(self):
+        return isinstance(self.moi, discord.Interaction)
+
+    def wasResponded(self):
+        return self.isInteraction() and self.moi.response.is_done()
+
+    async def send(self, content: Optional[str] = None, file: Optional[discord.File] = None):
+        """Sends to channel of message or responds to interaction or sends followups to interaction"""
+        if self.isMessage():
+            self.moi: discord.Message
+            await self.moi.channel.send(content=content, file=file)
+        elif self.isInteraction():
+            self.moi: discord.Interaction
+            if not self.moi.response.is_done():
+                await self.moi.response.send_message(content=content, file=file)
+            else:
+                await self.moi.followup.send(content=content, file=file)
+        else:
+            raise TypeError("Did not get discord.Message or discord.Interaction")
+
+
+class TempFile(discord.File):
+    """Discord file, which removes file on disk when going out of scope."""
+    def __del__(self):
+        print("File removed:", self.filename)
+        os.remove(self.fp.name)
 
 
 #async def cc_is_author(ctx):
@@ -88,6 +125,8 @@ async def on_ready():
     # set activity text
     act = discord.Game("Keywords: stats, nocolor, gif, cut. Use bp!print to print last file. "
                         "Use bp!help for commands. Private chat supported.")
+    #bot.tree.copy_global_to()
+    await bot.tree.sync()
     await bot.change_presence(status=discord.Status.online, activity=act)
 
 
@@ -101,7 +140,7 @@ async def on_guild_remove(guild):
 
 
 @bot.event
-async def on_message(message):
+async def on_message(message: discord.Message):
     """Handle all messages"""
     # skip all bot messages
     if message.author.bot:
@@ -110,7 +149,7 @@ async def on_message(message):
     # mode
     mode = GCM.getMode(message.guild, message.channel)
     if (mode == 1) or (((mode == 2) or (mode is None)) and bot.user.mentioned_in(message)):
-        bpcount = await process_attachments(message)
+        bpcount = await process_message_attachments(message)
 
     # command processing
     await bot.process_commands(message)
@@ -121,7 +160,7 @@ async def cmd_print(ctx: commands.Context):
     """Find and print last blueprint in channel"""
     print_cmd(ctx)
     async for message in ctx.history(limit=30, oldest_first=False):
-        bpcount = await process_attachments(message, ctx)
+        bpcount = await process_message_attachments(message, ctx)
         if bpcount != 0:
             break
 
@@ -182,17 +221,83 @@ async def on_reaction_add(reaction, user):
     #        print("Thumbs down")
 
 
-async def process_attachments(message: discord.Message, invokemessage=None):
+# TODO: context menu actions: public|private: simple blueprint, simple gif, interactive blueprint creation
+#@bot.tree.context_menu(name="Blueprint")
+#async def cm_print(interaction: discord.Interaction, message: discord.Message):
+#    await process_message_attachments(message)
+#    #await interaction.response.send_message(f"Message: ```{message.content}```\nwith {len(message.attachments)} Attachments")
+
+
+async def autocomplete_aspect_ratio(interaction: discord.Interaction, txt: str) -> list[discord.app_commands.Choice[str]]:
+    suggested_ratios = {"HDTV 16:9":"16:9", "SDTV 4:3":"4:3", "Square 1:1":"1:1", "Camera 3:2":"3:2", 
+                        "Ultra Wide 21:9":"21:9", "Movie 16:10":"16:10", "Smartphone 6:13":"6:13"}
+    return [discord.app_commands.Choice(name=key, value=val) for key, val in suggested_ratios.items() if txt.lower() in key.lower()]
+
+
+@bot.tree.command(name="blueprint", description="Create blueprint from file.")
+@discord.app_commands.describe(
+    blueprint="File",
+    cut_side="Side cut. From 1.0 (closest, all) to 0.0",
+    cut_top="Top cut. From 1.0 (closest, all) to 0.0",
+    cut_front="Front cut. From 1.0 (closest, all) to 0.0",
+    no_color="Disable custom ship color",
+    timing="Show processing times",
+    aspect_ratio="Output aspect ratio <x>:<y> e.g. 16:9"
+)
+@discord.app_commands.autocomplete(aspect_ratio=autocomplete_aspect_ratio)
+async def slash_blueprint(
+    interaction: discord.Interaction,
+    blueprint: discord.Attachment,
+    cut_side: PRange[float,0.0,1.0] = None, 
+    cut_top: PRange[float,0.0,1.0] = None, 
+    cut_front: PRange[float,0.0,1.0] = None,
+    no_color: bool = False, 
+    timing: bool = False, 
+    aspect_ratio: str = ""):
+    moi = MessageOrInteraction(interaction)
+    file, content = await process_attachment(moi, blueprint, timing, cut_side_top_front=(cut_side, cut_top, cut_front),
+        use_player_colors=not no_color, force_aspect_ratio=get_aspect_ratio(aspect_ratio))
+    if content is not None or file is not None:
+        await moi.send(content=content, file=file)
+
+
+def get_aspect_ratio(txt: str) -> float|None:
+    res = keywords_re_dict["aspect"].search(txt)
+    if res:
+        res = res.groups()
+        res = float(res[0])/float(res[1])
+    return res
+
+
+async def process_attachment(moi: MessageOrInteraction, attachment: discord.Attachment, do_timing:bool, **kwargs: any
+                        #make_gif: bool, firing_order: int|None, cut_stf: tuple[float, float, float]|None,
+                        #nocol: bool, timing: bool, aspect_ratio: float|None
+                    ) -> tuple[str,discord.File] | tuple[None, None]:
+    try:
+        fname = os.path.join(BP_FOLDER, attachment.filename)
+        img_fname, timing = await bp_to_img.process_blueprint([fname, await attachment.read()], **kwargs)
+    except:
+        # TODO
+        lastError = sys.exc_info()
+        await handle_blueprint_error(moi, lastError, attachment.filename, bp_to_img.bp_gameversion)
+        # TODO: check if a file was created and delete
+        return None, None
+    img_file = TempFile(img_fname)
+    timing_content = None
+    if do_timing:
+        timing_content = f"JSON parse completed in {timing[0]:.3f}s.\n" \
+            f"Conversion completed in {timing[1]:.3f}s.\n" \
+            f"View matrices completed in {timing[3]:.3f}s.\n" \
+            f"Image creation completed in {timing[4]:.3f}s.\n" \
+            f"Total time: {(timing[0]+timing[1]+timing[2]+timing[3]+timing[4]):.3f}s"
+    return img_file, timing_content
+
+
+
+async def process_message_attachments(message: discord.Message, invokemessage=None):
     """Checks, processes and sends attachments of message.
     Returns processed blueprint count"""
     global lastError
-    # already checked in on_message
-    # skip messages from self
-    #if message.author == bot.user:
-    #    return 0
-    # skip all bot messages
-    #if message.author.bot:
-    #    return 0
 
     bpcount = 0
     # iterate attachments
@@ -225,37 +330,38 @@ async def process_attachments(message: discord.Message, invokemessage=None):
             do_create_gif = keywords_re_dict["gif"].search(content_to_search)
             do_random_firing_order = -1 if do_create_gif is not None and do_create_gif.groups()[0] is not None else 2
             do_cut_args = keywords_re_dict["cut"].search(content_to_search)
-            do_aspectratio_args = keywords_re_dict["aspect"].search(content_to_search)
+            do_aspectratio_args = get_aspect_ratio(content_to_search)
             if do_cut_args is None:
                 do_cut_args = (None, None, None)
             else:
                 do_cut_args = convert_tupel_to_float(do_cut_args.groups())
                 if do_cut_args[0] is None:
                     do_cut_args[0] = 0.5
-            if do_aspectratio_args:
-                do_aspectratio_args = do_aspectratio_args.groups()
-                do_aspectratio_args = float(do_aspectratio_args[0]) / float(do_aspectratio_args[1])
             # process blueprint
-            try:
-                combined_img_file, timing = await bp_to_img.process_blueprint([filename, content],
-                    use_player_colors=do_player_color, create_gif=do_create_gif, firing_order=do_random_firing_order,
-                    cut_side_top_front=do_cut_args, force_aspect_ratio=do_aspectratio_args)
+            #try:
+            combined_img_file, timing = await process_attachment(MessageOrInteraction(message), attachm, 
+                    do_send_timing, use_player_colors=do_player_color,
+                    create_gif=do_create_gif, firing_order=do_random_firing_order, cut_side_top_front=do_cut_args,
+                    force_aspect_ratio=do_aspectratio_args)
+                #combined_img_file, timing = await bp_to_img.process_blueprint([filename, content],
+                #    use_player_colors=do_player_color, create_gif=do_create_gif, firing_order=do_random_firing_order,
+                #    cut_side_top_front=do_cut_args, force_aspect_ratio=do_aspectratio_args)
                 # files
-                file = discord.File(combined_img_file)
+                #file = discord.File(combined_img_file)
                 # upload
-                sendtiming = None
-                if do_send_timing:
-                    sendtiming = f"JSON parse completed in {timing[0]:.3f}s.\n" \
-                                f"Conversion completed in {timing[1]:.3f}s.\n" \
-                                f"View matrices completed in {timing[3]:.3f}s.\n" \
-                                f"Image creation completed in {timing[4]:.3f}s.\n" \
-                                f"Total time: {(timing[0]+timing[1]+timing[2]+timing[3]+timing[4]):.3f}s"
-                await message.channel.send(content=sendtiming, file=file)
+                #sendtiming = None
+                #if do_send_timing:
+                #    sendtiming = f"JSON parse completed in {timing[0]:.3f}s.\n" \
+                #                f"Conversion completed in {timing[1]:.3f}s.\n" \
+                #                f"View matrices completed in {timing[3]:.3f}s.\n" \
+                #                f"Image creation completed in {timing[4]:.3f}s.\n" \
+                #                f"Total time: {(timing[0]+timing[1]+timing[2]+timing[3]+timing[4]):.3f}s"
+            await message.channel.send(content=timing, file=combined_img_file)
                 # delete image file
-                os.remove(combined_img_file)
-            except:
-                lastError = sys.exc_info()
-                await handle_blueprint_error(message, lastError, attachm.filename, bp_to_img.bp_gameversion)
+            #    os.remove(combined_img_file)
+            #except:
+            #    lastError = sys.exc_info()
+            #    await handle_blueprint_error(message, lastError, attachm.filename, bp_to_img.bp_gameversion)
             
             # delete blueprint file
             #os.remove(filename)
@@ -263,7 +369,7 @@ async def process_attachments(message: discord.Message, invokemessage=None):
     return bpcount
 
 
-async def handle_blueprint_error(message, error, bpfilename, bpgameverison):
+async def handle_blueprint_error(moi: MessageOrInteraction, error, bpfilename: str, bpgameverison: str):
     """Sends error notification to channel where message was received and error informations to bot owner."""
     def traceback_string():
         etype, value, tb = error
@@ -295,17 +401,17 @@ async def handle_blueprint_error(message, error, bpfilename, bpgameverison):
         bot.owner_id = appinfo.owner.id
         ownerId = bot.owner_id
         if ownerId is None or ownerId == 0:
-            await message.channel.send("You found an error! Could not send details to bot owner." + warn_gv)
+            await moi.send("You found an error! Could not send details to bot owner." + warn_gv)
             return
     # fetch owner
     try:
         ownerUser = await bot.fetch_user(ownerId)
     except (discord.NotFound, discord.HTTPException):
-        await message.channel.send("You found an error! Could not send details to bot owner." + warn_gv)
+        await moi.send("You found an error! Could not send details to bot owner." + warn_gv)
         return
     # send
     await ownerUser.send(traceback_string())
-    await message.channel.send(f"You found an error! Details were send to {ownerUser.name}." + warn_gv)
+    await moi.send(f"You found an error! Details were send to {ownerUser.name}." + warn_gv)
 
 
 bot.run(TOKEN())
