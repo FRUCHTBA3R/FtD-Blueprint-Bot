@@ -74,11 +74,12 @@ class FiringAnimator:
             raise Exception("Call setup_ordered first.")
         return self.__total_frames
 
-    def setup_order(self, axis=2, ascending=False):
+    def setup_order(self, axis=2):
         """
         Animation setup.
-        :param axis: Axis selection for ordering, -1 for random order, -2 for all at once
-        :param ascending: Sort axis ascending or descending.
+        :param axis: Axis selection for ordering, -1 for random order, -2 for all at once,
+        0, 1, 2 normal y,z,x axis,
+        3, 4, 5 inverted y,z,x axis
         """
         max_spaced_frame_count = min(len(self.firing_positions) * len(self.animation), self.max_frames)
         available_frames = max_spaced_frame_count - len(self.animation) + 1
@@ -93,8 +94,8 @@ class FiringAnimator:
             order = np.arange(len(self.firing_positions))
             np.random.shuffle(order)
         else:
-            order = np.argsort(self.firing_positions[:, axis])
-            if not ascending:
+            order = np.argsort(self.firing_positions[:, axis % 3])
+            if axis < 3:
                 order = np.flip(order)
         # loop
         start_frame = 0
