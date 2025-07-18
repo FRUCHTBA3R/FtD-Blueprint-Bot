@@ -18,6 +18,7 @@ BP_FOLDER = os.getenv("BLUEPRINT_FOLDER")
 #####AUTHOR = int(os.getenv("AUTHOR"))
 if DO_DEBUG:
     TOKEN = lambda: os.getenv("DISCORD_TOKEN_DEBUG")
+    DEBUG_SERVER = discord.Object(os.getenv("DEBUG_SERVER_ID"))
 else:  # load encrypted credential provided with systemd-creds
     def __token():
         with open(os.getenv("CREDENTIALS_DIRECTORY") + "/discord_token", "r") as f:
@@ -150,7 +151,10 @@ async def on_ready():
     # commands
     slash_group = SlashCmdGroup(name="blueprint", description="...")
     bot.tree.add_command(slash_group)
-    print(await bot.tree.sync())
+    bot.synced_commands = await bot.tree.sync()
+    if DO_DEBUG:
+        bot.tree.copy_global_to(guild=DEBUG_SERVER)
+    print(bot.synced_commands)
 
 
 @bot.event
@@ -174,7 +178,10 @@ async def on_message(message: discord.Message):
     if (mode == 1) or (((mode == 2) or (mode is None)) and bot.user.mentioned_in(message)):
         bpcount = await process_message_attachments(message)
 
-    # command processing
+    # command processing, remove all mentions and trim, so @mention can use commands
+    for m in message.mentions:
+        message.content = message.content.replace(m.mention, ' '*len(m.mention))
+    message.content = message.content.strip()
     await bot.process_commands(message)
 
 
@@ -218,8 +225,11 @@ async def cmd_test(ctx):
     """Testing function"""
     print_cmd(ctx)
     await ctx.channel.send("bp!print")  # recursion test
-    for cmd in bot.tree.walk_commands():
-        await ctx.channel.send(cmd)
+
+    ownerUser = await bot.fetch_user(bot.owner_id)
+    for cmd in bot.synced_commands:
+        cmd: discord.app_commands.AppCommand
+        await ownerUser.send(f"## Synced Cmds\nname `{cmd}` id `{cmd.id}`")
 
 
 @bot.event
@@ -316,8 +326,10 @@ class SlashCmdGroup(discord.app_commands.Group):
         timing: bool = False, 
         aspect_ratio: str = ""):
         moi = MessageOrInteraction(interaction)
+        if isinstance(firing_order, discord.app_commands.Choice):
+            firing_order = firing_order.value
         file, content = await process_attachment(moi, blueprint, timing, create_gif=True,
-            firing_order=firing_order.value, cut_side_top_front=(cut_side, cut_top, cut_front),
+            firing_order=firing_order, cut_side_top_front=(cut_side, cut_top, cut_front),
             use_player_colors=not no_color, force_aspect_ratio=get_aspect_ratio(aspect_ratio))
         if content is not None or file is not None:
             await moi.send(content=content, file=file)
