@@ -111,7 +111,7 @@ class MessageOrInteraction():
             raise TypeError("Did not get discord.Message or discord.Interaction")
 
 
-class TempFile(discord.File):
+class AutoRemoveFile(discord.File):
     """Discord file, which removes file on disk when going out of scope."""
     def __del__(self):
         print("Removing file:", self.filename)
@@ -337,7 +337,7 @@ async def process_attachment(moi: MessageOrInteraction, attachment: discord.Atta
         await handle_blueprint_error(moi, lastError, attachment.filename, bp_to_img.bp_gameversion)
         # TODO: check if a file was created and delete
         return None, None
-    img_file = TempFile(img_fname)
+    img_file = AutoRemoveFile(img_fname)
     timing_content = None
     if do_timing:
         timing_content = f"JSON parse completed in {timing[0]:.3f}s.\n" \
