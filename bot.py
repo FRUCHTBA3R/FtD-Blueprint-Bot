@@ -288,7 +288,7 @@ async def on_command_error(ctx: commands.Context, error):
     print(f"[ERR] <cmd:{type(error)}> {error}")
     #[print(k, v) for k,v in vars(error).items()]
     if ctx.interaction is not None:
-        ctx.interaction.response.send_message("Failed")
+        await ctx.interaction.response.send_message("Failed")
     if type(error) == commands.errors.CheckFailure:
         # permission error
         await ctx.message.add_reaction("\U0001f4a9")  # :poop:
