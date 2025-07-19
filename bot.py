@@ -318,6 +318,9 @@ async def on_reaction_add(reaction, user):
 
 
 class SlashCmdGroup(discord.app_commands.Group):
+    __default_perms = discord.Permissions()
+    __default_perms.read_messages = True
+    __default_perms.send_messages = True
 
     @discord.app_commands.command(name="img", description="Create image from blueprint.")
     @discord.app_commands.describe(
@@ -330,6 +333,7 @@ class SlashCmdGroup(discord.app_commands.Group):
         aspect_ratio="Output aspect ratio <x>:<y> e.g. 16:9"
     )
     @discord.app_commands.autocomplete(aspect_ratio=autocomplete_aspect_ratio)
+    @discord.app_commands.default_permissions(__default_perms)
     async def slash_blueprint(self,
         interaction: discord.Interaction,
         blueprint: discord.Attachment,
@@ -340,6 +344,7 @@ class SlashCmdGroup(discord.app_commands.Group):
         timing: bool = False, 
         aspect_ratio: str = ""):
         # mode
+        print(self.__default_perms)
         mode = GCM.getMode(interaction.guild, interaction.channel)
         if mode == GCM.Mode.OFF:
             await interaction.response.send_message("Channel is set to OFF", ephemeral=True)
@@ -375,6 +380,7 @@ class SlashCmdGroup(discord.app_commands.Group):
         discord.app_commands.Choice(name="Right to Left", value=0),
     ])
     @discord.app_commands.autocomplete(aspect_ratio=autocomplete_aspect_ratio)
+    @discord.app_commands.default_permissions(__default_perms)
     async def slash_gif(self,
         interaction: discord.Interaction,
         blueprint: discord.Attachment,
