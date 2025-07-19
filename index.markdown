@@ -10,4 +10,4 @@ By inviting the bot <b>FtD BluePrinter Bot#1052</b> (AppID: 759429992521662464) 
 This bot uses user IDs and message content (including .blueprint files and other save files from "From the Depths") for processing only, they will not be stored.
 Server IDs and Channel IDs are stored until the bot is removed from the server to provide settings functionality.
 
-<h2 style="text-align: center"><a href="https://discord.com/api/oauth2/authorize?client_id=759429992521662464&permissions=34880&scope=bot">> INVITE <</a></h2>
+<h2 style="text-align: center"><a href="https://discord.com/oauth2/authorize?client_id=759429992521662464&permissions=100416&integration_type=0&scope=applications.commands+bot">> INVITE <</a></h2>
