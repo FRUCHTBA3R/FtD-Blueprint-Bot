@@ -3,6 +3,7 @@
 import os
 import sys, traceback
 from typing import Optional, Sequence
+import asyncio
 
 import bp_to_img
 import re
@@ -97,17 +98,21 @@ class MessageOrInteraction():
     def wasResponded(self):
         return self.isInteraction() and self.moi.response.is_done()
 
-    async def send(self, content: Optional[str] = None, file: Optional[discord.File] = None):
+    async def send(self, content: Optional[str] = None, file: Optional[discord.File] = None, ephemeral: bool = True):
         """Sends to channel of message or responds to interaction or sends followups to interaction"""
+        kwargs = {}
+        if content is not None: kwargs["content"] = content
+        if file is not None: kwargs["file"] = file
+        
         if self.isMessage():
             self.moi: discord.Message
-            await self.moi.channel.send(content=content, file=file)
+            await self.moi.channel.send(**kwargs)
         elif self.isInteraction():
             self.moi: discord.Interaction
             if not self.moi.response.is_done():
-                await self.moi.response.send_message(content=content, file=file)
+                await self.moi.response.send_message(**kwargs, ephemeral=ephemeral)
             else:
-                await self.moi.followup.send(content=content, file=file)
+                await self.moi.followup.send(**kwargs, ephemeral=ephemeral)
         else:
             raise TypeError("Did not get discord.Message or discord.Interaction")
 
@@ -154,7 +159,7 @@ async def on_ready():
     bot.synced_commands = await bot.tree.sync()
     if DO_DEBUG:
         bot.tree.copy_global_to(guild=DEBUG_SERVER)
-    print(bot.synced_commands)
+        print(bot.synced_commands)
 
 
 @bot.event
@@ -175,7 +180,7 @@ async def on_message(message: discord.Message):
 
     # mode
     mode = GCM.getMode(message.guild, message.channel)
-    if (mode == 1) or (((mode == 2) or (mode is None)) and bot.user.mentioned_in(message)):
+    if (mode == GCM.Mode.ON) or (((mode == GCM.Mode.MENTION) or (mode is None)) and bot.user.mentioned_in(message)):
         bpcount = await process_message_attachments(message)
 
     # command processing, remove all mentions and trim, so @mention can use commands
@@ -184,21 +189,43 @@ async def on_message(message: discord.Message):
     message.content = message.content.strip()
     await bot.process_commands(message)
 
-
-@bot.command(name="print", help="Print last blueprint uploaded to channel. Only checks last 30 messages.")
+# TODO
+@bot.command(name="print", help="DEPRECATED (use right click context menu, SOON). Print last blueprint uploaded to channel. Only checks last 30 messages.")
 async def cmd_print(ctx: commands.Context):
     """Find and print last blueprint in channel"""
-    print_cmd(ctx)
-    async for message in ctx.history(limit=30, oldest_first=False):
-        bpcount = await process_message_attachments(message, ctx)
-        if bpcount != 0:
-            break
+    await ctx.send("This command is no longer working. A right click context menu will be added soon.")
+    #print_cmd(ctx)
+    #async for message in ctx.history(limit=30, oldest_first=False):
+    #    bpcount = await process_message_attachments(message, ctx)
+    #    if bpcount != 0:
+    #        break
 
 
-@bot.command(name="mode", help="Set mode for current channel.\nAllowed arguments:\noff   Turned off.\non  Turned on.\nmention  Only react if bot is mentioned.",
-            require_var_positional=False, usage="off | on | mention")
+class ModeTransformer(discord.app_commands.Transformer, commands.Converter):
+    def get_choices(self):
+        return [
+            discord.app_commands.Choice(name="off", value=GCM.Mode.OFF.name),
+            discord.app_commands.Choice(name="on", value=GCM.Mode.ON.name),
+            discord.app_commands.Choice(name="private", value=GCM.Mode.PRIVATE.name),
+        ]
+    choices = property(get_choices)
+
+    async def transform(self, interaction: discord.Interaction, value: str) -> guildconfig.Mode:
+        # will only get a correct value from choices
+        return GCM.Mode[value]
+
+    async def convert(self, ctx: commands.Context, argument: str) -> guildconfig.Mode:
+        # can get any string
+        argument = argument.upper()
+        if argument not in GCM.Mode._member_names_:
+            return None
+        return GCM.Mode[argument]
+
+
+@bot.hybrid_command(name="mode", help="Set mode for current channel.\nAllowed arguments:\noff \t Turned off.\non \t Turned on.\nprivate \t Interaction only visible to user.",
+            require_var_positional=False, usage="off | on | private")
 @commands.has_permissions(manage_channels=True)
-async def cmd_mode(ctx: commands.Context, mode):
+async def cmd_mode(ctx: commands.Context, mode: discord.app_commands.Transform[guildconfig.Mode,ModeTransformer]):
     """Select mode for channel"""
     print_cmd(ctx)
     if ctx.guild is None:
@@ -207,8 +234,11 @@ async def cmd_mode(ctx: commands.Context, mode):
     # check mode
     if not GCM.setMode(ctx.guild, ctx.channel, mode):
         raise commands.errors.BadArgument("Mode could not be set")
-    
-    await ctx.message.add_reaction("\U0001f197")  # :ok:
+
+    if ctx.interaction is None:
+        await ctx.message.add_reaction("\U0001f197")  # :ok:
+    else:
+        await ctx.interaction.response.send_message(f"Mode for this channel was set to {mode.name}", ephemeral=True)
 
 
 @bot.command(name="pp&tos", help="Send links to privacy policy and terms of service.")
@@ -221,7 +251,7 @@ async def cmd_pptos(ctx: commands.Context):
 
 @bot.command(name="test", help="For testing stuff. (Author only)")
 @commands.is_owner()
-async def cmd_test(ctx):
+async def cmd_test(ctx: commands.Context):
     """Testing function"""
     print_cmd(ctx)
     await ctx.channel.send("bp!print")  # recursion test
@@ -232,11 +262,33 @@ async def cmd_test(ctx):
         await ownerUser.send(f"## Synced Cmds\nname `{cmd}` id `{cmd.id}`")
 
 
+@bot.command(name="notifydeprecated", help="Sends deprecation notification to channels where bot is in mode 'on'")
+@commands.is_owner()
+async def cmd_notify_deprecated(ctx: commands.Context):
+    ownerUser = await bot.fetch_user(bot.owner_id)
+    count = 0
+    for i in range(0, 5):
+        await asyncio.sleep(5)
+        for guild_id in GCM:
+            channels = GCM.getChannelsWithMode(guild_id, guildconfig.Mode.ON)
+            if i < len(channels):
+                count += 1
+                channel = await bot.fetch_channel(channels[i])
+                await channel.send(
+                    "This bot will soon be using slash commands and @mention only.\n" \
+                    "This channel is currently in mode `on` which will no longer work the same way.\n" \
+                    "Please take a look at the github page for more information.\n"\
+                    "(Right click context menu is planned)")
+    await ctx.channel.send(f"Notified total of {count} channels")
+
+
 @bot.event
 async def on_command_error(ctx: commands.Context, error):
     """Command error exception"""
     print(f"[ERR] <cmd:{type(error)}> {error}")
     #[print(k, v) for k,v in vars(error).items()]
+    if ctx.interaction is not None:
+        ctx.interaction.response.send_message("Failed")
     if type(error) == commands.errors.CheckFailure:
         # permission error
         await ctx.message.add_reaction("\U0001f4a9")  # :poop:
@@ -286,11 +338,18 @@ class SlashCmdGroup(discord.app_commands.Group):
         no_color: bool = False, 
         timing: bool = False, 
         aspect_ratio: str = ""):
+        # mode
+        mode = GCM.getMode(interaction.guild, interaction.channel)
+        if mode == GCM.Mode.OFF:
+            await interaction.response.send_message("Channel is set to OFF", ephemeral=True)
+            await asyncio.sleep(1)
+            await interaction.delete_original_response()
+            return
         moi = MessageOrInteraction(interaction)
         file, content = await process_attachment(moi, blueprint, timing, cut_side_top_front=(cut_side, cut_top, cut_front),
             use_player_colors=not no_color, force_aspect_ratio=get_aspect_ratio(aspect_ratio))
         if content is not None or file is not None:
-            await moi.send(content=content, file=file)
+            await moi.send(content=content, file=file, ephemeral=(mode==GCM.Mode.PRIVATE))
 
 
     @discord.app_commands.command(name="gif", description="Create gif from blueprint.")
@@ -325,6 +384,13 @@ class SlashCmdGroup(discord.app_commands.Group):
         no_color: bool = False, 
         timing: bool = False, 
         aspect_ratio: str = ""):
+        # mode
+        mode = GCM.getMode(interaction.guild, interaction.channel)
+        if mode == GCM.Mode.OFF:
+            await interaction.response.send_message("Channel is set to OFF", ephemeral=True)
+            await asyncio.sleep(2)
+            await interaction.delete_original_response()
+            return
         moi = MessageOrInteraction(interaction)
         if isinstance(firing_order, discord.app_commands.Choice):
             firing_order = firing_order.value
@@ -332,7 +398,7 @@ class SlashCmdGroup(discord.app_commands.Group):
             firing_order=firing_order, cut_side_top_front=(cut_side, cut_top, cut_front),
             use_player_colors=not no_color, force_aspect_ratio=get_aspect_ratio(aspect_ratio))
         if content is not None or file is not None:
-            await moi.send(content=content, file=file)
+            await moi.send(content=content, file=file, ephemeral=(mode==GCM.Mode.PRIVATE))
 
 
 

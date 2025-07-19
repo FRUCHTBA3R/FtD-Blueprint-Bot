@@ -1,9 +1,23 @@
 import json
+from discord import Guild
+from discord.abc import GuildChannel
+from enum import Enum
 
 GUILDCONFIG_FILE = "guildconfig.json"
 
+class Mode(Enum):
+    OFF = 0
+    """no @mention, no slash cmds, no context menu, only needed commands"""
+    ON = 1
+    """responses to interactions are public, visible to all, @mention enabled"""
+    MENTION = 2
+    """deprecated"""
+    PRIVATE = 3
+    """default, responses to interactions are private, visible only to interaction user, @mention disabled"""
 
 class GuildconfigManager():
+    Mode = Mode
+
     def __init__(self):
         with open(GUILDCONFIG_FILE, "r") as f:
             try:
@@ -11,14 +25,14 @@ class GuildconfigManager():
             except:
                 print("[ERR] <guildconfig> guildconfig.json unreadable.")
                 config = {}
-        self.config = config
-        self.modes = {"off": 0, "on": 1, "mention": 2}
-    
-    
+        self.config: dict[str, dict[str, int]] = config
+        #self.modes = {"off": 0, "on": 1, "mention": 2}
+
+
     def __str__(self):
         return self.config.__str__()
-    
-    
+
+
 ##    def __getitem__(self, key):
 ##        """Get self.config[key] or self.config[key[0]][key[1]]..."""
 ##        d = self.config
@@ -30,8 +44,8 @@ class GuildconfigManager():
 ##        if hasattr(d, "__setitem__"):
 ##            raise IndexError("Accessing lists/dicts/.. is not allowed. Use [keyA,keyB,..] or .get(key) instead.")
 ##        return d
-    
-    
+
+
 ##    def __setitem__(self, key, value):
 ##        """Set self.config[key] to value and save to file."""
 ##        d = self.config
@@ -66,8 +80,8 @@ class GuildconfigManager():
         """Get self.config[key]."""
         return self.config[key]
 
-    def setMode(self, guild, channel, mode):
-        """Set mode (int or str) for channel of guild. Return True if success"""
+    def setMode(self, guild: Guild, channel: GuildChannel, mode: Mode):
+        """Set mode for channel of guild. Return True if success"""
         if guild is None or channel is None:
             return False
         guild_id = guild.id
@@ -78,20 +92,16 @@ class GuildconfigManager():
         channel_id = str(channel_id)
         if guild_id not in self.config:
             self.config[guild_id] = {}
-        if type(mode) != int:
-            mode = self.modes.get(mode)
-        elif mode not in range(3):
-            mode = None
-        if mode is None:
+        if type(mode) != Mode:
             return False
-        self.config[guild_id][channel_id] = mode
+        self.config[guild_id][channel_id] = mode.value
         self.saveConfig()
         return True
 
-    def getMode(self, guild, channel):
-        """Get mode (int) for channel of guild."""
+    def getMode(self, guild: Guild, channel: GuildChannel) -> Mode | None:
+        """Get mode for channel of guild. Defaults to PRIVATE."""
         if guild is None:
-            return self.modes["on"]
+            return Mode.ON
         if channel is None:
             return None
         guild_id = guild.id
@@ -101,9 +111,26 @@ class GuildconfigManager():
         g = self.config.get(str(guild_id))
         if g is None:
             return None
-        return g.get(str(channel_id))
+        return Mode(g.get(str(channel_id), Mode.PRIVATE.value))
 
-    def removeGuild(self, guild):
+    def getChannelsWithMode(self, guild: Guild|str|int, mode: Mode) -> list[str]:
+        """Gets all channels of given guild with equal mode"""
+        if type(guild) is Guild:
+            guild = guild.id
+        if type(guild) is int:
+            guild = str(guild)
+        if type(guild) is not str or type(mode) is not Mode:
+            return []
+        channels = self.config.get(guild)
+        if channels is None:
+            return []
+        res = []
+        for key, val in channels.items():
+            if Mode(val) == mode:
+                res.append(key)
+        return res
+
+    def removeGuild(self, guild: Guild):
         """Removes guild"""
         if guild is None:
             return False
@@ -113,7 +140,7 @@ class GuildconfigManager():
         self.saveConfig()
         return True
 
-    def removeUnused(self, active_guilds):
+    def removeUnused(self, active_guilds: list[Guild]):
         """Remove guild configurations if id is not in active_guilds list.
         Returns number of removed guilds."""
         if active_guilds is None or len(active_guilds) == 0:
