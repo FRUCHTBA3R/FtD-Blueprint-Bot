@@ -251,15 +251,30 @@ async def cmd_pptos(ctx: commands.Context):
 
 @bot.command(name="test", help="For testing stuff. (Author only)")
 @commands.is_owner()
-async def cmd_test(ctx: commands.Context):
+async def cmd_test(ctx: commands.Context, args):
     """Testing function"""
     print_cmd(ctx)
     await ctx.channel.send("bp!print")  # recursion test
 
+    try:
+        args = discord.Object(int(args))
+    except:
+        args = None
+
     ownerUser = await bot.fetch_user(bot.owner_id)
+    txt = "## Synced Cmds"
     for cmd in bot.synced_commands:
         cmd: discord.app_commands.AppCommand
-        await ownerUser.send(f"## Synced Cmds\nname `{cmd}` id `{cmd.id}`")
+        perms = "no guild id"
+        if args:
+            try:
+                perms = await cmd.fetch_permissions(args)
+            except Exception as err:
+                perms = err
+        txt += f"\nname `{cmd}` id `{cmd.id}` perms `{perms}`"
+        
+    await ownerUser.send(txt)
+
 
 
 @bot.command(name="notifydeprecated", help="Sends deprecation notification to channels where bot is in mode 'on'")
