@@ -57,10 +57,13 @@ def get_aspect_ratio(txt: str) -> float|None:
 async def s_fetch_owner() -> None | discord.User:
     """Safely fetches owner as user. Returns None if failed."""
     try:
+        # fetch owner if not set
+        if not bot.owner_id and not bot.owner_ids:
+            await bot.is_owner(None)
         if bot.owner_id:
             owner = await bot.fetch_user(bot.owner_id)
         else:
-            owner = (await bot.application_info()).owner
+            owner = await bot.fetch_user(bot.owner_ids[0])
         log.info("Fetched owner %s %i", owner.global_name, owner.id)
         return owner
     except Exception as err:
