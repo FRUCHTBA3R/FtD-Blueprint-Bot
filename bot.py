@@ -54,6 +54,19 @@ def get_aspect_ratio(txt: str) -> float|None:
     return res
 
 
+async def s_fetch_owner() -> None | discord.User:
+    """Safely fetches owner as user. Returns None if failed."""
+    try:
+        if bot.owner_id:
+            owner = await bot.fetch_user(bot.owner_id)
+        else:
+            owner = await bot.application_info().owner
+        return owner
+    except Exception as err:
+        log.error("Fetching owner failed: %s", err)
+    return None
+
+
 async def autocomplete_aspect_ratio(interaction: discord.Interaction, txt: str) -> list[discord.app_commands.Choice[str]]:
     suggested_ratios = {"HDTV 16:9":"16:9", "SDTV 4:3":"4:3", "Square 1:1":"1:1", "Camera 3:2":"3:2", 
                         "Ultra Wide 21:9":"21:9", "Movie 16:10":"16:10", "Smartphone 6:13":"6:13"}
@@ -237,8 +250,9 @@ async def cmd_test(ctx: commands.Context, args: str = ""):
     except:
         args = None
 
-    ownerUser = await bot.fetch_user(bot.owner_id)
-    log.info(f"OwnerUser {ownerUser}")
+    ownerUser = await s_fetch_owner()
+    if not ownerUser:
+        return
     txt = "## Synced Cmds"
     for cmd in bot.synced_commands:
         cmd: discord.app_commands.AppCommand
@@ -257,7 +271,6 @@ async def cmd_test(ctx: commands.Context, args: str = ""):
 @bot.command(name="notifydeprecated", help="Sends deprecation notification to channels where bot is in mode 'on'")
 @commands.is_owner()
 async def cmd_notify_deprecated(ctx: commands.Context):
-    ownerUser = await bot.fetch_user(bot.owner_id)
     count = 0
     for i in range(0, 5):
         await asyncio.sleep(5)
@@ -529,18 +542,8 @@ async def handle_blueprint_error(moi: MessageOrInteraction, error, bpfilename: s
     except Exception as err:
         log.critical(f"Couldn't log blueprint error: {err}")
     # log to channel and bot owner chat
-    ownerId = bot.owner_id
-    if ownerId is None or ownerId == 0:
-        appinfo = await bot.application_info()
-        bot.owner_id = appinfo.owner.id
-        ownerId = bot.owner_id
-        if ownerId is None or ownerId == 0:
-            await moi.send("You found an error! Could not send details to bot owner." + warn_gv)
-            return
-    # fetch owner
-    try:
-        ownerUser = await bot.fetch_user(ownerId)
-    except (discord.NotFound, discord.HTTPException):
+    ownerUser = await s_fetch_owner()
+    if not ownerUser:
         await moi.send("You found an error! Could not send details to bot owner." + warn_gv)
         return
     # send
