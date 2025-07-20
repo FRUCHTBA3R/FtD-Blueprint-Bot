@@ -238,6 +238,7 @@ async def cmd_test(ctx: commands.Context, args: str = ""):
         args = None
 
     ownerUser = await bot.fetch_user(bot.owner_id)
+    log.info(f"OwnerUser {ownerUser}")
     txt = "## Synced Cmds"
     for cmd in bot.synced_commands:
         cmd: discord.app_commands.AppCommand
