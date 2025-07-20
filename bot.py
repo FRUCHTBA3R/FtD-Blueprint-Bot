@@ -63,7 +63,10 @@ async def s_fetch_owner() -> None | discord.User:
         if bot.owner_id:
             owner = await bot.fetch_user(bot.owner_id)
         else:
-            owner = await bot.fetch_user(bot.owner_ids[0])
+            # if only i wouldn't had to create a team
+            for id in bot.owner_ids:
+                break
+            owner = await bot.fetch_user(id)
         log.info("Fetched owner %s %i", owner.global_name, owner.id)
         return owner
     except Exception as err:
