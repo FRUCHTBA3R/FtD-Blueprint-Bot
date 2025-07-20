@@ -61,6 +61,7 @@ async def s_fetch_owner() -> None | discord.User:
             owner = await bot.fetch_user(bot.owner_id)
         else:
             owner = (await bot.application_info()).owner
+        log.info("Fetched owner %s %i", owner.global_name, owner.id)
         return owner
     except Exception as err:
         log.error("Fetching owner failed: %s", err)
