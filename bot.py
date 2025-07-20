@@ -256,7 +256,12 @@ async def cmd_test(ctx: commands.Context, args: str = ""):
         args = discord.Object(int(args))
     except:
         args = None
-
+    
+    # sync to guild
+    if args:
+        bot.tree.sync(guild=args)
+    
+    # get permissions of command for guild
     ownerUser = await s_fetch_owner()
     if not ownerUser:
         return
