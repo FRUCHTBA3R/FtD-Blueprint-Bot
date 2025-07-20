@@ -257,25 +257,29 @@ async def cmd_test(ctx: commands.Context, args: str = ""):
     except:
         args = None
 
-    # sync to guild
     if args:
-        await bot.tree.sync(guild=args)
+        # sync to guild
+        synced_commands = await bot.tree.sync(guild=args)
+        # get commands from guild
+        fetched_commands = await bot.tree.fetch_commands(guild=args)
 
     # get permissions of command for guild
+    txt = "## bot.synced_cmds, synced_cmds, fetched_cmds"
+    for synced_cmds in [bot.synced_commands, synced_commands, fetched_commands]:
+        txt += "\n### Synced Cmds"
+        for cmd in bot.synced_commands:
+            cmd: discord.app_commands.AppCommand
+            perms = "no guild id"
+            if args:
+                try:
+                    perms = await cmd.fetch_permissions(args)
+                except Exception as err:
+                    perms = err
+            txt += f"\nname `{cmd}` id `{cmd.id}` perms `{perms}`"
+
     ownerUser = await s_fetch_owner()
     if not ownerUser:
         return
-    txt = "## Synced Cmds"
-    for cmd in bot.synced_commands:
-        cmd: discord.app_commands.AppCommand
-        perms = "no guild id"
-        if args:
-            try:
-                perms = await cmd.fetch_permissions(args)
-            except Exception as err:
-                perms = err
-        txt += f"\nname `{cmd}` id `{cmd.id}` perms `{perms}`"
-        
     await ownerUser.send(txt)
 
 
