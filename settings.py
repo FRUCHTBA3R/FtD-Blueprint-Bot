@@ -33,14 +33,14 @@ def get_bot_intents():
     res.message_content = True
     return res
 
-if DO_DEBUG:  # add file:lineno to console
-    _ColourFormatter.FORMATS = {
-        level: logging.Formatter(
-            f'\x1b[30;1m%(asctime)s\x1b[0m {colour}%(levelname)-4s\x1b[0m %(filename)s:%(lineno)d \x1b[35m%(name)s\x1b[0m %(message)s',
-            '%Y-%m-%d %H:%M:%S',
-        )
-        for level, colour in _ColourFormatter.LEVEL_COLOURS
-    }
+# add file:lineno to console when debugging, change levelname length to 4
+_ColourFormatter.FORMATS = {
+    level: logging.Formatter(
+        f'\x1b[30;1m%(asctime)s\x1b[0m {colour}%(levelname)-4s\x1b[0m {"%(filename)s:%(lineno)d " if DO_DEBUG else ""}\x1b[35m%(name)s\x1b[0m %(message)s',
+        '%Y-%m-%d %H:%M:%S',
+    )
+    for level, colour in _ColourFormatter.LEVEL_COLOURS
+}
 
 # class _VerboseColourFormatter(_ColourFormatter):
 #     FORMATS = {
