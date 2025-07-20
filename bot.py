@@ -2,36 +2,20 @@
 
 import os
 import sys, traceback
-from typing import Optional, Sequence
+from typing import Optional
 import asyncio
 
-import bp_to_img
+import bp_to_img, settings, guildconfig
 import re
 
 import discord
 from discord.ext import commands
 from discord.app_commands import Range as PRange
-from dotenv import load_dotenv
 
-load_dotenv()
-DO_DEBUG = os.getenv("DO_DEBUG")
-BP_FOLDER = os.getenv("BLUEPRINT_FOLDER")
-#####AUTHOR = int(os.getenv("AUTHOR"))
-if DO_DEBUG:
-    TOKEN = lambda: os.getenv("DISCORD_TOKEN_DEBUG")
-    DEBUG_SERVER = discord.Object(os.getenv("DEBUG_SERVER_ID"))
-else:  # load encrypted credential provided with systemd-creds
-    def __token():
-        with open(os.getenv("CREDENTIALS_DIRECTORY") + "/discord_token", "r") as f:
-            return f.read()
-    TOKEN = __token
 
-# create bp_folder
-if not os.path.exists(BP_FOLDER):
-    os.mkdir(BP_FOLDER)
+log = settings.logging.getLogger("bot")
 
 # guild/channel config manager
-import guildconfig
 GCM = guildconfig.GuildconfigManager()
 
 # keyword search expression
@@ -47,21 +31,13 @@ keywords_re_dict = {"timing": re.compile(r"(?:^|[_*~`\s])(stats|statistics|timin
 
 lastError = None
 
-def my_intents():
-    res = discord.Intents()
-    res.messages = True
-    res.typing = True
-    res.reactions = True
-    res.guilds = True
-    # for compatibility, will be removed soon
-    res.message_content = True
-    return res
-bot = commands.Bot(command_prefix = "bp!", intents=my_intents())
+
+bot = commands.Bot(command_prefix = "bp!", intents=settings.get_bot_intents())
 
 
 def print_cmd(ctx: commands.Context):
     """Print command information"""
-    print(f"[CMD] <{ctx.command}> invoked in channel '{ctx.channel}'", "" if ctx.guild is None else f"of guild '{ctx.guild}'")
+    log.info(f"[CMD] <{ctx.command}> invoked in channel '{ctx.channel}'{"" if ctx.guild is None else f" of guild '{ctx.guild}'"}")
 
 
 def convert_tupel_to_float(tpl):
@@ -120,12 +96,12 @@ class MessageOrInteraction():
 class AutoRemoveFile(discord.File):
     """Discord file, which removes file on disk when going out of scope."""
     def __del__(self):
-        print("Removing file:", self.filename)
+        log.info("Removing file: %s", self.filename)
         try:
             self.close()
             os.remove(self.fp.name)
         except:
-            print("[ERR] File could not be removed.")
+            log.error("File could not be removed.")
 
 
 #async def cc_is_author(ctx):
@@ -140,13 +116,13 @@ class AutoRemoveFile(discord.File):
 
 @bot.event
 async def on_ready():
-    print(f"{bot.user} has connected to Discord!")
+    log.info(f"{bot.user} has connected to Discord!")
     removed = GCM.removeUnused(bot.guilds)
     if removed > 0:
-        print(f"Removed {removed} unconnected guilds.")
-    print(f"Connected to {len(bot.guilds)} guilds:")
+        log.info(f"Removed {removed} unconnected guilds.")
+    log.info(f"Connected to {len(bot.guilds)} guilds:")
     for guild in bot.guilds:
-        print(f"{guild.name} (id: {guild.id})")
+        log.info(f"{guild.name} (id: {guild.id})")
 
     # set activity text
     act = discord.Game("Keywords: stats, nocolor, gif, cut. Use bp!print to print last file. "
@@ -157,9 +133,9 @@ async def on_ready():
     slash_group = SlashCmdGroup(name="blueprint", description="...")
     bot.tree.add_command(slash_group)
     bot.synced_commands = await bot.tree.sync()
-    if DO_DEBUG:
-        bot.tree.copy_global_to(guild=DEBUG_SERVER)
-        print(bot.synced_commands)
+    if settings.DO_DEBUG:
+        bot.tree.copy_global_to(guild=settings.DEBUG_SERVER)
+        log.debug(str(bot.synced_commands))
 
 
 @bot.event
@@ -251,7 +227,7 @@ async def cmd_pptos(ctx: commands.Context):
 
 @bot.command(name="test", help="For testing stuff. (Author only)")
 @commands.is_owner()
-async def cmd_test(ctx: commands.Context, args):
+async def cmd_test(ctx: commands.Context, args: str = ""):
     """Testing function"""
     print_cmd(ctx)
     await ctx.channel.send("bp!print")  # recursion test
@@ -300,7 +276,7 @@ async def cmd_notify_deprecated(ctx: commands.Context):
 @bot.event
 async def on_command_error(ctx: commands.Context, error):
     """Command error exception"""
-    print(f"[ERR] <cmd:{type(error)}> {error}")
+    log.error("[ERR] <cmd:%s> %s", str(type(error)), str(error))
     #[print(k, v) for k,v in vars(error).items()]
     if ctx.interaction is not None:
         await ctx.interaction.response.send_message(error, ephemeral=True)
@@ -359,7 +335,6 @@ class SlashCmdGroup(discord.app_commands.Group):
         timing: bool = False, 
         aspect_ratio: str = ""):
         # mode
-        print(self.__default_perms)
         mode = GCM.getMode(interaction.guild, interaction.channel)
         if mode == GCM.Mode.OFF:
             await interaction.response.send_message("Channel is set to OFF", ephemeral=True)
@@ -429,7 +404,7 @@ async def process_attachment(moi: MessageOrInteraction, attachment: discord.Atta
                         #nocol: bool, timing: bool, aspect_ratio: float|None
                     ) -> tuple[str,discord.File] | tuple[None, None]:
     try:
-        fname = os.path.join(BP_FOLDER, attachment.filename)
+        fname = os.path.join(settings.BP_FOLDER, attachment.filename)
         img_fname, timing = await bp_to_img.process_blueprint([fname, await attachment.read()], **kwargs)
     except:
         # TODO
@@ -473,7 +448,7 @@ async def process_message_attachments(message: discord.Message, invokemessage=No
 
             # trigger typing
             await message.channel.typing()
-            filename = BP_FOLDER + "/" + attachm.filename
+            filename = settings.BP_FOLDER + "/" + attachm.filename
             # save file  # NO use bytes object directly
             #with open(filename, "wb") as f:
             #    f.write(content)
@@ -548,7 +523,10 @@ async def handle_blueprint_error(moi: MessageOrInteraction, error, bpfilename: s
         bpgameverison = ".".join([str(e) for e in bpgameverison])
 
     # log to console
-    traceback.print_exception(*error)
+    try:
+        log.exception(traceback.format_exception(*error))
+    except Exception as err:
+        log.critical(f"Couldn't log blueprint error: {err}")
     # log to channel and bot owner chat
     ownerId = bot.owner_id
     if ownerId is None or ownerId == 0:
@@ -569,4 +547,4 @@ async def handle_blueprint_error(moi: MessageOrInteraction, error, bpfilename: s
     await moi.send(f"You found an error! Details were send to {ownerUser.name}." + warn_gv)
 
 
-bot.run(TOKEN())
+bot.run(settings.TOKEN(), root_logger=True)
