@@ -50,11 +50,12 @@ To change the current mode of a channel use `/mode` or write `bp!mode <on|mentio
 
 The mode for direct messages is "on". This can not be changed.
 
-### Commands
+### Text Commands
 List of all commands (these require *@mentioning* the bot):
-- `bp!help`
+- `bp!help` Shows help for text commands
 - ~~`bp!print`~~
-- `bp!mode`
+- `bp!mode` Sets mode for channel
+- `bp!pp&tos` Post links to privacy policy and terms of service
 
 ### Supported file formats
 Bot will only accept *.blueprint*, *.blueprint_ba* and *.blueprint_bac* files.
