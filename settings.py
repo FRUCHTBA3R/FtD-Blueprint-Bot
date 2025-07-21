@@ -29,8 +29,6 @@ def get_bot_intents():
     res.typing = True
     res.reactions = True
     res.guilds = True
-    # for compatibility, will be removed soon TODO
-    res.message_content = True
     return res
 
 # add file:lineno to console when debugging, change levelname length to 4

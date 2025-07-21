@@ -290,22 +290,27 @@ async def cmd_notify_deprecated(ctx: commands.Context, confirm: str = ""):
     confirm = confirm == "confirm"
     dep_message = "This bot is now using slash commands and @mention only.\n" \
         "This channel is currently in mode `on` which will no longer work the same way.\n" \
-        "If the slash commands aren't showing up, check the permissions and try reinviting the bot.\n" \
+        "If slash commands aren't showing up, check the permissions and try reinviting the bot and reloading Discord.\n" \
         "Please take a look at the github page for more information.\n" \
         "(Right click context menu is planned)"
     count = 0
+    failed_count = 0
     for i in range(0, 5):
         await asyncio.sleep(5)
         for guild_id in GCM:
             channels = GCM.getChannelsWithMode(guild_id, GCM.Mode.ON)
             if i < len(channels):
                 count += 1
-                channel = await bot.fetch_channel(channels[i])
-                if confirm:
-                    await channel.send(dep_message)
+                try:
+                    channel = await bot.fetch_channel(channels[i])
+                    if confirm:
+                        await channel.send(dep_message)
+                except Exception as err:
+                    log.warning(f"Failed for channel {channels[i]} with {err}")
+                    failed_count += 1
     if not confirm:
         await ctx.channel.send(dep_message)
-    await ctx.channel.send(f"{"" if confirm else "(Would have) "}Notified total of {count} channels")
+    await ctx.channel.send(f"{"" if confirm else "(Would have) "}Notified total of {count-failed_count} channels, with {failed_count} failed")
 
 
 @bot.event
