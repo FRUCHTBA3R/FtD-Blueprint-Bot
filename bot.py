@@ -80,14 +80,15 @@ async def autocomplete_aspect_ratio(interaction: discord.Interaction, txt: str) 
     return [discord.app_commands.Choice(name=key, value=val) for key, val in suggested_ratios.items() if txt.lower() in key.lower()]
 
 
+
 class MessageOrInteraction():
     """Wrapper for Message or Interaction"""
     def __init__(self, m_or_i: discord.Message | discord.Interaction):
         self.moi = m_or_i
-    
+
     def isMessage(self):
         return isinstance(self.moi, discord.Message)
-    
+
     def isInteraction(self):
         return isinstance(self.moi, discord.Interaction)
 
@@ -111,6 +112,16 @@ class MessageOrInteraction():
                 await self.moi.followup.send(**kwargs, ephemeral=ephemeral)
         else:
             raise TypeError("Did not get discord.Message or discord.Interaction")
+
+    async def defer(self, ephemeral: bool, thinking: bool) -> bool:
+        """defers if interaction and not responded"""
+        if self.isInteraction():
+            self.moi: discord.Interaction
+            if not self.moi.response.is_done():
+                await self.moi.response.defer(ephemeral=ephemeral, thinking=thinking)
+                return True
+        return False
+
 
 
 class AutoRemoveFile(discord.File):
@@ -345,18 +356,22 @@ async def on_reaction_add(reaction, user):
     #        print("Thumbs down")
 
 
-# TODO: context menu actions: public|private: simple blueprint, simple gif, interactive blueprint creation
-#@bot.tree.context_menu(name="Blueprint")
-#async def cm_print(interaction: discord.Interaction, message: discord.Message):
-#    await process_message_attachments(message)
-#    #await interaction.response.send_message(f"Message: ```{message.content}```\nwith {len(message.attachments)} Attachments")
+default_perms_app_command = discord.Permissions()
+default_perms_app_command.read_messages = True
+default_perms_app_command.send_messages = True
 
+
+async def check_mode(interaction: discord.Interaction) -> guildconfig.Mode | None:
+    mode = GCM.getMode(interaction.guild, interaction.channel)
+    if mode == GCM.Mode.OFF:
+        await interaction.response.send_message("Channel is set to OFF", ephemeral=True)
+        await asyncio.sleep(1)
+        await interaction.delete_original_response()
+        return None
+    return mode
 
 
 class SlashCmdGroup(discord.app_commands.Group):
-    __default_perms = discord.Permissions()
-    __default_perms.read_messages = True
-    __default_perms.send_messages = True
 
     @discord.app_commands.command(name="img", description="Create image from blueprint.")
     @discord.app_commands.describe(
@@ -369,7 +384,7 @@ class SlashCmdGroup(discord.app_commands.Group):
         aspect_ratio="Output aspect ratio <x>:<y> e.g. 16:9"
     )
     @discord.app_commands.autocomplete(aspect_ratio=autocomplete_aspect_ratio)
-    @discord.app_commands.default_permissions(__default_perms)
+    @discord.app_commands.default_permissions(default_perms_app_command)
     async def slash_blueprint(self,
         interaction: discord.Interaction,
         blueprint: discord.Attachment,
@@ -380,14 +395,11 @@ class SlashCmdGroup(discord.app_commands.Group):
         timing: bool = False, 
         aspect_ratio: str = ""):
         # mode
-        mode = GCM.getMode(interaction.guild, interaction.channel)
-        if mode == GCM.Mode.OFF:
-            await interaction.response.send_message("Channel is set to OFF", ephemeral=True)
-            await asyncio.sleep(1)
-            await interaction.delete_original_response()
+        mode = await check_mode(interaction)
+        if mode is None:
             return
-        await interaction.response.defer(ephemeral=(mode==GCM.Mode.PRIVATE), thinking=True)
         moi = MessageOrInteraction(interaction)
+        await moi.defer(ephemeral=(mode==GCM.Mode.PRIVATE), thinking=True)
         file, content = await process_attachment(moi, blueprint, timing, cut_side_top_front=(cut_side, cut_top, cut_front),
             use_player_colors=not no_color, force_aspect_ratio=get_aspect_ratio(aspect_ratio))
         if content is not None or file is not None:
@@ -416,7 +428,7 @@ class SlashCmdGroup(discord.app_commands.Group):
         discord.app_commands.Choice(name="Right to Left", value=0),
     ])
     @discord.app_commands.autocomplete(aspect_ratio=autocomplete_aspect_ratio)
-    @discord.app_commands.default_permissions(__default_perms)
+    @discord.app_commands.default_permissions(default_perms_app_command)
     async def slash_gif(self,
         interaction: discord.Interaction,
         blueprint: discord.Attachment,
@@ -428,14 +440,12 @@ class SlashCmdGroup(discord.app_commands.Group):
         timing: bool = False, 
         aspect_ratio: str = ""):
         # mode
-        mode = GCM.getMode(interaction.guild, interaction.channel)
-        if mode == GCM.Mode.OFF:
-            await interaction.response.send_message("Channel is set to OFF", ephemeral=True)
-            await asyncio.sleep(2)
-            await interaction.delete_original_response()
+        # mode
+        mode = await check_mode(interaction)
+        if mode is None:
             return
-        await interaction.response.defer(ephemeral=(mode==GCM.Mode.PRIVATE), thinking=True)
         moi = MessageOrInteraction(interaction)
+        moi.defer(ephemeral=(mode==GCM.Mode.PRIVATE), thinking=True)
         if isinstance(firing_order, discord.app_commands.Choice):
             firing_order = firing_order.value
         file, content = await process_attachment(moi, blueprint, timing, create_gif=True,
@@ -444,6 +454,25 @@ class SlashCmdGroup(discord.app_commands.Group):
         if content is not None or file is not None:
             await moi.send(content=content, file=file, ephemeral=(mode==GCM.Mode.PRIVATE))
 
+
+
+# TODO: context menu actions: public|private: simple blueprint, simple gif, interactive blueprint creation
+@bot.tree.context_menu(name="Simple Blueprint")
+@discord.app_commands.default_permissions(default_perms_app_command)
+async def cm_print(interaction: discord.Interaction, message: discord.Message):
+    if (await check_mode(interaction)) is None:
+        return
+    for attachment in message.attachments:
+        await SlashCmdGroup.slash_blueprint.callback(None, interaction, attachment)
+
+
+@bot.tree.context_menu(name="Simple Gif")
+@discord.app_commands.default_permissions(default_perms_app_command)
+async def cm_gif(interaction: discord.Interaction, message: discord.Message):
+    if (await check_mode(interaction)) is None:
+        return
+    for attachment in message.attachments:
+        await SlashCmdGroup.slash_gif.callback(None, interaction, attachment)
 
 
 async def process_attachment(moi: MessageOrInteraction, attachment: discord.Attachment, do_timing:bool, **kwargs: any
