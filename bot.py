@@ -145,26 +145,31 @@ async def on_ready():
         log.info(f"{guild.name} (id: {guild.id})")
 
     # set activity text
-    act = discord.Game("Keywords: stats, nocolor, gif, cut. Use bp!print to print last file. "
+    act = discord.Game("/blueprint or @mention - Keywords: stats, nocolor, gif, cut. "
                         "Use bp!help for commands. Private chat supported.")
     await bot.change_presence(status=discord.Status.online, activity=act)
     
     # commands
     slash_group = SlashCmdGroup(name="blueprint", description="...")
-    bot.tree.add_command(slash_group)
-    bot.synced_commands = await bot.tree.sync()
-    if settings.DO_DEBUG:
-        bot.tree.copy_global_to(guild=settings.DEBUG_SERVER)
-        log.debug(str(bot.synced_commands))
+    try:
+        bot.tree.add_command(slash_group)
+        bot.synced_commands = await bot.tree.sync()
+        if settings.DO_DEBUG:
+            bot.tree.copy_global_to(guild=settings.DEBUG_SERVER)
+            log.debug(str(bot.synced_commands))
+    except discord.app_commands.CommandAlreadyRegistered as err:
+        pass
+    except Exception as err:
+        log.error(str(err))
 
 
 @bot.event
 async def on_guild_remove(guild):
     success = GCM.removeGuild(guild)
     if success:
-        print(f"A Guild was removed.")
+        log.info(f"A Guild was removed.")
     else:
-        print(f"Guild removal unsuccessful.")
+        log.info(f"Guild removal unsuccessful.")
 
 
 @bot.event
@@ -334,7 +339,7 @@ async def on_reaction_add(reaction, user):
     #print("Found reaction", reaction, "from user", user)
     if reaction.message.author == bot.user:
         if reaction.emoji == "\U0001f44e":  # :thumbsdown:
-            print("Thumbs down on bot message")
+            log.info("Thumbs down on bot message")
     #else:
     #    if reaction.emoji == "\U0001f44e":  # :thumbsdown:
     #        print("Thumbs down")
@@ -381,6 +386,7 @@ class SlashCmdGroup(discord.app_commands.Group):
             await asyncio.sleep(1)
             await interaction.delete_original_response()
             return
+        await interaction.response.defer(ephemeral=(mode==GCM.Mode.PRIVATE), thinking=True)
         moi = MessageOrInteraction(interaction)
         file, content = await process_attachment(moi, blueprint, timing, cut_side_top_front=(cut_side, cut_top, cut_front),
             use_player_colors=not no_color, force_aspect_ratio=get_aspect_ratio(aspect_ratio))
@@ -428,6 +434,7 @@ class SlashCmdGroup(discord.app_commands.Group):
             await asyncio.sleep(2)
             await interaction.delete_original_response()
             return
+        await interaction.response.defer(ephemeral=(mode==GCM.Mode.PRIVATE), thinking=True)
         moi = MessageOrInteraction(interaction)
         if isinstance(firing_order, discord.app_commands.Choice):
             firing_order = firing_order.value
@@ -477,13 +484,13 @@ async def process_message_attachments(message: discord.Message, invokemessage=No
             try:
                 content = await attachm.read()
             except discord.Forbidden:
-                print("You do not have permissions to access this attachment:", attachm.filename)
+                log.warning("You do not have permissions to access this attachment: %s", attachm.filename)
                 continue
             except discord.NotFound:
-                print("The attachment was deleted:", attachm.filename)
+                log.warning("The attachment was deleted: %s", attachm.filename)
                 continue
             except discord.HTTPException:
-                print("Downloading the attachment failed:", attachm.filename)
+                log.warning("Downloading the attachment failed: %s", attachm.filename)
                 continue
 
             # trigger typing
