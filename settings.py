@@ -70,6 +70,11 @@ LOGGING_CONFIG = {
             "level": "DEBUG" if DO_DEBUG else "INFO",
             "propagate": False
         },
+        "bp_to_img": {
+            "handlers": ["console"],
+            "level": "DEBUG" if DO_DEBUG else "INFO",
+            "propagate": False
+        },
     },
 }
 

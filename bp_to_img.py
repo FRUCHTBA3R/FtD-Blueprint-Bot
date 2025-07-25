@@ -2,6 +2,7 @@
 
 import json
 import time
+import logging
 from collections import OrderedDict
 
 import numpy as np
@@ -12,6 +13,8 @@ from firing_animator import FiringAnimator
 import imageio
 from pygifsicle import optimize
 from scipy.signal import convolve2d
+
+_log = logging.getLogger("bp_to_img")
 
 # block rotation directions
 rot_normal = np.array([
@@ -113,7 +116,7 @@ async def process_blueprint(file: str | list[str | bytes], silent=False, standal
     global bp_gameversion, firing_animator
     bp_gameversion = None
     if not silent:
-        print("Processing blueprint")
+        _log.info("Processing blueprint")
     # parse file or bytes
     ts1 = time.time()
     if type(file) == str:
@@ -125,13 +128,13 @@ async def process_blueprint(file: str | list[str | bytes], silent=False, standal
         fname = file[0]
         bp = json.loads(file[1])
     else:
-        print("ERROR: invalid file args passed")
+        _log.error("ERROR: invalid file args passed")
         raise FileNotFoundError()
     file = None  # free up space
     main_img_fname = fname.rsplit(".", 1)[0] + "_view"
     ts1 = time.time() - ts1
     if not silent:
-        print("JSON parse completed in", ts1, "s")
+        _log.info(f"JSON parse completed in {ts1} s")
     # convert to numpy data
     ts2 = time.time()
     res = __convert_blueprint(bp)
@@ -139,13 +142,13 @@ async def process_blueprint(file: str | list[str | bytes], silent=False, standal
         use_player_colors = False
     ts2 = time.time() - ts2
     if not silent:
-        print("Conversion completed in", ts2, "s")
+        _log.info(f"Conversion completed in {ts2} s")
     # fetch infos
     ts3 = time.time()
     bp_infos, bp_gameversion = __fetch_infos(bp)
     ts3 = time.time() - ts3
     if not silent:
-        print("Infos gathered in", ts3, "s")
+        _log.info(f"Infos gathered in {ts3} s")
     # create top, side, front view matrices
     ts4 = time.time()
     firing_animator.clear()  # clear here and at the end (if it crashes)
@@ -154,7 +157,7 @@ async def process_blueprint(file: str | list[str | bytes], silent=False, standal
                                 cut_side_top_front=cut_side_top_front)
     ts4 = time.time() - ts4
     if not silent:
-        print("View matrices completed in", ts4, "s")
+        _log.info(f"View matrices completed in {ts4} s")
     # create images
     ts5 = time.time()
     if create_gif:
@@ -166,12 +169,12 @@ async def process_blueprint(file: str | list[str | bytes], silent=False, standal
                                     aspect_ratio=force_aspect_ratio)
     ts5 = time.time() - ts5
     if not silent:
-        print("Image creation completed in", ts5, "s")
+        _log.info(f"Image creation completed in {ts5} s")
     # save image
     if not create_gif:
         main_img_fname += ".png"
         if not cv2.imwrite(main_img_fname, main_img):  # TODO: raise exception
-            print("ERROR: image could not be saved", main_img_fname)
+            _log.error("ERROR: image could not be saved %s", main_img_fname)
     else:
         main_img_fname += ".gif"
         firing_animator.clear()
@@ -224,7 +227,7 @@ def __convert_blueprint(bp):
         blockcount = blueprint["BlockCount"]
         if blockcount != len(blueprint["BLP"]):
             blockcount = len(blueprint["BLP"])
-            print("[WARN] Block count is not equal to length of block position array.")
+            _log.warning("Block count is not equal to length of block position array.")
         #blockguid_array = np.zeros(blockcount, dtype="<U36") not using guid here
         blockid_array = np.array(blueprint["BlockIds"], dtype=int)
         # block loop
@@ -244,8 +247,8 @@ def __convert_blueprint(bp):
         # check min/max coords with blp
         #mincords = np.min(blueprint["BLP"], 0)
         #maxcords = np.max(blueprint["BLP"], 0)
-        #print(mincords, maxcords)
-        #print(blueprint["MinCords"], blueprint["MaxCords"])
+        #_log.debug(f"{mincords} {maxcords}")
+        #_log.debug(f"{blueprint["MinCords"]} {blueprint["MaxCords"]}")
         # re-min/max
         #blueprint["MinCords"] = np.minimum(mincords, blueprint["MinCords"])
         #blueprint["MaxCords"] = np.maximum(mincords, blueprint["MaxCords"])
@@ -303,22 +306,22 @@ def __fetch_infos(bp):
         infos["Name"] = "Unknown"
     infos["Blocks"] = f"{safe_max(bp.get('SavedTotalBlockCount'), bp['Blueprint'].get('TotalBlockCount')):,}"
     if infos["Blocks"] is None:
-        print("Error while gathering blueprint block count info.")
+        _log.warning("Error while gathering blueprint block count info.")
         infos["Blocks"] = "?"
     try:
         infos["Cost"] = f"{round(bp.get('SavedMaterialCost')):,}"
     except Exception as err:
-        print("Error while gathering blueprint cost info:", err)
+        _log.warning("Error while gathering blueprint cost info: %s", err)
         infos["Cost"] = "?"
     try:
         infos["Size"] = "W:{0:,} H:{1:,} L:{2:,}".format(*bp.get("Blueprint").get("Size"))
     except Exception as err:
-        print("Error while gathering blueprint size info:", err)
+        _log.warning("Error while gathering blueprint size info: %s", err)
         infos["Size"] = "?"
     try:
         infos["Author"] = bp.get("Blueprint").get("AuthorDetails").get("CreatorReadableName")
     except Exception as err:
-        print("Error while gathering blueprint author info:", err)
+        _log.warning("Error while gathering blueprint author info: %s", err)
         infos["Author"] = "Unknown"
 
     # game version
@@ -334,7 +337,7 @@ def __fetch_infos(bp):
                         numonly += c
                 gameversion[i] = int(numonly)
     except Exception as err:
-        print("Error while gathering blueprint gameversion info:", err)
+        _log.warning("Error while gathering blueprint gameversion info: %s", err)
         gameversion = "?"
 
     return infos, gameversion
@@ -348,7 +351,7 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side
         global firing_animator
         # subtract min cords
         blueprint["BLP"] -= mincords
-        #print("ViewMat at", blueprint_desc)
+        #_log.info("ViewMat at %s", blueprint_desc)
 
         # numpyfication
         # vectorize is slower
@@ -378,9 +381,9 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side
         #for i in range(len(a_guid)):
         #    block = blocks.get(a_guid[i])
         #    if block is None:
-        #        print(f"Unknown missing block: '{a_guid[i]}'")
+        #        _log.warning(f"Unknown missing block: '{a_guid[i]}'")
         #    elif block["Material"] == missing_block["Material"]:
-        #        print(f"Missing block: '{a_guid[i]}'\nwith name: '{block['Name']}'")
+        #        _log.warning(f"Missing block: '{a_guid[i]}'\nwith name: '{block['Name']}'")
 
         if create_gif:
             blocks_that_go_bang = [ "c94e1719-bcc7-4c6a-8563-505fad2f9db9",  # 16 pounder
@@ -580,7 +583,7 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side
     itemdict = bp["ItemDictionary"]
     blueprint_iter(bp["Blueprint"], bp["Blueprint"]["MinCords"])
     # re-center based on actual min coordinates
-    # print("Actual min cords:", actual_min_cords)
+    # _log.info("Actual min cords: %s", actual_min_cords)
     if np.any(actual_min_cords < bp["Blueprint"]["MinCords"]):
         top_color = np.roll(top_color, (-actual_min_cords[0], -actual_min_cords[2]), (0, 1))
         top_height = np.roll(top_height, (-actual_min_cords[0], -actual_min_cords[2]), (0, 1))
@@ -594,7 +597,7 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side
     side_height = cv2.flip(side_height, 0)
     front_color = cv2.flip(front_color, -1)
     front_height = cv2.flip(front_height, -1)
-    # print(side_height)
+    # _log.info(str(side_height))
 
     return ([top_color, top_height],  # , actual_min_cords[1]],
             [side_color, side_height],  # , actual_min_cords[0]],
@@ -924,8 +927,8 @@ def __create_images(top_mat, side_mat, front_mat, bp_infos, contours=True, upsca
     # aspect ratio
     if type(aspect_ratio) == float and gif_args is None:
         res_img_shape = [side_img_shape[0] + info_img.shape[0], side_img_shape[1] + info_img.shape[1]]
-        #print("Calc res img size:", res_img_shape)
-        #print("Aspect ratio:", res_img_shape[1] / res_img_shape[0], "wanted:", aspect_ratio)
+        #_log.debug("Calc res img size: %s", res_img_shape)
+        #_log.debug(f"Aspect ratio: {res_img_shape[1] / res_img_shape[0]} wanted: {aspect_ratio}")
         if res_img_shape[1] / res_img_shape[0] > aspect_ratio:
             # too wide, pad height
             needed_pixels = int(res_img_shape[1] / aspect_ratio) - res_img_shape[0]
@@ -1110,12 +1113,12 @@ async def speed_test(fname):
         t3[i] = timing[2]
         t4[i] = timing[3]
         t5[i] = timing[4]
-    print("Timing:")
-    print("t1:", np.sum(t1)/testlen, "dt:", np.sum(np.abs(t1-np.sum(t1)/testlen))/testlen, "max:", np.max(t1))
-    print("t2:", np.sum(t2)/testlen, "dt:", np.sum(np.abs(t2-np.sum(t2)/testlen))/testlen, "max:", np.max(t2))
-    print("t3:", np.sum(t3)/testlen, "dt:", np.sum(np.abs(t3-np.sum(t3)/testlen))/testlen, "max:", np.max(t3))
-    print("t4:", np.sum(t4)/testlen, "dt:", np.sum(np.abs(t4-np.sum(t4)/testlen))/testlen, "max:", np.max(t4))
-    print("t5:", np.sum(t5)/testlen, "dt:", np.sum(np.abs(t5-np.sum(t5)/testlen))/testlen, "max:", np.max(t5))
+    _log.info("Timing:")
+    _log.info(f"t1: {np.sum(t1)/testlen} dt: {np.sum(np.abs(t1-np.sum(t1)/testlen))/testlen} max: {np.max(t1)}")
+    _log.info(f"t2: {np.sum(t2)/testlen} dt: {np.sum(np.abs(t2-np.sum(t2)/testlen))/testlen} max: {np.max(t2)}")
+    _log.info(f"t3: {np.sum(t3)/testlen} dt: {np.sum(np.abs(t3-np.sum(t3)/testlen))/testlen} max: {np.max(t3)}")
+    _log.info(f"t4: {np.sum(t4)/testlen} dt: {np.sum(np.abs(t4-np.sum(t4)/testlen))/testlen} max: {np.max(t4)}")
+    _log.info(f"t5: {np.sum(t5)/testlen} dt: {np.sum(np.abs(t5-np.sum(t5)/testlen))/testlen} max: {np.max(t5)}")
 
     blueprint = bp["Blueprint"]
     # show image
