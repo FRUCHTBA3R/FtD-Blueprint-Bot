@@ -2,15 +2,15 @@
 
 import os
 import sys, traceback
-from typing import Optional
 import asyncio
-
-import bp_to_img, settings, guildconfig
 import re
 
 import discord
 from discord.ext import commands
 from discord.app_commands import Range as PRange
+
+import bp_to_img, settings, guildconfig
+from classes import MessageOrInteraction, InteractiveBlueprint, firing_order_options, aspect_ratio_options
 
 
 log = settings.logging.getLogger("bot")
@@ -75,52 +75,7 @@ async def s_fetch_owner() -> None | discord.User:
 
 
 async def autocomplete_aspect_ratio(interaction: discord.Interaction, txt: str) -> list[discord.app_commands.Choice[str]]:
-    suggested_ratios = {"HDTV 16:9":"16:9", "SDTV 4:3":"4:3", "Square 1:1":"1:1", "Camera 3:2":"3:2", 
-                        "Ultra Wide 21:9":"21:9", "Movie 16:10":"16:10", "Smartphone 6:13":"6:13"}
-    return [discord.app_commands.Choice(name=key, value=val) for key, val in suggested_ratios.items() if txt.lower() in key.lower()]
-
-
-
-class MessageOrInteraction():
-    """Wrapper for Message or Interaction"""
-    def __init__(self, m_or_i: discord.Message | discord.Interaction):
-        self.moi = m_or_i
-
-    def isMessage(self):
-        return isinstance(self.moi, discord.Message)
-
-    def isInteraction(self):
-        return isinstance(self.moi, discord.Interaction)
-
-    def wasResponded(self):
-        return self.isInteraction() and self.moi.response.is_done()
-
-    async def send(self, content: Optional[str] = None, file: Optional[discord.File] = None, ephemeral: bool = True):
-        """Sends to channel of message or responds to interaction or sends followups to interaction"""
-        kwargs = {}
-        if content is not None: kwargs["content"] = content
-        if file is not None: kwargs["file"] = file
-        
-        if self.isMessage():
-            self.moi: discord.Message
-            await self.moi.channel.send(**kwargs)
-        elif self.isInteraction():
-            self.moi: discord.Interaction
-            if not self.moi.response.is_done():
-                await self.moi.response.send_message(**kwargs, ephemeral=ephemeral)
-            else:
-                await self.moi.followup.send(**kwargs, ephemeral=ephemeral)
-        else:
-            raise TypeError("Did not get discord.Message or discord.Interaction")
-
-    async def defer(self, ephemeral: bool, thinking: bool) -> bool:
-        """defers if interaction and not responded"""
-        if self.isInteraction():
-            self.moi: discord.Interaction
-            if not self.moi.response.is_done():
-                await self.moi.response.defer(ephemeral=ephemeral, thinking=thinking)
-                return True
-        return False
+    return [discord.app_commands.Choice(name=key, value=val) for key, val in aspect_ratio_options.items() if txt.lower() in key.lower()]
 
 
 
@@ -360,7 +315,6 @@ default_perms_app_command = discord.Permissions()
 default_perms_app_command.read_messages = True
 default_perms_app_command.send_messages = True
 
-
 async def check_mode(interaction: discord.Interaction) -> guildconfig.Mode | None:
     mode = GCM.getMode(interaction.guild, interaction.channel)
     if mode == GCM.Mode.OFF:
@@ -414,20 +368,12 @@ class SlashCmdGroup(discord.app_commands.Group):
         cut_top="Top cut. From 1.0 (closest, all) to 0.0",
         cut_front="Front cut. From 1.0 (closest, all) to 0.0",
         no_color="Disable custom ship color",
-        timing="Show processing times",
-        aspect_ratio="Output aspect ratio <x>:<y> e.g. 16:9"
+        timing="Show processing times"
     )
     @discord.app_commands.choices(firing_order=[
-        discord.app_commands.Choice(name="Front to Back", value=2),
-        discord.app_commands.Choice(name="Random", value=-1),
-        discord.app_commands.Choice(name="All at once", value=-2),
-        discord.app_commands.Choice(name="Back to Front", value=5),
-        discord.app_commands.Choice(name="Top to Bottom", value=1),
-        discord.app_commands.Choice(name="Bottom to Top", value=4),
-        discord.app_commands.Choice(name="Left to Right", value=3),
-        discord.app_commands.Choice(name="Right to Left", value=0),
+        discord.app_commands.Choice(name=elem["name"], value=elem["value"])
+        for elem in firing_order_options
     ])
-    @discord.app_commands.autocomplete(aspect_ratio=autocomplete_aspect_ratio)
     @discord.app_commands.default_permissions(default_perms_app_command)
     async def slash_gif(self,
         interaction: discord.Interaction,
@@ -437,9 +383,7 @@ class SlashCmdGroup(discord.app_commands.Group):
         cut_top: PRange[float,0.0,1.0] = None, 
         cut_front: PRange[float,0.0,1.0] = None,
         no_color: bool = False, 
-        timing: bool = False, 
-        aspect_ratio: str = ""):
-        # mode
+        timing: bool = False):
         # mode
         mode = await check_mode(interaction)
         if mode is None:
@@ -450,10 +394,9 @@ class SlashCmdGroup(discord.app_commands.Group):
             firing_order = firing_order.value
         file, content = await process_attachment(moi, blueprint, timing, create_gif=True,
             firing_order=firing_order, cut_side_top_front=(cut_side, cut_top, cut_front),
-            use_player_colors=not no_color, force_aspect_ratio=get_aspect_ratio(aspect_ratio))
+            use_player_colors=not no_color)
         if content is not None or file is not None:
             await moi.send(content=content, file=file, ephemeral=(mode==GCM.Mode.PRIVATE))
-
 
 
 # TODO: context menu actions: public|private: simple blueprint, simple gif, interactive blueprint creation
@@ -475,10 +418,47 @@ async def cm_gif(interaction: discord.Interaction, message: discord.Message):
         await SlashCmdGroup.slash_gif.callback(None, interaction, attachment)
 
 
+@bot.tree.context_menu(name="Interactive Blueprint")
+@discord.app_commands.default_permissions(default_perms_app_command)
+async def cm_interactive(interaction: discord.Interaction, message: discord.Message):
+    if len(message.attachments) == 0:
+        await interaction.response.send_message("No attachments found.", delete_after=2, ephemeral=True)
+        return
+
+    mode = await check_mode(interaction)
+    if mode is None:
+        return
+
+    interactive_bp = InteractiveBlueprint(mode, [m.filename for m in message.attachments])
+    await interactive_bp.show(interaction)
+    timed_out = await interactive_bp.wait()
+    if timed_out:
+        log.debug("Interactive Blueprint timed out")
+        try:
+            await interaction.delete_original_response()
+        except:
+            pass
+        return
+
+    moi = MessageOrInteraction(interaction)
+    for i in interactive_bp.selected_files:
+        file, content = await process_attachment(moi, message.attachments[i],
+            do_timing=interactive_bp.do_timing,
+            create_gif=interactive_bp.create_gif,
+            firing_order=interactive_bp.firing_order,
+            cut_side_top_front=interactive_bp.cut_side_top_front,
+            use_player_colors=interactive_bp.use_player_colors,
+            force_aspect_ratio=get_aspect_ratio(interactive_bp.aspect_ratio_string)
+        )
+        if content is not None or file is not None:
+            await moi.send(content=content, file=file, ephemeral=(mode==GCM.Mode.PRIVATE))
+
+
+
 async def process_attachment(moi: MessageOrInteraction, attachment: discord.Attachment, do_timing:bool, **kwargs: any
                         #make_gif: bool, firing_order: int|None, cut_stf: tuple[float, float, float]|None,
                         #nocol: bool, timing: bool, aspect_ratio: float|None
-                    ) -> tuple[str,discord.File] | tuple[None, None]:
+                    ) -> tuple[AutoRemoveFile, str] | tuple[None, None]:
     try:
         fname = os.path.join(settings.BP_FOLDER, attachment.filename)
         img_fname, timing = await bp_to_img.process_blueprint([fname, await attachment.read()], **kwargs)
