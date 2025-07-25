@@ -345,9 +345,11 @@ def __fetch_infos(bp):
 
 def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side_top_front=(None, None, None)):
     """Create top, side, front view matrices (color matrix and height matrix)"""
-    def blueprint_iter(blueprint, mincoords, blueprint_desc = "main"):
-        """Iterate blueprint and sub blueprints"""
-        nonlocal actual_min_coords
+    def blueprint_iter(blueprint, mincoords, blueprint_desc = "main") -> bool:
+        """Iterate blueprint and sub blueprints.
+        
+        Returns False if IndexError occurred and min/max coords updated."""
+        nonlocal actual_min_coords, actual_max_coords
         global firing_animator
         # subtract min coords
         blueprint["BLP"] -= mincoords
@@ -366,7 +368,7 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side
         for i in range(len(a_guid)):
             a_sizeid[i] = blocks.get(a_guid[i], missing_block).get("SizeId")
         # end new
-        a_pos = blueprint["BLP"]
+        a_pos = np.array(blueprint["BLP"])  # poor ram
         a_dir = blueprint["RotNormal"][blueprint["BLR"]]
         a_dir_tan = blueprint["RotTangent"][blueprint["BLR"]]
         a_dir_bitan = blueprint["RotBitangent"][blueprint["BLR"]]
@@ -471,7 +473,8 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side
 
         def fill_color_and_height(color_mat, height_mat, sel_arr, pos_sel_arr, axisX, axisZ, axisY):
             """Fills color_mat and height_mat with selected blocks (sel_arr as index and pos_sel_arr as position).
-            axisY is the height axis."""
+            axisY is the height axis.
+            Raises IndexError when position is out of bounds."""
             nonlocal a_color#, a_invisible  # unused
             # create slicing indices for axes
             axisA = axisX
@@ -516,6 +519,8 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side
             # new height
             height_mat[unique_pos[:, 0], unique_pos[:, 1]] = sorted_pos[:, axisY][unique_index]
 
+        # flag if fill_color_and_height raised an index error, stops fill_color_and_height from beeing called and returns False at end
+        index_error_occured = False
         # positiv size
         for sizeid in size_id_dict:
             # block selection
@@ -546,12 +551,18 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side
                     for l in range(size_z + 1):
                         # select position here as loop changes a_pos
                         a_pos_sel = a_pos[a_sel]
-                        # fill
-                        fill_color_and_height(top_color, top_height, a_sel, a_pos_sel, 0, 2, 1)
-                        fill_color_and_height(side_color, side_height, a_sel, a_pos_sel, 1, 2, 0)
-                        fill_color_and_height(front_color, front_height, a_sel, a_pos_sel, 1, 0, 2)
-                        # min coords
+                        # fill if no index error occured, else just continue to calculate min/max coords
+                        if not index_error_occured:
+                            try:
+                                fill_color_and_height(top_color, top_height, a_sel, a_pos_sel, 0, 2, 1)
+                                fill_color_and_height(side_color, side_height, a_sel, a_pos_sel, 1, 2, 0)
+                                fill_color_and_height(front_color, front_height, a_sel, a_pos_sel, 1, 0, 2)
+                            except IndexError as err:
+                                _log.warning(str(err))
+                                index_error_occured = True
+                        # min and max coords
                         actual_min_coords = np.minimum(np.amin(a_pos_sel, 0), actual_min_coords)
+                        actual_max_coords = np.maximum(np.amax(a_pos_sel, 0), actual_max_coords)
                         # step in z direction (dir)
                         if l < size_z:
                             a_pos[a_sel] += a_dir[a_sel]
@@ -567,24 +578,38 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side
                     a_pos[a_sel] += a_dir_bitan[a_sel]
 
         # sub blueprints iteration
+        no_sub_index_error = True
         for i, sub_bp in enumerate(blueprint["SCs"]):
-            blueprint_iter(sub_bp, mincoords, blueprint_desc+":"+str(i))
+            no_sub_index_error = no_sub_index_error and blueprint_iter(sub_bp, mincoords, blueprint_desc+":"+str(i))
 
-    # calculate min coords again, cause "MinCords" are not always true
-    actual_min_coords = np.full((3), np.iinfo(np.int32).max, dtype=np.int32)
-    # create matrices
-    top_color = np.full((*bp["Blueprint"]["Size"][[0, 2]], 3), np.array([255, 118, 33]), dtype=np.uint8)
-    top_height = np.full(bp["Blueprint"]["Size"][[0, 2]], -12345, dtype=int)
-    side_color = np.full((*bp["Blueprint"]["Size"][[1, 2]], 3), np.array([255, 118, 33]), dtype=np.uint8)
-    side_height = np.full(bp["Blueprint"]["Size"][[1, 2]], -12345, dtype=int)
-    front_color = np.full((*bp["Blueprint"]["Size"][[1, 0]], 3), np.array([255, 118, 33]), dtype=np.uint8)
-    front_height = np.full(bp["Blueprint"]["Size"][[1, 0]], -12345, dtype=int)
-    # blueprint iteration
-    itemdict = bp["ItemDictionary"]
-    blueprint_iter(bp["Blueprint"], bp["Blueprint"]["MinCords"])
-    # re-center based on actual min coordinates
-    if np.any(actual_min_coords < bp["Blueprint"]["MinCords"]):
-        _log.debug(f"Calculated new min coords {actual_min_coords}")
+        return (not index_error_occured) and no_sub_index_error
+
+    # MAX TWO tries at filling blueprint, first try should get correct min/max coords
+    for iter_i in range(2):
+        # calculate min/max coords again, cause "MinCords" are not always true
+        actual_min_coords = np.full((3), np.iinfo(np.int32).max, dtype=np.int32)
+        actual_max_coords = np.full((3), np.iinfo(np.int32).min, dtype=np.int32)
+        # create matrices
+        top_color = np.full((*bp["Blueprint"]["Size"][[0, 2]], 3), np.array([255, 118, 33]), dtype=np.uint8)
+        top_height = np.full(bp["Blueprint"]["Size"][[0, 2]], -12345, dtype=int)
+        side_color = np.full((*bp["Blueprint"]["Size"][[1, 2]], 3), np.array([255, 118, 33]), dtype=np.uint8)
+        side_height = np.full(bp["Blueprint"]["Size"][[1, 2]], -12345, dtype=int)
+        front_color = np.full((*bp["Blueprint"]["Size"][[1, 0]], 3), np.array([255, 118, 33]), dtype=np.uint8)
+        front_height = np.full(bp["Blueprint"]["Size"][[1, 0]], -12345, dtype=int)
+        # blueprint iteration
+        itemdict = bp["ItemDictionary"]
+        bp_iter_success = blueprint_iter(bp["Blueprint"], bp["Blueprint"]["MinCords"])
+        if bp_iter_success:
+            break
+        _log.info(f"Applying min coord shift by {actual_min_coords}")
+        bp["Blueprint"]["MinCords"] = actual_min_coords  # "MinCords" have been subtracted from "BLP"
+        new_bp_size = actual_max_coords - actual_min_coords + 1
+        _log.info(f"Setting blueprint size from {bp["Blueprint"]["Size"]} to {new_bp_size}")
+        bp["Blueprint"]["Size"] = new_bp_size
+
+    # re-center based on actual min coordinates (should never happen after iterating twice)
+    if np.any(actual_min_coords < 0): #bp["Blueprint"]["MinCords"]):  # this seems wrong, as actual_min_cords are shifted by MinCords
+        _log.debug(f"Calculated new min coords {actual_min_coords} old {bp["Blueprint"]["MinCords"]}")
         top_color = np.roll(top_color, (-actual_min_coords[0], -actual_min_coords[2]), (0, 1))
         top_height = np.roll(top_height, (-actual_min_coords[0], -actual_min_coords[2]), (0, 1))
         side_color = np.roll(side_color, (-actual_min_coords[1], -actual_min_coords[2]), (0, 1))

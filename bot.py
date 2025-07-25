@@ -59,7 +59,7 @@ async def s_fetch_owner() -> None | discord.User:
     try:
         # fetch owner if not set
         if not bot.owner_id and not bot.owner_ids:
-            await bot.is_owner(None)
+            await bot.is_owner(discord.Object(0))
         if bot.owner_id:
             owner = await bot.fetch_user(bot.owner_id)
         else:
