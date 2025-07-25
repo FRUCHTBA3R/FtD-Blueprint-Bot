@@ -211,17 +211,17 @@ def __convert_blueprint(bp):
         blueprint["LocalPosition"] = (parentglobalrotation * quaternion.quaternion(*blueprint["LocalPosition"]) *
                                         parentglobalrotation.inverse()).vec.astype(int) + parentglobalposition
         # convert min/max coordinates to np array
-        mincords = np.array(blueprint["MinCords"].split(","), dtype=float)
-        maxcords = np.array(blueprint["MaxCords"].split(","), dtype=float)
+        mincoords = np.array(blueprint["MinCords"].split(","), dtype=float)
+        maxcoords = np.array(blueprint["MaxCords"].split(","), dtype=float)
         # rotate
-        mincords = (blueprint["LocalRotation"] @ mincords) + blueprint["LocalPosition"]
-        maxcords = (blueprint["LocalRotation"] @ maxcords) + blueprint["LocalPosition"]
+        mincoords = (blueprint["LocalRotation"] @ mincoords) + blueprint["LocalPosition"]
+        maxcoords = (blueprint["LocalRotation"] @ maxcoords) + blueprint["LocalPosition"]
         # (round to int) ((done after iteration))
-        mincords = mincords  # .round().astype(int)
-        maxcords = maxcords  # .round().astype(int)
+        mincoords = mincoords  # .round().astype(int)
+        maxcoords = maxcoords  # .round().astype(int)
         # re-min/max
-        blueprint["MinCords"] = np.minimum(mincords, maxcords)
-        blueprint["MaxCords"] = np.maximum(mincords, maxcords)
+        blueprint["MinCords"] = np.minimum(mincoords, maxcoords)
+        blueprint["MaxCords"] = np.maximum(mincoords, maxcoords)
 
         # create new arrays
         blockcount = blueprint["BlockCount"]
@@ -245,13 +245,13 @@ def __convert_blueprint(bp):
         blueprint["BLP"] = blockposition_array.round().astype(int) + blueprint["LocalPosition"]
 
         # check min/max coords with blp
-        #mincords = np.min(blueprint["BLP"], 0)
-        #maxcords = np.max(blueprint["BLP"], 0)
-        #_log.debug(f"{mincords} {maxcords}")
+        #mincoords = np.min(blueprint["BLP"], 0)
+        #maxcoords = np.max(blueprint["BLP"], 0)
+        #_log.debug(f"{mincoords} {maxcoords}")
         #_log.debug(f"{blueprint["MinCords"]} {blueprint["MaxCords"]}")
         # re-min/max
-        #blueprint["MinCords"] = np.minimum(mincords, blueprint["MinCords"])
-        #blueprint["MaxCords"] = np.maximum(mincords, blueprint["MaxCords"])
+        #blueprint["MinCords"] = np.minimum(mincoords, blueprint["MinCords"])
+        #blueprint["MaxCords"] = np.maximum(mincoords, blueprint["MaxCords"])
 
         # rotate rot_normal, rot_tangent and rot_bitangent via local rotation
         blueprint["RotNormal"] = np.dot(blueprint["LocalRotation"], rot_normal).T.round().astype(int)
@@ -345,12 +345,12 @@ def __fetch_infos(bp):
 
 def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side_top_front=(None, None, None)):
     """Create top, side, front view matrices (color matrix and height matrix)"""
-    def blueprint_iter(blueprint, mincords, blueprint_desc = "main"):
+    def blueprint_iter(blueprint, mincoords, blueprint_desc = "main"):
         """Iterate blueprint and sub blueprints"""
-        nonlocal actual_min_cords
+        nonlocal actual_min_coords
         global firing_animator
-        # subtract min cords
-        blueprint["BLP"] -= mincords
+        # subtract min coords
+        blueprint["BLP"] -= mincoords
         #_log.info("ViewMat at %s", blueprint_desc)
 
         # numpyfication
@@ -503,7 +503,7 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side
             sorted_index = np.argsort(height_pos_sel_arr[:, axisY], axis=0)[::-1]
             # sort pos
             sorted_pos = height_pos_sel_arr[sorted_index]
-            # find index of unique (x,z) cords
+            # find index of unique (x,z) coords
             unique_pos, unique_index = np.unique(sorted_pos[:, axisA:axisB:axisS], return_index=True, axis=0)
 
             # coloring
@@ -550,8 +550,8 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side
                         fill_color_and_height(top_color, top_height, a_sel, a_pos_sel, 0, 2, 1)
                         fill_color_and_height(side_color, side_height, a_sel, a_pos_sel, 1, 2, 0)
                         fill_color_and_height(front_color, front_height, a_sel, a_pos_sel, 1, 0, 2)
-                        # min cords
-                        actual_min_cords = np.minimum(np.amin(a_pos_sel, 0), actual_min_cords)
+                        # min coords
+                        actual_min_coords = np.minimum(np.amin(a_pos_sel, 0), actual_min_coords)
                         # step in z direction (dir)
                         if l < size_z:
                             a_pos[a_sel] += a_dir[a_sel]
@@ -568,10 +568,10 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side
 
         # sub blueprints iteration
         for i, sub_bp in enumerate(blueprint["SCs"]):
-            blueprint_iter(sub_bp, mincords, blueprint_desc+":"+str(i))
+            blueprint_iter(sub_bp, mincoords, blueprint_desc+":"+str(i))
 
-    # calculate min cords again, cause "MinCords" are not always true
-    actual_min_cords = np.full((3), np.iinfo(np.int32).max, dtype=np.int32)
+    # calculate min coords again, cause "MinCords" are not always true
+    actual_min_coords = np.full((3), np.iinfo(np.int32).max, dtype=np.int32)
     # create matrices
     top_color = np.full((*bp["Blueprint"]["Size"][[0, 2]], 3), np.array([255, 118, 33]), dtype=np.uint8)
     top_height = np.full(bp["Blueprint"]["Size"][[0, 2]], -12345, dtype=int)
@@ -583,14 +583,14 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side
     itemdict = bp["ItemDictionary"]
     blueprint_iter(bp["Blueprint"], bp["Blueprint"]["MinCords"])
     # re-center based on actual min coordinates
-    # _log.info("Actual min cords: %s", actual_min_cords)
-    if np.any(actual_min_cords < bp["Blueprint"]["MinCords"]):
-        top_color = np.roll(top_color, (-actual_min_cords[0], -actual_min_cords[2]), (0, 1))
-        top_height = np.roll(top_height, (-actual_min_cords[0], -actual_min_cords[2]), (0, 1))
-        side_color = np.roll(side_color, (-actual_min_cords[1], -actual_min_cords[2]), (0, 1))
-        side_height = np.roll(side_height, (-actual_min_cords[1], -actual_min_cords[2]), (0, 1))
-        front_color = np.roll(front_color, (-actual_min_cords[1], -actual_min_cords[0]), (0, 1))
-        front_height = np.roll(front_height, (-actual_min_cords[1], -actual_min_cords[0]), (0, 1))
+    if np.any(actual_min_coords < bp["Blueprint"]["MinCords"]):
+        _log.debug(f"Calculated new min coords {actual_min_coords}")
+        top_color = np.roll(top_color, (-actual_min_coords[0], -actual_min_coords[2]), (0, 1))
+        top_height = np.roll(top_height, (-actual_min_coords[0], -actual_min_coords[2]), (0, 1))
+        side_color = np.roll(side_color, (-actual_min_coords[1], -actual_min_coords[2]), (0, 1))
+        side_height = np.roll(side_height, (-actual_min_coords[1], -actual_min_coords[2]), (0, 1))
+        front_color = np.roll(front_color, (-actual_min_coords[1], -actual_min_coords[0]), (0, 1))
+        front_height = np.roll(front_height, (-actual_min_coords[1], -actual_min_coords[0]), (0, 1))
 
     # flip
     side_color = cv2.flip(side_color, 0)
@@ -599,9 +599,9 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side
     front_height = cv2.flip(front_height, -1)
     # _log.info(str(side_height))
 
-    return ([top_color, top_height],  # , actual_min_cords[1]],
-            [side_color, side_height],  # , actual_min_cords[0]],
-            [front_color, front_height]  # , actual_min_cords[2]])
+    return ([top_color, top_height],  # , actual_min_coords[1]],
+            [side_color, side_height],  # , actual_min_coords[0]],
+            [front_color, front_height]  # , actual_min_coords[2]])
             )
 
 
