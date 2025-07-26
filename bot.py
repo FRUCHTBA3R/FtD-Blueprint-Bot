@@ -399,14 +399,21 @@ class SlashCmdGroup(discord.app_commands.Group):
             await moi.send(content=content, file=file, ephemeral=(mode==GCM.Mode.PRIVATE))
 
 
-# TODO: context menu actions: public|private: simple blueprint, simple gif, interactive blueprint creation
 @bot.tree.context_menu(name="Simple Blueprint")
 @discord.app_commands.default_permissions(default_perms_app_command)
 async def cm_print(interaction: discord.Interaction, message: discord.Message):
     if (await check_mode(interaction)) is None:
         return
-    for attachment in message.attachments:
+    no_loop = True
+    # only first 3 valid attachments will get processed
+    for attachment in get_valid_attachments(message.attachments)[:3]:
         await SlashCmdGroup.slash_blueprint.callback(None, interaction, attachment)
+        no_loop = False
+    if no_loop:
+        try:
+            await interaction.response.send_message("No valid files in message attachments, maybe try Interactive Blueprint.", delete_after=5, ephemeral=True)
+        except:
+            log.warning("Interaction response failed")
 
 
 @bot.tree.context_menu(name="Simple Gif")
@@ -414,8 +421,16 @@ async def cm_print(interaction: discord.Interaction, message: discord.Message):
 async def cm_gif(interaction: discord.Interaction, message: discord.Message):
     if (await check_mode(interaction)) is None:
         return
-    for attachment in message.attachments:
+    no_loop = True
+    # only first 3 valid attachments will get processed
+    for attachment in get_valid_attachments(message.attachments)[:3]:
         await SlashCmdGroup.slash_gif.callback(None, interaction, attachment)
+        no_loop = False
+    if no_loop:
+        try:
+            await interaction.response.send_message("No valid files in message attachments, maybe try Interactive Blueprint.", delete_after=5, ephemeral=True)
+        except:
+            log.warning("Interaction response failed")
 
 
 @bot.tree.context_menu(name="Interactive Blueprint")
@@ -479,6 +494,20 @@ async def process_attachment(moi: MessageOrInteraction, attachment: discord.Atta
     return img_file, timing_content
 
 
+def get_valid_attachments(attachments: list[discord.Attachment]) -> list[discord.Attachment]:
+    """Returns list with all valid attachments"""
+    res = [
+        attachment 
+        for attachment in attachments 
+        if is_valid_filename(attachment.filename)
+    ]
+    return res
+
+def is_valid_filename(filename: str) -> bool:
+    """Returns true if filename is a blueprint file"""
+    _, ext = os.path.splitext(filename)
+    return ext in [".blueprint", ".blueprint_ba", ".blueprint_bac"]
+
 
 async def process_message_attachments(message: discord.Message, invokemessage=None):
     """Checks, processes and sends attachments of message.
@@ -488,7 +517,7 @@ async def process_message_attachments(message: discord.Message, invokemessage=No
     bpcount = 0
     # iterate attachments
     for attachm in message.attachments:
-        if attachm.filename.endswith(".blueprint") or attachm.filename.endswith(".blueprint_ba") or attachm.filename.endswith(".blueprint_bac"):
+        if is_valid_filename(attachm.filename):
             bpcount += 1
             try:
                 content = await attachm.read()
