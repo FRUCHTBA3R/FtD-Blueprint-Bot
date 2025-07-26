@@ -368,7 +368,7 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side
         for i in range(len(a_guid)):
             a_sizeid[i] = blocks.get(a_guid[i], missing_block).get("SizeId")
         # end new
-        a_pos = np.array(blueprint["BLP"])  # poor ram
+        a_pos = blueprint["BLP"]
         a_dir = blueprint["RotNormal"][blueprint["BLR"]]
         a_dir_tan = blueprint["RotTangent"][blueprint["BLR"]]
         a_dir_bitan = blueprint["RotBitangent"][blueprint["BLR"]]
@@ -527,6 +527,7 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side
             a_sel, = np.nonzero(a_sizeid == sizeid)
             if len(a_sel) == 0:
                 continue
+            a_pos_sel = a_pos[a_sel]
 
             # load size
             xp = size_id_dict[sizeid]["xp"]
@@ -540,7 +541,7 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side
             size_z = zp + zn
 
             # initial position
-            a_pos[a_sel] -= zn * a_dir[a_sel] + yn * a_dir_tan[a_sel] + xp * a_dir_bitan[a_sel]  # here xp instead ...
+            a_pos_sel -= zn * a_dir[a_sel] + yn * a_dir_tan[a_sel] + xp * a_dir_bitan[a_sel]  # here xp instead ...
             # ... of xn as the negative x axis in game is the bitan direction here
             a_z_times_dir = a_dir[a_sel] * size_z
             a_y_times_dir = a_dir_tan[a_sel] * size_y
@@ -550,7 +551,7 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side
                 for k in range(size_y + 1):
                     for l in range(size_z + 1):
                         # select position here as loop changes a_pos
-                        a_pos_sel = a_pos[a_sel]
+                        #a_pos_sel = a_pos[a_sel]
                         # fill if no index error occured, else just continue to calculate min/max coords
                         if not index_error_occured:
                             try:
@@ -565,17 +566,17 @@ def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side
                         actual_max_coords = np.maximum(np.amax(a_pos_sel, 0), actual_max_coords)
                         # step in z direction (dir)
                         if l < size_z:
-                            a_pos[a_sel] += a_dir[a_sel]
+                            a_pos_sel += a_dir[a_sel]
                     # reset z axis
-                    a_pos[a_sel] -= a_z_times_dir
+                    a_pos_sel -= a_z_times_dir
                     # step in y direction (tan)
                     if k < size_y:
-                        a_pos[a_sel] += a_dir_tan[a_sel]
+                        a_pos_sel += a_dir_tan[a_sel]
                 # reset y axis
-                a_pos[a_sel] -= a_y_times_dir
+                a_pos_sel -= a_y_times_dir
                 # step in x direction (bitan)
                 if j < size_x:
-                    a_pos[a_sel] += a_dir_bitan[a_sel]
+                    a_pos_sel += a_dir_bitan[a_sel]
 
         # sub blueprints iteration
         no_sub_index_error = True
@@ -1165,10 +1166,13 @@ if __name__ == "__main__":
         if len(sys.argv) > 1:
             if os.path.exists(sys.argv[1]):
                 fname = sys.argv[1]
+            logging.basicConfig(level="INFO")
+        else:
+            logging.basicConfig(level="DEBUG")
 
         async def async_main():
             global bp, timing, main_img
-            bp, timing, main_img = await process_blueprint(fname, False, True, False, True, 2)
+            bp, timing, main_img = await process_blueprint(fname, False, True, True, False, 2)
         asyncio.run(async_main())
         if main_img is None:
             exit()
