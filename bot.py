@@ -235,15 +235,19 @@ async def cmd_test(ctx: commands.Context, args: str = ""):
         fetched_commands = await bot.tree.fetch_commands(guild=args)
 
     # get permissions of command for guild
-    txt = ["## bot.synced_cmds, synced_cmds, fetched_cmds"]
-    for synced_cmds in [bot.synced_commands, synced_commands, fetched_commands]:
-        txt.append("### Synced Cmds")
-        for cmd in bot.synced_commands:
+    perms_for_humans = lambda l: [f"{p.target}:{p.permission}" for p in l]
+    guild_name = bot.get_guild(args.id).name if args else "?"
+    txt = [f"## Cmds for „{guild_name}“"]
+    headings = ["bot.synced_cmds", "synced_cmds", "fetched_cmds"]
+    for i, synced_cmds in enumerate([bot.synced_commands, synced_commands, fetched_commands]):
+        txt.append(f"### {headings[i]}")
+        for cmd in synced_cmds:
             cmd: discord.app_commands.AppCommand
             perms = "no guild id"
             if args:
                 try:
-                    perms = await cmd.fetch_permissions(args)
+                    perms = (await cmd.fetch_permissions(args)).permissions
+                    perms = perms_for_humans(perms)
                 except Exception as err:
                     perms = err
             txt.append(f"name `{cmd}` id `{cmd.id}` perms `{perms}`")
