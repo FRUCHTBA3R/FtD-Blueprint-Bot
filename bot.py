@@ -235,9 +235,9 @@ async def cmd_test(ctx: commands.Context, args: str = ""):
         fetched_commands = await bot.tree.fetch_commands(guild=args)
 
     # get permissions of command for guild
-    txt = "## bot.synced_cmds, synced_cmds, fetched_cmds"
+    txt = ["## bot.synced_cmds, synced_cmds, fetched_cmds"]
     for synced_cmds in [bot.synced_commands, synced_commands, fetched_commands]:
-        txt += "\n### Synced Cmds"
+        txt.append("### Synced Cmds")
         for cmd in bot.synced_commands:
             cmd: discord.app_commands.AppCommand
             perms = "no guild id"
@@ -246,12 +246,21 @@ async def cmd_test(ctx: commands.Context, args: str = ""):
                     perms = await cmd.fetch_permissions(args)
                 except Exception as err:
                     perms = err
-            txt += f"\nname `{cmd}` id `{cmd.id}` perms `{perms}`"
+            txt.append(f"name `{cmd}` id `{cmd.id}` perms `{perms}`")
 
     ownerUser = await s_fetch_owner()
     if not ownerUser:
         return
-    await ownerUser.send(txt)
+    content = ""
+    # limit to less than 2000 chars per message
+    for line in txt:
+        if 1999 > len(content) + len(line):  # "\n" gives +1
+            content += "\n" + line
+        else:
+            await ownerUser.send(content)
+            content = line
+    else:
+        await ownerUser.send(content)
 
 
 
