@@ -268,6 +268,67 @@ async def cmd_test(ctx: commands.Context, args: str = ""):
 
 
 
+@bot.command(name="omode")
+@commands.is_owner()
+async def cmd_owner_mode(ctx: commands.Context, *args: str):
+    """List or set mode for channels. For debugging and testing.
+    
+    Parameters:
+    args: guildID [channelID [on|private|off]]"""
+    print_cmd(ctx)
+    log.info("with args %s", args)
+
+    if 0 >= len(args) or 3 < len(args):
+        await ctx.send("Invalid args")
+        return
+
+    # make sure guilds and channels actually exist
+    try:
+        guild = bot.get_guild(int(args[0]))
+    except Exception as err:
+        await ctx.send(str(err))
+        return
+
+    channel = None
+    if 2 <= len(args):
+        try:
+            channel = guild.get_channel(int(args[1]))
+        except Exception as err:
+            await ctx.send(str(err))
+            return
+    
+    # set mode
+    if 3 == len(args):
+        mode = await ModeTransformer.convert(None, ctx, args[2])
+        if mode is None:
+            await ctx.send("Invalid mode")
+            return
+        success = GCM.setMode(guild, channel, mode)
+        await ctx.send(f"{["FAILED","SUCCESS"][int(success)]}: {guild.name} < {channel.name} < Mode:{mode.name}")
+        return
+    
+    # list all saved modes
+    if channel is None:
+        txt = [f"## Listing: {guild.name} >"]
+        channels = GCM.get(args[0], {})
+        for channel_id in channels.keys():
+            channel = guild.get_channel(int(channel_id))
+            if channel is None:
+                txt.append(f"Non existing channel with id: {channel_id}")
+            else:
+                mode = GCM.getMode(guild, channel)
+                mode = mode.name if mode is not None else "None"
+            txt.append(f"{channel.name} > Mode:{mode}")
+        await ctx.send("\n".join(txt))
+        return
+    
+    # list mode for channel
+    mode = GCM.getMode(guild, channel)
+    mode = mode.name if mode is not None else "None"
+    await ctx.send(f"{guild.name} > {channel.name} > Mode:{mode}")
+
+
+
 @bot.command(name="notifydeprecated", help="Sends deprecation notification to channels where bot is in mode 'on'")
 @commands.is_owner()
 async def cmd_notify_deprecated(ctx: commands.Context, confirm: str = ""):
