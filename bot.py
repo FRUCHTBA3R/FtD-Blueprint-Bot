@@ -233,13 +233,15 @@ async def cmd_test(ctx: commands.Context, args: str = ""):
         synced_commands = await bot.tree.sync(guild=args)
         # get commands from guild
         fetched_commands = await bot.tree.fetch_commands(guild=args)
+        # get globals
+        fetched_global_commands = await bot.tree.fetch_commands()
 
     # get permissions of command for guild
     perms_for_humans = lambda l: [f"{p.target}:{p.permission}" for p in l]
     guild_name = bot.get_guild(args.id).name if args else "?"
     txt = [f"## Cmds for „{guild_name}“"]
-    headings = ["bot.synced_cmds", "synced_cmds", "fetched_cmds"]
-    for i, synced_cmds in enumerate([bot.synced_commands, synced_commands, fetched_commands]):
+    headings = ["bot.synced_cmds", "synced_cmds", "fetched_cmds", "fetched_global_cmds"]
+    for i, synced_cmds in enumerate([bot.synced_commands, synced_commands, fetched_commands, fetched_global_commands]):
         txt.append(f"### {headings[i]}")
         for cmd in synced_cmds:
             cmd: discord.app_commands.AppCommand
