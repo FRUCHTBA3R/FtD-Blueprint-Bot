@@ -270,6 +270,34 @@ async def cmd_test(ctx: commands.Context, args: str = ""):
 
 
 
+@bot.command(name="operms")
+@commands.is_owner()
+async def cmd_owner_perms(ctx: commands.Context, channel_id: str, member_id: str):
+    """Lists permissions for member in the channel.
+    
+    Parameters:
+    channel_id: Channel ID
+    member_id: Member ID"""
+    print_cmd(ctx)
+    log.info(f"with args '{channel_id}' '{member_id}'")
+
+    try:
+        channel = bot.get_channel(int(channel_id))
+    except Exception as err:
+        ctx.send(str(err))
+        return
+    
+    member = await channel.guild.fetch_member(int(member_id))
+    if member is None:
+        await ctx.send("Member not found")
+        return
+    
+    perms = channel.permissions_for(member)
+    txt = "\n".join([f"{perm}:{value}" for perm, value in iter(perms)])
+    await ctx.send(f"## Permissions for: {channel.guild.name} > {channel.name} > {member.name}\n" + txt)
+
+
+
 @bot.command(name="omode")
 @commands.is_owner()
 async def cmd_owner_mode(ctx: commands.Context, *args: str):
@@ -284,7 +312,7 @@ async def cmd_owner_mode(ctx: commands.Context, *args: str):
         await ctx.send("Invalid args")
         return
 
-    # make sure guilds and channels actually exist
+    # make sure guild and channel actually exist
     try:
         guild = bot.get_guild(int(args[0]))
     except Exception as err:
