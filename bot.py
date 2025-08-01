@@ -119,10 +119,9 @@ async def on_ready():
     slash_group = SlashCmdGroup(name="blueprint", description="...")
     try:
         bot.tree.add_command(slash_group)
-        bot.synced_commands = await bot.tree.sync()
         if settings.DO_DEBUG:
             bot.tree.copy_global_to(guild=settings.DEBUG_SERVER)
-            log.debug(str(bot.synced_commands))
+        bot.synced_commands = await bot.tree.sync()
     except discord.app_commands.CommandAlreadyRegistered as err:
         pass
     except Exception as err:

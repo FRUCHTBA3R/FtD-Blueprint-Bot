@@ -152,6 +152,7 @@ async def process_blueprint(file: str | list[str | bytes], silent=False, standal
     # create top, side, front view matrices
     ts4 = time.time()
     firing_animator.clear()  # clear here and at the end (if it crashes)
+    # TODO these should stay in the class (free when done using)
     top_mats, side_mats, front_mats = \
         bp.create_view_matrices(use_player_colors=use_player_colors, create_gif=create_gif,
                                 cut_side_top_front=cut_side_top_front)
@@ -160,6 +161,7 @@ async def process_blueprint(file: str | list[str | bytes], silent=False, standal
         _log.info(f"View matrices completed in {ts4} s")
     # create images
     ts5 = time.time()
+    # TODO make a single call from this
     if create_gif:
         main_img = __create_images(top_mats, side_mats, front_mats, bp_infos, gif_args=firing_animator,
                                     firing_order=firing_order, file_name=main_img_fname, 
@@ -311,7 +313,7 @@ class Blueprint:
         blockid_array = np.array(blueprint["BlockIds"], dtype=int)
         # block loop
         for i in range(blockcount):
-            # blockguid_array[i] = bp["ItemDictionary"][str(blueprint["BlockIds"][i])] not using guid here
+            # blockguid_array[i] = self.item_dictionary[str(blueprint["BlockIds"][i])] not using guid here
             blueprint["BLP"][i] = blueprint["BLP"][i].split(",")
         # below does the same as the loop above, but way slower
         #blueprint["BLP"] = np.vectorize(lambda x: np.array(x.split(","), dtype=float), signature="()->(n)")(blueprint["BLP"])
@@ -356,7 +358,7 @@ class Blueprint:
         self.blueprint["MaxCords"] = self.blueprint["MaxCords"].round().astype(int)
         self.blueprint["Size"] = self.blueprint["MaxCords"] - self.blueprint["MinCords"] + 1
         # player colors
-        #color_array = np.vectorize(lambda x: np.array(str.split(x, ",")).astype(float),signature="()->(n)")(bp["Blueprint"]["COL"])
+        #color_array = np.vectorize(lambda x: np.array(str.split(x, ",")).astype(float),signature="()->(n)")(self.blueprint["COL"])
         if self.blueprint.get("COL") is not None:
             for i in range(len(self.blueprint["COL"])):
                 self.blueprint["COL"][i] = self.blueprint["COL"][i].split(",")
@@ -509,7 +511,7 @@ class Blueprint:
                                                     ]
                 simple_cannons_firing_type_blocks = [(1, blocks_that_go_bang), (2, blocks_that_go_brrr), (4, blocks_that_go_woosh)]
                 barrels_firing_type_blocks = [(1, blocks_with_barrels_that_go_bang), (2, blocks_with_barrels_that_go_brrr), (3, blocks_with_barrels_that_go_zap)]
-                largest_axis = np.argmax(bp["Blueprint"]["Size"])
+                largest_axis = np.argmax(self.blueprint["Size"])
                 # simple cannons loop
                 for firing_type, blocks_simple in simple_cannons_firing_type_blocks:
                     for cannon_guid in blocks_simple:
@@ -579,7 +581,7 @@ class Blueprint:
                 # cut through filter
                 if cut_side_top_front[axisY] is not None:
                     height_sel_arr = np.logical_and(height_sel_arr, pos_sel_arr[:, axisY] <
-                                                    bp["Blueprint"]["Size"][axisY] * cut_side_top_front[axisY])
+                                                    self.blueprint["Size"][axisY] * cut_side_top_front[axisY])
                 # position of selection
                 height_pos_sel_arr = pos_sel_arr[height_sel_arr]
 
