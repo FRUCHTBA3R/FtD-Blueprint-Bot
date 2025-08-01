@@ -271,12 +271,13 @@ async def cmd_test(ctx: commands.Context, args: str = ""):
 
 @bot.command(name="operms")
 @commands.is_owner()
-async def cmd_owner_perms(ctx: commands.Context, channel_id: str, member_id: str):
-    """Lists permissions for member in the channel.
+async def cmd_owner_perms(ctx: commands.Context, channel_id: str, member_id: str = "", filter: str = ""):
+    """Lists (filtered) permissions for member/role in the channel. Or lists all roles.
     
     Parameters:
     channel_id: Channel ID
-    member_id: Member ID"""
+    member_id: optional Member ID
+    filter: optional, only permissions listed where name starts with filter"""
     print_cmd(ctx)
     log.info(f"with args '{channel_id}' '{member_id}'")
 
@@ -286,13 +287,27 @@ async def cmd_owner_perms(ctx: commands.Context, channel_id: str, member_id: str
         ctx.send(str(err))
         return
     
-    member = await channel.guild.fetch_member(int(member_id))
-    if member is None:
-        await ctx.send("Member not found")
+    if "" == member_id:
+        try:
+            roles = await channel.guild.fetch_roles()
+        except Exception as err:
+            await ctx.send(str(err))
+            return
+        txt = "\n".join([f"{role.name}:`{role.id}`" for role in roles])
+        await ctx.send(f"## Roles for: {channel.guild.name}\n" + txt)
         return
     
+    try:
+        member = await channel.guild.fetch_member(int(member_id))
+    except Exception as err:
+        try:
+            member = await channel.guild.fetch_role(int(member_id))
+        except Exception as err_role:
+            await ctx.send(f"No Role or Member found\n{str(err)}\n{str(err_role)}")
+            return
+    
     perms = channel.permissions_for(member)
-    txt = "\n".join([f"{perm}:{value}" for perm, value in iter(perms)])
+    txt = "\n".join([f"{perm}:{value}" for perm, value in iter(perms) if perm.startswith(filter)])
     await ctx.send(f"## Permissions for: {channel.guild.name} > {channel.name} > {member.name}\n" + txt)
 
 
