@@ -4,6 +4,7 @@ import json
 import time
 import logging
 from collections import OrderedDict
+from typing import Iterator, Annotated
 
 import numpy as np
 import quaternion
@@ -137,15 +138,14 @@ async def process_blueprint(file: str | list[str | bytes], silent=False, standal
         _log.info(f"JSON parse completed in {ts1} s")
     # convert to numpy data
     ts2 = time.time()
-    res = __convert_blueprint(bp)
-    if res.get("force_disable_colors") == True:
-        use_player_colors = False
+    bp = Blueprint(bp)
+    bp.convert_blueprint()
     ts2 = time.time() - ts2
     if not silent:
         _log.info(f"Conversion completed in {ts2} s")
-    # fetch infos
+    # fetch infos TODO remove this, not important
     ts3 = time.time()
-    bp_infos, bp_gameversion = __fetch_infos(bp)
+    bp_infos, bp_gameversion = bp.fetch_infos()
     ts3 = time.time() - ts3
     if not silent:
         _log.info(f"Infos gathered in {ts3} s")
@@ -153,7 +153,7 @@ async def process_blueprint(file: str | list[str | bytes], silent=False, standal
     ts4 = time.time()
     firing_animator.clear()  # clear here and at the end (if it crashes)
     top_mats, side_mats, front_mats = \
-        __create_view_matrices(bp, use_player_colors=use_player_colors, create_gif=create_gif,
+        bp.create_view_matrices(use_player_colors=use_player_colors, create_gif=create_gif,
                                 cut_side_top_front=cut_side_top_front)
     ts4 = time.time() - ts4
     if not silent:
@@ -183,22 +183,101 @@ async def process_blueprint(file: str | list[str | bytes], silent=False, standal
     else:
         return main_img_fname, [ts1, ts2, ts3, ts4, ts5]
 
+type Guid = str
 
-def __convert_blueprint(bp):
-    """Convert data to numpy data"""
+class Blueprint:
+    
+    def __init__(self, blueprint: dict):
+        self._done_conversion = False
+        self._force_disable_colors = False
+        self.name: str = blueprint.get("Name")
+        self.saved_total_block_count = blueprint.get("SavedTotalBlockCount")
+        self.saved_material_cost = blueprint.get("SavedMaterialCost")
+        self.blueprint: dict = blueprint.get("Blueprint")
+        if self.blueprint is None:
+            raise KeyError("No 'Blueprint' key in blueprint")
+        self.item_dictionary: dict[int, Guid] = blueprint.get("ItemDictionary")
+        if self.item_dictionary is None:
+            raise KeyError("No 'ItemDictionary' key in blueprint")
 
-    def blueprint_iter(blueprint, parentglobalrotation=quaternion.one, parentglobalposition=0):
-        """Iterate blueprint and sub blueprints"""
+    # backwards compatibility for testing
+    def __getitem__(self, key):
+        _log.warning("NOT SUPPOSED TO BE USED")
+        res = self.get(key)
+        if res is None:
+            raise KeyError
+        return res
+    def __setitem__(self, key, value):
+        _log.warning("NOT SUPPOSED TO BE USED")
+        if key == "Blueprint":
+            self.blueprint = value
+        elif key == "ItemDictionary":
+            self.item_dictionary = value
+        elif key == "Name":
+            self.name = value
+        elif key == "SavedTotalBlockCount":
+            self.saved_total_block_count = value
+        elif key == "SavedMaterialCost":
+            self.saved_material_cost = value
+        else:
+            raise KeyError
+    def __iter__(self):
+        _log.warning("NOT SUPPOSED TO BE USED")
+        yield self.blueprint
+        yield self.item_dictionary
+    def __contains__(self, key):
+        _log.warning("NOT SUPPOSED TO BE USED")
+        return key in ["Blueprint", "ItemDictionary"]
+    def get(self, key, default=None):
+        _log.warning("NOT SUPPOSED TO BE USED")
+        if key == "Blueprint":
+            return self.blueprint
+        if key == "ItemDictionary":
+            return self.item_dictionary
+        if key == "Name":
+            return self.name
+        if key == "SavedTotalBlockCount":
+            return self.saved_total_block_count
+        if key == "SavedMaterialCost":
+            return self.saved_material_cost
+        return default
+
+
+    def blueprint_iterator(self) -> Iterator[tuple[str, dict]]:
+            """Iterate through blueprint and sub blueprints.
+            
+            Yields layer name and blueprint dict, links 'ParentBlueprint' key to parent"""
+            queue:list[tuple[str, dict]] = [("0", self.blueprint)]
+            for i in range(10000):
+                if len(queue) == 0:
+                    break
+                desc, elem = queue.pop(0)
+                sub_blueprints = elem.get("SCs", [])
+                for k, sub in enumerate(sub_blueprints):
+                    sub["ParentBlueprint"] = elem
+                    queue.append((f"{desc}:{i}", sub))
+                yield desc, elem
+            else:
+                _log.error("Sub blueprint iteration reached limit")
+
+
+    def __blueprint_conversion(self, blueprint: dict):
+        """Convert blueprint and sub blueprints"""
         # convert rotation ids to np array
         blueprint["BLR"] = np.array(blueprint["BLR"])
+        # parent global rotation and global position
+        parent_blueprint = blueprint.get("ParentBlueprint", {})
+        parent_global_rotation = parent_blueprint.get("GlobalRotation", quaternion.one)
+        parent_global_position = parent_blueprint.get("LocalPosition", 0)
         # convert local rotation to quaternion
         localrot_split = blueprint["LocalRotation"].split(",")
-        globalrotation = np.quaternion( float(localrot_split[3]),
+        global_rotation = np.quaternion(float(localrot_split[3]),
                                         float(localrot_split[0]),
                                         float(localrot_split[1]),
                                         float(localrot_split[2]))
-        globalrotation = parentglobalrotation * globalrotation
-        localrot = quaternion.as_rotation_matrix(globalrotation)
+        global_rotation = parent_global_rotation * global_rotation
+        blueprint["GlobalRotation"] = global_rotation
+        localrot = quaternion.as_rotation_matrix(global_rotation)
         localrot_arg = np.argmax(np.abs(localrot), axis=1)
         localrot_max = np.sign(localrot[[0, 1, 2], localrot_arg])
         localrot[:, :] = 0
@@ -208,8 +287,8 @@ def __convert_blueprint(bp):
         # convert local position to np array
         blueprint["LocalPosition"] = np.array(blueprint["LocalPosition"].split(","),
                                             dtype=float).round().astype(int)
-        blueprint["LocalPosition"] = (parentglobalrotation * quaternion.quaternion(*blueprint["LocalPosition"]) *
-                                        parentglobalrotation.inverse()).vec.astype(int) + parentglobalposition
+        blueprint["LocalPosition"] = (parent_global_rotation * quaternion.quaternion(*blueprint["LocalPosition"]) *
+                                        parent_global_rotation.inverse()).vec.astype(int) + parent_global_position
         # convert min/max coordinates to np array
         mincoords = np.array(blueprint["MinCords"].split(","), dtype=float)
         maxcoords = np.array(blueprint["MaxCords"].split(","), dtype=float)
@@ -217,8 +296,8 @@ def __convert_blueprint(bp):
         mincoords = (blueprint["LocalRotation"] @ mincoords) + blueprint["LocalPosition"]
         maxcoords = (blueprint["LocalRotation"] @ maxcoords) + blueprint["LocalPosition"]
         # (round to int) ((done after iteration))
-        mincoords = mincoords  # .round().astype(int)
-        maxcoords = maxcoords  # .round().astype(int)
+        #mincoords = mincoords  # .round().astype(int)
+        #maxcoords = maxcoords  # .round().astype(int)
         # re-min/max
         blueprint["MinCords"] = np.minimum(mincoords, maxcoords)
         blueprint["MaxCords"] = np.maximum(mincoords, maxcoords)
@@ -258,383 +337,386 @@ def __convert_blueprint(bp):
         blueprint["RotTangent"] = np.dot(blueprint["LocalRotation"], rot_tangent).T.round().astype(int)
         blueprint["RotBitangent"] = np.dot(blueprint["LocalRotation"], rot_bitangent).T.round().astype(int)
 
-        # sub blueprint iteration
-        for sub_bp in blueprint["SCs"]:
-            blueprint_iter(sub_bp, globalrotation, blueprint["LocalPosition"])
-            # merge min/max
-            blueprint["MinCords"] = np.minimum(blueprint["MinCords"], sub_bp["MinCords"])
-            blueprint["MaxCords"] = np.maximum(blueprint["MaxCords"], sub_bp["MaxCords"])
 
-    res = {}
-    # item dictionary conversion
-    bp["ItemDictionary"] = {int(k): v for k, v in bp["ItemDictionary"].items()}
-    # main bp fix
-    bp["Blueprint"]["LocalRotation"] = "0,0,0,1"
-    bp["Blueprint"]["LocalPosition"] = "0,0,0"
-    blueprint_iter(bp["Blueprint"])
-    # set size
-    bp["Blueprint"]["MinCords"] = bp["Blueprint"]["MinCords"].round().astype(int)
-    bp["Blueprint"]["MaxCords"] = bp["Blueprint"]["MaxCords"].round().astype(int)
-    bp["Blueprint"]["Size"] = bp["Blueprint"]["MaxCords"] - bp["Blueprint"]["MinCords"] + 1
-    # player colors
-    #color_array = np.vectorize(lambda x: np.array(str.split(x, ",")).astype(float),signature="()->(n)")(bp["Blueprint"]["COL"])
-    if bp["Blueprint"].get("COL") is not None:
-        for i in range(len(bp["Blueprint"]["COL"])):
-            bp["Blueprint"]["COL"][i] = bp["Blueprint"]["COL"][i].split(",")
-        color_array = np.array(bp["Blueprint"]["COL"], dtype=float)
-        # early alpha blending
-        bp["Blueprint"]["COL"] = (255 * color_array[:, 2::-1] * color_array[:, np.newaxis, 3]).astype(np.uint8)
-        bp["Blueprint"]["ONE_MINUS_ALPHA"] = 1. - color_array[:, 3]
-    else:
-        res["force_disable_colors"] = True
-    return res
-
-
-def __fetch_infos(bp):
-    """Gathers important information of blueprint"""
-    def safe_max(a, b):
-        """Returns max(a,b) or the one which is not None or None if both are None."""
-        if a is None:
-            return b
-        if b is None:
-            return a
-        return max(a, b)
-
-    infos = OrderedDict()
-    infos["Name"] = bp.get("Name")
-    if infos["Name"] is None:
-        infos["Name"] = "Unknown"
-    infos["Blocks"] = f"{safe_max(bp.get('SavedTotalBlockCount'), bp['Blueprint'].get('TotalBlockCount')):,}"
-    if infos["Blocks"] is None:
-        _log.warning("Error while gathering blueprint block count info.")
-        infos["Blocks"] = "?"
-    try:
-        infos["Cost"] = f"{round(bp.get('SavedMaterialCost')):,}"
-    except Exception as err:
-        _log.warning("Error while gathering blueprint cost info: %s", err)
-        infos["Cost"] = "?"
-    try:
-        infos["Size"] = "W:{0:,} H:{1:,} L:{2:,}".format(*bp.get("Blueprint").get("Size"))
-    except Exception as err:
-        _log.warning("Error while gathering blueprint size info: %s", err)
-        infos["Size"] = "?"
-    try:
-        infos["Author"] = bp.get("Blueprint").get("AuthorDetails").get("CreatorReadableName")
-    except Exception as err:
-        _log.warning("Error while gathering blueprint author info: %s", err)
-        infos["Author"] = "Unknown"
-
-    # game version
-    try:
-        gameversion = bp.get("Blueprint").get("GameVersion").split(".")
-        for i in range(len(gameversion)):
-            if gameversion[i].isnumeric():
-                gameversion[i] = int(gameversion[i])
-            else:
-                numonly = ""
-                for c in gameversion[i]:
-                    if c.isnumeric():
-                        numonly += c
-                gameversion[i] = int(numonly)
-    except Exception as err:
-        _log.warning("Error while gathering blueprint gameversion info: %s", err)
-        gameversion = "?"
-
-    return infos, gameversion
-
-
-def __create_view_matrices(bp, use_player_colors=True, create_gif=True, cut_side_top_front=(None, None, None)):
-    """Create top, side, front view matrices (color matrix and height matrix)"""
-    def blueprint_iter(blueprint, mincoords, blueprint_desc = "main") -> bool:
-        """Iterate blueprint and sub blueprints.
-        
-        Returns False if IndexError occurred and min/max coords updated."""
-        nonlocal actual_min_coords, actual_max_coords
-        global firing_animator
-        # subtract min coords
-        blueprint["BLP"] -= mincoords
-        #_log.info("ViewMat at %s", blueprint_desc)
-
-        # numpyfication
-        # vectorize is slower
-        #a_guid = np.vectorize(itemdict.get, otypes=["<U36"])(blueprint["BlockIds"])
-        a_guid = np.zeros((len(blueprint["BlockIds"])), dtype="<U36")
-        for i in range(len(a_guid)):
-            a_guid[i] = itemdict.get(blueprint["BlockIds"][i])
-        missing_block = blocks.get("missing")
-        # new version
-        #a_sizeid = np.vectorize(lambda x: blocks.get(x, missing_block).get("SizeId"), otypes=[np.uint8])(a_guid)
-        a_sizeid = np.zeros((len(a_guid)), dtype=np.uint8)
-        for i in range(len(a_guid)):
-            a_sizeid[i] = blocks.get(a_guid[i], missing_block).get("SizeId")
-        # end new
-        a_pos = blueprint["BLP"]
-        a_dir = blueprint["RotNormal"][blueprint["BLR"]]
-        a_dir_tan = blueprint["RotTangent"][blueprint["BLR"]]
-        a_dir_bitan = blueprint["RotBitangent"][blueprint["BLR"]]
-        #a_material = np.vectorize(lambda x: blocks.get(x, missing_block).get("Material"))(a_guid)
-        #a_color = np.vectorize(lambda x: materials.get(x)["Color"], signature="()->(n)")(a_material)
-        #a_invisible = np.vectorize(lambda x: materials.get(x)["Invisible"])(a_material)  # unused
-        a_color = np.zeros((len(a_guid), 3), dtype=np.uint8)
-        for i in range(len(a_guid)):
-            a_color[i] = materials.get(blocks.get(a_guid[i], missing_block).get("Material"))["Color"]
-
-        # find missing blocks
-        #for i in range(len(a_guid)):
-        #    block = blocks.get(a_guid[i])
-        #    if block is None:
-        #        _log.warning(f"Unknown missing block: '{a_guid[i]}'")
-        #    elif block["Material"] == missing_block["Material"]:
-        #        _log.warning(f"Missing block: '{a_guid[i]}'\nwith name: '{block['Name']}'")
-
-        if create_gif:
-            blocks_that_go_bang = [ "c94e1719-bcc7-4c6a-8563-505fad2f9db9",  # 16 pounder
-                                    "58305289-16ea-43cf-9144-2f23b383da81",  # 32 pounder
-                                    "e1d1bcae-f5e4-42bb-9781-6dde51b8e390",  # 64 pounder
-                                    "16b67fbc-25d5-4a35-a0df-4941e7abf6ef",  # Revolving Blast-Gun
-                                    "d3e8e14a-58e7-4bdd-b1b3-0f37e4723a73",  # Shard cannon
-                                    #"7101e1cb-a501-49bd-8bbe-7a960881e72b",  # .50 AA Gun
-                                    #"b92a4ce6-ea93-4c0c-97d7-494ea611caa9",  # 20mm AA gun
-                                    #"d8c5639a-ff5f-448e-a761-c2f69fac661a",  # 40mm Quad AA Gun
-                                    #"268d79bf-c266-48ed-b01b-76c8d4d31c92",  # 40mm Twin AA Gun
-                                    #"3be0cab1-643b-4e3a-9f49-45995e4eb9fb",  # 40mm Octuple AA Gun
-                                    "2311e4db-a281-448f-ad53-0a6127573a96",  # 60mm Grenade Launcher
-                                    "742f063f-d0fe-4f41-8717-a2c75c38d5e0",  # 30mm Assault Cannon
-                                    "9b8657b9-c820-43a0-ad19-25ea45a100f1",  # 60mm Auto Cannon
-                                    "f9f36cb3-cbfd-446a-9313-40f8e31e6e89",  # 3.7" Gun
-                                    "1217043c-e786-4555-ba24-46cd1f458bf9",  # 3.7" Gun Shield
-                                    "0aa0fa2e-1a85-4493-9c4c-0a69c385395d",  # 130mm Casemate
-                                    "aa070f63-c454-4f95-82fd-d946a32a1b66"   # 150mm Casemate
-                                    ]
-            blocks_that_go_brrr = [ "5cf2b4da-c1b8-4005-930b-73cc39ac9d28"  # (Simple) Laser
-                                    ]
-            blocks_that_go_woosh = ["2fd4fd83-3125-4825-b596-f78ef36375c2",  # Flamethrower Back
-                                    "a5ad3190-f3ff-4cfd-860a-9f7328482271"   # Flamethrower Bottom
-                                    ]
-            blocks_with_barrels_that_go_bang = ["dc8f69fe-f97c-404f-996c-1b934afa17b5",  # Adv. Firing piece
-                                                "a97e03b0-e8da-49e2-9913-ad8c1826d869"  # Firing piece
-                                                ]
-            blocks_with_barrels_that_go_brrr = ["fd2b6afb-da6f-4a8e-bfc0-e4202b87300d",  # Short range laser combiner
-                                                "7dc67bed-fd0f-4145-9525-5840bbcc4822"  # Laser combiner
-                                                ]
-            blocks_with_barrels_that_go_zap = [ "9896747c-39a5-43bc-8ba9-ccf2f645cca1",  # PAC lens (symmetric)
-                                                "1a1c9de5-6db5-4092-97ac-a4883383fadd",  # Small PAC lens (cross inputs)
-                                                "2e429412-2982-4335-bf3c-a6c6609c8cbf",  # Small PAC lens (rear inputs)
-                                                "2eea241a-6a32-41c6-a9e4-d082c7e854de",  # PAC lens (rear inputs)
-                                                "f1746662-adec-4054-98bd-94b553bc6c6d",  # Particle Accelerator Lens
-                                                #"2099a233-181e-4f50-9a0e-78a547969a8e",  # Particle Melee Lens
-                                                "3d82f1a3-ad2a-4e81-a4e3-cb88c968f6e9",  # Particle Cannon
-                                                ]
-            simple_cannons_firing_type_blocks = [(1, blocks_that_go_bang), (2, blocks_that_go_brrr), (4, blocks_that_go_woosh)]
-            barrels_firing_type_blocks = [(1, blocks_with_barrels_that_go_bang), (2, blocks_with_barrels_that_go_brrr), (3, blocks_with_barrels_that_go_zap)]
-            largest_axis = np.argmax(bp["Blueprint"]["Size"])
-            # simple cannons loop
-            for firing_type, blocks_simple in simple_cannons_firing_type_blocks:
-                for cannon_guid in blocks_simple:
-                    cannon, = np.nonzero(a_guid == cannon_guid)
-                    if len(cannon) > 0:
-                        firing_pos = a_pos[cannon] + a_dir_tan[cannon] * size_id_dict[a_sizeid[cannon[0]]]["yp"] + \
-                            a_dir[cannon] * (size_id_dict[a_sizeid[cannon[0]]]["zp"] + 1)
-                        firing_animator.append(firing_pos, a_dir[cannon], np.full(len(cannon), firing_type, dtype=np.uint8))
-            # cannons with barrels marching loop
-            for firing_type, blocks_with_barrels in barrels_firing_type_blocks:
-                for cannon_guid in blocks_with_barrels:
-                    cannon, = np.nonzero(a_guid == cannon_guid)
-                    if len(cannon) > 0:
-                        firing_pos = a_pos[cannon] + a_dir_tan[cannon] * (size_id_dict[a_sizeid[cannon[0]]]["yp"] // 2) + \
-                            a_dir[cannon] * (size_id_dict[a_sizeid[cannon[0]]]["zp"] + 1)
-                        barrel_end_firing_pos = np.empty(firing_pos.shape, dtype=firing_pos.dtype)
-                        for i in range(len(firing_pos)):
-                            slicer = np.index_exp[largest_axis, (largest_axis + 1) % 3, (largest_axis + 2) % 3]
-                            iter_count = 0
-                            while iter_count < 100:
-                                iter_count += 1
-                                # search the largest axis in hopes of getting less false hits
-                                index_largest, = np.nonzero(a_pos[:, slicer[0]] == firing_pos[i, slicer[0]])
-                                if len(index_largest) < 1:
-                                    break
-                                index_a, = np.nonzero(a_pos[index_largest, slicer[1]] == firing_pos[i, slicer[1]])
-                                if len(index_a) < 1:
-                                    break
-                                index_b, = np.nonzero(a_pos[index_largest[index_a], slicer[2]] == firing_pos[i, slicer[2]])
-                                if len(index_b) < 1:
-                                    break
-                                final_index = index_largest[index_a[index_b]][0]
-                                if blocks.get(a_guid[final_index], missing_block).get("Material") == "Missing":
-                                    break
-                                firing_pos[i] += (size_id_dict[a_sizeid[final_index]]["zp"] + 1) * a_dir[final_index]
-                            barrel_end_firing_pos[i] = firing_pos[i]
-                        firing_animator.append(barrel_end_firing_pos, a_dir[cannon], np.full(len(cannon), firing_type, dtype=np.uint8))
-
+    def convert_blueprint(self):
+        """Convert data to numpy data"""
+        res = {}
+        # item dictionary conversion
+        self.item_dictionary = {int(k): v for k, v in self.item_dictionary.items()}
+        # main bp fix
+        self.blueprint["LocalRotation"] = "0,0,0,1"
+        self.blueprint["LocalPosition"] = "0,0,0"
+        for desc, blueprint in self.blueprint_iterator():
+            self.__blueprint_conversion(blueprint)
+            # track min/max coords
+            self.blueprint["MinCords"] = np.minimum(self.blueprint["MinCords"], blueprint["MinCords"])
+            self.blueprint["MaxCords"] = np.maximum(self.blueprint["MaxCords"], blueprint["MaxCords"])
+        # set size
+        self.blueprint["MinCords"] = self.blueprint["MinCords"].round().astype(int)
+        self.blueprint["MaxCords"] = self.blueprint["MaxCords"].round().astype(int)
+        self.blueprint["Size"] = self.blueprint["MaxCords"] - self.blueprint["MinCords"] + 1
         # player colors
-        if use_player_colors:
-            a_block_color = bp["Blueprint"]["COL"][blueprint["BCI"]]
-            a_block_one_minus_alpha = bp["Blueprint"]["ONE_MINUS_ALPHA"][blueprint["BCI"]][:, np.newaxis]
+        #color_array = np.vectorize(lambda x: np.array(str.split(x, ",")).astype(float),signature="()->(n)")(bp["Blueprint"]["COL"])
+        if self.blueprint.get("COL") is not None:
+            for i in range(len(self.blueprint["COL"])):
+                self.blueprint["COL"][i] = self.blueprint["COL"][i].split(",")
+            color_array = np.array(self.blueprint["COL"], dtype=float)
+            # early alpha blending
+            self.blueprint["COL"] = (255 * color_array[:, 2::-1] * color_array[:, np.newaxis, 3]).astype(np.uint8)
+            self.blueprint["ONE_MINUS_ALPHA"] = 1. - color_array[:, 3]
+        else:
+            self._force_disable_colors = True
 
-        def fill_color_and_height(color_mat, height_mat, sel_arr, pos_sel_arr, axisX, axisZ, axisY):
-            """Fills color_mat and height_mat with selected blocks (sel_arr as index and pos_sel_arr as position).
-            axisY is the height axis.
-            Raises IndexError when position is out of bounds."""
-            nonlocal a_color#, a_invisible  # unused
-            # create slicing indices for axes
-            axisA = axisX
-            axisB = axisZ+1 if axisZ > axisX else None
-            axisS = axisZ - axisX
-
-            # selection of higher height
-            if height_mat.shape[0] <= np.max(pos_sel_arr[:, axisX]):
-                errortext = f"Axis overflow: {height_mat.shape[0]} to {np.max(pos_sel_arr[:, axisX])}\n" \
-                            f"Block guid: {a_guid[sel_arr[np.argmax(pos_sel_arr[:, axisX])]]}"
-                raise IndexError(errortext)
-            if height_mat.shape[1] <= np.max(pos_sel_arr[:, axisZ]):
-                errortext = f"Axis overflow: {height_mat.shape[1]} to {np.max(pos_sel_arr[:, axisZ])}\n" \
-                            f"Block guid: {a_guid[sel_arr[np.argmax(pos_sel_arr[:, axisZ])]]}"
-                raise IndexError(errortext)
+        self._done_conversion = True
 
 
-            # height filter
-            height_sel_arr = height_mat[pos_sel_arr[:, axisX], pos_sel_arr[:, axisZ]] < pos_sel_arr[:, axisY]
-            # cut through filter
-            if cut_side_top_front[axisY] is not None:
-                height_sel_arr = np.logical_and(height_sel_arr, pos_sel_arr[:, axisY] <
-                                                bp["Blueprint"]["Size"][axisY] * cut_side_top_front[axisY])
-            # position of selection
-            height_pos_sel_arr = pos_sel_arr[height_sel_arr]
+    def fetch_infos(self) -> tuple[OrderedDict, int|str]:
+        """Gathers important information of blueprint
+        
+        Returns gathered infos as dict and gameversion"""
+        def safe_max(a, b):
+            """Returns max(a,b) or the one which is not None or None if both are None."""
+            if a is None:
+                return b
+            if b is None:
+                return a
+            return max(a, b)
 
-            # select only max height for each x,z coord
-            # sort index of heights
-            sorted_index = np.argsort(height_pos_sel_arr[:, axisY], axis=0)[::-1]
-            # sort pos
-            sorted_pos = height_pos_sel_arr[sorted_index]
-            # find index of unique (x,z) coords
-            unique_pos, unique_index = np.unique(sorted_pos[:, axisA:axisB:axisS], return_index=True, axis=0)
+        infos = OrderedDict()
+        infos["Name"] = self.name if self.name is not None else "Unknown"
+        infos["Blocks"] = safe_max(self.saved_total_block_count, self.blueprint.get('TotalBlockCount'))
+        if infos["Blocks"] is None:
+            _log.warning("Error while gathering blueprint block count info.")
+            infos["Blocks"] = "?"
+        else:
+            infos["Blocks"] = f"{infos["Blocks"]:,}"
+        try:
+            infos["Cost"] = f"{round(self.saved_material_cost):,}"
+        except Exception as err:
+            _log.warning("Error while gathering blueprint cost info: %s", err)
+            infos["Cost"] = "?"
+        try:
+            infos["Size"] = "W:{0:,} H:{1:,} L:{2:,}".format(*self.blueprint.get("Size"))
+        except Exception as err:
+            _log.warning("Error while gathering blueprint size info: %s", err)
+            infos["Size"] = "?"
+        infos["Author"] = self.blueprint.get("AuthorDetails", {}).get("CreatorReadableName")
+        if infos["Author"] is None:
+            _log.warning("Error while gathering blueprint author info: %s", err)
+            infos["Author"] = "Unknown"
 
-            # coloring
-            if use_player_colors:
-                color_mat[unique_pos[:, 0], unique_pos[:, 1]] = a_color[sel_arr][height_sel_arr][sorted_index][unique_index] * a_block_one_minus_alpha[sel_arr][height_sel_arr][sorted_index][unique_index]
-                # player color
-                color_mat[unique_pos[:, 0], unique_pos[:, 1]] += a_block_color[sel_arr][height_sel_arr][sorted_index][unique_index]
-            else:
-                color_mat[unique_pos[:, 0], unique_pos[:, 1]] = a_color[sel_arr][height_sel_arr][sorted_index][unique_index]
-            # new height
-            height_mat[unique_pos[:, 0], unique_pos[:, 1]] = sorted_pos[:, axisY][unique_index]
+        # game version
+        try:
+            gameversion = self.blueprint.get("GameVersion").split(".")
+            for i in range(len(gameversion)):
+                if gameversion[i].isnumeric():
+                    gameversion[i] = int(gameversion[i])
+                else:
+                    numonly = ""
+                    for c in gameversion[i]:
+                        if c.isnumeric():
+                            numonly += c
+                    gameversion[i] = int(numonly)
+        except Exception as err:
+            _log.warning("Error while gathering blueprint gameversion info: %s", err)
+            gameversion = "?"
 
-        # flag if fill_color_and_height raised an index error, stops fill_color_and_height from beeing called and returns False at end
-        index_error_occured = False
-        # positiv size
-        for sizeid in size_id_dict:
-            # block selection
-            a_sel, = np.nonzero(a_sizeid == sizeid)
-            if len(a_sel) == 0:
-                continue
-            a_pos_sel = a_pos[a_sel]
+        return infos, gameversion
 
-            # load size
-            xp = size_id_dict[sizeid]["xp"]
-            yp = size_id_dict[sizeid]["yp"]
-            zp = size_id_dict[sizeid]["zp"]
-            xn = size_id_dict[sizeid]["xn"]
-            yn = size_id_dict[sizeid]["yn"]
-            zn = size_id_dict[sizeid]["zn"]
-            size_x = xp + xn
-            size_y = yp + yn
-            size_z = zp + zn
 
-            # initial position
-            a_pos_sel -= zn * a_dir[a_sel] + yn * a_dir_tan[a_sel] + xp * a_dir_bitan[a_sel]  # here xp instead ...
-            # ... of xn as the negative x axis in game is the bitan direction here
-            a_z_times_dir = a_dir[a_sel] * size_z
-            a_y_times_dir = a_dir_tan[a_sel] * size_y
+    def create_view_matrices(self, use_player_colors=True, create_gif=True, 
+                cut_side_top_front=(None, None, None)) -> tuple[list[np.typing.ArrayLike], list[np.typing.ArrayLike], list[np.typing.ArrayLike]]:
+        """Create top, side, front view matrices (color matrix and height matrix)"""
+        def blueprint_iter(blueprint, mincoords, blueprint_desc = "main") -> bool:
+            """Iterate blueprint and sub blueprints.
+            
+            Returns False if IndexError occurred and min/max coords updated."""
+            nonlocal actual_min_coords, actual_max_coords
+            global firing_animator
+            # subtract min coords
+            blueprint["BLP"] -= mincoords
+            #_log.info("ViewMat at %s", blueprint_desc)
 
-            # volume loop
-            for j in range(size_x + 1):
-                for k in range(size_y + 1):
-                    for l in range(size_z + 1):
-                        # select position here as loop changes a_pos
-                        #a_pos_sel = a_pos[a_sel]
-                        # fill if no index error occured, else just continue to calculate min/max coords
-                        if not index_error_occured:
-                            try:
-                                fill_color_and_height(top_color, top_height, a_sel, a_pos_sel, 0, 2, 1)
-                                fill_color_and_height(side_color, side_height, a_sel, a_pos_sel, 1, 2, 0)
-                                fill_color_and_height(front_color, front_height, a_sel, a_pos_sel, 1, 0, 2)
-                            except IndexError as err:
-                                _log.warning(str(err))
-                                index_error_occured = True
-                        # min and max coords
-                        actual_min_coords = np.minimum(np.amin(a_pos_sel, 0), actual_min_coords)
-                        actual_max_coords = np.maximum(np.amax(a_pos_sel, 0), actual_max_coords)
-                        # step in z direction (dir)
-                        if l < size_z:
-                            a_pos_sel += a_dir[a_sel]
-                    # reset z axis
-                    a_pos_sel -= a_z_times_dir
-                    # step in y direction (tan)
-                    if k < size_y:
-                        a_pos_sel += a_dir_tan[a_sel]
-                # reset y axis
-                a_pos_sel -= a_y_times_dir
-                # step in x direction (bitan)
-                if j < size_x:
-                    a_pos_sel += a_dir_bitan[a_sel]
+            # numpyfication
+            # vectorize is slower
+            #a_guid = np.vectorize(self.item_dictionary.get, otypes=["<U36"])(blueprint["BlockIds"])
+            a_guid = np.zeros((len(blueprint["BlockIds"])), dtype="<U36")
+            for i in range(len(a_guid)):
+                a_guid[i] = self.item_dictionary.get(blueprint["BlockIds"][i])
+            missing_block = blocks.get("missing")
+            # new version
+            #a_sizeid = np.vectorize(lambda x: blocks.get(x, missing_block).get("SizeId"), otypes=[np.uint8])(a_guid)
+            a_sizeid = np.zeros((len(a_guid)), dtype=np.uint8)
+            for i in range(len(a_guid)):
+                a_sizeid[i] = blocks.get(a_guid[i], missing_block).get("SizeId")
+            # end new
+            a_pos = blueprint["BLP"]
+            a_dir = blueprint["RotNormal"][blueprint["BLR"]]
+            a_dir_tan = blueprint["RotTangent"][blueprint["BLR"]]
+            a_dir_bitan = blueprint["RotBitangent"][blueprint["BLR"]]
+            #a_material = np.vectorize(lambda x: blocks.get(x, missing_block).get("Material"))(a_guid)
+            #a_color = np.vectorize(lambda x: materials.get(x)["Color"], signature="()->(n)")(a_material)
+            #a_invisible = np.vectorize(lambda x: materials.get(x)["Invisible"])(a_material)  # unused
+            a_color = np.zeros((len(a_guid), 3), dtype=np.uint8)
+            for i in range(len(a_guid)):
+                a_color[i] = materials.get(blocks.get(a_guid[i], missing_block).get("Material"))["Color"]
 
-        # sub blueprints iteration
-        no_sub_index_error = True
-        for i, sub_bp in enumerate(blueprint["SCs"]):
-            no_sub_index_error = no_sub_index_error and blueprint_iter(sub_bp, mincoords, blueprint_desc+":"+str(i))
+            # find missing blocks
+            #for i in range(len(a_guid)):
+            #    block = blocks.get(a_guid[i])
+            #    if block is None:
+            #        _log.warning(f"Unknown missing block: '{a_guid[i]}'")
+            #    elif block["Material"] == missing_block["Material"]:
+            #        _log.warning(f"Missing block: '{a_guid[i]}'\nwith name: '{block['Name']}'")
 
-        return (not index_error_occured) and no_sub_index_error
+            if create_gif:
+                blocks_that_go_bang = [ "c94e1719-bcc7-4c6a-8563-505fad2f9db9",  # 16 pounder
+                                        "58305289-16ea-43cf-9144-2f23b383da81",  # 32 pounder
+                                        "e1d1bcae-f5e4-42bb-9781-6dde51b8e390",  # 64 pounder
+                                        "16b67fbc-25d5-4a35-a0df-4941e7abf6ef",  # Revolving Blast-Gun
+                                        "d3e8e14a-58e7-4bdd-b1b3-0f37e4723a73",  # Shard cannon
+                                        #"7101e1cb-a501-49bd-8bbe-7a960881e72b",  # .50 AA Gun
+                                        #"b92a4ce6-ea93-4c0c-97d7-494ea611caa9",  # 20mm AA gun
+                                        #"d8c5639a-ff5f-448e-a761-c2f69fac661a",  # 40mm Quad AA Gun
+                                        #"268d79bf-c266-48ed-b01b-76c8d4d31c92",  # 40mm Twin AA Gun
+                                        #"3be0cab1-643b-4e3a-9f49-45995e4eb9fb",  # 40mm Octuple AA Gun
+                                        "2311e4db-a281-448f-ad53-0a6127573a96",  # 60mm Grenade Launcher
+                                        "742f063f-d0fe-4f41-8717-a2c75c38d5e0",  # 30mm Assault Cannon
+                                        "9b8657b9-c820-43a0-ad19-25ea45a100f1",  # 60mm Auto Cannon
+                                        "f9f36cb3-cbfd-446a-9313-40f8e31e6e89",  # 3.7" Gun
+                                        "1217043c-e786-4555-ba24-46cd1f458bf9",  # 3.7" Gun Shield
+                                        "0aa0fa2e-1a85-4493-9c4c-0a69c385395d",  # 130mm Casemate
+                                        "aa070f63-c454-4f95-82fd-d946a32a1b66"   # 150mm Casemate
+                                        ]
+                blocks_that_go_brrr = [ "5cf2b4da-c1b8-4005-930b-73cc39ac9d28"  # (Simple) Laser
+                                        ]
+                blocks_that_go_woosh = ["2fd4fd83-3125-4825-b596-f78ef36375c2",  # Flamethrower Back
+                                        "a5ad3190-f3ff-4cfd-860a-9f7328482271"   # Flamethrower Bottom
+                                        ]
+                blocks_with_barrels_that_go_bang = ["dc8f69fe-f97c-404f-996c-1b934afa17b5",  # Adv. Firing piece
+                                                    "a97e03b0-e8da-49e2-9913-ad8c1826d869"  # Firing piece
+                                                    ]
+                blocks_with_barrels_that_go_brrr = ["fd2b6afb-da6f-4a8e-bfc0-e4202b87300d",  # Short range laser combiner
+                                                    "7dc67bed-fd0f-4145-9525-5840bbcc4822"  # Laser combiner
+                                                    ]
+                blocks_with_barrels_that_go_zap = [ "9896747c-39a5-43bc-8ba9-ccf2f645cca1",  # PAC lens (symmetric)
+                                                    "1a1c9de5-6db5-4092-97ac-a4883383fadd",  # Small PAC lens (cross inputs)
+                                                    "2e429412-2982-4335-bf3c-a6c6609c8cbf",  # Small PAC lens (rear inputs)
+                                                    "2eea241a-6a32-41c6-a9e4-d082c7e854de",  # PAC lens (rear inputs)
+                                                    "f1746662-adec-4054-98bd-94b553bc6c6d",  # Particle Accelerator Lens
+                                                    #"2099a233-181e-4f50-9a0e-78a547969a8e",  # Particle Melee Lens
+                                                    "3d82f1a3-ad2a-4e81-a4e3-cb88c968f6e9",  # Particle Cannon
+                                                    ]
+                simple_cannons_firing_type_blocks = [(1, blocks_that_go_bang), (2, blocks_that_go_brrr), (4, blocks_that_go_woosh)]
+                barrels_firing_type_blocks = [(1, blocks_with_barrels_that_go_bang), (2, blocks_with_barrels_that_go_brrr), (3, blocks_with_barrels_that_go_zap)]
+                largest_axis = np.argmax(bp["Blueprint"]["Size"])
+                # simple cannons loop
+                for firing_type, blocks_simple in simple_cannons_firing_type_blocks:
+                    for cannon_guid in blocks_simple:
+                        cannon, = np.nonzero(a_guid == cannon_guid)
+                        if len(cannon) > 0:
+                            firing_pos = a_pos[cannon] + a_dir_tan[cannon] * size_id_dict[a_sizeid[cannon[0]]]["yp"] + \
+                                a_dir[cannon] * (size_id_dict[a_sizeid[cannon[0]]]["zp"] + 1)
+                            firing_animator.append(firing_pos, a_dir[cannon], np.full(len(cannon), firing_type, dtype=np.uint8))
+                # cannons with barrels marching loop
+                for firing_type, blocks_with_barrels in barrels_firing_type_blocks:
+                    for cannon_guid in blocks_with_barrels:
+                        cannon, = np.nonzero(a_guid == cannon_guid)
+                        if len(cannon) > 0:
+                            firing_pos = a_pos[cannon] + a_dir_tan[cannon] * (size_id_dict[a_sizeid[cannon[0]]]["yp"] // 2) + \
+                                a_dir[cannon] * (size_id_dict[a_sizeid[cannon[0]]]["zp"] + 1)
+                            barrel_end_firing_pos = np.empty(firing_pos.shape, dtype=firing_pos.dtype)
+                            for i in range(len(firing_pos)):
+                                slicer = np.index_exp[largest_axis, (largest_axis + 1) % 3, (largest_axis + 2) % 3]
+                                iter_count = 0
+                                while iter_count < 100:
+                                    iter_count += 1
+                                    # search the largest axis in hopes of getting less false hits
+                                    index_largest, = np.nonzero(a_pos[:, slicer[0]] == firing_pos[i, slicer[0]])
+                                    if len(index_largest) < 1:
+                                        break
+                                    index_a, = np.nonzero(a_pos[index_largest, slicer[1]] == firing_pos[i, slicer[1]])
+                                    if len(index_a) < 1:
+                                        break
+                                    index_b, = np.nonzero(a_pos[index_largest[index_a], slicer[2]] == firing_pos[i, slicer[2]])
+                                    if len(index_b) < 1:
+                                        break
+                                    final_index = index_largest[index_a[index_b]][0]
+                                    if blocks.get(a_guid[final_index], missing_block).get("Material") == "Missing":
+                                        break
+                                    firing_pos[i] += (size_id_dict[a_sizeid[final_index]]["zp"] + 1) * a_dir[final_index]
+                                barrel_end_firing_pos[i] = firing_pos[i]
+                            firing_animator.append(barrel_end_firing_pos, a_dir[cannon], np.full(len(cannon), firing_type, dtype=np.uint8))
 
-    # MAX TWO tries at filling blueprint, first try should get correct min/max coords
-    for iter_i in range(2):
-        # calculate min/max coords again, cause "MinCords" are not always true
-        actual_min_coords = np.full((3), np.iinfo(np.int32).max, dtype=np.int32)
-        actual_max_coords = np.full((3), np.iinfo(np.int32).min, dtype=np.int32)
-        # create matrices
-        top_color = np.full((*bp["Blueprint"]["Size"][[0, 2]], 3), np.array([255, 118, 33]), dtype=np.uint8)
-        top_height = np.full(bp["Blueprint"]["Size"][[0, 2]], -12345, dtype=int)
-        side_color = np.full((*bp["Blueprint"]["Size"][[1, 2]], 3), np.array([255, 118, 33]), dtype=np.uint8)
-        side_height = np.full(bp["Blueprint"]["Size"][[1, 2]], -12345, dtype=int)
-        front_color = np.full((*bp["Blueprint"]["Size"][[1, 0]], 3), np.array([255, 118, 33]), dtype=np.uint8)
-        front_height = np.full(bp["Blueprint"]["Size"][[1, 0]], -12345, dtype=int)
-        # blueprint iteration
-        itemdict = bp["ItemDictionary"]
-        bp_iter_success = blueprint_iter(bp["Blueprint"], bp["Blueprint"]["MinCords"])
-        if bp_iter_success:
-            break
-        _log.info(f"Applying min coord shift by {actual_min_coords}")
-        bp["Blueprint"]["MinCords"] = actual_min_coords  # "MinCords" have been subtracted from "BLP"
-        new_bp_size = actual_max_coords - actual_min_coords + 1
-        _log.info(f"Setting blueprint size from {bp["Blueprint"]["Size"]} to {new_bp_size}")
-        bp["Blueprint"]["Size"] = new_bp_size
+            # player colors
+            if use_player_colors and not self._force_disable_colors:
+                a_block_color = self.blueprint["COL"][blueprint["BCI"]]
+                a_block_one_minus_alpha = self.blueprint["ONE_MINUS_ALPHA"][blueprint["BCI"]][:, np.newaxis]
 
-    # re-center based on actual min coordinates (should never happen after iterating twice)
-    if np.any(actual_min_coords < 0): #bp["Blueprint"]["MinCords"]):  # this seems wrong, as actual_min_cords are shifted by MinCords
-        _log.debug(f"Calculated new min coords {actual_min_coords} old {bp["Blueprint"]["MinCords"]}")
-        top_color = np.roll(top_color, (-actual_min_coords[0], -actual_min_coords[2]), (0, 1))
-        top_height = np.roll(top_height, (-actual_min_coords[0], -actual_min_coords[2]), (0, 1))
-        side_color = np.roll(side_color, (-actual_min_coords[1], -actual_min_coords[2]), (0, 1))
-        side_height = np.roll(side_height, (-actual_min_coords[1], -actual_min_coords[2]), (0, 1))
-        front_color = np.roll(front_color, (-actual_min_coords[1], -actual_min_coords[0]), (0, 1))
-        front_height = np.roll(front_height, (-actual_min_coords[1], -actual_min_coords[0]), (0, 1))
+            def fill_color_and_height(color_mat, height_mat, sel_arr, pos_sel_arr, axisX, axisZ, axisY):
+                """Fills color_mat and height_mat with selected blocks (sel_arr as index and pos_sel_arr as position).
+                axisY is the height axis.
+                Raises IndexError when position is out of bounds."""
+                nonlocal a_color#, a_invisible  # unused
+                # create slicing indices for axes
+                axisA = axisX
+                axisB = axisZ+1 if axisZ > axisX else None
+                axisS = axisZ - axisX
 
-    # flip
-    side_color = cv2.flip(side_color, 0)
-    side_height = cv2.flip(side_height, 0)
-    front_color = cv2.flip(front_color, -1)
-    front_height = cv2.flip(front_height, -1)
-    # _log.info(str(side_height))
+                # selection of higher height
+                if height_mat.shape[0] <= np.max(pos_sel_arr[:, axisX]):
+                    errortext = f"Axis overflow: {height_mat.shape[0]} to {np.max(pos_sel_arr[:, axisX])}\n" \
+                                f"Block guid: {a_guid[sel_arr[np.argmax(pos_sel_arr[:, axisX])]]}"
+                    raise IndexError(errortext)
+                if height_mat.shape[1] <= np.max(pos_sel_arr[:, axisZ]):
+                    errortext = f"Axis overflow: {height_mat.shape[1]} to {np.max(pos_sel_arr[:, axisZ])}\n" \
+                                f"Block guid: {a_guid[sel_arr[np.argmax(pos_sel_arr[:, axisZ])]]}"
+                    raise IndexError(errortext)
 
-    return ([top_color, top_height],  # , actual_min_coords[1]],
-            [side_color, side_height],  # , actual_min_coords[0]],
-            [front_color, front_height]  # , actual_min_coords[2]])
-            )
+
+                # height filter
+                height_sel_arr = height_mat[pos_sel_arr[:, axisX], pos_sel_arr[:, axisZ]] < pos_sel_arr[:, axisY]
+                # cut through filter
+                if cut_side_top_front[axisY] is not None:
+                    height_sel_arr = np.logical_and(height_sel_arr, pos_sel_arr[:, axisY] <
+                                                    bp["Blueprint"]["Size"][axisY] * cut_side_top_front[axisY])
+                # position of selection
+                height_pos_sel_arr = pos_sel_arr[height_sel_arr]
+
+                # select only max height for each x,z coord
+                # sort index of heights
+                sorted_index = np.argsort(height_pos_sel_arr[:, axisY], axis=0)[::-1]
+                # sort pos
+                sorted_pos = height_pos_sel_arr[sorted_index]
+                # find index of unique (x,z) coords
+                unique_pos, unique_index = np.unique(sorted_pos[:, axisA:axisB:axisS], return_index=True, axis=0)
+
+                # coloring
+                if use_player_colors and not self._force_disable_colors:
+                    color_mat[unique_pos[:, 0], unique_pos[:, 1]] = a_color[sel_arr][height_sel_arr][sorted_index][unique_index] * a_block_one_minus_alpha[sel_arr][height_sel_arr][sorted_index][unique_index]
+                    # player color
+                    color_mat[unique_pos[:, 0], unique_pos[:, 1]] += a_block_color[sel_arr][height_sel_arr][sorted_index][unique_index]
+                else:
+                    color_mat[unique_pos[:, 0], unique_pos[:, 1]] = a_color[sel_arr][height_sel_arr][sorted_index][unique_index]
+                # new height
+                height_mat[unique_pos[:, 0], unique_pos[:, 1]] = sorted_pos[:, axisY][unique_index]
+
+            # flag if fill_color_and_height raised an index error, stops fill_color_and_height from beeing called and returns False at end
+            index_error_occured = False
+            # positiv size
+            for sizeid in size_id_dict:
+                # block selection
+                a_sel, = np.nonzero(a_sizeid == sizeid)
+                if len(a_sel) == 0:
+                    continue
+                a_pos_sel = a_pos[a_sel]
+
+                # load size
+                xp = size_id_dict[sizeid]["xp"]
+                yp = size_id_dict[sizeid]["yp"]
+                zp = size_id_dict[sizeid]["zp"]
+                xn = size_id_dict[sizeid]["xn"]
+                yn = size_id_dict[sizeid]["yn"]
+                zn = size_id_dict[sizeid]["zn"]
+                size_x = xp + xn
+                size_y = yp + yn
+                size_z = zp + zn
+
+                # initial position
+                a_pos_sel -= zn * a_dir[a_sel] + yn * a_dir_tan[a_sel] + xp * a_dir_bitan[a_sel]  # here xp instead ...
+                # ... of xn as the negative x axis in game is the bitan direction here
+                a_z_times_dir = a_dir[a_sel] * size_z
+                a_y_times_dir = a_dir_tan[a_sel] * size_y
+
+                # volume loop
+                for j in range(size_x + 1):
+                    for k in range(size_y + 1):
+                        for l in range(size_z + 1):
+                            # select position here as loop changes a_pos
+                            #a_pos_sel = a_pos[a_sel]
+                            # fill if no index error occured, else just continue to calculate min/max coords
+                            if not index_error_occured:
+                                try:
+                                    fill_color_and_height(top_color, top_height, a_sel, a_pos_sel, 0, 2, 1)
+                                    fill_color_and_height(side_color, side_height, a_sel, a_pos_sel, 1, 2, 0)
+                                    fill_color_and_height(front_color, front_height, a_sel, a_pos_sel, 1, 0, 2)
+                                except IndexError as err:
+                                    _log.warning(str(err))
+                                    index_error_occured = True
+                            # min and max coords
+                            actual_min_coords = np.minimum(np.amin(a_pos_sel, 0), actual_min_coords)
+                            actual_max_coords = np.maximum(np.amax(a_pos_sel, 0), actual_max_coords)
+                            # step in z direction (dir)
+                            if l < size_z:
+                                a_pos_sel += a_dir[a_sel]
+                        # reset z axis
+                        a_pos_sel -= a_z_times_dir
+                        # step in y direction (tan)
+                        if k < size_y:
+                            a_pos_sel += a_dir_tan[a_sel]
+                    # reset y axis
+                    a_pos_sel -= a_y_times_dir
+                    # step in x direction (bitan)
+                    if j < size_x:
+                        a_pos_sel += a_dir_bitan[a_sel]
+
+            return (not index_error_occured)
+
+        if not self._done_conversion:
+            raise RuntimeError("Blueprint was not converted. Call convert_blueprint() first.")
+        
+        # MAX TWO tries at filling blueprint, first try should get correct min/max coords
+        for iter_i in range(2):
+            # calculate min/max coords again, cause "MinCords" are not always true
+            actual_min_coords = np.full((3), np.iinfo(np.int32).max, dtype=np.int32)
+            actual_max_coords = np.full((3), np.iinfo(np.int32).min, dtype=np.int32)
+            # create matrices
+            top_color = np.full((*self.blueprint["Size"][[0, 2]], 3), np.array([255, 118, 33]), dtype=np.uint8)
+            top_height = np.full(self.blueprint["Size"][[0, 2]], -12345, dtype=int)
+            side_color = np.full((*self.blueprint["Size"][[1, 2]], 3), np.array([255, 118, 33]), dtype=np.uint8)
+            side_height = np.full(self.blueprint["Size"][[1, 2]], -12345, dtype=int)
+            front_color = np.full((*self.blueprint["Size"][[1, 0]], 3), np.array([255, 118, 33]), dtype=np.uint8)
+            front_height = np.full(self.blueprint["Size"][[1, 0]], -12345, dtype=int)
+            # blueprint iteration
+            bp_iter_success = True
+            for desc, elem in self.blueprint_iterator():
+                bp_iter_success &= blueprint_iter(elem, self.blueprint["MinCords"], "main:"+desc)
+            if bp_iter_success:
+                break
+            _log.info(f"Applying min coord shift by {actual_min_coords}")
+            self.blueprint["MinCords"] = actual_min_coords  # "MinCords" have been subtracted from "BLP"
+            new_bp_size = actual_max_coords - actual_min_coords + 1
+            _log.info(f"Setting blueprint size from {self.blueprint["Size"]} to {new_bp_size}")
+            self.blueprint["Size"] = new_bp_size
+
+        # re-center based on actual min coordinates (should never happen after iterating twice)
+        if np.any(actual_min_coords < 0): #self.blueprint["MinCords"]):  # this seems wrong, as actual_min_cords are shifted by MinCords
+            _log.debug(f"Calculated new min coords {actual_min_coords} old {self.blueprint["MinCords"]}")
+            top_color = np.roll(top_color, (-actual_min_coords[0], -actual_min_coords[2]), (0, 1))
+            top_height = np.roll(top_height, (-actual_min_coords[0], -actual_min_coords[2]), (0, 1))
+            side_color = np.roll(side_color, (-actual_min_coords[1], -actual_min_coords[2]), (0, 1))
+            side_height = np.roll(side_height, (-actual_min_coords[1], -actual_min_coords[2]), (0, 1))
+            front_color = np.roll(front_color, (-actual_min_coords[1], -actual_min_coords[0]), (0, 1))
+            front_height = np.roll(front_height, (-actual_min_coords[1], -actual_min_coords[0]), (0, 1))
+
+        # flip
+        side_color = cv2.flip(side_color, 0)
+        side_height = cv2.flip(side_height, 0)
+        front_color = cv2.flip(front_color, -1)
+        front_height = cv2.flip(front_height, -1)
+        # _log.info(str(side_height))
+
+        return ([top_color, top_height],  # , actual_min_coords[1]],
+                [side_color, side_height],  # , actual_min_coords[0]],
+                [front_color, front_height]  # , actual_min_coords[2]])
+                )
 
 
 def __copy_to_image(dst, start_pos, src_preblend, mask_start_pos, mask, mask_compare, mask_upscale):
     """
     Copies src_preblend[0] (image RGB uint8) to dst at starting_pos with alpha blending.
     Mask as depth test: mask < mask_compare
+    
     :param dst: Destination image RGB uint8
     :param start_pos: [x, y]
     :param src_preblend: [Source image * source alpha RGB uint8, 1. - alpha float16]
@@ -667,6 +749,7 @@ def __line_on_image(dst, start_pos, draw_start, draw_size, src_preblend, rotatio
     """
     Draws a line with color src_preblend[0] (RGB uint8) (or callable) to dst at starting_pos with alpha blending.
     Mask as depth test: mask < mask_compare
+    
     :param dst: Destination image RGB uint8
     :param start_pos: [x, y]
     :param draw_start: [x, y] start coordinate in combined view image
