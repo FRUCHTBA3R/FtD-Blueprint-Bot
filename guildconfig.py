@@ -1,8 +1,11 @@
 import json
+import os
 from discord import Guild
 from discord.abc import GuildChannel
 from enum import Enum
+import logging
 
+_log = logging.getLogger("bot")
 GUILDCONFIG_FILE = "guildconfig.json"
 
 class Mode(Enum):
@@ -19,11 +22,15 @@ class GuildconfigManager():
     Mode = Mode
 
     def __init__(self):
+        if not os.path.isfile(GUILDCONFIG_FILE):
+            with open(GUILDCONFIG_FILE, "x") as f:
+                f.write("{}")
+            _log.info("Created guildconfig.json")
         with open(GUILDCONFIG_FILE, "r") as f:
             try:
                 config = json.load(f)
             except:
-                print("[ERR] <guildconfig> guildconfig.json unreadable.")
+                _log.error("<guildconfig> guildconfig.json unreadable.")
                 config = {}
         self.config: dict[str, dict[str, int]] = config
         #self.modes = {"off": 0, "on": 1, "mention": 2}
@@ -76,9 +83,9 @@ class GuildconfigManager():
         else:
             return d.__contains__(key)
 
-    def get(self, key):
-        """Get self.config[key]."""
-        return self.config[key]
+    def get(self, key, default = None):
+        """Returns self.config.get(key, default)."""
+        return self.config.get(key, default)
 
     def setMode(self, guild: Guild, channel: GuildChannel, mode: Mode):
         """Set mode for channel of guild. Return True if success"""
@@ -99,7 +106,7 @@ class GuildconfigManager():
         return True
 
     def getMode(self, guild: Guild, channel: GuildChannel) -> Mode | None:
-        """Get mode for channel of guild. Defaults to PRIVATE."""
+        """Get mode for channel of guild. Defaults to PRIVATE if channel wasn't found or None if guild wasn't found."""
         if guild is None:
             return Mode.ON
         if channel is None:
