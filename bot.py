@@ -256,16 +256,24 @@ async def cmd_test(ctx: commands.Context, args: str = ""):
     ownerUser = await s_fetch_owner()
     if not ownerUser:
         return
-    content = ""
-    # limit to less than 2000 chars per message
-    for line in txt:
-        if 1999 > len(content) + len(line):  # "\n" gives +1
-            content += "\n" + line
+    await send_limited(ownerUser, txt)
+
+
+
+async def send_limited(sender: commands.Context|discord.User, text_list: list[str], sep="\n"):
+    """Sends text_list in chunks of max 2000 chars (lines in text_list must not exceed limit)"""
+    content = None
+    for line in text_list:
+        if content is None:
+            content = line
+            continue
+        if 2000 > len(content) + len(line) + len(sep):
+            content += sep + line
         else:
-            await ownerUser.send(content)
+            await sender.send(content)
             content = line
     else:
-        await ownerUser.send(content)
+        await sender.send(content)
 
 
 
@@ -293,8 +301,9 @@ async def cmd_owner_perms(ctx: commands.Context, channel_id: str, member_id: str
         except Exception as err:
             await ctx.send(str(err))
             return
-        txt = "\n".join([f"{role.name}:`{role.id}`" for role in roles])
-        await ctx.send(f"## Roles for: {channel.guild.name}\n" + txt)
+        txt = [f"## Roles for: {channel.guild.name}"]+[f"{role.name}:`{role.id}`" for role in roles]
+        
+        await send_limited(ctx, txt)
         return
     
     try:
