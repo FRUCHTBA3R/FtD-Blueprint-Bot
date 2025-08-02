@@ -404,7 +404,7 @@ class Blueprint:
             infos["Size"] = "?"
         infos["Author"] = self.blueprint.get("AuthorDetails", {}).get("CreatorReadableName")
         if infos["Author"] is None:
-            _log.warning("Error while gathering blueprint author info: %s", err)
+            _log.warning("Error while gathering blueprint author info")
             infos["Author"] = "Unknown"
 
         # game version
