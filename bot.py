@@ -459,7 +459,45 @@ async def check_mode(interaction: discord.Interaction) -> guildconfig.Mode | Non
 
 
 class SlashCmdGroup(discord.app_commands.Group):
-
+    
+    @staticmethod
+    async def do_slash_command(*,
+        create_gif: bool,
+        interaction: discord.Interaction,
+        blueprint: discord.Attachment,
+        cut_side: float, 
+        cut_top: float, 
+        cut_front: float,
+        no_color: bool, 
+        timing: bool, 
+        no_link: bool,
+        aspect_ratio: str = "",
+        firing_order: discord.app_commands.Choice[int] = 2,
+    ):
+        """Handles gif and image slash command"""
+        # get and check mode
+        mode = await check_mode(interaction)
+        if mode is None:
+            return
+        # defer and 'think'
+        moi = MessageOrInteraction(interaction)
+        await moi.defer(ephemeral=(mode==GCM.Mode.PRIVATE), thinking=True)
+        file, content = await process_attachment(
+            moi, blueprint, timing,
+            create_gif=create_gif,
+            firing_order=firing_order,
+            cut_side_top_front=(cut_side, cut_top, cut_front),
+            use_player_colors=not no_color,
+            force_aspect_ratio=get_aspect_ratio(aspect_ratio)
+        )
+        # finally
+        if content is None and file is None:
+            return
+        if blueprint.url and not no_link:
+            content = (content or "") + f"\n||{blueprint.url}||"
+        await moi.send(content=content, file=file, ephemeral=(mode==GCM.Mode.PRIVATE))
+    
+    
     @discord.app_commands.command(name="img", description="Create image from blueprint.")
     @discord.app_commands.describe(
         blueprint="File",
@@ -468,29 +506,34 @@ class SlashCmdGroup(discord.app_commands.Group):
         cut_front="Front cut. From 1.0 (closest, all) to 0.0",
         no_color="Disable custom ship color",
         timing="Show processing times",
-        aspect_ratio="Output aspect ratio <x>:<y> e.g. 16:9"
+        aspect_ratio="Output aspect ratio <x>:<y> e.g. 16:9",
+        no_link="Do not put a download link to the blueprint in response"
     )
     @discord.app_commands.autocomplete(aspect_ratio=autocomplete_aspect_ratio)
     @discord.app_commands.default_permissions(default_perms_app_command)
     async def slash_blueprint(self,
         interaction: discord.Interaction,
         blueprint: discord.Attachment,
-        cut_side: PRange[float,0.0,1.0] = None, 
-        cut_top: PRange[float,0.0,1.0] = None, 
+        cut_side: PRange[float,0.0,1.0] = None,
+        cut_top: PRange[float,0.0,1.0] = None,
         cut_front: PRange[float,0.0,1.0] = None,
-        no_color: bool = False, 
-        timing: bool = False, 
-        aspect_ratio: str = ""):
-        # mode
-        mode = await check_mode(interaction)
-        if mode is None:
-            return
-        moi = MessageOrInteraction(interaction)
-        await moi.defer(ephemeral=(mode==GCM.Mode.PRIVATE), thinking=True)
-        file, content = await process_attachment(moi, blueprint, timing, cut_side_top_front=(cut_side, cut_top, cut_front),
-            use_player_colors=not no_color, force_aspect_ratio=get_aspect_ratio(aspect_ratio))
-        if content is not None or file is not None:
-            await moi.send(content=content, file=file, ephemeral=(mode==GCM.Mode.PRIVATE))
+        no_color: bool = False,
+        timing: bool = False,
+        aspect_ratio: str = "",
+        no_link: bool = False
+    ):
+        await SlashCmdGroup.do_slash_command(
+            create_gif=False,
+            interaction=interaction,
+            blueprint=blueprint,
+            cut_side=cut_side,
+            cut_top=cut_top,
+            cut_front=cut_front,
+            no_color=no_color,
+            timing=timing,
+            aspect_ratio=aspect_ratio,
+            no_link=no_link
+        )
 
 
     @discord.app_commands.command(name="gif", description="Create gif from blueprint.")
@@ -501,7 +544,8 @@ class SlashCmdGroup(discord.app_commands.Group):
         cut_top="Top cut. From 1.0 (closest, all) to 0.0",
         cut_front="Front cut. From 1.0 (closest, all) to 0.0",
         no_color="Disable custom ship color",
-        timing="Show processing times"
+        timing="Show processing times",
+        no_link="Do not put a download link to the blueprint in response"
     )
     @discord.app_commands.choices(firing_order=[
         discord.app_commands.Choice(name=elem["name"], value=elem["value"])
@@ -512,24 +556,28 @@ class SlashCmdGroup(discord.app_commands.Group):
         interaction: discord.Interaction,
         blueprint: discord.Attachment,
         firing_order: discord.app_commands.Choice[int] = 2,
-        cut_side: PRange[float,0.0,1.0] = None, 
-        cut_top: PRange[float,0.0,1.0] = None, 
+        cut_side: PRange[float,0.0,1.0] = None,
+        cut_top: PRange[float,0.0,1.0] = None,
         cut_front: PRange[float,0.0,1.0] = None,
-        no_color: bool = False, 
-        timing: bool = False):
-        # mode
-        mode = await check_mode(interaction)
-        if mode is None:
-            return
-        moi = MessageOrInteraction(interaction)
-        moi.defer(ephemeral=(mode==GCM.Mode.PRIVATE), thinking=True)
+        no_color: bool = False,
+        timing: bool = False,
+        no_link: bool = False
+    ):
         if isinstance(firing_order, discord.app_commands.Choice):
             firing_order = firing_order.value
-        file, content = await process_attachment(moi, blueprint, timing, create_gif=True,
-            firing_order=firing_order, cut_side_top_front=(cut_side, cut_top, cut_front),
-            use_player_colors=not no_color)
-        if content is not None or file is not None:
-            await moi.send(content=content, file=file, ephemeral=(mode==GCM.Mode.PRIVATE))
+        await SlashCmdGroup.do_slash_command(
+            create_gif=True,
+            interaction=interaction,
+            blueprint=blueprint,
+            firing_order=firing_order,
+            cut_side=cut_side,
+            cut_top=cut_top,
+            cut_front=cut_front,
+            no_color=no_color,
+            timing=timing,
+            no_link=no_link
+        )
+
 
 
 @bot.tree.context_menu(name="Simple Blueprint")
@@ -540,13 +588,14 @@ async def cm_print(interaction: discord.Interaction, message: discord.Message):
     no_loop = True
     # only first 3 valid attachments will get processed
     for attachment in get_valid_attachments(message.attachments)[:3]:
-        await SlashCmdGroup.slash_blueprint.callback(None, interaction, attachment)
+        await SlashCmdGroup.slash_blueprint.callback(None, interaction, attachment, no_link=True)
         no_loop = False
     if no_loop:
         try:
             await interaction.response.send_message("No valid files in message attachments, maybe try Interactive Blueprint.", delete_after=5, ephemeral=True)
         except:
             log.warning("Interaction response failed")
+
 
 
 @bot.tree.context_menu(name="Simple Gif")
@@ -557,7 +606,7 @@ async def cm_gif(interaction: discord.Interaction, message: discord.Message):
     no_loop = True
     # only first 3 valid attachments will get processed
     for attachment in get_valid_attachments(message.attachments)[:3]:
-        await SlashCmdGroup.slash_gif.callback(None, interaction, attachment)
+        await SlashCmdGroup.slash_gif.callback(None, interaction, attachment, no_link=True)
         no_loop = False
     if no_loop:
         try:
