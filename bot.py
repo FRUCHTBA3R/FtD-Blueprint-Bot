@@ -155,16 +155,19 @@ async def on_message(message: discord.Message):
     message.content = message.content.strip()
     await bot.process_commands(message)
 
+
+
 # TODO
-@bot.command(name="print", help="DEPRECATED (use right click context menu, SOON). Print last blueprint uploaded to channel. Only checks last 30 messages.")
+@bot.command(name="print", help="DEPRECATED (use right click context menu). Print last blueprint uploaded to channel. Only checks last 30 messages.")
 async def cmd_print(ctx: commands.Context):
     """Find and print last blueprint in channel"""
-    await ctx.send("This command is no longer working. A right click context menu will be added soon.")
+    await ctx.send("This command is no longer supported. Use right click context menu instead.")
     #print_cmd(ctx)
     #async for message in ctx.history(limit=30, oldest_first=False):
     #    bpcount = await process_message_attachments(message, ctx)
     #    if bpcount != 0:
     #        break
+
 
 
 class ModeTransformer(discord.app_commands.Transformer, commands.Converter):
@@ -188,6 +191,7 @@ class ModeTransformer(discord.app_commands.Transformer, commands.Converter):
         return GCM.Mode[argument]
 
 
+
 @bot.hybrid_command(name="mode", help="Set mode for current channel.\nAllowed arguments:\noff \t Turned off.\non \t Turned on.\nprivate \t Interaction only visible to user.",
             require_var_positional=False, usage="off | on | private")
 @commands.has_permissions(manage_channels=True)
@@ -207,12 +211,31 @@ async def cmd_mode(ctx: commands.Context, mode: discord.app_commands.Transform[g
         await ctx.interaction.response.send_message(f"Mode for this channel was set to {mode.name}", ephemeral=True)
 
 
+
 @bot.command(name="pp&tos", help="Send links to privacy policy and terms of service.")
 async def cmd_pptos(ctx: commands.Context):
     """Send PP and TOS links to chat"""
     print_cmd(ctx)
     await ctx.send("[Privacy Policy](https://fruchtba3r.github.io/FtD-Blueprint-Bot/datenschutz/)\n"
     "[Terms of Service](https://fruchtba3r.github.io/FtD-Blueprint-Bot/tos/)")
+
+
+
+async def send_limited(sender: commands.Context|discord.User, text_list: list[str], sep="\n"):
+    """Sends text_list in chunks of max 2000 chars (lines in text_list must not exceed limit)"""
+    content = None
+    for line in text_list:
+        if content is None:
+            content = line
+            continue
+        if 2000 > len(content) + len(line) + len(sep):
+            content += sep + line
+        else:
+            await sender.send(content)
+            content = line
+    else:
+        await sender.send(content)
+
 
 
 @bot.command(name="test", help="For testing stuff. (Author only)")
@@ -257,23 +280,6 @@ async def cmd_test(ctx: commands.Context, args: str = ""):
     if not ownerUser:
         return
     await send_limited(ownerUser, txt)
-
-
-
-async def send_limited(sender: commands.Context|discord.User, text_list: list[str], sep="\n"):
-    """Sends text_list in chunks of max 2000 chars (lines in text_list must not exceed limit)"""
-    content = None
-    for line in text_list:
-        if content is None:
-            content = line
-            continue
-        if 2000 > len(content) + len(line) + len(sep):
-            content += sep + line
-        else:
-            await sender.send(content)
-            content = line
-    else:
-        await sender.send(content)
 
 
 
