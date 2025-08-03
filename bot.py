@@ -170,36 +170,15 @@ async def cmd_print(ctx: commands.Context):
 
 
 
-class ModeTransformer(discord.app_commands.Transformer, commands.Converter):
-    def get_choices(self):
-        return [
-            discord.app_commands.Choice(name="off", value=GCM.Mode.OFF.name),
-            discord.app_commands.Choice(name="on", value=GCM.Mode.ON.name),
-            discord.app_commands.Choice(name="private", value=GCM.Mode.PRIVATE.name),
-        ]
-    choices = property(get_choices)
-
-    async def transform(self, interaction: discord.Interaction, value: str) -> guildconfig.Mode:
-        # will only get a correct value from choices
-        return GCM.Mode[value]
-
-    async def convert(self, ctx: commands.Context, argument: str) -> guildconfig.Mode:
-        # can get any string
-        argument = argument.upper()
-        if argument not in GCM.Mode._member_names_:
-            return None
-        return GCM.Mode[argument]
-
-
-
 @bot.hybrid_command(name="mode", help="Set mode for current channel.\nAllowed arguments:\noff \t Turned off.\non \t Turned on.\nprivate \t Interaction only visible to user.",
             require_var_positional=False, usage="off | on | private")
 @commands.has_permissions(manage_channels=True)
-async def cmd_mode(ctx: commands.Context, mode: discord.app_commands.Transform[guildconfig.Mode,ModeTransformer]):
+@discord.app_commands.default_permissions(discord.Permissions(manage_channels=True))
+async def cmd_mode(ctx: commands.Context, mode: discord.app_commands.Transform[guildconfig.Mode,guildconfig.ModeTransformer]):
     """Select mode for channel"""
     print_cmd(ctx)
     if ctx.guild is None:
-        return
+        return # TODO this will fail the interaction
 
     # check mode
     if not GCM.setMode(ctx.guild, ctx.channel, mode):
@@ -358,7 +337,7 @@ async def cmd_owner_mode(ctx: commands.Context, *args: str):
     
     # set mode
     if 3 == len(args):
-        mode = await ModeTransformer.convert(None, ctx, args[2])
+        mode = await guildconfig.ModeTransformer.convert(None, ctx, args[2])
         if mode is None:
             await ctx.send("Invalid mode")
             return

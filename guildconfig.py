@@ -1,12 +1,15 @@
 import json
 import os
-from discord import Guild
+from discord import Guild, app_commands, Interaction
 from discord.abc import GuildChannel
+from discord.ext import commands
 from enum import Enum
 import logging
 
 _log = logging.getLogger("bot")
 GUILDCONFIG_FILE = "guildconfig.json"
+
+
 
 class Mode(Enum):
     OFF = 0
@@ -17,6 +20,30 @@ class Mode(Enum):
     """deprecated"""
     PRIVATE = 3
     """default, responses to interactions are private, visible only to interaction user, @mention disabled"""
+
+
+
+class ModeTransformer(app_commands.Transformer, commands.Converter):
+    def get_choices(self):
+        return [
+            app_commands.Choice(name="off", value=Mode.OFF.name),
+            app_commands.Choice(name="on", value=Mode.ON.name),
+            app_commands.Choice(name="private", value=Mode.PRIVATE.name),
+        ]
+    choices = property(get_choices)
+
+    async def transform(self, interaction: Interaction, value: str) -> Mode:
+        # will only get a correct value from choices
+        return Mode[value]
+
+    async def convert(self, ctx: commands.Context, argument: str) -> Mode:
+        # can get any string
+        argument = argument.upper()
+        if argument not in Mode._member_names_:
+            return None
+        return Mode[argument]
+
+
 
 class GuildconfigManager():
     Mode = Mode
