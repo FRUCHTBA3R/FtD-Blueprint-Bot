@@ -44,21 +44,22 @@ class MessageOrInteraction():
     def wasResponded(self):
         return self.isInteraction() and self.moi.response.is_done()
 
-    async def send(self, content: Optional[str] = None, file: Optional[discord.File] = None, ephemeral: bool = True):
+    async def send(self, content: Optional[str] = None, file: Optional[discord.File] = None, ephemeral: bool = True, **kwargs):
         """Sends to channel of message or responds to interaction or sends followups to interaction"""
-        kwargs = {}
+        #kwargs = {}
         if content is not None: kwargs["content"] = content
         if file is not None: kwargs["file"] = file
         
         if self.isMessage():
-            self.moi: discord.Message
-            await self.moi.channel.send(**kwargs)
+            moi: discord.Message = self.moi
+            await moi.channel.send(**kwargs)
         elif self.isInteraction():
-            self.moi: discord.Interaction
-            if not self.moi.response.is_done():
-                await self.moi.response.send_message(**kwargs, ephemeral=ephemeral)
+            moi: discord.Interaction = self.moi
+            if not moi.response.is_done():
+                await moi.response.send_message(**kwargs, ephemeral=ephemeral)
             else:
-                await self.moi.followup.send(**kwargs, ephemeral=ephemeral)
+                if "delete_after" in kwargs: del kwargs["delete_after"]
+                await moi.followup.send(**kwargs, ephemeral=ephemeral)
         else:
             raise TypeError("Did not get discord.Message or discord.Interaction")
 
