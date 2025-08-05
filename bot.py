@@ -10,7 +10,7 @@ from discord.ext import commands
 from discord.app_commands import Range as PRange
 
 import bp_to_img, settings, guildconfig
-from classes import MessageOrInteraction, InteractiveBlueprint, firing_order_options, aspect_ratio_options
+from classes import MessageOrInteraction, InteractiveBlueprint, firing_order_options, aspect_ratio_options, PermissionState
 
 
 log = settings.logging.getLogger("bot")
@@ -188,6 +188,420 @@ async def cmd_mode(ctx: commands.Context, mode: discord.app_commands.Transform[g
         await ctx.message.add_reaction("\U0001f197")  # :ok:
     else:
         await ctx.interaction.response.send_message(f"Mode for this channel was set to {mode.name}", ephemeral=True)
+
+
+
+async def send_permission_list_embed(moi: MessageOrInteraction, perm_includes_text: str):
+    embed = discord.Embed(
+        color=discord.Color.blurple(),
+        title="Permission Evaluation",
+        description=f"No permissions including `{perm_includes_text}` in their name were found.\n"
+            "You can find some inspiration in the [discord.py documentation]"
+            "(https://discordpy.readthedocs.io/en/stable/api.html?#discord.Permissions)",
+        url="https://discordpy.readthedocs.io/en/stable/api.html?#discord.Permissions"
+    )
+    await moi.send(ephemeral=False, embed=embed)
+
+
+
+async def fetch_guild_channel_from_name_or_id(guild: discord.Guild|None, to_find: str) -> discord.abc.GuildChannel|None:
+    """
+    Fetch channel by ID (global!) or search for channel in guild with name containing to_find.
+
+    Args:
+        guild (discord.Guild | None): Guild to get channels from or None
+        to_find (str): ID or part of channel name
+
+    Raises:
+        ValueError: Invalid to_find
+        and Errors of bot.fetch_channel
+
+    Returns:
+        discord.abc.GuildChannel|None: The found channel or None if not found
+    """
+    try:
+        to_find = int(to_find)
+    except:
+        pass
+    if isinstance(to_find, str):
+        if guild is None: return None
+        found_index = 999
+        found_channel: discord.abc.GuildChannel = None
+        for channel in guild.channels:
+            channel:discord.abc.GuildChannel
+            if isinstance(channel, discord.CategoryChannel):
+                continue
+            index = channel.name.find(to_find)
+            if -1 < index and index < found_index:
+                found_index = index
+                found_channel = channel
+        return found_channel
+    elif isinstance(to_find, int):
+        channel = await bot.fetch_channel(to_find)
+        return channel
+    raise ValueError
+
+
+
+def str_ansi_colored(text: any, state_to_color: any, bold: bool = False, underline: bool = False):
+    """Creates red, yellow or green text with bold and underline if wanted"""
+    if not isinstance(text, str): text = str(text)
+    if isinstance(state_to_color, PermissionState): state_to_color = state_to_color.state
+    color = {False: "31", True: "32", None: "33", "None": "1"}[state_to_color]
+    return f"\u001b[{(bold and "1;") or ""}{(underline and "4;") or ""}{color}m{text}\u001b[0;0m"
+
+
+
+def evaluate_permissions_to_embed(
+        embed:discord.Embed,
+        search_for: str,
+        perms_guild: discord.Permissions,
+        perms_in_channel: discord.Permissions,
+        perms_overwrite: discord.PermissionOverwrite,
+        limit: int = 3
+) -> tuple[PermissionState, int]:
+    """Evaluates guild and channel permissions and stores result in embed.
+    Returns state (True if all permissions are granted, False if all are denied, None if mixed)
+    and number of matching permissions.
+
+    Args:
+        embed (Embed): Fields will be added to this
+        search_for (str): Text to search in permission name
+        perms_guild (Permissions): The global permissions in the guild (from roles and @everyone)
+        perms_in_channel (Permissions): The permissions in the channel (completely resolved)
+        perms_overwrite (PermissionOverwrite): The permission overwrites of the channel
+        limit (int, optional): The maximum number of matching permissions to evaluate. Defaults to 3.
+
+    Returns:
+        tuple(PermissionState, int): (state, matches)
+    """
+    found = 0
+    flag_allowed = False
+    flag_denied = False
+    for perm_name, value_channel in iter(perms_in_channel):
+        if -1 == perm_name.find(search_for):
+            continue
+        found += 1
+        if limit < found:
+            continue
+        flag_allowed |= value_channel
+        flag_denied |= not value_channel
+        value_gild = getattr(perms_guild, perm_name)
+        value_gild = str_ansi_colored(PermissionState(value_gild), value_gild)
+        value_overwrite = getattr(perms_overwrite, perm_name)
+        value_overwrite = str_ansi_colored(PermissionState(value_overwrite), value_overwrite)
+        value_channel = str_ansi_colored(PermissionState(value_channel), value_channel, True, True)
+        embed.add_field(name=f"Permission: {perm_name}", inline=False, value=f"```ansi\n"
+            f"• Guild (Roles): {value_gild}\n"
+            f"• Channel overwrite: {value_overwrite}\n"
+            f"• In Channel: {value_channel}```")
+    return PermissionState(flag_allowed, flag_denied), found
+
+
+
+def evaluate_command_permission_list(
+        cmd_perm_list: list[discord.app_commands.AppCommandPermissions],
+        channel: discord.abc.GuildChannel,
+        member: discord.Member
+) -> tuple[PermissionState, PermissionState, PermissionState]:
+    """Evaluates permissions list for a command in respect to channel and member.
+    Returns state for channel, role and member. With state being True if allowed, 
+    False if denied, None if unchanged.
+
+    Args:
+        cmd_perm_list (list[AppCommandPermissions]): list of permissions for command
+        channel (GuildChannel): Channel to check permissions for
+        member (Member): Member to check permissions for
+
+    Returns:
+        states (tuple[bool | None, bool | None, bool | None]): State for channel, State for role, State for member
+    """
+    state_channel = PermissionState(None)
+    state_member = PermissionState(None)
+    state_role = PermissionState(None)
+    if cmd_perm_list is None:
+        return state_channel, state_role, state_member
+    t = discord.AppCommandPermissionType
+    for perm in cmd_perm_list:
+        if t.channel ==  perm.type:
+            if perm.id == channel.id:
+                state_channel.set(perm.permission)
+            elif perm.id == channel.guild.id - 1 and state_channel.unchanged:
+                state_channel.set(perm.permission)
+        elif t.user == perm.type:
+            if perm.id == member.id:
+                state_member.set(perm.permission)
+        elif t.role == perm.type:
+            if perm.target in member.roles:
+                # assume that any role set to allowed will allow
+                state_role = state_role.any(PermissionState(perm.permission))
+    return state_channel, state_role, state_member
+
+
+
+async def _application_command_fetch_guild_permissions(
+    state: discord.state.ConnectionState,
+    guild: discord.abc.Snowflake
+) -> list[discord.app_commands.GuildAppCommandPermissions]:
+    """Gets global application command permissions"""
+    if not state.application_id:
+        raise discord.MissingApplicationID
+    
+    data_list = await state.http.get_guild_application_command_permissions(
+        application_id=state.application_id,
+        guild_id=guild.id
+    )
+    return [discord.app_commands.GuildAppCommandPermissions(data=data, state=state, command=None) for data in data_list]
+
+
+
+async def evaluate_command_permission_to_embed(
+        embed: discord.Embed,
+        command_start: str,
+        member: discord.Member,
+        channel: discord.abc.GuildChannel,
+        state_use_app_cmd: PermissionState
+) -> tuple[PermissionState, int]:
+    """Evaluates application command permissions and adds result as embed field.
+    Returns state of all found commands, True if all are allowed, False if all are denied, else None.
+    And number of found commands.
+
+    Args:
+        embed (Embed): Embed to add fields to
+        command_start (str): String the command starts with
+        member (Member): Member to check permissions for
+        channel (GuildChannel): Channel to check permissions for
+        state_use_app_cmd (PermissionState): Result of use_application_commands check for channel
+
+    Returns:
+        (PermissionState, int): Unified state and #found commands
+    """
+    flag_allowed = False
+    flag_denied = False
+    count = 0
+    
+    # we will not search other applications as this would require manage_channels permission
+    # prepare cmds
+    global_commands = await bot.tree.fetch_commands()
+    guild_commands = await bot.tree.fetch_commands(guild=channel.guild)
+    commands_to_merge = []
+    for global_cmd in global_commands:
+        found = False
+        for guild_cmd in guild_commands:
+            found |= (global_cmd.id == guild_cmd.id)
+        if not found:
+            commands_to_merge.append(global_cmd)
+    guild_commands.extend(commands_to_merge)
+    global_commands = commands_to_merge = None
+    
+    # search cmd, limit to 4
+    guild_commands = [cmd for cmd in guild_commands if cmd.name.startswith(command_start)]
+    count = len(guild_commands)
+    guild_commands = guild_commands[:4]
+    
+    # fetch all permissions
+    guild_cmd_permissions_list = await _application_command_fetch_guild_permissions(bot.tree._state, channel.guild)
+    guild_cmd_permissions_list = {perm.id:perm for perm in guild_cmd_permissions_list}
+    
+    # global cmd permissions
+    global_cmd_perms = guild_cmd_permissions_list.get(bot.application_id)
+    if global_cmd_perms:
+        global_cmd_perms = global_cmd_perms.permissions
+    global_state_channel, global_state_role, global_state_member = evaluate_command_permission_list(global_cmd_perms, channel, member)
+    # assume member overrides role, TODO test what happens if member is denied but role from member is allowed
+    global_state_final = global_state_role.overwrite(global_state_member).both(global_state_channel)
+    
+    # get per command permissions
+    permission_tuple_list = []
+    for cmd in guild_commands:
+        cmd_perms = guild_cmd_permissions_list.get(cmd.id)
+        if cmd_perms: cmd_perms = cmd_perms.permissions
+        cmd_perms_default = cmd.default_member_permissions
+        permission_tuple_list.append((cmd_perms, cmd_perms_default))
+    
+    # compare
+    perms_in_channel = channel.permissions_for(member)
+    for i, cmd in enumerate(guild_commands):
+        cmd_perms, cmd_perms_default = permission_tuple_list[i]
+        txt_value = ""
+        state_final = state_default_final = PermissionState(None)
+        
+        # default required perms
+        if cmd_perms_default is not None:
+            txt_value += "\n" + str_ansi_colored("Default Required Permissions", "None", True, True) + "\n"
+            perms_ok = (perms_in_channel & cmd_perms_default)
+            perms_missing = (~perms_in_channel & cmd_perms_default)
+            missing_default_perm = False
+            for perm_name, value in iter(perms_ok):
+                if value:
+                    txt_value += f"• Has {str_ansi_colored(perm_name, True)}\n"
+            for perm_name, value in iter(perms_missing):
+                if value:
+                    missing_default_perm = True
+                    txt_value += f"• {str_ansi_colored("MISSING", False)} {perm_name}\n"
+            flag_denied |= missing_default_perm
+            flag_allowed |= not missing_default_perm
+            state_default_final = PermissionState(not missing_default_perm)
+        
+        # global cmd perms
+        if global_cmd_perms is not None:
+            txt_value += "\n" + str_ansi_colored("Global Command Permissions", "None", True, True) + "\n"
+            txt_value += f"• In Channel: {str_ansi_colored(global_state_channel, global_state_channel)}\n" \
+                f"• For Member: {str_ansi_colored(global_state_member, global_state_member)}\n" \
+                f"• For Member's Roles: {str_ansi_colored(global_state_role, global_state_role)}\n" \
+                f"• Together -> {str_ansi_colored(global_state_final, global_state_final, True, True)}\n"
+        
+        # per-cmd perms
+        if cmd_perms is not None:
+            txt_value += "\n" + str_ansi_colored("Per-Command Permissions", "None", True, True) + "\n"
+            state_channel, state_role, state_member = evaluate_command_permission_list(cmd_perms, channel, member)
+            # assume member overrides role
+            state_final = state_role.overwrite(state_member).both(state_channel)
+            flag_allowed |= state_final.allowed
+            flag_denied |= state_final.denied
+            txt_value += f"• In Channel: {str_ansi_colored(state_channel, state_channel)}\n" \
+                f"• For Member's Roles: {str_ansi_colored(state_role, state_role)}\n" \
+                f"• For Member: {str_ansi_colored(state_member, state_member)}\n" \
+                f"• Together -> {str_ansi_colored(state_final, state_final, True, True)}\n"
+        
+        # global and per-cmd
+        if global_cmd_perms is not None and cmd_perms is not None:
+            # first global cmd perms and default required perms overwritten by per-cmds perms
+            state_all_final = global_state_final.both(state_default_final).overwrite(state_final)
+            state_can_be_used = state_use_app_cmd.both(state_all_final)
+            txt_value += "\n" + str_ansi_colored(f"This Command {"Is" if not state_use_app_cmd.denied else "Would Be"}: ", state_can_be_used, True, False)
+            txt_value +=  str_ansi_colored(state_all_final, state_all_final, True, False) + "\n"
+            if state_use_app_cmd.denied:
+                txt_value += str_ansi_colored("But is DENIED by missing use_application_commands permission anyway!", False, True)
+        
+        embed.add_field(name=f"Command: {cmd.name}", value=f"```ansi\n{txt_value}```", inline=False)
+    return PermissionState(flag_allowed, flag_denied), count
+
+
+
+def PermissionOverwrite_any(self: discord.PermissionOverwrite, other: discord.PermissionOverwrite) -> discord.PermissionOverwrite:
+    """Merges two PermissionOverwrites. Any Allow will allow."""
+    res = discord.PermissionOverwrite()
+    for key, val in iter(self):
+        val_other = other._values.get(key)
+        if val is None and val_other is None:
+            continue
+        elif val is None:
+            res._values[key] = val_other
+        elif val_other is None:
+            res._values[key] = val
+        else:
+            res._values[key] = val or val_other
+    return res
+discord.PermissionOverwrite.any = PermissionOverwrite_any
+
+
+@bot.hybrid_command(name="whycant", help="Helps with permissions conflict resolution.",
+                    require_var_positional=False)
+@discord.app_commands.describe(
+    member="Member ID or i for yourself",
+    do="Text to search for in permission name OR /command_starts_with_text",
+    channel="Channel ID or here for current channel"
+)
+async def cmd_whycant(ctx: commands.Context, member: str="I", do: str="use_application_commands", channel: str="here"):
+    """Evaluates member permissions and app command permissions.
+    
+    Parameters:
+        member: Member ID or i for yourself
+        do: Text to search for in permission name OR /command_starts_with_text
+        channel: Channel (ID | partial name) OR here for current channel"""
+    print_cmd(ctx)
+    
+    moi = MessageOrInteraction(ctx.message if ctx.interaction is None else ctx.interaction)
+    
+    # if this is not invoked in a guild, allow only owner
+    if ctx.guild is None:
+        ownerUser = await s_fetch_owner()
+        if ownerUser is None:
+            await moi.send("Couldn't check if you're the owner")
+            return
+        if ctx.author != ownerUser:
+            await moi.send("Not allowed")
+            return
+    
+    # get channel
+    if "here" != channel.lower():
+        try:
+            channel = await fetch_guild_channel_from_name_or_id(ctx.guild, channel)
+        except Exception as err:
+            await moi.send(str(err))
+            return
+    elif ctx.guild is not None:
+        channel = ctx.channel
+    else:
+        # not in a gild channel and no channel id given
+        await moi.send("No channel id was given")
+        return
+    if ctx.guild != channel.guild:
+        # allow only owner to query other guilds
+        ownerUser = await s_fetch_owner()
+        if ctx.author != ownerUser:
+            await moi.send("Querying other guilds is not allowed")
+            return
+    channel: discord.abc.MessageableChannel
+    
+    # get member
+    if member in ["i", "I"]:
+        member = ctx.author.id
+    try:
+        member = await channel.guild.fetch_member(int(member))
+    except Exception as err:
+        await moi.send(str(err))
+        return
+    member: discord.Member
+    
+    # gather member permissions
+    perms_guild = member.guild_permissions
+    channel_overwrites = channel.overwrites
+    perms_overwrite = channel_overwrites.get(member, discord.PermissionOverwrite())
+    for role in member.roles:
+        perms_overwrite = perms_overwrite.any(channel_overwrites.get(role, discord.PermissionOverwrite()))
+    perms_in_channel = channel.permissions_for(member)
+    
+    # create embed
+    embed = discord.Embed(
+        color=discord.Color.red(),
+        title="Permission Evaluation",
+        description=f"For member: {member.display_name} `{member.id}`\nin channel: {channel.name} `{channel.id}`\nof guild: {channel.guild.name} `{channel.guild.id}`"
+    )
+    
+    # check commands
+    eval_res_cmd = None
+    found_cmd = -1
+    if do.startswith("/"):
+        do = do.lstrip("/")
+        eval_res, found = evaluate_permissions_to_embed(embed, "use_application_commands", perms_guild, perms_in_channel, perms_overwrite)
+        eval_res_cmd, found_cmd = await evaluate_command_permission_to_embed(embed, do, member, channel, eval_res)
+        eval_res = eval_res.both(eval_res_cmd)
+    else:
+        # evaluate guild and channel permissions
+        eval_res, found = evaluate_permissions_to_embed(embed, do, perms_guild, perms_in_channel, perms_overwrite)
+    
+    # TODO found == 0 and found_cmd == 0 ERROR
+    
+    # send 'informative' message when no permission was found
+    if 0 == found:
+        await send_permission_list_embed(moi, do)
+        return
+    
+    # finalize embed
+    embed.colour = {
+        True: discord.Color.green(),
+        False: discord.Color.red(),
+        None: discord.Color.yellow()
+    }[eval_res.state]
+    if 3 < found:
+        embed.set_footer(text=f"Skipped {found - 3} more permission{"s" if 4 < found else ""}")
+    
+    try:
+        await moi.send(ephemeral=False, embed=embed)
+    except Exception as err:
+        await moi.send(f"Couldn't send embed, do I have embed links permission?\n{err}")
 
 
 

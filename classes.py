@@ -1,6 +1,8 @@
+
+from __future__ import annotations
 import discord
 from discord import ui
-from typing import Optional
+from typing import Optional, overload
 
 from guildconfig import Mode
 from numpy.random import randint
@@ -441,3 +443,74 @@ class InteractiveBlueprint(ui.View):
         except:
             _log.warning("Submit button could not edit response")
         self.stop()
+
+
+
+class PermissionState():
+    @overload
+    def __init__(self, state: Optional[bool] = None): ...
+    @overload
+    def __init__(self, state: PermissionState): ...
+    @overload
+    def __init__(self, allowed: bool, denied: bool): ...
+    def __init__(self, state: any, denied: Optional[bool] = None):
+        if isinstance(state, PermissionState):
+            self.state = state.state
+        elif isinstance(state, bool) and isinstance(denied, bool):
+            self.state = None if state == denied else state
+        else:
+            self.state = state
+    
+    def __str__(self):
+        if self.state is None:
+            return "Unchanged"
+        elif self.state:
+            return "Allowed"
+        return "Denied"
+    
+    @property
+    def allowed(self) -> bool:
+        return self.state == True
+    @allowed.setter
+    def _set_allowed(self):
+        self.state = True
+    
+    @property
+    def denied(self) -> bool:
+        return self.state == False
+    @allowed.setter
+    def _set_denied(self):
+        self.state = False
+    
+    @property
+    def unchanged(self) -> bool:
+        return self.state is None
+    @unchanged.setter
+    def _set_unchanged(self):
+        self.state = None
+    
+    def set(self, state: Optional[bool]):
+        self.state = state
+    
+    def overwrite(self, state: PermissionState) -> PermissionState:
+        """Overwrite self with state of higher hierarchy"""
+        if state.state is None:
+            return PermissionState(self)
+        else:
+            return PermissionState(state)
+    
+    def both(self, state: PermissionState) -> PermissionState:
+        """Same hierarchy merge. Any Deny will deny."""
+        if self.state is None:
+            return PermissionState(state)
+        if state.state is None:
+            return PermissionState(self)
+        return PermissionState(self.state and state.state)
+    
+    def any(self, state: PermissionState) -> PermissionState:
+        """Same hierarchy merge. Any Allow will allow"""
+        if self.state is None:
+            return PermissionState(state)
+        if state.state is None:
+            return PermissionState(self)
+        return PermissionState(self.state or state.state)
