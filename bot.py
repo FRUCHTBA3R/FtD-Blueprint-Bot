@@ -408,7 +408,7 @@ async def evaluate_command_permission_to_embed(
     if global_cmd_perms:
         global_cmd_perms = global_cmd_perms.permissions
     global_state_channel, global_state_role, global_state_member = evaluate_command_permission_list(global_cmd_perms, channel, member)
-    # assume member overrides role, TODO test what happens if member is denied but role from member is allowed
+    # assume member overrides role (confirmed)
     global_state_final = global_state_role.overwrite(global_state_member).both(global_state_channel)
     
     # get per command permissions
@@ -466,8 +466,8 @@ async def evaluate_command_permission_to_embed(
         
         # global and per-cmd
         if global_cmd_perms is not None and cmd_perms is not None:
-            # first global cmd perms and default required perms overwritten by per-cmds perms
-            state_all_final = global_state_final.both(state_default_final).overwrite(state_final)
+            # ((global cmd perms AND default required perms) OverWritten by per-cmds perms for member/role) AND per-cmds perms for channel
+            state_all_final = global_state_final.both(state_default_final).overwrite(state_role.overwrite(state_member)).both(state_channel)
             state_can_be_used = state_use_app_cmd.both(state_all_final)
             txt_value += "\n" + str_ansi_colored(f"This Command {"Is" if not state_use_app_cmd.denied else "Would Be"}: ", state_can_be_used, True, False)
             txt_value +=  str_ansi_colored(state_all_final, state_all_final, True, False) + "\n"
