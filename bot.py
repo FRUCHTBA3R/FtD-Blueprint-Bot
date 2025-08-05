@@ -464,15 +464,14 @@ async def evaluate_command_permission_to_embed(
                 f"• For Member: {str_ansi_colored(state_member, state_member)}\n" \
                 f"• Together -> {str_ansi_colored(state_final, state_final, True, True)}\n"
         
-        # global and per-cmd
-        if global_cmd_perms is not None and cmd_perms is not None:
-            # ((global cmd perms AND default required perms) OverWritten by per-cmds perms for member/role) AND per-cmds perms for channel
-            state_all_final = global_state_final.both(state_default_final).overwrite(state_role.overwrite(state_member)).both(state_channel)
-            state_can_be_used = state_use_app_cmd.both(state_all_final)
-            txt_value += "\n" + str_ansi_colored(f"This Command {"Is" if not state_use_app_cmd.denied else "Would Be"}: ", state_can_be_used, True, False)
-            txt_value +=  str_ansi_colored(state_all_final, state_all_final, True, False) + "\n"
-            if state_use_app_cmd.denied:
-                txt_value += str_ansi_colored("But is DENIED by missing use_application_commands permission anyway!", False, True)
+        # the final result, I promise
+        # ((global cmd perms AND default required perms) OverWritten by per-cmds perms for member/role) AND per-cmds perms for channel
+        state_all_final = global_state_final.both(state_default_final).overwrite(state_role.overwrite(state_member)).both(state_channel)
+        state_can_be_used = state_use_app_cmd.both(state_all_final)
+        txt_value += "\n" + str_ansi_colored(f"This Command {"Is" if not state_use_app_cmd.denied else "Would Be"}: ", state_can_be_used, True, False)
+        txt_value +=  str_ansi_colored(state_all_final, state_all_final, True, False) + "\n"
+        if state_use_app_cmd.denied:
+            txt_value += str_ansi_colored("But is DENIED by missing use_application_commands permission anyway!", False, True)
         
         embed.add_field(name=f"Command: {cmd.name}", value=f"```ansi\n{txt_value}```", inline=False)
     return PermissionState(flag_allowed, flag_denied), count
